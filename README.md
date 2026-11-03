@@ -11,9 +11,11 @@ Offline-first bonafide-only short-clip PAD research.
 - [Full source-bonafide preparation có budget](docs/005-bounded-full-source-preparation.md).
 - [Continuation đã hoàn tất source preparation](docs/006-explicit-source-continuation.md).
 - [Matched spatial/temporal source-only pilot](docs/007-matched-source-adapter-pilot.md).
+- [Source-validation spoof diagnostic: raw residual chưa tách tốt](docs/008-source-validation-spoof-diagnostic.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
-`fas`; chưa có PAD evaluation hoặc target result.** Full-source preparation
+`fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
+test hoặc target result.** Full-source preparation
 đã hoàn tất sau explicit continuation approval: **476/491 originals usable,
 gồm 359 fitting + 117 validation**. Giữ 9 short-video và 6 tracking failures
 trong denominator; không còn interrupted/unattempted. Caches đã QA bằng 1.428
@@ -22,7 +24,18 @@ và [lịch sử attempt đầu bị dừng](docs/005-bounded-full-source-prepar
 Hai adapter đã train 360 steps/model trên cùng sampling/noise schedule; source
 validation macro MSE giảm 0,0907% (spatial) / 0,2707% (temporal) so frozen,
 **chưa chứng minh spoof detection tốt hơn**. Xem [pilot evidence](results/adapter-pilot-v1.json).
-Training dài hơn hoặc attack/target access vẫn cần approval/budget riêng.
+Diagnostic đủ 283 validation originals, 259 usable / 24 failures; AUROC
+frozen / spatial / temporal lần lượt: CASIA **0,3819 / 0,3819 / 0,3819**,
+MSU **0,6765 / 0,6765 / 0,6765**, SiW **0,5006 / 0,5007 / 0,5012**.
+Temporal macro chỉ **0,5199**, chưa cải thiện separation có ý nghĩa; **chưa
+nên train dài hơn với raw residual recipe này**. Xem
+[coverage, paired CIs và failure bounds](results/source-diagnostic-v2.json).
+Đây là development evidence vì bonafide validation đã chọn checkpoints;
+không fit threshold, đảo score, chạy calibration/target hoặc train thêm.
+Lượt đầu dừng do staging guard được giữ trong
+[failed-attempt evidence](results/source-diagnostic-v1.json); lượt sau chỉ chạy
+sau explicit approval mới. Training dài hơn hoặc access mới vẫn cần
+approval/budget riêng.
 Default scientific config vẫn đóng mọi quyền decode/scoring/training.
 Synthetic optimizer steps không phải kết quả FAS.
 
@@ -30,8 +43,8 @@ Synthetic optimizer steps không phải kết quả FAS.
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v10.json):
-76 tests passed, gồm actual CUDA checkpoint-resume và pinned FFmpeg helper trên
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v12.json):
+86 tests passed, gồm actual CUDA checkpoint-resume và pinned FFmpeg helper trên
 video tổng hợp.
 
 ```bash
@@ -136,6 +149,17 @@ train bằng private source-only config, không sửa default execution gates.
 Epoch-boundary resume và separate-process EMA replay được kiểm tra trên
 checkpoints thực tế. Watchdog dùng shared 45-minute / 8-GiB conservative
 device-GPU / 2-GiB new-output cap. Xem [protocol và kết quả](docs/007-matched-source-adapter-pilot.md).
+
+### Dedicated source-validation diagnostic
+
+[Diagnostic runner](scripts/source_diagnostic.py) có `plan`, `run`, `report`;
+chỉ dùng sau explicit source-validation attack approval với shared finite caps.
+Giữ default CLI guards; archive extraction có opt-in chỉ cho source-validation
+attacks, không cho fitting/calibration/target attacks. Models/checkpoints/noise
+levels/score direction được khóa trước decoding; không training, threshold
+fitting hoặc model selection. Export aggregate AUROC, paired group-bootstrap
+CIs, all-original coverage và missing-score bounds; individual profiles/caches
+giữ private. Xem [protocol, lỗi ban đầu và kết quả](docs/008-source-validation-spoof-diagnostic.md).
 
 ### Các model variants
 

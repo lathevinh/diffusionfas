@@ -106,10 +106,14 @@ def copy_member(source: BinaryIO, output: Path, expected_bytes: int, expected_sh
 def stage_member(
     item: dict[str, Any], fas_root: Path, data_root: Path, output: Path,
     stack: ExitStack, msu_context: dict[str, Any], deadline: float,
+    *, allow_validation_attacks: bool = False,
 ) -> None:
     video, member = item["video"], item["member"]
-    if video["dataset"] not in SOURCES or video["label"] != "bona_fide" or video["partition"] not in {"fitting", "validation"}:
-        raise ValueError("staging restricted to predetermined source bonafide")
+    bonafide = video["label"] == "bona_fide" and video["partition"] in {"fitting", "validation"}
+    diagnostic_attack = (allow_validation_attacks and video["label"] == "attack"
+                         and video["partition"] == "validation")
+    if video["dataset"] not in SOURCES or not (bonafide or diagnostic_attack):
+        raise ValueError("staging restricted to predetermined source bonafide or explicitly authorized validation attacks")
     safe_member(member)
     expected_size, expected_sha = item["byte_size"], video["media_sha256"]
     if video["dataset"] == "SiW-Mv2":

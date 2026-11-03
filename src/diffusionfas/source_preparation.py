@@ -31,6 +31,24 @@ def selected_sources(videos: list[Video]) -> list[Video]:
     )
 
 
+def source_media_entry(video: Video, row: dict[str, Any]) -> dict[str, Any]:
+    if (video.dataset not in SOURCES or f"{row['dataset']}/{row['video_id']}" != video.key
+            or row["binary_label"] != video.label):
+        raise ValueError("source original identity/label differs from accepted population")
+    receipt, receipt_sha = read_media_receipt(row)
+    if (
+        receipt["media_sha256"] != video.media_sha256
+        or receipt["decoded_rgb_sequence_sha256"] != video.decoded_sha256
+        or tuple(f["rgb_sha256"] for f in receipt["frame_index"]) != video.frame_hashes
+        or tuple(float(Fraction(f["timestamp_seconds"])) for f in receipt["frame_index"]) != video.timestamps
+    ):
+        raise ValueError("preparation receipt differs from imported evidence")
+    size = receipt["byte_size"]
+    if not 0 < size <= 128 * 1024**2:
+        raise ValueError("source original exceeds existing exact-member staging cap")
+    return {"member": receipt["media_relpath"], "byte_size": size, "receipt_sha256": receipt_sha}
+
+
 def build_plan(
     metadata: Path, source_manifest: Path, template: Path, fas_root: Path,
     detector: Path, output: Path, *, max_seconds: float, max_rss_bytes: int,
@@ -76,19 +94,7 @@ def build_plan(
             failure = str(error)
         entry: dict[str, Any] = {"video": video.to_dict(), "metadata_failure": failure}
         if failure is None:
-            receipt, receipt_sha = read_media_receipt(row)
-            if (
-                receipt["media_sha256"] != video.media_sha256
-                or receipt["decoded_rgb_sequence_sha256"] != video.decoded_sha256
-                or tuple(f["rgb_sha256"] for f in receipt["frame_index"]) != video.frame_hashes
-                or tuple(float(Fraction(f["timestamp_seconds"])) for f in receipt["frame_index"]) != video.timestamps
-            ):
-                raise ValueError("preparation receipt differs from imported evidence")
-            size = receipt["byte_size"]
-            if not 0 < size <= 128 * 1024**2:
-                raise ValueError("source original exceeds existing exact-member staging cap")
-            entry.update(member=receipt["media_relpath"], byte_size=size, receipt_sha256=receipt_sha,
-                         grid_frames=grid_frames)
+            entry.update(source_media_entry(video, row), grid_frames=grid_frames)
         entries.append(entry)
     if not entries:
         raise ValueError("nonempty source fitting/validation population required")

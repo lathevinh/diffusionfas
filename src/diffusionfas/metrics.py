@@ -100,6 +100,76 @@ def auroc(rows: list[Prediction]) -> float | None:
     return (rank_sum - p * (p + 1) / 2) / (p * n)
 
 
+def auroc_summary(rows: list[Prediction]) -> dict[str, Any]:
+    if not rows or len({r.key for r in rows}) != len(rows):
+        raise ValueError("nonempty unique original predictions required")
+    counts = {}
+    for label in ("bona_fide", "attack"):
+        subset = [r for r in rows if r.label == label]
+        if not subset:
+            raise ValueError("both original classes required")
+        usable = sum(r.score is not None for r in subset)
+        counts[label] = {"originals": len(subset), "usable": usable,
+                         "technical_failures": len(subset) - usable}
+    pairs = counts["attack"]["originals"] * counts["bona_fide"]["originals"]
+    observed_pairs = counts["attack"]["usable"] * counts["bona_fide"]["usable"]
+    value = auroc(rows)
+    wins = value * observed_pairs if value is not None else 0
+    return {"auroc_usable": value, "coverage": counts,
+            "unavailable_reason": None if value is not None else "insufficient_usable_classes",
+            "all_original_missing_score_bounds": [wins / pairs, (wins + pairs - observed_pairs) / pairs],
+            "score_direction": "higher_is_attack"}
+
+
+def paired_auroc_bootstrap(
+    arms: dict[str, list[Prediction]], *, repetitions: int = 2000, seed: int = 20261103,
+) -> dict[str, Any]:
+    if not arms or repetitions < 1:
+        raise ValueError("nonempty paired arms and positive repetitions required")
+    reference = next(iter(arms.values()))
+    auroc_summary(reference)
+    identities = [(r.key, r.dataset, r.group, r.partition, r.label) for r in reference]
+    if len({r.dataset for r in reference}) != 1:
+        raise ValueError("bootstrap one domain at a time")
+    for rows in arms.values():
+        if [(r.key, r.dataset, r.group, r.partition, r.label) for r in rows] != identities:
+            raise ValueError("paired AUROC bootstrap requires identical ordered original populations")
+    groups: dict[str, list[int]] = defaultdict(list)
+    for index, row in enumerate(reference):
+        groups[row.group].append(index)
+    if len(groups) < 2:
+        raise ValueError("at least two declared groups required")
+    keys, rng = sorted(groups), np.random.default_rng(seed)
+    values: dict[str, list[float]] = {name: [] for name in arms}
+    invalid = 0
+    for _ in range(repetitions):
+        indexes = [i for key in rng.choice(keys, size=len(keys), replace=True) for i in groups[key]]
+        sample = {name: auroc([rows[i] for i in indexes]) for name, rows in arms.items()}
+        if any(value is None for value in sample.values()):
+            invalid += 1
+            continue
+        for name, value in sample.items():
+            if value is None:
+                raise ValueError("usable bootstrap AUROC invariant violated")
+            values[name].append(value)
+    intervals: dict[str, Any] = {}
+    if repetitions - invalid >= 0.95 * repetitions:
+        arrays = {name: np.array(samples) for name, samples in values.items()}
+        intervals.update({name: np.quantile(array, [0.025, 0.975]).tolist()
+                          for name, array in arrays.items()})
+        names = list(arrays)
+        for left_index, left in enumerate(names):
+            for right in names[left_index + 1:]:
+                intervals[f"{right}-minus-{left}"] = np.quantile(
+                    arrays[right] - arrays[left], [0.025, 0.975],
+                ).tolist()
+    return {"repetitions": repetitions, "valid_repetitions": repetitions - invalid,
+            "invalid_usable_one_class": invalid, "declared_groups": len(groups),
+            "intervals": intervals,
+            "unavailable_reason": None if intervals else "insufficient_valid_bootstrap_replicates",
+            "scope": "development_diagnostic_conditional_on_fixed_models"}
+
+
 def operating_metrics(rows: list[Prediction], threshold: float) -> dict[str, Any]:
     if not rows or not math.isfinite(threshold):
         raise ValueError("nonempty predictions and finite threshold required")
