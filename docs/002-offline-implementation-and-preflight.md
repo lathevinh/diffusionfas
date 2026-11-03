@@ -2,6 +2,9 @@
 
 Ngày: 2026-11-03.
 
+Đây là snapshot của phase offline ban đầu. Checkpoint/GPU/source probes đã được
+cho phép và thực hiện sau đó; xem [báo cáo 003](003-bounded-checkpoint-gpu-and-source-probes.md).
+
 **Trạng thái: đã triển khai code và kiểm tra offline/synthetic; chưa chạy scientific
 training, chưa tải checkpoint, chưa đánh giá target.**
 

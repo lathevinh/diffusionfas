@@ -60,6 +60,7 @@ class ClipDenoiser(nn.Module):
         self.backbone = backbone
         self.scheduler = scheduler
         self.freeze_backbone = freeze_backbone
+        self.backbone_frame_batch: int | None = None
         self.fixed_timestep: int | None = None
         sample_size = backbone.config.sample_size
         if not isinstance(sample_size, int) or sample_size <= 0:
@@ -90,11 +91,15 @@ class ClipDenoiser(nn.Module):
         flattened = noisy.flatten(0, 1)
         conditioning = torch.zeros_like(timestep) if self.fixed_timestep is not None else timestep
         repeated = conditioning.repeat_interleave(noisy.shape[1])
-        if self.freeze_backbone:
-            with torch.no_grad():
-                base = self.backbone(flattened, repeated).sample
-        else:
-            base = self.backbone(flattened, repeated).sample
+        frame_batch = len(flattened) if self.backbone_frame_batch is None else self.backbone_frame_batch
+        if type(frame_batch) is not int or frame_batch < 1:
+            raise ValueError("positive backbone frame microbatch required")
+        chunks = []
+        with torch.set_grad_enabled(torch.is_grad_enabled() and not self.freeze_backbone):
+            for offset in range(0, len(flattened), frame_batch):
+                chunks.append(self.backbone(flattened[offset:offset + frame_batch],
+                                            repeated[offset:offset + frame_batch]).sample)
+        base = torch.cat(chunks)
         base = base.reshape_as(noisy)
         return base if self.adapter is None else base + self.adapter(noisy, base, timestep)
 
@@ -155,16 +160,22 @@ def build_model(config: dict[str, Any]) -> ClipDenoiser:
             raise ValueError("fixed-noise baseline requires scoring.alpha_bars=[0.5]")
         result = scratch_model(config["scratch"], temporal=False)
         result.fixed_timestep = int((result.scheduler.alphas_cumprod - 0.5).abs().argmin())
-        return result
-    if variant in {"scratch_spatial", "scratch_temporal"}:
-        return scratch_model(config["scratch"], temporal=variant.endswith("temporal"),
-                             adapter_channels=model["adapter_channels"])
-    if variant in {"pretrained_spatial", "pretrained_spatial_adapter", "pretrained_temporal"}:
+    elif variant in {"scratch_spatial", "scratch_temporal"}:
+        result = scratch_model(config["scratch"], temporal=variant.endswith("temporal"),
+                               adapter_channels=model["adapter_channels"])
+    elif variant in {"pretrained_spatial", "pretrained_spatial_adapter", "pretrained_temporal"}:
         if not model["local_bundle"] or not model["bundle_manifest_sha256"]:
             raise ValueError("pretrained weights unavailable: provide a verified LOCAL safetensors bundle; no automatic download")
-        return local_pretrained_model(
+        result = local_pretrained_model(
             Path(model["local_bundle"]), model["bundle_manifest_sha256"],
             temporal=variant != "pretrained_spatial", adapter_channels=model["adapter_channels"],
             temporal_kernel=1 if variant == "pretrained_spatial_adapter" else 3,
         )
-    raise ValueError("unknown model variant")
+    else:
+        raise ValueError("unknown model variant")
+    if "backbone_frame_batch" in model:
+        frame_batch = model["backbone_frame_batch"]
+        if frame_batch is not None and (type(frame_batch) is not int or frame_batch < 1):
+            raise ValueError("positive backbone frame microbatch or null required")
+        result.backbone_frame_batch = frame_batch
+    return result

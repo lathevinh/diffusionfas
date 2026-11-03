@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+from dataclasses import replace
 from pathlib import Path
 import tempfile
 import unittest
@@ -54,6 +55,37 @@ class PreprocessingTests(unittest.TestCase):
                 self.assertEqual(cache["native_orders"].shape, (24,))
             with self.assertRaises(MediaFailure):
                 prepare_video(row, FixtureFaces(), root / "too-big.npz", max_output_bytes=100)
+            fixed = prepare_video(row, FixtureFaces(), root / "fixed.npz",
+                                  window_start=0.5, window_duration=2)
+            with np.load(fixed.cache_path, allow_pickle=False) as cache:
+                self.assertEqual(cache["frames"].shape, (16, 256, 256, 3))
+                np.testing.assert_array_equal(cache["timestamps"], 0.5 + (np.arange(16) + 0.5) / 8)
+            with self.assertRaises(ValueError):
+                prepare_video(row, FixtureFaces(), root / "outside.npz", window_start=2, window_duration=2)
+            with self.assertRaises(ValueError):
+                prepare_video(row, FixtureFaces(), root / "half-request.npz", window_start=0.5)
+
+            def native(path, consume, timeout):
+                capture = cv2.VideoCapture(str(path))
+                try:
+                    index = 0
+                    while True:
+                        ok, bgr = capture.read()
+                        if not ok:
+                            break
+                        consume(index, cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))
+                        index += 1
+                finally:
+                    capture.release()
+
+            replayed = prepare_video(row, FixtureFaces(), root / "replayed.npz",
+                                     window_start=0.5, window_duration=2, native_replay=native)
+            with np.load(fixed.cache_path, allow_pickle=False) as expected, np.load(replayed.cache_path, allow_pickle=False) as actual:
+                np.testing.assert_array_equal(expected["frames"], actual["frames"])
+            corrupted = replace(row, frame_hashes=("0" * 64, *row.frame_hashes[1:]))
+            with self.assertRaisesRegex(MediaFailure, "native_RGB_hash"):
+                prepare_video(corrupted, FixtureFaces(), root / "bad-native.npz",
+                              window_start=0.5, window_duration=2, native_replay=native)
 
 
 if __name__ == "__main__":

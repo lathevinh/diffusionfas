@@ -1,0 +1,417 @@
+{
+  "PAD_target_evaluations": 0,
+  "acquisition": {
+    "bundle_manifest_sha256": "87e6b56cea4c1d7d803579425b7219b0cc06914878340c038ea33eecec5b3fc6",
+    "completed": true,
+    "conversion": {
+      "renamed_attention_tensors": 48,
+      "reshaped_1x1_attention_tensors": 0
+    },
+    "model_card_declared_license": "apache-2.0",
+    "native_noise_schedule": "linear",
+    "native_resolution": 256,
+    "parameter_count": 113673219,
+    "rights_review_scope": "reviewed public Apache-2.0 model-card declaration for this private research probe, not legal certification or unrestricted dataset/commercial rights",
+    "safe_load": "torch.load(weights_only=True)",
+    "schema_version": 1,
+    "scientific_training_runs": 0,
+    "unsafe_pickle_fallback": false,
+    "upstream_files": {
+      "README.md": {
+        "bytes": 2991,
+        "sha256": "8c5543f321d69e4974766eefc80dd1e4b280d5c8c90b2d7b7db2becee5e26c00"
+      },
+      "config.json": {
+        "bytes": 790,
+        "sha256": "32b2f0534ffcea4231d844a85087e1fd67d8f4d067e41c2149c38b079d8afaf5"
+      },
+      "diffusion_pytorch_model.bin": {
+        "bytes": 454853117,
+        "sha256": "efff89712093ad060ce99d9b461bbe542b49d8dd4ce30f23fe5761dca292361d"
+      },
+      "scheduler_config.json": {
+        "bytes": 256,
+        "sha256": "af2d0e17f61f358ffe9e671f285334b9a01c3bc8740834e3709b1efd5a4cdae5"
+      }
+    },
+    "upstream_repository": "google/ddpm-celebahq-256",
+    "upstream_revision": "cd5c944777ea2668051904ead6cc120739b86c4d",
+    "weights_redistributed": false
+  },
+  "calibration_blocker": "CASIA 12 and MSU 6 bonafide calibration originals cannot support the chosen strict 5% policy requiring at least one rejection unit; splits/rate unchanged",
+  "calibration_policy_changed": false,
+  "completed": true,
+  "environment": "conda:fas",
+  "failed_invocation_explanation": "first native-followup worker failed before staging/decoding because the reused FAS package was not on sys.path; corrected explicit attempt retained both immutable receipts",
+  "failed_supervised_invocations_preserved": 1,
+  "full_source_preprocessing_runs": 0,
+  "guard_semantics": "0.2s sampled process-tree RSS/owned-disk watchdog, finite wall limit with up-to-5s termination grace; not OS-enforced instantaneous RSS/disk quotas; CUDA limit covers own PyTorch allocator, not other users or all driver allocations",
+  "limitations": [
+    "six originals and twelve unique slots cannot establish dataset-wide tracking success or PAD discrimination",
+    "three measured synthetic steps per arm do not establish end-to-end training runtime",
+    "CUDA training bitwise determinism is not claimed",
+    "OpenCV CLI default remains unchanged; accepted native replay is explicitly injectable into prepare_video and used for the fixed MSU follow-up",
+    "no DINO or scratch-model performance benchmark was executed",
+    "model-card license review is not unrestricted data/commercial-rights certification"
+  ],
+  "private_receipt_sha256": {
+    "acquisition": "3641e630382909b75149ba92a8bd31ae187797c8e1e403276539ff34d46f2888",
+    "gpu": "5d3042092ab5630d1db6662ccae2e541f6262e8b9f51468954c425ee543f0836",
+    "replay": "65d03bfc1e2635c8016ba2f6867da73046d2cc6bcf795f2cc42f30199bf2a478",
+    "source_initial": "c8a31309b8082bbcfbc58a20c4ecbbbca48a0727a5b1c3205724e9acb10bb19d",
+    "source_native_followup": "75054e6098b207cba00537309d317dbe7d0d7258a7746171aa89d5fd5ec6a326"
+  },
+  "schema_version": 1,
+  "scientific_execution_flags": {
+    "checkpoint_download": false,
+    "source_decode": false,
+    "source_scoring": false,
+    "source_training": false,
+    "target_decode": false,
+    "target_evaluation": false
+  },
+  "scientific_training_runs": 0,
+  "scope": "engineering_feasibility_only_not_PAD_accuracy_or_cross_domain_generalization",
+  "separate_process_replay": {
+    "atol": 1e-06,
+    "completed": true,
+    "maximum_absolute_errors": {
+      "frozen": 0.0,
+      "spatial_adapter": 0.0,
+      "temporal_adapter": 0.0
+    },
+    "rtol": 1e-05,
+    "separate_process": true,
+    "synthetic_inputs_only": true
+  },
+  "source_preprocessing": {
+    "MSU_RGB_frames_verified_across_all_followup_passes": 2168,
+    "MSU_followup_decoder": "accepted_FFmpeg_strict_full_RGB_replay",
+    "MSU_seeks_may_decompress_other_container_bytes": true,
+    "MSU_strict_full_decode_passes": 8,
+    "RGB_shape": [
+      16,
+      256,
+      256,
+      3
+    ],
+    "by_domain": {
+      "CASIA-FASD": {
+        "explicit_native_followup_attempts": 0,
+        "final_successful_windows": 4,
+        "fitting_originals": 1,
+        "fixed_unique_window_slots": 4,
+        "initial_attempts": 4,
+        "initial_failures": {},
+        "initial_successful_windows": 4,
+        "selected_originals": 2,
+        "validation_originals": 1
+      },
+      "MSU-MFSD": {
+        "explicit_native_followup_attempts": 4,
+        "final_successful_windows": 4,
+        "fitting_originals": 1,
+        "fixed_unique_window_slots": 4,
+        "initial_attempts": 4,
+        "initial_failures": {
+          "native_RGB_hash_mismatch_no_decoder_waiver": 4
+        },
+        "initial_successful_windows": 0,
+        "selected_originals": 2,
+        "validation_originals": 1
+      },
+      "SiW-Mv2": {
+        "explicit_native_followup_attempts": 0,
+        "final_successful_windows": 4,
+        "fitting_originals": 1,
+        "fixed_unique_window_slots": 4,
+        "initial_attempts": 4,
+        "initial_failures": {},
+        "initial_successful_windows": 4,
+        "selected_originals": 2,
+        "validation_originals": 1
+      }
+    },
+    "explicit_native_followup_attempts": 4,
+    "final_successful_window_slots": 12,
+    "fps": 8,
+    "frames_per_window": 16,
+    "initial_decoder": "OpenCV",
+    "initial_preprocessing_wall_seconds": 53.178963198995916,
+    "initial_successful_windows": 8,
+    "initial_window_attempts": 12,
+    "native_RGB_waivers": 0,
+    "native_followup_wall_seconds": 21.535261741002614,
+    "native_replay_helper_sha256": "8018390bfa8004d42cd52eae21dab8633a39838f1efc523647de5cd9d823a888",
+    "newly_staged_originals_removed": true,
+    "original_or_window_replacements": 0,
+    "pairs_with_identical_native_frame_indices": 0,
+    "predetermined_window_slots": 12,
+    "selected_originals": 6,
+    "selection_plan_sha256": "fc49a5bd03375455b48eee49a6b6ffc7a678fe8848b4cc10b71b4b1d175edd3a",
+    "selection_seed": 20261103,
+    "source_model_forwards": 0,
+    "target_video_decodes": 0,
+    "total_window_attempts_including_repair": 16,
+    "window_seconds": 2
+  },
+  "supervision": {
+    "acquire": {
+      "completed": true,
+      "guard_failure": null,
+      "limits": {
+        "owned_disk_bytes": 8589934592,
+        "rss_bytes": 12884901888,
+        "wall_seconds": 900
+      },
+      "returncode": 0,
+      "sampled_owned_peak_disk_bytes": 909741686,
+      "sampled_tree_peak_rss_bytes": 2048339968,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 30.471986034004658
+    },
+    "gpu": {
+      "completed": true,
+      "guard_failure": null,
+      "limits": {
+        "owned_disk_bytes": 8589934592,
+        "rss_bytes": 12884901888,
+        "wall_seconds": 600
+      },
+      "returncode": 0,
+      "sampled_owned_peak_disk_bytes": 980773725,
+      "sampled_tree_peak_rss_bytes": 2405076992,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 19.233753941996838
+    },
+    "plan": {
+      "completed": true,
+      "guard_failure": null,
+      "limits": {
+        "owned_disk_bytes": 8589934592,
+        "rss_bytes": 12884901888,
+        "wall_seconds": 180
+      },
+      "returncode": 0,
+      "sampled_owned_peak_disk_bytes": 138704,
+      "sampled_tree_peak_rss_bytes": 446185472,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 1.0013645139988512
+    },
+    "replay": {
+      "completed": true,
+      "guard_failure": null,
+      "limits": {
+        "owned_disk_bytes": 8589934592,
+        "rss_bytes": 12884901888,
+        "wall_seconds": 300
+      },
+      "returncode": 0,
+      "sampled_owned_peak_disk_bytes": 998249157,
+      "sampled_tree_peak_rss_bytes": 1989951488,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 6.018714001002081
+    },
+    "source": {
+      "completed": true,
+      "guard_failure": null,
+      "limits": {
+        "owned_disk_bytes": 8589934592,
+        "rss_bytes": 12884901888,
+        "wall_seconds": 1200
+      },
+      "returncode": 0,
+      "sampled_owned_peak_disk_bytes": 1053816914,
+      "sampled_tree_peak_rss_bytes": 347127808,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 53.924938798001676
+    },
+    "source-native": {
+      "completed": false,
+      "guard_failure": null,
+      "limits": {
+        "owned_disk_bytes": 8589934592,
+        "rss_bytes": 12884901888,
+        "wall_seconds": 600
+      },
+      "returncode": 1,
+      "sampled_owned_peak_disk_bytes": 998251019,
+      "sampled_tree_peak_rss_bytes": 86016,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 0.2014092109966441
+    },
+    "source-native-import-fix": {
+      "completed": true,
+      "guard_failure": null,
+      "limits": {
+        "owned_disk_bytes": 8589934592,
+        "rss_bytes": 12884901888,
+        "wall_seconds": 600
+      },
+      "returncode": 0,
+      "sampled_owned_peak_disk_bytes": 1075879745,
+      "sampled_tree_peak_rss_bytes": 304766976,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 22.301291483003297
+    }
+  },
+  "synthetic_gpu": {
+    "arms": [
+      {
+        "adapter_checkpoint_sha256": null,
+        "arm": "frozen",
+        "backbone_frame_microbatch": 4,
+        "clip_microbatch": 1,
+        "frozen_backbone_parameters": 113673219,
+        "frozen_backbone_unchanged": true,
+        "gradient_norms": [],
+        "input_shape": [
+          1,
+          16,
+          3,
+          256,
+          256
+        ],
+        "losses": [
+          0.027879320085048676,
+          0.027879320085048676,
+          0.027879320085048676,
+          0.027879320085048676
+        ],
+        "mean_step_seconds": 0.3275829706690274,
+        "measured_iterations": 3,
+        "measured_step_seconds": [
+          0.32740948400169145,
+          0.3283296480003628,
+          0.327009780005028
+        ],
+        "peak_allocated_bytes": 1947558400,
+        "peak_reserved_bytes": 2631925760,
+        "six_evaluation_scoring_seconds": 1.9931910350060207,
+        "synthetic_optimizer_steps": 0,
+        "synthetic_residual_profile": [
+          [
+            1.225597620010376,
+            0.28908461332321167,
+            0.03637459874153137
+          ]
+        ],
+        "trainable_parameters": 0,
+        "warmup_iterations": 1,
+        "zero_init_max_absolute_difference": 0.0
+      },
+      {
+        "adapter_checkpoint_sha256": "b112a1564b9f644b4ef68863136fff15cbe867a88e66a2e114cd49ef716acc86",
+        "arm": "spatial_adapter",
+        "backbone_frame_microbatch": 4,
+        "clip_microbatch": 1,
+        "frozen_backbone_parameters": 113673219,
+        "frozen_backbone_unchanged": true,
+        "gradient_norms": [
+          0.002002385212108493,
+          0.0013358123833313584,
+          0.0007973210886120796,
+          0.001187336165457964
+        ],
+        "input_shape": [
+          1,
+          16,
+          3,
+          256,
+          256
+        ],
+        "losses": [
+          0.027879320085048676,
+          0.027878334745764732,
+          0.027877669781446457,
+          0.027877716347575188
+        ],
+        "mean_step_seconds": 0.3306027656653896,
+        "measured_iterations": 3,
+        "measured_step_seconds": [
+          0.33049812399985967,
+          0.3299452849969384,
+          0.3313648879993707
+        ],
+        "peak_allocated_bytes": 1948045824,
+        "peak_reserved_bytes": 2644508672,
+        "six_evaluation_scoring_seconds": 1.9729868670037831,
+        "synthetic_optimizer_steps": 4,
+        "synthetic_residual_profile": [
+          [
+            1.225602388381958,
+            0.2890888750553131,
+            0.0363779291510582
+          ]
+        ],
+        "trainable_parameters": 46051,
+        "warmup_iterations": 1,
+        "zero_init_max_absolute_difference": 0.0
+      },
+      {
+        "adapter_checkpoint_sha256": "1b4b5aad603a087559ce7d0cfd2e9c5485605ba7b8993e893c1cc68e64db7b56",
+        "arm": "temporal_adapter",
+        "backbone_frame_microbatch": 4,
+        "clip_microbatch": 1,
+        "frozen_backbone_parameters": 113673219,
+        "frozen_backbone_unchanged": true,
+        "gradient_norms": [
+          0.002110459143295884,
+          0.0013468567049130797,
+          0.0008113632793538272,
+          0.0013408658560365438
+        ],
+        "input_shape": [
+          1,
+          16,
+          3,
+          256,
+          256
+        ],
+        "losses": [
+          0.027879320085048676,
+          0.02787821553647518,
+          0.02787761203944683,
+          0.02787785790860653
+        ],
+        "mean_step_seconds": 0.332587754332053,
+        "measured_iterations": 3,
+        "measured_step_seconds": [
+          0.33248874000128126,
+          0.33186599299369846,
+          0.3334085300011793
+        ],
+        "peak_allocated_bytes": 1948078592,
+        "peak_reserved_bytes": 2644508672,
+        "six_evaluation_scoring_seconds": 1.9746236369974213,
+        "synthetic_optimizer_steps": 4,
+        "synthetic_residual_profile": [
+          [
+            1.2256042957305908,
+            0.289093554019928,
+            0.036376871168613434
+          ]
+        ],
+        "trainable_parameters": 48099,
+        "warmup_iterations": 1,
+        "zero_init_max_absolute_difference": 0.0
+      }
+    ],
+    "bundle_manifest_sha256": "87e6b56cea4c1d7d803579425b7219b0cc06914878340c038ea33eecec5b3fc6",
+    "completed": true,
+    "device": {
+      "initial_free_bytes": 15761145856,
+      "name": "NVIDIA GeForce RTX 4080 SUPER",
+      "numeric": "FP32_no_AMP_no_TF32",
+      "own_allocator_limit_bytes": 11161121587,
+      "total_bytes": 17170956288,
+      "training_bitwise_determinism_claimed": false
+    },
+    "schema_version": 1,
+    "scientific_training_runs": 0,
+    "scope": "engineering_probe_not_PAD_performance",
+    "source_video_model_forwards": 0,
+    "synthetic_inputs_only": true,
+    "target_evaluations": 0
+  }
+}

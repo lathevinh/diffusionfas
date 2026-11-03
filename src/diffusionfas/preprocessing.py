@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 import time
 from typing import Protocol
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 
 import cv2
 import numpy as np
@@ -27,6 +27,10 @@ class FaceProvider(Protocol):
     def detect(self, rgb: np.ndarray) -> tuple[np.ndarray, np.ndarray] | None: ...
 
     def crop(self, rgb: np.ndarray, box: np.ndarray, landmarks: np.ndarray) -> np.ndarray: ...
+
+
+class NativeReplay(Protocol):
+    def __call__(self, path: Path, consume: Callable[[int, np.ndarray], None], timeout: float) -> None: ...
 
 
 class FasFaceProvider:
@@ -108,6 +112,8 @@ def interpolate_track(
 def prepare_video(
     video: Video, provider: FaceProvider, output: Path, *,
     fps: int = 8, max_seconds: float = 180, max_output_bytes: int = 512 * 1024**2,
+    window_start: float | None = None, window_duration: float | None = None,
+    native_replay: NativeReplay | None = None,
 ) -> Video:
     if not video.media_path or not video.media_sha256 or not video.frame_hashes:
         raise ValueError("bound extracted local media path, hash and native frame hashes required")
@@ -119,8 +125,16 @@ def prepare_video(
     interval = video.interval
     if interval is None or interval[1] - interval[0] + 1e-8 < 2:
         raise MediaFailure("insufficient_duration")
-    duration = int((interval[1] - interval[0] + 1e-8) * fps) / fps
-    indexes = window_indices(video.timestamps, interval[0], duration, fps)
+    if (window_start is None) != (window_duration is None):
+        raise ValueError("window start and duration must be supplied together")
+    if window_start is None:
+        start = interval[0]
+        duration = int((interval[1] - interval[0] + 1e-8) * fps) / fps
+    else:
+        start, duration = window_start, window_duration
+        if duration is None or start < interval[0] - 1e-8 or start + duration > interval[1] + 1e-8:
+            raise ValueError("requested fixed window outside accepted native interval")
+    indexes = window_indices(video.timestamps, start, duration, fps)
     maximum_cache_bytes = len(indexes) * 256 * 256 * 3 + len(indexes) * (8 + 4 * 8 + 10 * 8) + 16384
     if maximum_cache_bytes > max_output_bytes:
         raise MediaFailure("cache_output_budget_exceeded")
@@ -153,22 +167,50 @@ def prepare_video(
         if order != len(video.timestamps) or selected != len(indexes):
             raise MediaFailure("native_frame_count_mismatch")
 
+    def consume_selected(consume: Callable[[np.ndarray], None]) -> None:
+        if native_replay is None:
+            with closing(selected_frames()) as frames:
+                for frame in frames:
+                    consume(frame)
+            return
+        order, selected = 0, 0
+
+        def verify(index: int, rgb: np.ndarray) -> None:
+            nonlocal order, selected
+            if time.monotonic() > deadline:
+                raise MediaFailure("video_preparation_timeout")
+            if index != order or order >= len(video.timestamps):
+                raise MediaFailure("native_frame_count_mismatch")
+            if rgb.dtype != np.uint8 or rgb.ndim != 3 or rgb.shape[2] != 3:
+                raise MediaFailure("native_RGB_shape_mismatch")
+            if hashlib.sha256(rgb.tobytes()).hexdigest() != video.frame_hashes[order]:
+                raise MediaFailure("native_RGB_hash_mismatch_no_decoder_waiver")
+            order += 1
+            if index in wanted:
+                selected += 1
+                consume(rgb)
+
+        native_replay(path, verify, max(0.001, deadline - time.monotonic()))
+        if order != len(video.timestamps) or selected != len(indexes):
+            raise MediaFailure("native_frame_count_mismatch")
+
     detections = []
-    with closing(selected_frames()) as frames:
-        for frame in frames:
-            detections.append(provider.detect(frame))
+    consume_selected(lambda frame: detections.append(provider.detect(frame)))
     boxes, landmarks = interpolate_track(detections)
     crops = []
-    with closing(selected_frames()) as frames:
-        for frame, box, points in zip(frames, boxes, landmarks, strict=True):
-            crop = provider.crop(frame, box, points)
-            if crop.shape != (256, 256, 3) or crop.dtype != np.uint8:
-                raise ValueError("face provider must return RGB256 uint8")
-            crops.append(crop)
+
+    def crop_frame(frame: np.ndarray) -> None:
+        slot = len(crops)
+        crop = provider.crop(frame, boxes[slot], landmarks[slot])
+        if crop.shape != (256, 256, 3) or crop.dtype != np.uint8:
+            raise ValueError("face provider must return RGB256 uint8")
+        crops.append(crop)
+
+    consume_selected(crop_frame)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("xb") as stream:
         np.savez(stream, frames=np.stack(crops),
-                 timestamps=interval[0] + (np.arange(len(indexes)) + 0.5) / fps,
+                 timestamps=start + (np.arange(len(indexes)) + 0.5) / fps,
                  native_timestamps=np.array([video.timestamps[i] for i in indexes]),
                  boxes=boxes, landmarks=landmarks, native_orders=np.array(indexes))
     if output.stat().st_size > max_output_bytes:

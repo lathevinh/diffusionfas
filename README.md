@@ -5,16 +5,20 @@ Offline-first bonafide-only short-clip PAD research.
 - [Kế hoạch ban đầu](docs/001-bonafide-only-short-clip-diffusion-plan.md).
 - [Implementation, preflight thực tế và những gì còn bị chặn](docs/002-offline-implementation-and-preflight.md).
 - [Aggregate metadata/resource preflight](results/preflight-v2.json).
+- [Checkpoint, GPU và source preprocessing probe](docs/003-bounded-checkpoint-gpu-and-source-probes.md).
+- [Aggregate probe evidence](results/probe-v2.json).
 
-**Chưa tải pretrained checkpoint, chưa training trên PAD videos và chưa đánh giá
-target.** Default config đóng mọi quyền decode/scoring/training. Synthetic tests
-không phải kết quả FAS.
+**Đã tải checkpoint private và chạy bounded engineering probes trong env `fas`;
+chưa training trên PAD videos, chưa đánh giá target.** Đã xử lý 12 cửa sổ cố định
+từ 6 source bonafide originals; không dùng OULU. Default scientific config vẫn
+đóng mọi quyền decode/scoring/training. Synthetic optimizer steps không phải kết quả FAS.
 
 ## Môi trường và tests
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác.
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v3.json):
+43 tests passed.
 
 ```bash
 PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
@@ -26,8 +30,9 @@ conda run --no-capture-output -n fas python scripts/validate.py \
   --out /path/to/new-validation-receipt.json
 ```
 
-Trong lần triển khai này chỉ bổ sung package còn thiếu `diffusers==0.35.1` với
-`--no-deps`; các package cũ không được nâng cấp. Không tải model weights.
+Chỉ bổ sung package còn thiếu `diffusers==0.35.1` với `--no-deps`; các package cũ
+không được nâng cấp. Checkpoint chỉ được tải bằng explicit bounded acquisition
+probe; không có automatic download trong scientific loader.
 
 ## Lệnh metadata-only: có thể chạy trước training approval
 
@@ -96,7 +101,8 @@ không phải matched backbone ablation.
 
 ### Local pretrained bundle contract
 
-Không có lệnh download hoặc unsafe pickle fallback. Loader chỉ đọc:
+Scientific loader không tự download hoặc dùng unsafe pickle fallback. Explicit
+acquisition probe tách biệt được mô tả trong tài liệu 003. Loader chỉ đọc:
 
 ```text
 bundle/
@@ -121,17 +127,24 @@ bundle/
 Config cần `model.local_bundle` và `model.bundle_manifest_sha256`. Native
 resolution và scheduler lấy từ bundle, không ghi đè bằng scratch settings.
 Candidate hiện tại là `google/ddpm-celebahq-256`, revision được pin trong config.
-Upstream liệt kê legacy `.bin`; acquisition và safe conversion cần quyết định
-riêng, chưa thực hiện. Model-card license không thay cho review quyền dữ liệu.
+Legacy `.bin` đã được pin byte count/SHA-256, load với `weights_only=True` và
+chuyển lossless sang private safetensors. Model-card license không thay cho
+review quyền dữ liệu/commercial use.
 
 ## Giới hạn hiện tại
 
-- Chưa có actual multi-frame PAD crops; eligibility hiện chỉ từ saved metadata.
-- Chưa benchmark denoiser thật trên GPU; không có estimated training runtime đáng tin.
+- Engineering probe chỉ có 6 source originals, không chứng minh tracking success
+  toàn dataset hoặc khả năng phân biệt bonafide/spoof.
+- GPU timing chỉ từ tensors tổng hợp; chưa đo end-to-end training.
+- OpenCV default của `prepare` không đổi và đã phát hiện không khớp MSU RGB
+  receipts. Fixed MSU probe dùng explicit accepted-FFmpeg replay qua Python API
+  `prepare_video(native_replay=...)`; phải chốt/wire decoder policy cho full
+  preparation trước scientific run, không bật CLI full preparation như hiện tại.
 - Source calibration bonafide CASIA/MSU quá ít cho strict 5% finite-sample policy
   đã chọn; không tự nới ngưỡng hoặc đổi split.
-- Archive staging/extraction, hard process watchdog và full-matrix orchestration
-  chưa được cho phép/chốt budget; không claim production execution readiness.
+- Exact-member staging và sampled process watchdog đã kiểm tra cho probe nhỏ.
+  Full-source preparation, scientific training và full matrix chưa được chốt
+  budget; không claim production execution readiness.
 - SiW subject identities và các near-duplicate/capture-independence giới hạn cũ
   vẫn còn nguyên.
 - Attack family không có trong source integration export hiện tại được báo
