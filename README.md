@@ -14,6 +14,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Source-validation spoof diagnostic: raw residual chưa tách tốt](docs/008-source-validation-spoof-diagnostic.md).
 - [CelebA-HQ-style crop và private HTML review trước ablation](docs/009-celebahq-geometry-visual-review.md).
 - [Audit dataset: crop phải nằm hoàn toàn trên pixels thật, không padding](docs/010-real-pixel-crop-dataset-audit.md).
+- [MSU preview không padding: 6 videos, dừng chờ duyệt ảnh](docs/011-msu-real-pixel-crop-review.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
@@ -183,6 +184,27 @@ không dataset nào đạt 100% toàn bộ denominator. MSU có 18/18 fitting bo
 context, một attack có decode failure cũ. Việc dùng subset cần chốt protocol
 riêng, không tự đổi validation window để cứu mẫu. Xem
 [coverage và selection-bias caveats](docs/010-real-pixel-crop-dataset-audit.md).
+
+Đã chốt eligible MSU population bằng metadata và chạy preview CPU được duyệt:
+**6/6 validation videos, 18/18 frames**, zero padding, không đổi middle window.
+Strict renderer kiểm tra cả square bounds lẫn actual bilinear support trước
+khi sample RGB; historical reflected renderer không được dùng cho policy mới.
+25 targeted crop tests passed. HTML/ảnh giữ private, **đang chờ duyệt bằng mắt**;
+chưa chạy DDPM A/B hoặc train thêm. Xem
+[protocol và aggregate](docs/011-msu-real-pixel-crop-review.md).
+
+```bash
+conda run --no-capture-output -n fas python scripts/crop_preview.py plan \
+  --diagnostic-root /path/to/private/source-diagnostic-v2 \
+  --real-pixel-audit-root /path/to/private/crop-fit-audit-v1 \
+  --private-root /path/to/private/new-msu-real-pixel-preview
+
+CUDA_VISIBLE_DEVICES='' conda run --no-capture-output -n fas python scripts/crop_preview.py run \
+  --plan /path/to/private/new-msu-real-pixel-preview/plan.json
+```
+
+Mỗi actual attempt vẫn cần approval/budget riêng; các lệnh không cấp quyền
+scoring/training. Audit v1 và original population được pin theo hashes.
 
 ### Các model variants
 

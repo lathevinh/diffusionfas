@@ -18,7 +18,7 @@ from typing import Any
 import cv2
 import numpy as np
 
-from .celebahq_geometry import POLICY, crop_celebahq
+from .celebahq_geometry import POLICY, REAL_PIXEL_POLICY, crop_celebahq, crop_real_pixels
 from .data import Video, addressed_seed, load_manifest
 from .fas_import import MANIFEST_SHA
 from .io import digest, object_digest, read_json, require_private_output, write_json
@@ -34,6 +34,61 @@ AUTHORITY = {"source_validation_preview": True, "model_scoring": False, "trainin
              "calibration_pixels": False, "target_pixels": False, "human_review_required": True}
 SEED = 20261104
 SLOTS = (0, 7, 15)
+AUDIT_PLAN_SHA = "07295e678961390f85e097ebfaff8291ade02e9bd5fe130dafa423e259289c69"
+AUDIT_RESULTS_SHA = "cd9939f65729c7aded36d329ea00179dd8cb275c1e4e448ff8a8e7bc5577ed3a"
+
+
+def real_pixel_selection(videos: list[Video], audit_root: Path) -> tuple[list[Video], dict[str, Any]]:
+    from .crop_fit_audit import population
+
+    audit = read_json(audit_root / "plan.json", AUDIT_PLAN_SHA)
+    result = read_json(audit_root / "private-results.json", AUDIT_RESULTS_SHA)
+    supervision = read_json(audit_root / "supervision.json")
+    if (result["plan_sha256"] != AUDIT_PLAN_SHA or not supervision["completed"]
+            or supervision["plan_sha256"] != AUDIT_PLAN_SHA):
+        raise ValueError("completed pinned crop-fit audit required")
+    for name in ("bonafide_manifest", "diagnostic_manifest"):
+        read_json(Path(audit[name]), audit[f"{name}_sha256"])
+    original = population(Path(audit["bonafide_manifest"]), Path(audit["diagnostic_manifest"]))
+    if object_digest([v.to_dict() for v in original]) != audit["population_sha256"]:
+        raise ValueError("audit population drift")
+    expected_validation = [v for v in original if v.partition == "validation"]
+    if {v.key: v for v in expected_validation} != {v.key: v for v in videos}:
+        raise ValueError("preview diagnostic differs from audited validation")
+    records = {r["key"]: r for r in result["records"]}
+    if len(records) != len(original) or set(records) != {v.key for v in original}:
+        raise ValueError("audit original coverage changed")
+    eligible, excluded = [], []
+    for video in original:
+        if video.dataset != "MSU-MFSD":
+            continue
+        record = records[video.key]
+        geometry = record["geometry"]
+        if (record["dataset"], record["partition"], record["label"], record["status"]) != (
+                video.dataset, video.partition, video.label, video.status):
+            raise ValueError("audit original metadata drift")
+        gate = "all_cached_frames_fit" if video.partition == "fitting" else "middle_T16_fit"
+        if geometry is not None and geometry[gate]:
+            if video.status != "prepared" or geometry["cache_sha256"] != video.cache_sha256:
+                raise ValueError("eligible audit cache drift")
+            eligible.append(video)
+        else:
+            excluded.append({"key": video.key, "reason": "unknown_existing_failure"
+                             if geometry is None else "fixed_middle_square_out_of_frame"})
+    counts = Counter(f"{v.partition}:{v.label}" for v in eligible)
+    if counts != {"fitting:bona_fide": 18, "validation:bona_fide": 6, "validation:attack": 16}:
+        raise ValueError("approved MSU cohort counts changed")
+    selected = []
+    for label in ("bona_fide", "attack"):
+        candidates = sorted((v for v in eligible if v.partition == "validation" and v.label == label),
+                            key=lambda v: v.key)
+        rng = random.Random(addressed_seed(SEED, "MSU-MFSD", label, "real-pixel-preview"))
+        selected.extend(rng.sample(candidates, 3))
+    return selected, {"audit_root": str(audit_root.resolve()), "audit_plan_sha256": AUDIT_PLAN_SHA,
+                      "audit_results_sha256": AUDIT_RESULTS_SHA, "eligible_counts": dict(counts),
+                      "eligible_keys": [v.key for v in eligible], "excluded": excluded,
+                      "eligible_population_sha256": object_digest([v.to_dict() for v in eligible]),
+                      "fitting_pixels_authorized": False, "model_scoring_authorized": False}
 
 
 def select_videos(videos: list[Video]) -> list[Video]:
@@ -77,7 +132,7 @@ def cache_samples(video: Video) -> list[dict[str, Any]]:
                 for slot in SLOTS]
 
 
-def build_plan(diagnostic_root: Path, output: Path) -> Path:
+def build_plan(diagnostic_root: Path, output: Path, audit_root: Path | None = None) -> Path:
     require_private_output(output / "plan.json")
     if output.exists():
         raise ValueError("new preview root required")
@@ -99,8 +154,9 @@ def build_plan(diagnostic_root: Path, output: Path) -> Path:
         raise ValueError("preview population must be source validation only")
     source_path = Path(previous["source_manifest"])
     rows = {f"{r['dataset']}/{r['video_id']}": r for r in read_json(source_path, MANIFEST_SHA)["rows"]}
+    chosen, cohort = real_pixel_selection(videos, audit_root) if audit_root is not None else (select_videos(videos), None)
     selected = []
-    for video in select_videos(videos):
+    for video in chosen:
         selected.append({"video": video.to_dict(), **source_media_entry(video, rows[video.key]),
                          "samples": cache_samples(video)})
     png_bound = 36 * (640 * 640 * 3 + 65536) + 72 * (256 * 256 * 3 + 65536)
@@ -110,7 +166,8 @@ def build_plan(diagnostic_root: Path, output: Path) -> Path:
         raise ValueError("preview conservative output estimate exceeds approval")
     project = Path(__file__).resolve().parents[2]
     plan = {"scope": "private_source_crop_visual_review", "authority": AUTHORITY, "budget": BUDGET,
-            "policy": POLICY, "seed": SEED, "slots": list(SLOTS), "selected": selected,
+            "policy": REAL_PIXEL_POLICY if cohort is not None else POLICY,
+            "seed": SEED, "slots": list(SLOTS), "selected": selected,
             "diagnostic_root": str(diagnostic_root.resolve()), "diagnostic_plan_sha256": digest(previous_path),
             "diagnostic_completion_sha256": digest(diagnostic_root / "completion.json"),
             "manifest": str(manifest.resolve()), "manifest_sha256": digest(manifest),
@@ -122,6 +179,8 @@ def build_plan(diagnostic_root: Path, output: Path) -> Path:
             "conservative_estimate_bytes": estimate,
             "implementation_sha256": {str(p.relative_to(project)): digest(p) for directory in ("src", "scripts")
                                       for p in sorted((project / directory).rglob("*.py"))}}
+    if cohort is not None:
+        plan["real_pixel_cohort"] = cohort
     output.mkdir(parents=True)
     write_json(output / "plan.json", plan)
     return output / "plan.json"
@@ -130,8 +189,10 @@ def build_plan(diagnostic_root: Path, output: Path) -> Path:
 def checked_inputs(path: Path, sha: str) -> dict[str, Any]:
     require_private_output(path)
     plan = read_json(path, sha)
+    strict = "real_pixel_cohort" in plan
     if (plan["authority"] != AUTHORITY or plan["budget"] != BUDGET
-            or plan["scope"] != "private_source_crop_visual_review" or plan["policy"] != POLICY
+            or plan["scope"] != "private_source_crop_visual_review"
+            or plan["policy"] != (REAL_PIXEL_POLICY if strict else POLICY)
             or plan["seed"] != SEED or plan["slots"] != list(SLOTS)):
         raise PermissionError("fixed preview-only authority, geometry, sample and caps required")
     project = Path(__file__).resolve().parents[2]
@@ -151,7 +212,12 @@ def checked_inputs(path: Path, sha: str) -> dict[str, Any]:
         raise ValueError("preview lineage or decoder contracts changed")
     read_json(Path(plan["manifest"]), plan["manifest_sha256"])
     videos, _ = load_manifest(Path(plan["manifest"]))
-    expected = select_videos(videos)
+    if strict:
+        expected, cohort = real_pixel_selection(videos, Path(plan["real_pixel_cohort"]["audit_root"]))
+        if cohort != plan["real_pixel_cohort"]:
+            raise ValueError("approved real-pixel cohort changed")
+    else:
+        expected = select_videos(videos)
     if object_digest([v.to_dict() for v in expected]) != object_digest([e["video"] for e in plan["selected"]]):
         raise ValueError("preview must retain its entire predetermined sample")
     source = read_json(Path(plan["source_manifest"]), MANIFEST_SHA)
@@ -281,7 +347,8 @@ def run_preview(path: Path, sha: str) -> None:
                         legacy = cv2.resize(legacy, (256, 256), interpolation=cv2.INTER_CUBIC)
                         if not np.array_equal(legacy, old_frames[sample["cache_index"]]):
                             raise ValueError("preview legacy pixels differ from locked cache")
-                        corrected, geometry = crop_celebahq(rgb, landmarks)
+                        renderer = crop_real_pixels if "real_pixel_cohort" in plan else crop_celebahq
+                        corrected, geometry = renderer(rgb, landmarks)
                         annotated = render_original(rgb, np.asarray(geometry["quad"]), legacy_meta)
                         prefix = f"v{index + 1:02d}-f{sample['clip_slot'] + 1:02d}"
                         images = {name: save_png(root / "images" / f"{prefix}-{name}.png", image)
@@ -302,7 +369,7 @@ def run_preview(path: Path, sha: str) -> None:
             write_json(root / "records" / f"result-{index:02d}.json", {
                 "index": index, "status": "technical_failure" if failure else "rendered",
                 "failure": failure, "frames": rendered})
-            print({"originals": index + 1, "selected": 12,
+            print({"originals": index + 1, "selected": len(plan["selected"]),
                    "status": "technical_failure" if failure else "rendered"}, flush=True)
     review = render_review(path)
     write_json(root / "completion.json", {
@@ -314,6 +381,8 @@ def run_preview(path: Path, sha: str) -> None:
 
 def render_review(path: Path) -> dict[str, Any]:
     root, plan = path.parent, read_json(path)
+    strict = "real_pixel_cohort" in plan
+    total = len(plan["selected"])
     require_private_output(root / "review.html")
     cards, counts = [], Counter()
 
@@ -341,7 +410,7 @@ def render_review(path: Path) -> dict[str, Any]:
                 + embed(images["original"], "Original + crop outlines (thumbnail)")
                 + embed(images["legacy"], "A: legacy stretched crop, 256 x 256")
                 + embed(images["celebahq"], "B: CelebA-HQ-style square crop, 256 x 256")
-                + f'</div><p class="meta">Reflected padding: {geometry["padding_fraction"]:.2%}'
+                + f'</div><p class="meta">Padding: {geometry["padding_fraction"]:.2%}'
                 f' &middot; square side: {geometry["side_source_pixels"]:.1f} source pixels'
                 f' &middot; output eye distance: {geometry["eye_distance_output_pixels"]:.1f}px</p></section>')
         if row["failure"]:
@@ -381,7 +450,13 @@ No beautification, face restoration or learned super-resolution. Not bit-exact C
 <p>Inspect head/chin coverage, face scale, alignment, distortion, reflected edges and frame-to-frame stability.
 Failures stay visible; no replacement examples were selected.</p>
 """
-    page += (f'<p class="meta">{counts["rendered"]}/12 videos rendered; {counts["frames"]}/36 frames. '
+    if strict:
+        page = page.replace(
+            "12 seeded random source-validation videos, 2 per domain/class.",
+            "6 seeded random geometry-qualified MSU validation videos, 3 per class.")
+        page = page.replace("reflected boundaries", "real source pixels only; no padding, shifting or shrinking")
+        page = page.replace("reflected edges", "real context boundaries")
+    page += (f'<p class="meta">{counts["rendered"]}/{total} videos rendered; {counts["frames"]}/{total * 3} frames. '
              f'Pool: {plan["pool_prepared"]}/{plan["pool_originals"]} previously prepared originals. '
              f'Sampling seed: {SEED}.</p>'
              f'<p class="meta hash">Plan SHA-256: {digest(path)}</p></header>'
@@ -415,7 +490,8 @@ def summarize_preview(path: Path, supervision: dict[str, Any]) -> dict[str, Any]
     if completion is not None:
         if (completion["plan_sha256"] != digest(path)
                 or completion["html_sha256"] != digest(root / "review.html")
-                or completion["counts"] != dict(counts) or len(completion["records_sha256"]) != 12):
+                or completion["counts"] != dict(counts)
+                or len(completion["records_sha256"]) != len(plan["selected"])):
             raise ValueError("preview completion binding mismatch")
         for name, expected in completion["records_sha256"].items():
             if digest(root / "records" / name) != expected:
@@ -425,4 +501,5 @@ def summarize_preview(path: Path, supervision: dict[str, Any]) -> dict[str, Any]
             "training_runs": 0, "calibration_pixel_access": 0, "target_pixel_access": 0,
             "plan_sha256": digest(path), "html_sha256": completion["html_sha256"] if completion else None,
             "counts": dict(counts), "budget": BUDGET, "supervision": supervision,
+            "policy": plan.get("policy", POLICY),
             "output_bytes": tree_bytes(root), "sampling_replacements": 0}

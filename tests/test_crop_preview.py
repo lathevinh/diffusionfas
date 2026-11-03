@@ -16,13 +16,13 @@ from unittest.mock import patch
 import cv2
 import numpy as np
 
-from diffusionfas.celebahq_geometry import crop_celebahq, square_geometry
+from diffusionfas.celebahq_geometry import REAL_PIXEL_POLICY, crop_celebahq, crop_real_pixels, square_geometry
 from diffusionfas.crop_preview import (
     AUTHORITY, BUDGET, SOURCES, cache_samples, checked_inputs, read_native_frames,
-    run_preview, select_videos, summarize_preview,
+    run_preview, select_videos, summarize_preview, real_pixel_selection, AUDIT_PLAN_SHA,
 )
 from diffusionfas.data import Video
-from diffusionfas.io import digest, read_json, write_json
+from diffusionfas.io import digest, object_digest, read_json, write_json
 from diffusionfas.preprocessing import MediaFailure
 
 POINTS = np.array([[40., 30.], [88., 30.], [64., 48.], [48., 68.], [80., 68.]])
@@ -72,6 +72,85 @@ class CropPreviewTests(unittest.TestCase):
         np.testing.assert_array_equal(cropped, np.broadcast_to(rgb[0, 0], cropped.shape))
         self.assertGreater(geometry["padding_fraction"], 0)
         self.assertLess(geometry["padding_fraction"], 1)
+
+    def test_real_pixel_renderer_matches_in_bounds_reference_without_padding(self):
+        rng = np.random.default_rng(42)
+        rgb = rng.integers(0, 256, (320, 320, 3), dtype=np.uint8)
+        for angle in (0., .3, -.7):
+            rotation = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
+            points = (POINTS - [64, 49]) @ rotation.T + [160, 160]
+            actual, geometry = crop_real_pixels(rgb, points)
+            reference, _ = crop_celebahq(rgb, points)
+            np.testing.assert_array_equal(actual, reference)
+            self.assertEqual(geometry["policy"], REAL_PIXEL_POLICY["name"])
+            self.assertEqual(geometry["padding_fraction"], 0)
+            self.assertTrue(geometry["bilinear_support_verified"])
+            self.assertGreater(geometry["minimum_source_margin_pixels"], 0)
+
+    def test_real_pixel_renderer_rejects_outside_before_rasterization(self):
+        rgb = np.zeros((96, 128, 3), dtype=np.uint8)
+        with patch("diffusionfas.celebahq_geometry.cv2.warpAffine") as warp:
+            with self.assertRaisesRegex(MediaFailure, "square_outside"):
+                crop_real_pixels(rgb, POINTS)
+            warp.assert_not_called()
+        with self.assertRaises(ValueError):
+            crop_real_pixels(rgb.astype(np.float32), POINTS)
+
+    def test_real_pixel_renderer_closed_bounds_without_epsilon(self):
+        points = np.array([[30., 40.], [50., 40.], [40., 50.], [35., 60.], [45., 60.]])
+        rgb = np.full((96, 128, 3), 127, dtype=np.uint8)
+        result, meta = crop_real_pixels(rgb, points)
+        self.assertEqual(meta["minimum_source_margin_pixels"], 0)
+        self.assertTrue(np.all(result == 127))
+        points[:, 0] -= 1e-9
+        with self.assertRaisesRegex(MediaFailure, "square_outside"):
+            crop_real_pixels(rgb, points)
+
+    def test_real_pixel_renderer_checks_actual_interpolation_support(self):
+        rgb = np.zeros((320, 320, 3), dtype=np.uint8)
+        mask = np.ones((1024, 1024), dtype=np.float32)
+        mask[0, 0] = .999
+        with patch("diffusionfas.celebahq_geometry.cv2.warpAffine", return_value=mask) as warp:
+            with self.assertRaisesRegex(MediaFailure, "bilinear_support"):
+                crop_real_pixels(rgb, POINTS + [100, 100])
+            self.assertEqual(warp.call_count, 1)
+
+    def test_msu_selection_keeps_fixed_middle_gate_and_original_exclusions(self):
+        rows = [replace(video("MSU-MFSD", label, f"{partition}-{label}-{i}"), partition=partition,
+                        cache_path="/unused/cache.npz", cache_sha256="cache")
+                for partition, label, count in (("fitting", "bona_fide", 18),
+                                                 ("validation", "bona_fide", 6),
+                                                 ("validation", "attack", 18))
+                for i in range(count)]
+        rows[-1] = replace(rows[-1], status="preparation_failure:decode")
+        records = [{"key": v.key, "dataset": v.dataset, "partition": v.partition, "label": v.label,
+                    "status": v.status, "geometry": {"all_cached_frames_fit": True,
+                    "middle_T16_fit": v != rows[-2], "has_any_valid_T16_window": True,
+                    "cache_sha256": v.cache_sha256} if v != rows[-1] else None} for v in rows]
+        audit = {"bonafide_manifest": "/unused/bona.json", "diagnostic_manifest": "/unused/val.json",
+                 "bonafide_manifest_sha256": "bona", "diagnostic_manifest_sha256": "val",
+                 "population_sha256": object_digest([v.to_dict() for v in rows])}
+        documents = {"plan.json": audit, "private-results.json": {"plan_sha256": AUDIT_PLAN_SHA,
+                     "records": records}, "supervision.json": {"completed": True,
+                     "plan_sha256": AUDIT_PLAN_SHA}, "bona.json": {}, "val.json": {}}
+        validation = [v for v in rows if v.partition == "validation"]
+        with patch("diffusionfas.crop_preview.read_json",
+                   side_effect=lambda path, *args: documents[path.name]), \
+                patch("diffusionfas.crop_fit_audit.population", return_value=rows):
+            selected, cohort = real_pixel_selection(validation, Path("/unused"))
+            reversed_selected, _ = real_pixel_selection(list(reversed(validation)), Path("/unused"))
+            self.assertEqual(selected, reversed_selected)
+            self.assertEqual(len(selected), 6)
+            self.assertEqual(Counter(v.label for v in selected), {"bona_fide": 3, "attack": 3})
+            self.assertTrue(all(v.dataset == "MSU-MFSD" and v.partition == "validation" for v in selected))
+            self.assertEqual(len(cohort["eligible_keys"]), 40)
+            self.assertEqual([e["key"] for e in cohort["excluded"]], [rows[-2].key, rows[-1].key])
+            self.assertFalse(cohort["model_scoring_authorized"])
+            with self.assertRaisesRegex(ValueError, "differs from audited"):
+                real_pixel_selection(validation[:-1], Path("/unused"))
+            records[-2]["geometry"]["middle_T16_fit"] = True
+            with self.assertRaisesRegex(ValueError, "cohort counts changed"):
+                real_pixel_selection(validation, Path("/unused"))
 
     def test_sampling_is_seeded_stratified_and_excludes_other_roles(self):
         rows = [video(domain, label, f"{label}-{i}") for domain in SOURCES
@@ -156,14 +235,14 @@ class CropPreviewTests(unittest.TestCase):
             with self.assertRaisesRegex(MediaFailure, "RGB_mismatch"):
                 read_native_frames(bad, path, {7, 15}, time.monotonic() + 10)
 
-    def execute_worker(self, root, fail_first=False):
+    def execute_worker(self, root, fail_first=False, real_pixels=False):
         media, frames, template = self.make_media(root)
         cache = root / "cache.npz"
         np.savez(cache, frames=np.stack([cv2.resize(f, (256, 256), interpolation=cv2.INTER_CUBIC)
                                         for f in frames]),
                  timestamps=template.timestamps, native_timestamps=template.timestamps,
                  native_orders=np.arange(17), boxes=np.tile([0., 0., 128., 96.], (17, 1)),
-                 landmarks=np.tile(POINTS, (17, 1, 1)))
+                 landmarks=np.tile(POINTS * .3 + [45, 25] if real_pixels else POINTS, (17, 1, 1)))
         fas_root = root / "fas"
         preprocessing = fas_root / "src/fas/preprocessing.py"
         preprocessing.parent.mkdir(parents=True)
@@ -174,9 +253,9 @@ class CropPreviewTests(unittest.TestCase):
         output = root / "preview"
         output.mkdir()
         entries = []
-        for domain in SOURCES:
+        for domain in (("MSU-MFSD",) if real_pixels else SOURCES):
             for label in ("bona_fide", "attack"):
-                for index in range(2):
+                for index in range(3 if real_pixels else 2):
                     row = replace(template, key=f"{domain}/{label}-{index}", dataset=domain, label=label,
                                   group=f"{label}-{index}", cache_path=str(cache), cache_sha256=digest(cache))
                     entries.append({"video": row.to_dict(), "member": "fixture.avi",
@@ -185,6 +264,9 @@ class CropPreviewTests(unittest.TestCase):
                 "preprocessing_sha256": digest(preprocessing), "msu_reader_sha256": digest(reader),
                 "decoder_config": {}, "source_manifest": "unused.json",
                 "pool_originals": 12, "pool_prepared": 12}
+        if real_pixels:
+            plan["real_pixel_cohort"] = {"test": True}
+            plan["policy"] = REAL_PIXEL_POLICY
         path = output / "plan.json"
         write_json(path, plan)
 
@@ -206,6 +288,8 @@ class CropPreviewTests(unittest.TestCase):
 
         def corrected(rgb, landmarks):
             nonlocal crop_calls
+            if real_pixels:
+                raise AssertionError("reflected renderer forbidden in real-pixel preview")
             crop_calls += 1
             if fail_first and crop_calls == 1:
                 raise MediaFailure("synthetic_geometry_failure")
@@ -222,8 +306,8 @@ class CropPreviewTests(unittest.TestCase):
                 patch("diffusionfas.crop_preview.crop_celebahq", side_effect=corrected):
             native.return_value.bind.return_value = replay
             run_preview(path, digest(path))
-            self.assertEqual(stager.call_count, 12)
-            self.assertEqual(native.return_value.bind.call_count, 4)
+            self.assertEqual(stager.call_count, 6 if real_pixels else 12)
+            self.assertEqual(native.return_value.bind.call_count, 6 if real_pixels else 4)
             with self.assertRaisesRegex(ValueError, "already attempted"):
                 run_preview(path, digest(path))
         self.assertEqual(list((output / "staging").iterdir()), [])
@@ -259,3 +343,20 @@ class CropPreviewTests(unittest.TestCase):
             self.assertEqual(len(images), 99)
             self.assertIn("synthetic_geometry_failure", (output / "review.html").read_text())
             self.assertEqual(report["sampling_replacements"], 0)
+
+    def test_real_pixel_worker_produces_six_video_review_without_reflected_renderer(self):
+        with tempfile.TemporaryDirectory() as directory:
+            report, images, output = self.execute_worker(Path(directory), real_pixels=True)
+            self.assertTrue(report["completed"])
+            self.assertEqual(report["counts"], {"rendered": 6, "frames": 18})
+            self.assertEqual(len(images), 54)
+            self.assertEqual(report["model_scoring_runs"], 0)
+            self.assertEqual(report["policy"], REAL_PIXEL_POLICY)
+            page = (output / "review.html").read_text()
+            self.assertIn("6/6 videos rendered; 18/18 frames", page)
+            self.assertIn("real source pixels only", page)
+            self.assertNotIn("reflected boundaries", page)
+            for path in (output / "records").glob("result-*.json"):
+                for frame in read_json(path)["frames"]:
+                    self.assertTrue(frame["geometry"]["bilinear_support_verified"])
+                    self.assertEqual(frame["geometry"]["padding_fraction"], 0)

@@ -20,6 +20,8 @@ def main() -> None:
     plan = commands.add_parser("plan")
     plan.add_argument("--diagnostic-root", type=Path, required=True)
     plan.add_argument("--private-root", type=Path, required=True)
+    plan.add_argument("--real-pixel-audit-root", type=Path,
+                      help="select six MSU validation originals from the pinned no-padding audit")
     run = commands.add_parser("run")
     run.add_argument("--plan", type=Path, required=True)
     run.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
@@ -29,7 +31,7 @@ def main() -> None:
         raise ValueError("crop preview requires conda env fas")
     from diffusionfas.crop_preview import BUDGET, build_plan, checked_inputs, run_preview, summarize_preview
     if args.command == "plan":
-        path = build_plan(args.diagnostic_root, args.private_root)
+        path = build_plan(args.diagnostic_root, args.private_root, args.real_pixel_audit_root)
         print({"plan_sha256": digest(path)}, flush=True)
     elif args.worker:
         if args.plan_sha256 is None:

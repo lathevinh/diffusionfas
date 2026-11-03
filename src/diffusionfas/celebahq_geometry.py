@@ -23,6 +23,15 @@ POLICY = {
     "reference": "https://github.com/tkarras/progressive_growing_of_gans/blob/master/dataset_tool.py",
 }
 
+REAL_PIXEL_POLICY = {
+    **POLICY,
+    "name": "celebahq_real_pixels_v1",
+    "border": "forbidden_verified_bilinear_support",
+    "quad_bounds": "closed_native_pixel_center_rectangle",
+    "crop_shrinking_allowed": False,
+    "crop_shifting_allowed": False,
+}
+
 
 def square_geometry(landmarks: np.ndarray, resolution: int = 256) -> dict[str, Any]:
     points = np.asarray(landmarks, dtype=np.float64)
@@ -66,3 +75,27 @@ def crop_celebahq(rgb: np.ndarray, landmarks: np.ndarray) -> tuple[np.ndarray, d
     output = cv2.resize(aligned, (256, 256), interpolation=cv2.INTER_AREA)
     return output, {**geometry, "padding_fraction": float(np.clip(1 - valid.mean(), 0, 1)),
                     "policy": POLICY["name"]}
+
+
+def crop_real_pixels(rgb: np.ndarray, landmarks: np.ndarray) -> tuple[np.ndarray, dict[str, Any]]:
+    if rgb.dtype != np.uint8 or rgb.ndim != 3 or rgb.shape[2] != 3 or min(rgb.shape[:2]) < 2:
+        raise ValueError("nonempty uint8 RGB image at least 2x2 required")
+    geometry = square_geometry(landmarks)
+    quad = np.asarray(geometry["quad"])
+    height, width = rgb.shape[:2]
+    margin = float(np.min(np.stack((quad[:, 0], quad[:, 1],
+                                    width - 1 - quad[:, 0], height - 1 - quad[:, 1]))))
+    if margin < 0:
+        raise MediaFailure("celebahq_square_outside_real_pixels")
+    render = REAL_PIXEL_POLICY["render_resolution"]
+    matrix = np.asarray(square_geometry(landmarks, render)["source_to_output_matrix"])
+    # Verify the actual quantized interpolation footprint before sampling RGB.
+    support = cv2.warpAffine(np.ones((height, width), dtype=np.float32), matrix, (render, render),
+                             flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0)
+    if not np.all(support == 1):
+        raise MediaFailure("celebahq_bilinear_support_outside_real_pixels")
+    aligned = cv2.warpAffine(rgb, matrix, (render, render), flags=cv2.INTER_LINEAR,
+                             borderMode=cv2.BORDER_CONSTANT, borderValue=0)
+    output = cv2.resize(aligned, (256, 256), interpolation=cv2.INTER_AREA)
+    return output, {**geometry, "padding_fraction": 0.0, "bilinear_support_verified": True,
+                    "minimum_source_margin_pixels": margin, "policy": REAL_PIXEL_POLICY["name"]}

@@ -1,0 +1,53 @@
+{
+  "scope": "approved_private_MSU_real_pixel_preview_only",
+  "completed": true,
+  "human_review": "pending",
+  "automatic_continuation": false,
+  "plan_sha256": "bc4014dd7caeb8baa49420c27ae6091f8e562a4417ad3333646c8f6248bc8e41",
+  "html_sha256": "febacc6f020ca004abf056d7976716fcc6d2b1b97c8c720e2036b7aff0896743",
+  "policy": "celebahq_real_pixels_v1",
+  "selected_validation_originals": {"bona_fide": 3, "attack": 3},
+  "eligible_MSU_population_metadata_only": {
+    "fitting_bona_fide": 18,
+    "validation_bona_fide": 6,
+    "validation_attack": 16,
+    "excluded_attack_out_of_frame": 1,
+    "excluded_attack_existing_decode_failure": 1
+  },
+  "counts": {"rendered": 6, "frames": 18, "embedded_PNGs": 54},
+  "budget": {"max_seconds": 1200, "max_rss_bytes": 8589934592, "max_output_bytes": 536870912},
+  "supervision": {
+    "completed": true,
+    "returncode": 0,
+    "guard_failure": null,
+    "wall_seconds": 16.236910119987442,
+    "sampled_tree_peak_rss_bytes": 500838400,
+    "sampled_owned_peak_disk_bytes": 87941575
+  },
+  "postflight": {
+    "verified_originals": 6,
+    "verified_frames": 18,
+    "verified_PNGs": 54,
+    "worker_verified_full_native_RGB_frames": 1732,
+    "legacy_crop_cache_pixel_matches": 18,
+    "maximum_padding_fraction": 0,
+    "minimum_independent_square_margin_pixels": 22.864997985934906,
+    "all_rendered_bilinear_support_verified": true,
+    "staged_raw_files_remaining": 0,
+    "html_bytes": 14898835
+  },
+  "validation": {
+    "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 conda run --no-capture-output -n fas python -m unittest discover -s tests -p 'test_crop*.py' -v",
+    "tests_run": 25,
+    "failures": 0,
+    "errors": 0,
+    "scope": "targeted_synthetic_crop_preview_and_metadata_audit"
+  },
+  "sampling_replacements": 0,
+  "model_scoring_runs": 0,
+  "training_runs": 0,
+  "fitting_pixel_access": 0,
+  "calibration_pixel_access": 0,
+  "target_pixel_access": 0,
+  "private_images_or_original_identities_published": false
+}
