@@ -16,7 +16,8 @@ Offline-first bonafide-only short-clip PAD research.
 - [Audit dataset: crop phải nằm hoàn toàn trên pixels thật, không padding](docs/010-real-pixel-crop-dataset-audit.md).
 - [MSU preview không padding: 6 videos, dừng chờ duyệt ảnh](docs/011-msu-real-pixel-crop-review.md).
 - [Frozen DDPM crop A/B trên cùng 22 MSU clips](docs/012-msu-frozen-crop-ablation.md).
-- [MAT pretrained face inpainting: native-512 preview, chờ duyệt](docs/013-mat-native512-inpainting-preview.md).
+- [MAT pretrained face inpainting: native-512 preview đã được duyệt](docs/013-mat-native512-inpainting-preview.md).
+- [MAT masked reconstruction: protocol cố định trên 22 MSU validation clips](docs/014-msu-mat-anatomical-diagnostic.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
@@ -217,7 +218,7 @@ CUDA_VISIBLE_DEVICES='' conda run --no-capture-output -n fas python scripts/crop
 Mỗi actual attempt vẫn cần approval/budget riêng; các lệnh không cấp quyền
 scoring/training. Audit v1 và original population được pin theo hashes.
 
-### MAT face-inpainting pilot (preview only)
+### MAT face-inpainting pilot
 
 Đã tích hợp riêng MAT CelebA-HQ-512: **6 videos, 18 frames, 72 reconstructions**
 cho mắt trái/mắt phải/mũi/miệng, crop trực tiếp native RGB ở 512, không padding
@@ -227,9 +228,22 @@ trong hole. Actual synthetic GPU smoke cho replay/no-leakage error bằng 0.
 
 **Mirror safetensors bên thứ ba được người dùng duyệt; chưa xác minh weights
 khớp bản tác giả.** Link chính thức trả 404. Giữ failed synthetic attempt và
-explicit continuation evidence. HTML/ảnh giữ private, **chờ duyệt bằng mắt**,
-chưa chạy AUROC, train hay threshold fitting. Xem
+explicit continuation evidence. HTML/ảnh giữ private; **crop và mask đã được
+người dùng duyệt bằng mắt**. Preview không chạy AUROC, train hay threshold fitting. Xem
 [report, protocol và provenance limits](docs/013-mat-native512-inpainting-preview.md).
+
+Lượt diagnostic tiếp theo có approval/budget riêng: cùng 22 MSU validation
+originals, cửa sổ giữa T16, bốn mask độc lập, 1.408 reconstructions. Điểm chính
+là MSE trong hole, gộp đều bốn vùng và mười sáu frames; higher=attack.
+Không chọn mask tốt nhất/đảo dấu theo kết quả, train hay fit threshold. Xem
+[protocol cố định và đối chiếu DDPM](docs/014-msu-mat-anatomical-diagnostic.md).
+Lượt chạy đã hoàn tất **22/22 clips, 352 frames, 1.408 reconstructions**,
+không lỗi kỹ thuật. AUROC chính **MAT 0,7500**, so **DDPM 0,6979**;
+paired delta **+0,0521**, CI95% **[-0,0833; +0,1042]** chứa 0, chỉ ba nhóm
+subject nên **chưa chứng minh MAT tốt hơn hoặc generalize**. Nose riêng có
+AUROC 0,2604; giữ nguyên trọng số/dấu, không chọn eye-only theo kết quả.
+Postflight độc lập từ float32 hole predictions, sklearn và weighted pairwise
+bootstrap đã khớp. Không train/fit threshold; đây vẫn là development evidence.
 
 MAT runtime dùng pinned official source ngoài Git và optional dependency
 `timm==1.0.30` đang có sẵn; không import model này từ scientific CLI mặc định.
