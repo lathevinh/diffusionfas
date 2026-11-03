@@ -1,0 +1,46 @@
+{
+  "automatic_continuation": false,
+  "browser_validation": "file blocked by workspace trust; user chose external download",
+  "budget": {
+    "max_output_bytes": 536870912,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 1200
+  },
+  "calibration_pixel_access": 0,
+  "completed": true,
+  "counts": {
+    "frames": 36,
+    "rendered": 12
+  },
+  "eligible_pool_originals": 259,
+  "embedded_pngs_verified": 108,
+  "full_pool_originals": 283,
+  "html_sha256": "faee773a54b0dd07e82b9e9a62bdf3cfef6387165fc048c96fda65f4029645d2",
+  "human_review": "pending",
+  "legacy_cache_pixel_matches_verified": 36,
+  "model_scoring_runs": 0,
+  "native_frame_bindings_verified": 36,
+  "output_bytes": 43534467,
+  "padding_fraction_min_max": [
+    0.0,
+    0.49956780672073364
+  ],
+  "plan_sha256": "68456b4c673e94b401ea3864ffd42e00334f2d205f82f64887ddd44cb76b290e",
+  "preview_is_not_model_compatibility_certification": true,
+  "sampling_replacements": 0,
+  "scope": "private_source_crop_visual_review",
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "68456b4c673e94b401ea3864ffd42e00334f2d205f82f64887ddd44cb76b290e",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": null,
+    "sampled_owned_peak_disk_bytes": 80921533,
+    "sampled_tree_peak_rss_bytes": 274685952,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 41.89610784199613
+  },
+  "target_pixel_access": 0,
+  "training_runs": 0,
+  "validation_tests_passed": 97
+}

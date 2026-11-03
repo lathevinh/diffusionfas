@@ -12,6 +12,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Continuation đã hoàn tất source preparation](docs/006-explicit-source-continuation.md).
 - [Matched spatial/temporal source-only pilot](docs/007-matched-source-adapter-pilot.md).
 - [Source-validation spoof diagnostic: raw residual chưa tách tốt](docs/008-source-validation-spoof-diagnostic.md).
+- [CelebA-HQ-style crop và private HTML review trước ablation](docs/009-celebahq-geometry-visual-review.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
@@ -43,8 +44,8 @@ Synthetic optimizer steps không phải kết quả FAS.
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v12.json):
-86 tests passed, gồm actual CUDA checkpoint-resume và pinned FFmpeg helper trên
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v13.json):
+97 tests passed, gồm actual CUDA checkpoint-resume và pinned FFmpeg helper trên
 video tổng hợp.
 
 ```bash
@@ -160,6 +161,15 @@ levels/score direction được khóa trước decoding; không training, thresh
 fitting hoặc model selection. Export aggregate AUROC, paired group-bootstrap
 CIs, all-original coverage và missing-score bounds; individual profiles/caches
 giữ private. Xem [protocol, lỗi ban đầu và kết quả](docs/008-source-validation-spoof-diagnostic.md).
+
+### Private crop review before further scoring
+
+[Preview runner](scripts/crop_preview.py) tạo HTML tự chứa ảnh để so original,
+legacy crop và CelebA-HQ-style square crop, trên seeded source-validation sample.
+Worker chỉ CPU, không DDPM scoring/training hoặc calibration/target pixels.
+Crop mới là geometry/resampling ablation, không claim bit-exact preprocessing
+của checkpoint hoặc cải thiện PAD. HTML và ảnh giữ ngoài Git; **dừng chờ người
+dùng duyệt bằng mắt**, không tự chạy tiếp. Xem [protocol](docs/009-celebahq-geometry-visual-review.md).
 
 ### Các model variants
 
