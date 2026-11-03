@@ -1,0 +1,83 @@
+{
+  "authority": {
+    "AUROC": false,
+    "approved_third_party_mirror_research_only": true,
+    "automatic_retry": false,
+    "calibration_pixels": false,
+    "fitting_pixels": false,
+    "official_weight_equivalence_verified": false,
+    "preview_only": true,
+    "source_validation_MSU_only": true,
+    "target_pixels": false,
+    "training": false
+  },
+  "automatic_continuation": false,
+  "automatic_retry_performed": false,
+  "cause": "nondeterministic_backend_and_nested_impl_keyword_overriding_reference_partial",
+  "completed": false,
+  "completion": null,
+  "failure_stage": "synthetic_smoke_before_PAD_pixels",
+  "human_review": "pending",
+  "model_id": "not-lain/MAT-CelebA-HQ_512",
+  "model_revision": "b9dd007aea6d7c9e53818f2d11b071b1be5bf48c",
+  "plan_sha256": "a6d909bf8ca07225ddb945f9864014b2176dab58a4951e5183ce97fb9164c57d",
+  "policy": {
+    "bit_exact_training_crop_claimed": false,
+    "draws_per_mask": 1,
+    "ellipse_radii_in_eye_distances": {
+      "left_eye": [
+        0.25,
+        0.18
+      ],
+      "mouth": [
+        0.42,
+        0.23
+      ],
+      "nose": [
+        0.23,
+        0.3
+      ],
+      "right_eye": [
+        0.25,
+        0.18
+      ]
+    },
+    "geometry": "unchanged_celebahq_eye_mouth_square",
+    "human_review_required": true,
+    "internal_dropout_seeded_even_in_eval": true,
+    "mask": "float32_1_known_0_hole",
+    "mask_regions": [
+      "left_eye",
+      "right_eye",
+      "nose",
+      "mouth"
+    ],
+    "name": "mat_celebahq512_real_pixels_v1",
+    "noise_mode": "const",
+    "normalization": "RGB_float32_div_127.5_minus_1",
+    "padding": false,
+    "render_resolution": 1024,
+    "resolution": 512,
+    "shift_or_shrink": false,
+    "source": "native_RGB_not_resized_256_cache",
+    "truncation_psi": 1.0
+  },
+  "reconstructions_on_PAD_frames": 0,
+  "same_seed_max_absolute_error_observed": 8.702278e-06,
+  "smoke": null,
+  "source_video_decodes": 0,
+  "supervision": {
+    "completed": false,
+    "guard_failure": null,
+    "plan_sha256": "a6d909bf8ca07225ddb945f9864014b2176dab58a4951e5183ce97fb9164c57d",
+    "returncode": 1,
+    "sampled_device_peak_gpu_bytes": 5478809600,
+    "sampled_owned_peak_disk_bytes": 254228044,
+    "sampled_tree_peak_rss_bytes": 1716051968,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 20.432213188993046
+  },
+  "upstream_revision": "d273d891ecdad2e1df106516423a75bc45b2d800",
+  "weight_sha256": "b47eb8ff60bc25131b531eab96cf8f8d4e85a86da688c7595ea50003df93d8bb",
+  "weights_acquired_and_strict_load_passed": true
+}

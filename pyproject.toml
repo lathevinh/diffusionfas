@@ -16,6 +16,9 @@ dependencies = [
   "scikit-learn==1.6.1",
 ]
 
+[project.optional-dependencies]
+mat = ["timm==1.0.30"]
+
 [project.scripts]
 diffusionfas = "diffusionfas.cli:main"
 

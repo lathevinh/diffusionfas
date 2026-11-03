@@ -16,6 +16,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Audit dataset: crop phải nằm hoàn toàn trên pixels thật, không padding](docs/010-real-pixel-crop-dataset-audit.md).
 - [MSU preview không padding: 6 videos, dừng chờ duyệt ảnh](docs/011-msu-real-pixel-crop-review.md).
 - [Frozen DDPM crop A/B trên cùng 22 MSU clips](docs/012-msu-frozen-crop-ablation.md).
+- [MAT pretrained face inpainting: native-512 preview, chờ duyệt](docs/013-mat-native512-inpainting-preview.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
@@ -215,6 +216,24 @@ CUDA_VISIBLE_DEVICES='' conda run --no-capture-output -n fas python scripts/crop
 
 Mỗi actual attempt vẫn cần approval/budget riêng; các lệnh không cấp quyền
 scoring/training. Audit v1 và original population được pin theo hashes.
+
+### MAT face-inpainting pilot (preview only)
+
+Đã tích hợp riêng MAT CelebA-HQ-512: **6 videos, 18 frames, 72 reconstructions**
+cho mắt trái/mắt phải/mũi/miệng, crop trực tiếp native RGB ở 512, không padding
+hay phóng cache 256. Đúng RGB normalization và `1=known, 0=hole`; chỉ đo lỗi
+trong hole. Actual synthetic GPU smoke cho replay/no-leakage error bằng 0.
+10 targeted MAT tests pass; không cài/nâng cấp package trong `fas`.
+
+**Mirror safetensors bên thứ ba được người dùng duyệt; chưa xác minh weights
+khớp bản tác giả.** Link chính thức trả 404. Giữ failed synthetic attempt và
+explicit continuation evidence. HTML/ảnh giữ private, **chờ duyệt bằng mắt**,
+chưa chạy AUROC, train hay threshold fitting. Xem
+[report, protocol và provenance limits](docs/013-mat-native512-inpainting-preview.md).
+
+MAT runtime dùng pinned official source ngoài Git và optional dependency
+`timm==1.0.30` đang có sẵn; không import model này từ scientific CLI mặc định.
+Không tự tải model hay compile CUDA extension khi chạy pipeline DDPM.
 
 ### Các model variants
 

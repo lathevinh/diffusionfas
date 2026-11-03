@@ -1,0 +1,132 @@
+{
+  "authority": {
+    "AUROC": false,
+    "approved_third_party_mirror_research_only": true,
+    "automatic_retry": false,
+    "calibration_pixels": false,
+    "fitting_pixels": false,
+    "official_weight_equivalence_verified": false,
+    "preview_only": true,
+    "source_validation_MSU_only": true,
+    "target_pixels": false,
+    "training": false
+  },
+  "automatic_continuation": false,
+  "completed": true,
+  "completion": {
+    "AUROC_runs": 0,
+    "calibration_pixel_access": 0,
+    "completed": true,
+    "fitting_pixel_access": 0,
+    "frozen_model_sha256_before_and_after": "c2fc813240578fbcf72180c128ea443c567462a43976d62edec0866e24a997f4",
+    "human_review": "pending",
+    "peak_allocated_bytes": 1348788224,
+    "peak_reserved_bytes": 1656750080,
+    "plan_sha256": "39c1df3b2f7dfe3c2ef26dcd7562b6dc9e6400637a648ddca46fa1b904c7a87f",
+    "review": {
+      "html_sha256": "e1e99a1df43c9946c21cd7f994a0480bddda279469ce8afe4a707000166d3073",
+      "reconstructions": 72,
+      "rendered_frames": 18,
+      "technical_failure_originals": 0
+    },
+    "target_pixel_access": 0,
+    "threshold_fitting_runs": 0,
+    "training_runs": 0
+  },
+  "human_review": "pending",
+  "initial_failed_plan_sha256": "a6d909bf8ca07225ddb945f9864014b2176dab58a4951e5183ce97fb9164c57d",
+  "model_id": "not-lain/MAT-CelebA-HQ_512",
+  "model_revision": "b9dd007aea6d7c9e53818f2d11b071b1be5bf48c",
+  "plan_sha256": "39c1df3b2f7dfe3c2ef26dcd7562b6dc9e6400637a648ddca46fa1b904c7a87f",
+  "policy": {
+    "bit_exact_training_crop_claimed": false,
+    "draws_per_mask": 1,
+    "ellipse_radii_in_eye_distances": {
+      "left_eye": [
+        0.25,
+        0.18
+      ],
+      "mouth": [
+        0.42,
+        0.23
+      ],
+      "nose": [
+        0.23,
+        0.3
+      ],
+      "right_eye": [
+        0.25,
+        0.18
+      ]
+    },
+    "geometry": "unchanged_celebahq_eye_mouth_square",
+    "human_review_required": true,
+    "internal_dropout_seeded_even_in_eval": true,
+    "mask": "float32_1_known_0_hole",
+    "mask_regions": [
+      "left_eye",
+      "right_eye",
+      "nose",
+      "mouth"
+    ],
+    "name": "mat_celebahq512_real_pixels_v1",
+    "noise_mode": "const",
+    "normalization": "RGB_float32_div_127.5_minus_1",
+    "padding": false,
+    "render_resolution": 1024,
+    "resolution": 512,
+    "shift_or_shrink": false,
+    "source": "native_RGB_not_resized_256_cache",
+    "truncation_psi": 1.0
+  },
+  "postflight": {
+    "CUDA_extension_build_or_fallback_messages": 0,
+    "all_known_region_PNG_pixels_preserved_exactly": true,
+    "all_residual_PNGs_black_outside_holes": true,
+    "html_bytes": 69813567,
+    "maximum_hole_fraction": 0.0189971923828125,
+    "minimum_hole_fraction": 0.00881195068359375,
+    "minimum_independent_square_margin_pixels": 22.864997985934906,
+    "raw_float_MSE_not_independently_recomputed_from_quantized_PNGs": true,
+    "staged_raw_files_remaining": 0,
+    "verified_PNGs": 234,
+    "verified_frames": 18,
+    "verified_reconstructions": 72,
+    "verified_videos": 6,
+    "worker_verified_full_native_RGB_frames": 1732
+  },
+  "postflight_sha256": "8372e7d66ee28451d015a46146fa608d276dc8563e7e6007c5a57c296a0ec4d8",
+  "smoke": {
+    "completed": true,
+    "hidden_ground_truth_change_max_absolute_error": 0.0,
+    "known_pixels_preserved_exactly": true,
+    "operators": "upstream_ref_on_CUDA",
+    "runtime_versions": {
+      "safetensors": "0.5.3",
+      "timm": "1.0.30",
+      "torch": "2.7.1"
+    },
+    "same_seed_max_absolute_error": 0.0,
+    "synthetic_forward_passes": 3
+  },
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "39c1df3b2f7dfe3c2ef26dcd7562b6dc9e6400637a648ddca46fa1b904c7a87f",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": 5515509760,
+    "sampled_owned_peak_disk_bytes": 131144648,
+    "sampled_tree_peak_rss_bytes": 3661131776,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 31.906738776000566
+  },
+  "upstream_revision": "d273d891ecdad2e1df106516423a75bc45b2d800",
+  "validation": {
+    "errors": 0,
+    "failures": 0,
+    "scope": "targeted_synthetic_MAT_input_and_preview_tests",
+    "tests_run": 10
+  },
+  "weight_sha256": "b47eb8ff60bc25131b531eab96cf8f8d4e85a86da688c7595ea50003df93d8bb",
+  "weights_reused_without_new_download": true
+}
