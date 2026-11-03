@@ -10,15 +10,19 @@ Offline-first bonafide-only short-clip PAD research.
 - [Strict MSU decoder đã wire vào CLI/config](docs/004-strict-msu-decoder-policy.md).
 - [Full source-bonafide preparation có budget](docs/005-bounded-full-source-preparation.md).
 - [Continuation đã hoàn tất source preparation](docs/006-explicit-source-continuation.md).
+- [Matched spatial/temporal source-only pilot](docs/007-matched-source-adapter-pilot.md).
 
-**Đã tải checkpoint private và chạy bounded engineering probes trong env `fas`;
-chưa training trên PAD videos, chưa đánh giá target.** Full-source preparation
+**Đã hoàn tất source preparation và matched source-only adapter pilot trong env
+`fas`; chưa có PAD evaluation hoặc target result.** Full-source preparation
 đã hoàn tất sau explicit continuation approval: **476/491 originals usable,
 gồm 359 fitting + 117 validation**. Giữ 9 short-video và 6 tracking failures
 trong denominator; không còn interrupted/unattempted. Caches đã QA bằng 1.428
 windows và verify lại toàn bộ hashes. Xem [aggregate evidence](results/source-preparation-v2.json)
 và [lịch sử attempt đầu bị dừng](docs/005-bounded-full-source-preparation.md).
-Training pilot vẫn cần approval/budget riêng.
+Hai adapter đã train 360 steps/model trên cùng sampling/noise schedule; source
+validation macro MSE giảm 0,0907% (spatial) / 0,2707% (temporal) so frozen,
+**chưa chứng minh spoof detection tốt hơn**. Xem [pilot evidence](results/adapter-pilot-v1.json).
+Training dài hơn hoặc attack/target access vẫn cần approval/budget riêng.
 Default scientific config vẫn đóng mọi quyền decode/scoring/training.
 Synthetic optimizer steps không phải kết quả FAS.
 
@@ -26,8 +30,9 @@ Synthetic optimizer steps không phải kết quả FAS.
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v7.json):
-67 tests passed, gồm actual pinned FFmpeg helper trên video tổng hợp.
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v10.json):
+76 tests passed, gồm actual CUDA checkpoint-resume và pinned FFmpeg helper trên
+video tổng hợp.
 
 ```bash
 PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
@@ -122,6 +127,15 @@ Explicit continuation dùng `plan --previous-plan ...` với budget mới; reuse
 caches/retain failures theo pinned predecessor receipts, không overwrite attempt
 cũ. Watchdog cộng cả hai roots vào cùng output cap. Chi tiết và kết quả ở
 [tài liệu 006](docs/006-explicit-source-continuation.md).
+
+### Bounded adapter pilot
+
+[Pilot runner](scripts/adapter_pilot.py) khóa hai variants pretrained spatial
+adapter / temporal adapter, hai epochs, cùng source data/windows/noise schedule;
+train bằng private source-only config, không sửa default execution gates.
+Epoch-boundary resume và separate-process EMA replay được kiểm tra trên
+checkpoints thực tế. Watchdog dùng shared 45-minute / 8-GiB conservative
+device-GPU / 2-GiB new-output cap. Xem [protocol và kết quả](docs/007-matched-source-adapter-pilot.md).
 
 ### Các model variants
 

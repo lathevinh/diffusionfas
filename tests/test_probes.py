@@ -111,6 +111,23 @@ class ProbeTests(unittest.TestCase):
             self.assertEqual(result["guard_failure"], "owned_disk_cap")
             self.assertGreaterEqual(result["sampled_owned_peak_disk_bytes"], 2048)
 
+    def test_gpu_watchdog_stops_only_owned_worker_at_observed_device_cap(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result = run_bounded(
+                [sys.executable, "-c", "import time; time.sleep(20)"], cwd=root,
+                owned_root=root, log=root / "gpu.log", max_seconds=5,
+                max_rss_bytes=512 * 1024**2, max_disk_bytes=1024**2,
+                max_gpu_bytes=1024, gpu_memory_bytes=lambda: 2048,
+            )
+            self.assertFalse(result["completed"])
+            self.assertEqual(result["guard_failure"], "conservative_device_gpu_memory_cap")
+            self.assertEqual(result["sampled_device_peak_gpu_bytes"], 2048)
+            with self.assertRaises(ValueError):
+                run_bounded([sys.executable, "-c", "pass"], cwd=root, owned_root=root,
+                            log=root / "invalid.log", max_seconds=5, max_rss_bytes=1024,
+                            max_disk_bytes=1024, max_gpu_bytes=1024)
+
     def test_archive_members_are_exact_and_media_hash_checked(self) -> None:
         for member in ("../escape", "/absolute", "foo/*", "foo/?.avi", "-option", "foo\\bar"):
             with self.assertRaises(ValueError):

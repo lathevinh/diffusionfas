@@ -57,6 +57,44 @@ def synthetic_config() -> dict:
 
 
 class TrainingTests(unittest.TestCase):
+    @unittest.skipUnless(torch.cuda.is_available(), "CUDA resume integration requires a GPU")
+    def test_cuda_resume_restores_cpu_byte_rng_state_after_gpu_checkpoint_loading(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            videos = synthetic_population(root)
+            config = synthetic_config()
+            model = scratch_model(TINY, temporal=True, adapter_channels=8)
+            paused = train(model, videos, config, root / "cuda", device="cuda", stop_after_epochs=1)
+            self.assertTrue(paused["paused_for_resume"])
+            result = train(model, videos, config, root / "cuda", device="cuda",
+                           resume=root / "cuda/last.pt")
+            self.assertTrue(result["complete"])
+            del model
+            torch.cuda.empty_cache()
+
+    def test_explicit_epoch_pause_resumes_to_identical_complete_parameters(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            videos = synthetic_population(root)
+            config = synthetic_config()
+            torch.manual_seed(7)
+            template = scratch_model(TINY, temporal=True, adapter_channels=8)
+            full = copy.deepcopy(template)
+            train(full, videos, config, root / "full")
+            resumed = copy.deepcopy(template)
+            paused = train(resumed, videos, config, root / "paused", stop_after_epochs=1)
+            self.assertFalse(paused["complete"])
+            self.assertTrue(paused["paused_for_resume"])
+            state = torch.load(root / "paused/last.pt", weights_only=True)
+            self.assertFalse(state["complete"])
+            self.assertEqual(len(state["history"][0]["validation_by_domain"]), 3)
+            train(resumed, videos, config, root / "paused", resume=root / "paused/last.pt")
+            expected = torch.load(root / "full/last.pt", weights_only=True)
+            actual = torch.load(root / "paused/last.pt", weights_only=True)
+            self.assertEqual(expected["history"], actual["history"])
+            self.assertTrue(all(torch.equal(tensor, actual["parameters"][name])
+                                for name, tensor in expected["parameters"].items()))
+
     def test_synthetic_train_reload_and_exact_resume(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

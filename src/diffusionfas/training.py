@@ -132,30 +132,49 @@ def check_source_pools(videos: list[Video], target: str) -> tuple[list[Video], l
     return fitting, validation, dict(skipped)
 
 
-def validation_loss(
+def validation_metrics(
     model: ClipDenoiser, cache: ClipCache, videos: list[Video], device: torch.device, seed: int,
-) -> float:
+) -> dict[str, Any]:
     losses: dict[str, list[float]] = defaultdict(list)
+    records = []
     for video in sorted(videos, key=lambda v: v.key):
         clip = cache.get(video)[None].to(device)
         levels = [0.5] if model.fixed_timestep is not None else [0.9, 0.5, 0.1]
         profile = residual_profile(model, clip, [video.key], alpha_bars=levels,
                                    draws=2, seed=seed)
         losses[video.dataset].append(float(profile.mean()))
+        records.append({"key": video.key, "dataset": video.dataset,
+                        "profile": profile.cpu().tolist()[0], "loss": float(profile.mean())})
     value = sum(sum(values) / len(values) for values in losses.values()) / len(losses)
     if not math.isfinite(value):
         raise FloatingPointError("nonfinite source validation loss")
-    return value
+    return {"macro_loss": value,
+            "by_domain": {name: {"originals": len(values), "mean_loss": sum(values) / len(values)}
+                          for name, values in sorted(losses.items())},
+            "records": records}
+
+
+def validation_loss(
+    model: ClipDenoiser, cache: ClipCache, videos: list[Video], device: torch.device, seed: int,
+) -> float:
+    return validation_metrics(model, cache, videos, device, seed)["macro_loss"]
+
+
+def sampling_commitment(draws: list[Video], seed: int, epoch: int) -> str:
+    return object_digest([[video.key, addressed_seed(seed, epoch, index, video.key)]
+                          for index, video in enumerate(draws)])
 
 
 def train(
     model: ClipDenoiser, videos: list[Video], config: dict[str, Any], output: Path,
-    *, device: str = "cpu", resume: Path | None = None,
+    *, device: str = "cpu", resume: Path | None = None, stop_after_epochs: int | None = None,
 ) -> dict[str, Any]:
     if config["execution"]["source_training"] is not True:
         raise PermissionError("source training is not authorized in this configuration")
     if config["training"]["numeric"] != "float32":
         raise ValueError("only explicit FP32 training is implemented; no silent AMP fallback")
+    if stop_after_epochs is not None and (type(stop_after_epochs) is not int or stop_after_epochs < 1):
+        raise ValueError("positive explicit pause epoch required")
     fitting, validation, skipped = check_source_pools(videos, config["target"])
     settings = config["training"]
     for key in ("effective_batch", "microbatch", "max_epochs", "minimum_epochs", "patience"):
@@ -190,7 +209,7 @@ def train(
         best_epoch, best_loss, history = state["best_epoch"], state["best_loss"], state["history"]
         torch.set_rng_state(state["torch_rng"].cpu())
         if target_device.type == "cuda":
-            torch.cuda.set_rng_state_all(state["cuda_rng"])
+            torch.cuda.set_rng_state_all([value.cpu() for value in state["cuda_rng"]])
     cache = ClipCache(model.resolution, config["clip"]["duration"], config["clip"]["fps"])
     for epoch in range(epoch_start, settings["max_epochs"]):
         budget.check(steps)
@@ -241,11 +260,14 @@ def train(
             ema.update(model)
         previous = ema.install(model)
         try:
-            val_loss = validation_loss(model, cache, validation, target_device, config["seed"])
+            metrics = validation_metrics(model, cache, validation, target_device, config["seed"])
+            val_loss = metrics["macro_loss"]
         finally:
             install_trainable(model, previous)
         budget.check(steps)
-        history.append({"epoch": epoch, "train_loss": loss_sum / len(draws), "validation_loss": val_loss})
+        history.append({"epoch": epoch, "train_loss": loss_sum / len(draws), "validation_loss": val_loss,
+                        "validation_by_domain": metrics["by_domain"],
+                        "sampling_sha256": sampling_commitment(draws, config["seed"], epoch)})
         improved = val_loss < best_loss
         if improved:
             best_loss, best_epoch = val_loss, epoch
@@ -258,6 +280,7 @@ def train(
             "optimizer": optimizer.state_dict(), "ema": copy.deepcopy(ema.shadow),
             "next_epoch": epoch + 1, "steps": steps, "best_epoch": best_epoch,
             "best_loss": best_loss, "history": history, "skipped": skipped,
+            "validation": metrics,
             "torch_rng": torch.get_rng_state(),
             "cuda_rng": torch.cuda.get_rng_state_all() if target_device.type == "cuda" else [],
         }
@@ -267,4 +290,6 @@ def train(
         if complete:
             return {"complete": True, "epochs": epoch + 1, "steps": steps,
                     "best_epoch": best_epoch, "best_loss": best_loss, "skipped": skipped}
+        if stop_after_epochs is not None and epoch + 1 >= stop_after_epochs:
+            return {"complete": False, "paused_for_resume": True, "epochs": epoch + 1, "steps": steps}
     raise ValueError("resume has no remaining epochs; no successful run claimed")

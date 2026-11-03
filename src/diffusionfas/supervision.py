@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from collections.abc import Callable
 from pathlib import Path
 import signal
 import subprocess
@@ -51,15 +52,20 @@ def run_bounded(
     command: list[str], *, cwd: Path, owned_root: Path, log: Path,
     max_seconds: float, max_rss_bytes: int, max_disk_bytes: int,
     additional_output_roots: tuple[Path, ...] = (),
+    max_gpu_bytes: int | None = None, gpu_memory_bytes: Callable[[], int] | None = None,
 ) -> dict[str, Any]:
     if max_seconds <= 0 or max_rss_bytes <= 0 or max_disk_bytes <= 0:
         raise ValueError("positive probe process caps required")
+    if (max_gpu_bytes is None) != (gpu_memory_bytes is None) or (
+        max_gpu_bytes is not None and max_gpu_bytes <= 0
+    ):
+        raise ValueError("GPU cap and explicit memory reader must be supplied together")
     log.parent.mkdir(parents=True, exist_ok=True)
     if log.exists():
         raise ValueError("new process log required")
     output_roots = (owned_root, *additional_output_roots)
     started, peak_rss, peak_disk = time.monotonic(), 0, sum(tree_bytes(p) for p in output_roots)
-    failure = None
+    failure, peak_gpu = None, 0
     with log.open("xb") as stream:
         process = subprocess.Popen(command, cwd=cwd, stdin=subprocess.DEVNULL,
                                    stdout=stream, stderr=subprocess.STDOUT, start_new_session=True)
@@ -67,12 +73,19 @@ def run_bounded(
             while process.poll() is None:
                 peak_rss = max(peak_rss, process_tree_rss(process.pid))
                 peak_disk = max(peak_disk, sum(tree_bytes(p) for p in output_roots))
+                if gpu_memory_bytes is not None:
+                    current_gpu = gpu_memory_bytes()
+                    if type(current_gpu) is not int or current_gpu < 0:
+                        raise ValueError("nonnegative integer GPU memory telemetry required")
+                    peak_gpu = max(peak_gpu, current_gpu)
                 if time.monotonic() - started > max_seconds:
                     failure = "wall_clock_cap"
                 elif peak_rss > max_rss_bytes:
                     failure = "process_tree_rss_cap"
                 elif peak_disk > max_disk_bytes:
                     failure = "owned_disk_cap"
+                elif max_gpu_bytes is not None and peak_gpu > max_gpu_bytes:
+                    failure = "conservative_device_gpu_memory_cap"
                 if failure:
                     break
                 time.sleep(0.2)
@@ -91,4 +104,5 @@ def run_bounded(
         "sampled_owned_peak_disk_bytes": peak_disk,
         "completed": process.returncode == 0 and failure is None and peak_disk <= max_disk_bytes,
         "sampling_interval_seconds": 0.2,
+        "sampled_device_peak_gpu_bytes": peak_gpu if gpu_memory_bytes is not None else None,
     }

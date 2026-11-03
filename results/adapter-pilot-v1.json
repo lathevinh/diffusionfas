@@ -1,0 +1,503 @@
+{
+  "PAD_accuracy_claimed": false,
+  "attack_model_forwards": 0,
+  "automatic_retries": 0,
+  "budget": {
+    "max_gpu_bytes": 8589934592,
+    "max_output_bytes": 2147483648,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 2700
+  },
+  "bundle_manifest_sha256": "87e6b56cea4c1d7d803579425b7219b0cc06914878340c038ea33eecec5b3fc6",
+  "calibration_fitted": false,
+  "checkpoints_and_individual_scores_private": true,
+  "completed": true,
+  "completed_arms": [
+    {
+      "adapter_changed": true,
+      "best_checkpoint_sha256": "0917eda5f6f65cd645ac8ddb3a3f33f7cdc4396618ff1b7969cf61a5b5c07fe7",
+      "best_epoch": 1,
+      "best_validation": {
+        "by_domain": {
+          "CASIA-FASD": {
+            "mean_loss": 0.008984428481198847,
+            "originals": 12
+          },
+          "MSU-MFSD": {
+            "mean_loss": 0.010415282100439072,
+            "originals": 6
+          },
+          "SiW-Mv2": {
+            "mean_loss": 0.012022670668860277,
+            "originals": 99
+          }
+        },
+        "macro_loss": 0.0104741270834994
+      },
+      "epoch_boundary_resume_verified": true,
+      "frozen_backbone_sha256": "ec734b668531cca8dbcaa9a05117d0544b282950b510887b374227fc9efc82b9",
+      "frozen_backbone_unchanged": true,
+      "history": [
+        {
+          "epoch": 0,
+          "sampling_sha256": "d7b4047d848a65948cca99321e206e8b29c639275bcc4d677828fa4b0d86f042",
+          "train_loss": 0.010269043303713483,
+          "validation_by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.008989550910579661,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.01042225786174337,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012029607309912793,
+              "originals": 99
+            }
+          },
+          "validation_loss": 0.01048047202741194
+        },
+        {
+          "epoch": 1,
+          "sampling_sha256": "69bec38e32984018ce430e83a7882bd21cfc90324e447d8a155a472aace6d478",
+          "train_loss": 0.012354018045913807,
+          "validation_by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.008984428481198847,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.010415282100439072,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012022670668860277,
+              "originals": 99
+            }
+          },
+          "validation_loss": 0.0104741270834994
+        }
+      ],
+      "last_checkpoint_sha256": "0917eda5f6f65cd645ac8ddb3a3f33f7cdc4396618ff1b7969cf61a5b5c07fe7",
+      "last_validation": {
+        "by_domain": {
+          "CASIA-FASD": {
+            "mean_loss": 0.008984428481198847,
+            "originals": 12
+          },
+          "MSU-MFSD": {
+            "mean_loss": 0.010415282100439072,
+            "originals": 6
+          },
+          "SiW-Mv2": {
+            "mean_loss": 0.012022670668860277,
+            "originals": 99
+          }
+        },
+        "macro_loss": 0.0104741270834994
+      },
+      "peak_allocated_bytes": 1949932032,
+      "peak_reserved_bytes": 2642411520,
+      "steps": 360,
+      "trainable_parameters": 46051,
+      "training_and_validation_seconds": 744.850638724005,
+      "variant": "pretrained_spatial_adapter"
+    },
+    {
+      "adapter_changed": true,
+      "best_checkpoint_sha256": "2c1767dbaf825d3d1b9ca026ff0754153e621c65a9580616ac82162a8112fe4f",
+      "best_epoch": 1,
+      "best_validation": {
+        "by_domain": {
+          "CASIA-FASD": {
+            "mean_loss": 0.00896523823030293,
+            "originals": 12
+          },
+          "MSU-MFSD": {
+            "mean_loss": 0.010394373442977667,
+            "originals": 6
+          },
+          "SiW-Mv2": {
+            "mean_loss": 0.012006165356271796,
+            "originals": 99
+          }
+        },
+        "macro_loss": 0.010455259009850797
+      },
+      "epoch_boundary_resume_verified": true,
+      "frozen_backbone_sha256": "ec734b668531cca8dbcaa9a05117d0544b282950b510887b374227fc9efc82b9",
+      "frozen_backbone_unchanged": true,
+      "history": [
+        {
+          "epoch": 0,
+          "sampling_sha256": "d7b4047d848a65948cca99321e206e8b29c639275bcc4d677828fa4b0d86f042",
+          "train_loss": 0.010234035939357558,
+          "validation_by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.008984977107805511,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.010417043697088957,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012025556376561372,
+              "originals": 99
+            }
+          },
+          "validation_loss": 0.01047585906048528
+        },
+        {
+          "epoch": 1,
+          "sampling_sha256": "69bec38e32984018ce430e83a7882bd21cfc90324e447d8a155a472aace6d478",
+          "train_loss": 0.012242532261580565,
+          "validation_by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.00896523823030293,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.010394373442977667,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012006165356271796,
+              "originals": 99
+            }
+          },
+          "validation_loss": 0.010455259009850797
+        }
+      ],
+      "last_checkpoint_sha256": "2c1767dbaf825d3d1b9ca026ff0754153e621c65a9580616ac82162a8112fe4f",
+      "last_validation": {
+        "by_domain": {
+          "CASIA-FASD": {
+            "mean_loss": 0.00896523823030293,
+            "originals": 12
+          },
+          "MSU-MFSD": {
+            "mean_loss": 0.010394373442977667,
+            "originals": 6
+          },
+          "SiW-Mv2": {
+            "mean_loss": 0.012006165356271796,
+            "originals": 99
+          }
+        },
+        "macro_loss": 0.010455259009850797
+      },
+      "peak_allocated_bytes": 1948679168,
+      "peak_reserved_bytes": 2654994432,
+      "steps": 360,
+      "trainable_parameters": 48099,
+      "training_and_validation_seconds": 744.5800588600105,
+      "variant": "pretrained_temporal"
+    }
+  ],
+  "fitting_originals": 359,
+  "implementation_sha256": {
+    "scripts/adapter_pilot.py": "2aa39319d398b9a8dc8fcdf36145efd614f173aa1f33ae80af6959194e4aa389",
+    "scripts/prepare_sources.py": "8fb3d815ca24ee3f51bb32f9ebebbfe61462c6d7cbaa3cf331a3ce544a43f0cd",
+    "scripts/probe.py": "d2565ec4115b166bbf9975fd385d4bb48c78138dfd954e29ec2b07c394704450",
+    "scripts/summarize_probe.py": "8d48d4608f595d1781b92919e67e353cffa505af1afb37db20a39157a20224e7",
+    "scripts/validate.py": "bdc2266b3fb48d0c9d2142db6a096f4881c5d4c3a7b9690acedd865df861d50c",
+    "src/diffusionfas/__init__.py": "48e538584756b0455f225e1184855617eec42e416344734efedbadaeeef882e8",
+    "src/diffusionfas/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "src/diffusionfas/acquisition.py": "e499154add3f9a4cb3c7c3efdb328c24f9567fd3102ef6bf3bb6f235cdaa64e8",
+    "src/diffusionfas/adapter_pilot.py": "77d9eda491ad724928e4f964e02878d2e403af9f992547565096950300b5ee92",
+    "src/diffusionfas/baselines.py": "d1291701142fab55444760c782aa3b7446c5b5094b5a5a92d26eedf4c4fff53f",
+    "src/diffusionfas/cli.py": "aa107d3b70e2b0aac2c47a16f0aa95d4d1c4c74cc7c5ea18b68b0cf41f7a461d",
+    "src/diffusionfas/data.py": "eef56fec8f32f5ef496b14557e3488fc825d0253ef1ecc319846b1f72b3a84ed",
+    "src/diffusionfas/dataset.py": "40f79a050285204812ac44c59fba0e357bbef07840e1985682dd6db26bb2b4ba",
+    "src/diffusionfas/fas_import.py": "78f105522c78197d5e45d11e9e76725d032edc30961f048c129c7d2e02b8c132",
+    "src/diffusionfas/gpu_probe.py": "18f59ee999bbb85c18ae9743edae1f88fa4ea640363bfbb5c28be7b3018bbde1",
+    "src/diffusionfas/io.py": "b51240010d1b391f83c18bad40a1c8f83ab016ec6d01d848ce745beda321abf1",
+    "src/diffusionfas/metrics.py": "dfcb508a3b356abe280228cc17ff477a462a9ebfc7ac08855dc6961073d26e58",
+    "src/diffusionfas/models.py": "c966b1737abd4c0a80408a6b8571c4e51debce620bf7fb6a782c4049def83397",
+    "src/diffusionfas/native_replay.py": "2dc5d5a784088691da0b34aa7e48f75731b375715ac9744087be728a6d10ba7a",
+    "src/diffusionfas/preflight.py": "6c224872c3143a4bdc259b510e41ba140b9139499588fd91ad9c24ec86327f37",
+    "src/diffusionfas/preprocessing.py": "0ac33663f66515c5816d02e2c577445e734d03d50903059e04a78180f132b312",
+    "src/diffusionfas/scoring.py": "0a9a162a6ed4e6f3081cc8fedb6bd0053544f47fd1035c9d754e208c843dba3a",
+    "src/diffusionfas/source_preparation.py": "bd5d19c293976fa56703ad02e1987405f66baecb17b3f28e6bb199467b93586c",
+    "src/diffusionfas/source_probe.py": "e9ea26f3ee68f1fafba86395d36f394a177b518495ef58d470fee97b084ea9e9",
+    "src/diffusionfas/supervision.py": "a734755ff40f218cd2ce0f876d89fa62a0e48550605fba6e39945f5dddd66a5b",
+    "src/diffusionfas/training.py": "17f52e7f15b2a34c3e9d4efa05949d3e15bbe2ab1ae8cdd037ed00ba2f278e70"
+  },
+  "matched_schedule": [
+    {
+      "draws_by_domain": {
+        "CASIA-FASD": 120,
+        "MSU-MFSD": 119,
+        "SiW-Mv2": 120
+      },
+      "epoch": 0,
+      "sha256": "d7b4047d848a65948cca99321e206e8b29c639275bcc4d677828fa4b0d86f042"
+    },
+    {
+      "draws_by_domain": {
+        "CASIA-FASD": 119,
+        "MSU-MFSD": 120,
+        "SiW-Mv2": 120
+      },
+      "epoch": 1,
+      "sha256": "69bec38e32984018ce430e83a7882bd21cfc90324e447d8a155a472aace6d478"
+    }
+  ],
+  "preparation_plan_sha256": "879f5d89710108d5e9b9ad9efe4b3b16225049199e63623c2829aad385765104",
+  "prepared_manifest_sha256": "c2aa3ead64981a863fce6a78339a929c6d037f43609a9ff6a36988a183b84a7d",
+  "raw_video_decodes": 0,
+  "replay": {
+    "arms": {
+      "pretrained_spatial_adapter": {
+        "atol": 1e-06,
+        "max_absolute_profile_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05,
+        "validation_originals": 3
+      },
+      "pretrained_temporal": {
+        "atol": 1e-06,
+        "max_absolute_profile_error": 0.0,
+        "passed": true,
+        "rtol": 1e-05,
+        "validation_originals": 3
+      }
+    },
+    "completed": true,
+    "plan_sha256": "b10511fd7e09e1c217f67985445dc294b4cac446333c2f1009c1f05ba9239cf0",
+    "separate_process": true,
+    "training_result_sha256": "2a4f80469a8fb2adb010a3ccf667609fc18fad710195d86f18c16fa8f19fef70"
+  },
+  "retained_failure_count": 15,
+  "schema_version": 1,
+  "scientific_source_training_runs": 2,
+  "scope": "source_only_adapter_pilot_not_PAD_evaluation",
+  "selection_plan_sha256": "b10511fd7e09e1c217f67985445dc294b4cac446333c2f1009c1f05ba9239cf0",
+  "source_original_denominator": 491,
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "b10511fd7e09e1c217f67985445dc294b4cac446333c2f1009c1f05ba9239cf0",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": 6171918336,
+    "sampled_owned_peak_disk_bytes": 3231809,
+    "sampled_tree_peak_rss_bytes": 4427767808,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 1760.6628588090098
+  },
+  "target_model_forwards": 0,
+  "training": {
+    "arms": [
+      {
+        "adapter_changed": true,
+        "best_checkpoint_sha256": "0917eda5f6f65cd645ac8ddb3a3f33f7cdc4396618ff1b7969cf61a5b5c07fe7",
+        "best_epoch": 1,
+        "best_validation": {
+          "by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.008984428481198847,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.010415282100439072,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012022670668860277,
+              "originals": 99
+            }
+          },
+          "macro_loss": 0.0104741270834994
+        },
+        "epoch_boundary_resume_verified": true,
+        "frozen_backbone_sha256": "ec734b668531cca8dbcaa9a05117d0544b282950b510887b374227fc9efc82b9",
+        "frozen_backbone_unchanged": true,
+        "history": [
+          {
+            "epoch": 0,
+            "sampling_sha256": "d7b4047d848a65948cca99321e206e8b29c639275bcc4d677828fa4b0d86f042",
+            "train_loss": 0.010269043303713483,
+            "validation_by_domain": {
+              "CASIA-FASD": {
+                "mean_loss": 0.008989550910579661,
+                "originals": 12
+              },
+              "MSU-MFSD": {
+                "mean_loss": 0.01042225786174337,
+                "originals": 6
+              },
+              "SiW-Mv2": {
+                "mean_loss": 0.012029607309912793,
+                "originals": 99
+              }
+            },
+            "validation_loss": 0.01048047202741194
+          },
+          {
+            "epoch": 1,
+            "sampling_sha256": "69bec38e32984018ce430e83a7882bd21cfc90324e447d8a155a472aace6d478",
+            "train_loss": 0.012354018045913807,
+            "validation_by_domain": {
+              "CASIA-FASD": {
+                "mean_loss": 0.008984428481198847,
+                "originals": 12
+              },
+              "MSU-MFSD": {
+                "mean_loss": 0.010415282100439072,
+                "originals": 6
+              },
+              "SiW-Mv2": {
+                "mean_loss": 0.012022670668860277,
+                "originals": 99
+              }
+            },
+            "validation_loss": 0.0104741270834994
+          }
+        ],
+        "last_checkpoint_sha256": "0917eda5f6f65cd645ac8ddb3a3f33f7cdc4396618ff1b7969cf61a5b5c07fe7",
+        "last_validation": {
+          "by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.008984428481198847,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.010415282100439072,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012022670668860277,
+              "originals": 99
+            }
+          },
+          "macro_loss": 0.0104741270834994
+        },
+        "peak_allocated_bytes": 1949932032,
+        "peak_reserved_bytes": 2642411520,
+        "steps": 360,
+        "trainable_parameters": 46051,
+        "training_and_validation_seconds": 744.850638724005,
+        "variant": "pretrained_spatial_adapter"
+      },
+      {
+        "adapter_changed": true,
+        "best_checkpoint_sha256": "2c1767dbaf825d3d1b9ca026ff0754153e621c65a9580616ac82162a8112fe4f",
+        "best_epoch": 1,
+        "best_validation": {
+          "by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.00896523823030293,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.010394373442977667,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012006165356271796,
+              "originals": 99
+            }
+          },
+          "macro_loss": 0.010455259009850797
+        },
+        "epoch_boundary_resume_verified": true,
+        "frozen_backbone_sha256": "ec734b668531cca8dbcaa9a05117d0544b282950b510887b374227fc9efc82b9",
+        "frozen_backbone_unchanged": true,
+        "history": [
+          {
+            "epoch": 0,
+            "sampling_sha256": "d7b4047d848a65948cca99321e206e8b29c639275bcc4d677828fa4b0d86f042",
+            "train_loss": 0.010234035939357558,
+            "validation_by_domain": {
+              "CASIA-FASD": {
+                "mean_loss": 0.008984977107805511,
+                "originals": 12
+              },
+              "MSU-MFSD": {
+                "mean_loss": 0.010417043697088957,
+                "originals": 6
+              },
+              "SiW-Mv2": {
+                "mean_loss": 0.012025556376561372,
+                "originals": 99
+              }
+            },
+            "validation_loss": 0.01047585906048528
+          },
+          {
+            "epoch": 1,
+            "sampling_sha256": "69bec38e32984018ce430e83a7882bd21cfc90324e447d8a155a472aace6d478",
+            "train_loss": 0.012242532261580565,
+            "validation_by_domain": {
+              "CASIA-FASD": {
+                "mean_loss": 0.00896523823030293,
+                "originals": 12
+              },
+              "MSU-MFSD": {
+                "mean_loss": 0.010394373442977667,
+                "originals": 6
+              },
+              "SiW-Mv2": {
+                "mean_loss": 0.012006165356271796,
+                "originals": 99
+              }
+            },
+            "validation_loss": 0.010455259009850797
+          }
+        ],
+        "last_checkpoint_sha256": "2c1767dbaf825d3d1b9ca026ff0754153e621c65a9580616ac82162a8112fe4f",
+        "last_validation": {
+          "by_domain": {
+            "CASIA-FASD": {
+              "mean_loss": 0.00896523823030293,
+              "originals": 12
+            },
+            "MSU-MFSD": {
+              "mean_loss": 0.010394373442977667,
+              "originals": 6
+            },
+            "SiW-Mv2": {
+              "mean_loss": 0.012006165356271796,
+              "originals": 99
+            }
+          },
+          "macro_loss": 0.010455259009850797
+        },
+        "peak_allocated_bytes": 1948679168,
+        "peak_reserved_bytes": 2654994432,
+        "steps": 360,
+        "trainable_parameters": 48099,
+        "training_and_validation_seconds": 744.5800588600105,
+        "variant": "pretrained_temporal"
+      }
+    ],
+    "baseline": {
+      "by_domain": {
+        "CASIA-FASD": {
+          "mean_loss": 0.00899209058843553,
+          "originals": 12
+        },
+        "MSU-MFSD": {
+          "mean_loss": 0.010425642598420382,
+          "originals": 6
+        },
+        "SiW-Mv2": {
+          "mean_loss": 0.012033171048670105,
+          "originals": 99
+        }
+      },
+      "macro_loss": 0.010483634745175338
+    },
+    "device": {
+      "allocator_limit_bytes": 7516192768,
+      "bitwise_training_determinism_claimed": false,
+      "initial_free_bytes": 15761145856,
+      "name": "NVIDIA GeForce RTX 4080 SUPER",
+      "numeric": "FP32_no_AMP_no_TF32"
+    },
+    "plan_sha256": "b10511fd7e09e1c217f67985445dc294b4cac446333c2f1009c1f05ba9239cf0"
+  },
+  "validation_originals": 117
+}
