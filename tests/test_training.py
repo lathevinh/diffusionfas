@@ -157,6 +157,42 @@ class TrainingTests(unittest.TestCase):
             for seed in range(20):
                 self.assertEqual(cache.get(row, seed).shape, (16, 3, 16, 16))
 
+    def test_odd_cache_grid_with_nonbinary_origin_has_distinct_contiguous_windows(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "odd-grid.npz"
+            grid = tuple(0.1 + (index + 0.5) / 8 for index in range(17))
+            frames = np.broadcast_to(np.arange(17, dtype=np.uint8)[:, None, None, None],
+                                     (17, 256, 256, 3)).copy()
+            np.savez(path, frames=frames, timestamps=grid)
+            row = Video(
+                key="odd-grid", dataset="CASIA-FASD", group="odd-grid", subject="odd-grid",
+                partition="fitting", label="bona_fide", timestamps=grid, frame_hashes=(),
+                media_sha256=None, decoded_sha256=None, status="prepared",
+                cache_path=str(path), cache_sha256=digest(path),
+            )
+            cache = ClipCache(16)
+
+            def frame_numbers(seed=None):
+                clip = cache.get(row, seed)
+                self.assertEqual(clip.shape, (16, 3, 16, 16))
+                return ((clip[:, 0, 0, 0] + 1) * 255 / 2).round().int()
+
+            self.assertTrue(torch.equal(frame_numbers(), torch.arange(16)))
+            starts = set()
+            for seed in range(20):
+                numbers = frame_numbers(seed)
+                starts.add(int(numbers[0]))
+                self.assertTrue(torch.equal(numbers, torch.arange(int(numbers[0]), int(numbers[0]) + 16)))
+                self.assertTrue(torch.equal(numbers, frame_numbers(seed)))
+            self.assertEqual(starts, {0, 1})
+            with self.assertRaisesRegex(ValueError, "cached clip shorter"):
+                ClipCache(16, duration=3).get(row)
+
+    def test_cache_sampling_requires_a_positive_integral_frame_count(self) -> None:
+        for duration, fps in ((0, 8), (-1, 8), (float("nan"), 8), (0.3, 8), (2, 0)):
+            with self.subTest(duration=duration, fps=fps), self.assertRaises(ValueError):
+                ClipCache(16, duration=duration, fps=fps)
+
 
 if __name__ == "__main__":
     unittest.main()

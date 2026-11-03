@@ -8,18 +8,23 @@ Offline-first bonafide-only short-clip PAD research.
 - [Checkpoint, GPU và source preprocessing probe](docs/003-bounded-checkpoint-gpu-and-source-probes.md).
 - [Aggregate probe evidence](results/probe-v2.json).
 - [Strict MSU decoder đã wire vào CLI/config](docs/004-strict-msu-decoder-policy.md).
+- [Full source-bonafide preparation có budget](docs/005-bounded-full-source-preparation.md).
 
 **Đã tải checkpoint private và chạy bounded engineering probes trong env `fas`;
-chưa training trên PAD videos, chưa đánh giá target.** Đã xử lý 12 cửa sổ cố định
-từ 6 source bonafide originals; không dùng OULU. Default scientific config vẫn
-đóng mọi quyền decode/scoring/training. Synthetic optimizer steps không phải kết quả FAS.
+chưa training trên PAD videos, chưa đánh giá target.** Full-source preparation
+attempt đã dừng sau ~61 phút vì lỗi cache-QA: 282/491 originals prepared,
+198 chưa thử và 1 interrupted; 9 quá ngắn, 1 tracking failure được giữ nguyên.
+Đã sửa sampler và qua synthetic regressions, **chưa chạy lại, chưa sẵn sàng train**.
+Xem [aggregate evidence](results/source-preparation-v1.json).
+Default scientific config vẫn đóng mọi quyền decode/scoring/training.
+Synthetic optimizer steps không phải kết quả FAS.
 
 ## Môi trường và tests
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v4.json):
-55 tests passed, gồm actual pinned FFmpeg helper trên video tổng hợp.
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v6.json):
+62 tests passed, gồm actual pinned FFmpeg helper trên video tổng hợp.
 
 ```bash
 PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
@@ -97,6 +102,19 @@ transaction/media receipts, timestamps và full native RGB sequence đều đư�
 Decoder error không fallback sang OpenCV và không đổi accepted hashes. Failed
 originals giữ nguyên trong output manifest, kèm technical failure. Chi tiết
 policy, diagnostics và command example ở [tài liệu 004](docs/004-strict-msu-decoder-policy.md).
+
+### Full source preparation
+
+[Standalone orchestrator](scripts/prepare_sources.py) có ba commands:
+`plan` khóa selection/assets/code/caps; `run` thực thi dưới bounded supervisor;
+`report` export aggregate evidence. Full eligible intervals được cache ở 8 FPS
+và mỗi cache được QA bằng ba windows 2 giây. Một original được stage tại một
+thời điểm, rồi xóa raw sau preprocessing.
+
+Fold target OULU có 491 source bonafide fitting/validation originals, gồm 482
+metadata-eligible và 9 quá ngắn; mọi failure vẫn nằm trong denominator. Không
+thay video, bỏ hash check hoặc tự retry. Xem [tài liệu 005](docs/005-bounded-full-source-preparation.md)
+về scope, finite budget, private outputs và cách chạy. Không tự chuyển sang train.
 
 ### Các model variants
 

@@ -60,6 +60,7 @@ class Fixture:
         )
         self.receipt = {
             "video_id": "synthetic", "binary_label": "bona_fide", "media_sha256": self.video.media_sha256,
+            "byte_size": self.media.stat().st_size, "media_relpath": "release/synthetic.avi",
             "decode_status": "decoded", "frame_count": 48,
             "decoded_rgb_sequence_sha256": self.video.decoded_sha256,
             "frame_index": [

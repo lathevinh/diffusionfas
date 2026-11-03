@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from pathlib import Path
 import random
 
@@ -10,13 +11,18 @@ import torch
 from torch import Tensor
 from torch.nn import functional as F
 
-from .data import Video, addressed_seed, window_indices
+from .data import Video, addressed_seed
 from .io import digest
 
 
 class ClipCache:
     def __init__(self, resolution: int, duration: float = 2, fps: int = 8) -> None:
+        frame_count = duration * fps
+        if (not math.isfinite(frame_count) or duration <= 0 or fps <= 0 or frame_count < 1
+                or not math.isclose(frame_count, round(frame_count))):
+            raise ValueError("finite positive duration/fps with an integral frame count required")
         self.resolution, self.duration, self.fps = resolution, duration, fps
+        self.frame_count = round(frame_count)
         self.verified: dict[str, tuple[int, int, str]] = {}
 
     def get(self, video: Video, seed: int | None = None, augment: bool = False) -> Tensor:
@@ -46,12 +52,11 @@ class ClipCache:
                 raise ValueError("cache timestamps must increase")
             if not np.allclose(gaps, 1 / self.fps, rtol=0, atol=1e-7):
                 raise ValueError("cache must retain its uniform requested sampling grid")
-            low, high = timestamps[0] - 0.5 / self.fps, timestamps[-1] + 0.5 / self.fps - self.duration
-            if high + 1e-8 < low:
+            last_start = len(frames) - self.frame_count
+            if last_start < 0:
                 raise ValueError("cached clip shorter than requested duration")
-            start = (low + high) / 2 if seed is None else random.Random(seed).uniform(low, max(low, high))
-            indexes = window_indices(timestamps, start, self.duration, self.fps)
-            tensor = torch.from_numpy(frames[list(indexes)].copy()).permute(0, 3, 1, 2).float() / 255
+            start = last_start // 2 if seed is None else random.Random(seed).randrange(last_start + 1)
+            tensor = torch.from_numpy(frames[start:start + self.frame_count].copy()).permute(0, 3, 1, 2).float() / 255
         tensor = F.interpolate(tensor, (self.resolution, self.resolution), mode="bilinear",
                                align_corners=False, antialias=True)
         if augment:

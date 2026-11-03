@@ -1,0 +1,115 @@
+{
+  "attack_video_decodes": 0,
+  "automatic_retries": 0,
+  "budget": {
+    "max_output_bytes": 12884901888,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 7200.0
+  },
+  "calibration_policy_changed": false,
+  "completed": false,
+  "counts_by_domain_partition": {
+    "CASIA-FASD:fitting": {
+      "originals": 36,
+      "prepared": 36
+    },
+    "CASIA-FASD:validation": {
+      "originals": 12,
+      "prepared": 12
+    },
+    "MSU-MFSD:fitting": {
+      "originals": 18,
+      "prepared": 18
+    },
+    "MSU-MFSD:validation": {
+      "originals": 6,
+      "prepared": 6
+    },
+    "SiW-Mv2:fitting": {
+      "interrupted": 1,
+      "metadata_failure": 7,
+      "not_attempted": 95,
+      "originals": 314,
+      "preparation_failure": 1,
+      "prepared": 210
+    },
+    "SiW-Mv2:validation": {
+      "metadata_failure": 2,
+      "not_attempted": 103,
+      "originals": 105
+    }
+  },
+  "decoder_policy": {
+    "decoders": {
+      "MSU-MFSD": "fas_strict_ffmpeg"
+    },
+    "native_replay_helper_sha256": "8018390bfa8004d42cd52eae21dab8633a39838f1efc523647de5cd9d823a888"
+  },
+  "face_detector_device": "CPU",
+  "failures_by_reason": {
+    "insufficient_duration": 9,
+    "missing_track_endpoint": 1
+  },
+  "implementation_sha256": {
+    "scripts/prepare_sources.py": "9d82466e5799dda83bf6684f00e4b5ff05861e5872414008a2d74463ea4d517e",
+    "scripts/probe.py": "d2565ec4115b166bbf9975fd385d4bb48c78138dfd954e29ec2b07c394704450",
+    "scripts/summarize_probe.py": "8d48d4608f595d1781b92919e67e353cffa505af1afb37db20a39157a20224e7",
+    "scripts/validate.py": "bdc2266b3fb48d0c9d2142db6a096f4881c5d4c3a7b9690acedd865df861d50c",
+    "src/diffusionfas/__init__.py": "48e538584756b0455f225e1184855617eec42e416344734efedbadaeeef882e8",
+    "src/diffusionfas/__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "src/diffusionfas/acquisition.py": "e499154add3f9a4cb3c7c3efdb328c24f9567fd3102ef6bf3bb6f235cdaa64e8",
+    "src/diffusionfas/baselines.py": "d1291701142fab55444760c782aa3b7446c5b5094b5a5a92d26eedf4c4fff53f",
+    "src/diffusionfas/cli.py": "aa107d3b70e2b0aac2c47a16f0aa95d4d1c4c74cc7c5ea18b68b0cf41f7a461d",
+    "src/diffusionfas/data.py": "eef56fec8f32f5ef496b14557e3488fc825d0253ef1ecc319846b1f72b3a84ed",
+    "src/diffusionfas/dataset.py": "2d7501f387a0361b9a1104a0e2ce8e733b414a634e375be9604a63624af8fc10",
+    "src/diffusionfas/fas_import.py": "78f105522c78197d5e45d11e9e76725d032edc30961f048c129c7d2e02b8c132",
+    "src/diffusionfas/gpu_probe.py": "18f59ee999bbb85c18ae9743edae1f88fa4ea640363bfbb5c28be7b3018bbde1",
+    "src/diffusionfas/io.py": "b51240010d1b391f83c18bad40a1c8f83ab016ec6d01d848ce745beda321abf1",
+    "src/diffusionfas/metrics.py": "dfcb508a3b356abe280228cc17ff477a462a9ebfc7ac08855dc6961073d26e58",
+    "src/diffusionfas/models.py": "c966b1737abd4c0a80408a6b8571c4e51debce620bf7fb6a782c4049def83397",
+    "src/diffusionfas/native_replay.py": "2dc5d5a784088691da0b34aa7e48f75731b375715ac9744087be728a6d10ba7a",
+    "src/diffusionfas/preflight.py": "6c224872c3143a4bdc259b510e41ba140b9139499588fd91ad9c24ec86327f37",
+    "src/diffusionfas/preprocessing.py": "0ac33663f66515c5816d02e2c577445e734d03d50903059e04a78180f132b312",
+    "src/diffusionfas/scoring.py": "0a9a162a6ed4e6f3081cc8fedb6bd0053544f47fd1035c9d754e208c843dba3a",
+    "src/diffusionfas/source_preparation.py": "450e189e75b5a9c68e23c022824a9ecb14067727fc46e6b75826a865d0fe194b",
+    "src/diffusionfas/source_probe.py": "e9ea26f3ee68f1fafba86395d36f394a177b518495ef58d470fee97b084ea9e9",
+    "src/diffusionfas/supervision.py": "c43dc1d537880371e04b4d6f9de45a86e14537aafa912097c8706cdac6662720",
+    "src/diffusionfas/training.py": "fd3581ba42e811114817ec9ec10078cc847d9a0e72d4ea07bd32b65357e08d22"
+  },
+  "input_metadata_sha256": "ef0a5a2b860c76a093ba91acfb62ecba3b9c3164c6da32ebdcd7b77f3c99b92f",
+  "metadata_eligible_originals": 482,
+  "native_RGB_waivers": 0,
+  "original_denominator": 491,
+  "owned_output_bytes": 3219504160,
+  "prepared_manifest_sha256": null,
+  "prepared_originals": 282,
+  "raw_original_bytes_staged_and_verified": 3074451356,
+  "schema_version": 1,
+  "scientific_training_runs": 0,
+  "scope": "source_bonafide_fitting_validation_only",
+  "selection_plan_sha256": "8d9c421e647702468a20c0e340ca9921d026e7e6cc9840027d40c13a47a06e36",
+  "selection_replacements": 0,
+  "source_manifest_sha256": "7f9f54e6b097d7da0618cf8b3784e9eb3726b6aba8a3957455e26dda20da4580",
+  "source_model_scores": 0,
+  "successful_cache_grid_frames": 16247,
+  "supervision": {
+    "completed": false,
+    "guard_failure": null,
+    "plan_sha256": "8d9c421e647702468a20c0e340ca9921d026e7e6cc9840027d40c13a47a06e36",
+    "returncode": 1,
+    "sampled_owned_peak_disk_bytes": 3219498687,
+    "sampled_tree_peak_rss_bytes": 1172787200,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 3679.186859413996
+  },
+  "target": "OULU-NPU",
+  "target_video_decodes": 0,
+  "timings_seconds": {
+    "preparation_seconds": 3207.9148253188614,
+    "stage_seconds": 445.6068919959798,
+    "verification_seconds": 13.411803471084568
+  },
+  "uncompressed_RGB_estimate_bytes": 5070913536,
+  "verified_cache_windows": 846,
+  "worker_count": 1
+}
