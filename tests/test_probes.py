@@ -94,6 +94,23 @@ class ProbeTests(unittest.TestCase):
             else:
                 self.fail("owned descendant remained alive after supervisor cleanup")
 
+    def test_bounded_subprocess_counts_predecessor_output_against_combined_cap(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            previous, current = root / "previous", root / "current"
+            previous.mkdir()
+            current.mkdir()
+            (previous / "retained-cache").write_bytes(b"x" * 2048)
+            result = run_bounded(
+                [sys.executable, "-c", "import time; time.sleep(20)"], cwd=current,
+                owned_root=current, log=current / "batch.log", max_seconds=5,
+                max_rss_bytes=512 * 1024**2, max_disk_bytes=1024,
+                additional_output_roots=(previous,),
+            )
+            self.assertFalse(result["completed"])
+            self.assertEqual(result["guard_failure"], "owned_disk_cap")
+            self.assertGreaterEqual(result["sampled_owned_peak_disk_bytes"], 2048)
+
     def test_archive_members_are_exact_and_media_hash_checked(self) -> None:
         for member in ("../escape", "/absolute", "foo/*", "foo/?.avi", "-option", "foo\\bar"):
             with self.assertRaises(ValueError):

@@ -35,7 +35,7 @@ def build_plan(
     metadata: Path, source_manifest: Path, template: Path, fas_root: Path,
     detector: Path, output: Path, *, max_seconds: float, max_rss_bytes: int,
     max_output_bytes: int, source_manifest_sha: str = MANIFEST_SHA,
-    detector_sha: str = DETECTOR_SHA,
+    detector_sha: str = DETECTOR_SHA, previous_plan: Path | None = None,
 ) -> Path:
     require_private_output(output / "placeholder")
     if output.exists():
@@ -113,6 +113,16 @@ def build_plan(
         "uncompressed_RGB_estimate_bytes": raw_bytes, "conservative_estimate_bytes": expected_bytes,
         "config": config,
     }
+    if previous_plan is not None:
+        previous_root = previous_plan.parent.resolve()
+        if (previous_root == output.resolve() or previous_root in output.resolve().parents
+                or output.resolve() in previous_root.parents):
+            raise ValueError("continuation requires disjoint private attempt roots")
+        plan["previous_attempt"] = bind_previous_attempt(previous_plan, plan)
+        expected_bytes += tree_bytes(previous_root)
+        if expected_bytes + 64 * 1024**2 > max_output_bytes:
+            raise ValueError("combined previous/new output estimate exceeds approved cap")
+        plan["conservative_estimate_bytes"] = expected_bytes
     output.mkdir(parents=True)
     write_json(output / "plan.json", plan)
     return output / "plan.json"
@@ -122,6 +132,66 @@ def item_video(item: dict[str, Any]) -> Video:
     values = dict(item["video"])
     values["timestamps"], values["frame_hashes"] = tuple(values["timestamps"]), tuple(values["frame_hashes"])
     return Video(**values)
+
+
+def bind_previous_attempt(previous_plan: Path, plan: dict[str, Any]) -> dict[str, Any]:
+    require_private_output(previous_plan)
+    previous_sha = digest(previous_plan)
+    old = read_json(previous_plan, previous_sha)
+    if "previous_attempt" in old:
+        raise ValueError("this continuation supports one explicitly approved predecessor")
+    for field in ("metadata_sha256", "source_manifest_sha256", "detector_sha256",
+                  "preprocessing_sha256", "msu_reader_sha256", "scope"):
+        if old[field] != plan[field]:
+            raise ValueError("previous attempt population/assets differ")
+    if (object_digest([e["video"] for e in old["entries"]])
+            != object_digest([e["video"] for e in plan["entries"]])
+            or old["config"]["preprocessing"] != plan["config"]["preprocessing"]
+            or old["config"]["execution"] != plan["config"]["execution"]
+            or old["config"]["clip"] != plan["config"]["clip"]):
+        raise ValueError("previous attempt selection/policy differs")
+    root = previous_plan.parent
+    supervision_path = root / "supervision.json"
+    supervision = read_json(supervision_path)
+    if supervision["plan_sha256"] != previous_sha:
+        raise ValueError("previous supervisor/plan binding mismatch")
+    commitments = {}
+    for index, entry in enumerate(plan["entries"]):
+        path = root / "records" / f"result-{index:06d}.json"
+        if not path.exists():
+            continue
+        sha = digest(path)
+        record = read_json(path, sha)
+        original, cached = item_video(entry), item_video(record)
+        if replace(cached, status=original.status, media_path=original.media_path,
+                   cache_path=original.cache_path, cache_sha256=original.cache_sha256) != original:
+            raise ValueError("previous receipt changes original identity/evidence")
+        commitments[str(index)] = sha
+        if entry["metadata_failure"]:
+            continue
+        if cached.status == "prepared":
+            expected_cache = root / "caches" / f"{index:06d}.npz"
+            if (cached.cache_path != str(expected_cache) or record["failure"]
+                    or record["verified_cache_windows"] != 3
+                    or record["grid_frames"] != entry["grid_frames"]
+                    or digest(expected_cache) != cached.cache_sha256):
+                raise ValueError("previous prepared-cache binding mismatch")
+        elif (not record["failure"] or cached.status != f"preparation_failure:{record['failure']}"
+              or cached.cache_path is not None):
+            raise ValueError("previous receipt is not a completed preparation outcome")
+        entry["previous_record_sha256"] = sha
+    return {"plan_path": str(previous_plan.resolve()), "plan_sha256": previous_sha,
+            "supervision_sha256": digest(supervision_path), "records_sha256": commitments}
+
+
+def previous_output_root(plan: dict[str, Any]) -> Path | None:
+    previous = plan.get("previous_attempt")
+    return Path(previous["plan_path"]).parent if previous else None
+
+
+def combined_output_bytes(plan: dict[str, Any], root: Path) -> int:
+    previous = previous_output_root(plan)
+    return tree_bytes(root) + (tree_bytes(previous) if previous is not None else 0)
 
 
 def run_preparation(plan_path: Path, plan_sha: str) -> None:
@@ -141,6 +211,13 @@ def run_preparation(plan_path: Path, plan_sha: str) -> None:
     for name, expected in plan["implementation_sha256"].items():
         if digest(project / name) != expected:
             raise ValueError("preparation implementation changed after approval plan")
+    previous = plan.get("previous_attempt")
+    if previous:
+        old_plan = Path(previous["plan_path"])
+        read_json(old_plan, previous["plan_sha256"])
+        read_json(old_plan.parent / "supervision.json", previous["supervision_sha256"])
+        for index, sha in previous["records_sha256"].items():
+            read_json(old_plan.parent / "records" / f"result-{int(index):06d}.json", sha)
     if digest(Path(plan["metadata"])) != plan["metadata_sha256"]:
         raise ValueError("imported metadata changed after selection")
     if digest(Path(plan["source_manifest"])) != plan["source_manifest_sha256"]:
@@ -161,6 +238,7 @@ def run_preparation(plan_path: Path, plan_sha: str) -> None:
     decoders, helper_sha = decoder_policy(config)
     native = None
     if any(decoders[e["video"]["dataset"]] == "fas_strict_ffmpeg" and not e["metadata_failure"]
+           and not e.get("previous_record_sha256")
            for e in plan["entries"]):
         if helper_sha is None:
             raise ValueError("explicit native decoder helper hash required")
@@ -183,7 +261,7 @@ def run_preparation(plan_path: Path, plan_sha: str) -> None:
             before = time.monotonic()
             if before >= deadline:
                 raise TimeoutError("approved source preparation wall cap")
-            remaining_bytes = plan["budget"]["max_output_bytes"] - tree_bytes(root)
+            remaining_bytes = plan["budget"]["max_output_bytes"] - combined_output_bytes(plan, root)
             if remaining_bytes <= 0:
                 raise OSError("approved source preparation output cap")
             failure = item["metadata_failure"]
@@ -192,6 +270,14 @@ def run_preparation(plan_path: Path, plan_sha: str) -> None:
             grid_frames, windows = 0, 0
             if not failure:
                 write_json(records / f"started-{index:06d}.json", {"index": index})
+            reused = item.get("previous_record_sha256")
+            if reused:
+                previous_root = previous_output_root(plan)
+                if previous_root is None:
+                    raise ValueError("reused record requires predecessor commitment")
+                record = read_json(previous_root / "records" / f"result-{index:06d}.json", reused)
+                result, failure = item_video(record), record["failure"]
+            if not failure and not reused:
                 staged = staging / f"source-{index:06d}{Path(item['member']).suffix}"
                 try:
                     stage_member(item, fas_root, fas_root, staged, stack, msu_context, deadline)
@@ -219,24 +305,25 @@ def run_preparation(plan_path: Path, plan_sha: str) -> None:
                     timings["preparation_seconds"] = time.monotonic() - prepare_started
                 finally:
                     staged.unlink(missing_ok=True)
-                if result.status == "prepared":
-                    verify_started = time.monotonic()
-                    for seed in (None, addressed_seed(20261103, video.key, "cache-QA", 0),
-                                 addressed_seed(20261103, video.key, "cache-QA", 1)):
-                        clip = cache_reader.get(result, seed=seed)
-                        if clip.shape != (16, 3, 256, 256) or not torch.isfinite(clip).all():
-                            raise ValueError("prepared cache does not yield finite 2s RGB256 windows")
-                        windows += 1
-                    timings["verification_seconds"] = time.monotonic() - verify_started
-                    grid_frames = item["grid_frames"]
+            if result.status == "prepared":
+                verify_started = time.monotonic()
+                for seed in (None, addressed_seed(20261103, video.key, "cache-QA", 0),
+                             addressed_seed(20261103, video.key, "cache-QA", 1)):
+                    clip = cache_reader.get(result, seed=seed)
+                    if clip.shape != (16, 3, 256, 256) or not torch.isfinite(clip).all():
+                        raise ValueError("prepared cache does not yield finite 2s RGB256 windows")
+                    windows += 1
+                timings["verification_seconds"] = time.monotonic() - verify_started
+                grid_frames = item["grid_frames"]
             result = replace(result, media_path=None)
             completed[video.key] = result
             write_json(records / f"result-{index:06d}.json", {
                 "video": result.to_dict(), "failure": failure, "metadata_failure": item["metadata_failure"],
                 "timings": timings, "grid_frames": grid_frames, "verified_cache_windows": windows,
+                "reused_from_previous_attempt": bool(reused),
                 "wall_seconds": time.monotonic() - before,
             })
-            if tree_bytes(root) > plan["budget"]["max_output_bytes"]:
+            if combined_output_bytes(plan, root) > plan["budget"]["max_output_bytes"]:
                 raise OSError("approved output cap including caches and diagnostics")
             print({"completed_originals": index + 1, "total_originals": len(plan["entries"]),
                    "dataset": video.dataset, "partition": video.partition, "status": result.status,
@@ -246,6 +333,7 @@ def run_preparation(plan_path: Path, plan_sha: str) -> None:
         "schema_version": 1, "videos": [v.to_dict() for v in updated],
         "provenance": {**provenance, "parent_manifest_sha256": plan["metadata_sha256"],
                        "preparation_plan_sha256": plan_sha,
+                       "previous_preparation_plan_sha256": previous["plan_sha256"] if previous else None,
                        "decoder_policy": {"decoders": decoders, "native_replay_helper_sha256": helper_sha},
                        "preprocessing_sha256": plan["preprocessing_sha256"],
                        "detector_sha256": plan["detector_sha256"], "clip_config": config["clip"]},
@@ -261,7 +349,7 @@ def summarize_preparation(plan_path: Path, supervision: dict[str, Any]) -> dict[
     counts: dict[str, Counter] = {}
     failures: Counter = Counter()
     timings: Counter = Counter()
-    windows, grid_frames, staged_bytes, records_count = 0, 0, 0, 0
+    windows, grid_frames, staged_bytes, records_count, reused_prepared = 0, 0, 0, 0, 0
     for index, item in enumerate(plan["entries"]):
         bucket = counts.setdefault(f"{item['video']['dataset']}:{item['video']['partition']}", Counter())
         bucket["originals"] += 1
@@ -274,6 +362,7 @@ def summarize_preparation(plan_path: Path, supervision: dict[str, Any]) -> dict[
             state = ("metadata_failure" if item["metadata_failure"] else
                      "prepared" if record["video"]["status"] == "prepared" else "preparation_failure")
             bucket[state] += 1
+            reused_prepared += state == "prepared" and record.get("reused_from_previous_attempt", False)
             if record["failure"]:
                 failures[record["failure"]] += 1
             windows += record["verified_cache_windows"]
@@ -307,6 +396,9 @@ def summarize_preparation(plan_path: Path, supervision: dict[str, Any]) -> dict[
         "failures_by_reason": failures, "verified_cache_windows": windows,
         "successful_cache_grid_frames": grid_frames, "timings_seconds": timings,
         "raw_original_bytes_staged_and_verified": staged_bytes, "owned_output_bytes": tree_bytes(root),
+        "combined_owned_output_bytes": combined_output_bytes(plan, root),
+        "previous_selection_plan_sha256": plan.get("previous_attempt", {}).get("plan_sha256"),
+        "reused_prepared_originals": reused_prepared,
         "uncompressed_RGB_estimate_bytes": plan["uncompressed_RGB_estimate_bytes"],
         "selection_plan_sha256": digest(plan_path), "input_metadata_sha256": plan["metadata_sha256"],
         "source_manifest_sha256": plan["source_manifest_sha256"],

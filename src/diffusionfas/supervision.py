@@ -50,13 +50,15 @@ def signal_owned_group(process: subprocess.Popen, value: int) -> None:
 def run_bounded(
     command: list[str], *, cwd: Path, owned_root: Path, log: Path,
     max_seconds: float, max_rss_bytes: int, max_disk_bytes: int,
+    additional_output_roots: tuple[Path, ...] = (),
 ) -> dict[str, Any]:
     if max_seconds <= 0 or max_rss_bytes <= 0 or max_disk_bytes <= 0:
         raise ValueError("positive probe process caps required")
     log.parent.mkdir(parents=True, exist_ok=True)
     if log.exists():
         raise ValueError("new process log required")
-    started, peak_rss, peak_disk = time.monotonic(), 0, tree_bytes(owned_root)
+    output_roots = (owned_root, *additional_output_roots)
+    started, peak_rss, peak_disk = time.monotonic(), 0, sum(tree_bytes(p) for p in output_roots)
     failure = None
     with log.open("xb") as stream:
         process = subprocess.Popen(command, cwd=cwd, stdin=subprocess.DEVNULL,
@@ -64,7 +66,7 @@ def run_bounded(
         try:
             while process.poll() is None:
                 peak_rss = max(peak_rss, process_tree_rss(process.pid))
-                peak_disk = max(peak_disk, tree_bytes(owned_root))
+                peak_disk = max(peak_disk, sum(tree_bytes(p) for p in output_roots))
                 if time.monotonic() - started > max_seconds:
                     failure = "wall_clock_cap"
                 elif peak_rss > max_rss_bytes:
@@ -82,7 +84,7 @@ def run_bounded(
                 signal_owned_group(process, signal.SIGKILL)
                 process.wait(timeout=5)
             signal_owned_group(process, signal.SIGKILL)
-    peak_disk = max(peak_disk, tree_bytes(owned_root))
+    peak_disk = max(peak_disk, sum(tree_bytes(p) for p in output_roots))
     return {
         "returncode": process.returncode, "guard_failure": failure,
         "wall_seconds": time.monotonic() - started, "sampled_tree_peak_rss_bytes": peak_rss,

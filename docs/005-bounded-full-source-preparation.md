@@ -3,6 +3,9 @@
 **Batch đã dừng vì lỗi cache-QA; chưa hoàn tất full-source preparation.**
 Không tự chạy lại. [Aggregate evidence](../results/source-preparation-v1.json)
 ghi `completed: false`, không có completed prepared-manifest.
+Đây là lịch sử attempt đầu tiên. Sau approval riêng,
+[continuation 006](006-explicit-source-continuation.md) đã hoàn tất accounting
+491 originals với 476 usable caches; evidence của attempt cũ không bị sửa.
 
 ## Phạm vi đã được duyệt
 

@@ -9,13 +9,16 @@ Offline-first bonafide-only short-clip PAD research.
 - [Aggregate probe evidence](results/probe-v2.json).
 - [Strict MSU decoder đã wire vào CLI/config](docs/004-strict-msu-decoder-policy.md).
 - [Full source-bonafide preparation có budget](docs/005-bounded-full-source-preparation.md).
+- [Continuation đã hoàn tất source preparation](docs/006-explicit-source-continuation.md).
 
 **Đã tải checkpoint private và chạy bounded engineering probes trong env `fas`;
 chưa training trên PAD videos, chưa đánh giá target.** Full-source preparation
-attempt đã dừng sau ~61 phút vì lỗi cache-QA: 282/491 originals prepared,
-198 chưa thử và 1 interrupted; 9 quá ngắn, 1 tracking failure được giữ nguyên.
-Đã sửa sampler và qua synthetic regressions, **chưa chạy lại, chưa sẵn sàng train**.
-Xem [aggregate evidence](results/source-preparation-v1.json).
+đã hoàn tất sau explicit continuation approval: **476/491 originals usable,
+gồm 359 fitting + 117 validation**. Giữ 9 short-video và 6 tracking failures
+trong denominator; không còn interrupted/unattempted. Caches đã QA bằng 1.428
+windows và verify lại toàn bộ hashes. Xem [aggregate evidence](results/source-preparation-v2.json)
+và [lịch sử attempt đầu bị dừng](docs/005-bounded-full-source-preparation.md).
+Training pilot vẫn cần approval/budget riêng.
 Default scientific config vẫn đóng mọi quyền decode/scoring/training.
 Synthetic optimizer steps không phải kết quả FAS.
 
@@ -23,8 +26,8 @@ Synthetic optimizer steps không phải kết quả FAS.
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v6.json):
-62 tests passed, gồm actual pinned FFmpeg helper trên video tổng hợp.
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v7.json):
+67 tests passed, gồm actual pinned FFmpeg helper trên video tổng hợp.
 
 ```bash
 PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
@@ -115,6 +118,10 @@ Fold target OULU có 491 source bonafide fitting/validation originals, gồm 482
 metadata-eligible và 9 quá ngắn; mọi failure vẫn nằm trong denominator. Không
 thay video, bỏ hash check hoặc tự retry. Xem [tài liệu 005](docs/005-bounded-full-source-preparation.md)
 về scope, finite budget, private outputs và cách chạy. Không tự chuyển sang train.
+Explicit continuation dùng `plan --previous-plan ...` với budget mới; reuse
+caches/retain failures theo pinned predecessor receipts, không overwrite attempt
+cũ. Watchdog cộng cả hai roots vào cùng output cap. Chi tiết và kết quả ở
+[tài liệu 006](docs/006-explicit-source-continuation.md).
 
 ### Các model variants
 

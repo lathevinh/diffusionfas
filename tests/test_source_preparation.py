@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from diffusionfas.cli import manifest_payload
 from diffusionfas.io import digest, read_json, write_json
+from diffusionfas.preprocessing import MediaFailure
 from diffusionfas.source_preparation import build_plan, run_preparation, summarize_preparation
 from test_native_replay import Fixture, fake_runtime
 
@@ -25,12 +26,13 @@ class PreparationFixture:
         self.fixture.config["clip"]["duration"] = 2
         self.fixture.arguments()
 
-    def plan(self) -> Path:
+    def plan(self, previous_plan: Path | None = None) -> Path:
         return build_plan(
             self.root / "manifest.json", self.root / "source.json", self.root / "config.json",
             self.fas_root, self.detector, self.output, max_seconds=30,
             max_rss_bytes=8 * 1024**3, max_output_bytes=256 * 1024**2,
             source_manifest_sha=digest(self.root / "source.json"), detector_sha=digest(self.detector),
+            previous_plan=previous_plan,
         )
 
     def stage(self, item, source_root, data_root, destination, stack, context, deadline):
@@ -150,3 +152,91 @@ class SourcePreparationTests(unittest.TestCase):
                     detector_sha=digest(fixture.detector),
                 )
             self.assertFalse(fixture.output.exists())
+
+    def test_explicit_continuation_revalidates_cache_without_staging_or_decoding(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = PreparationFixture(Path(directory))
+            first = fixture.plan()
+            with fake_runtime(fixture.fixture), patch(
+                "diffusionfas.source_preparation.stage_member", side_effect=fixture.stage,
+            ):
+                run_preparation(first, digest(first))
+            write_json(first.parent / "supervision.json", {"completed": True, "plan_sha256": digest(first)})
+            old_record = first.parent / "records/result-000000.json"
+            original_record_sha = digest(old_record)
+            fixture.output = fixture.root / "continuation"
+            second = fixture.plan(first)
+            with fake_runtime(fixture.fixture), patch(
+                "diffusionfas.source_preparation.stage_member",
+            ) as stage, patch("diffusionfas.preprocessing.prepare_video") as prepare:
+                run_preparation(second, digest(second))
+            stage.assert_not_called()
+            prepare.assert_not_called()
+            report = summarize_preparation(second, {"completed": True})
+            self.assertTrue(report["completed"])
+            self.assertEqual(report["reused_prepared_originals"], 1)
+            self.assertEqual(report["verified_cache_windows"], 3)
+            self.assertGreater(report["combined_owned_output_bytes"], report["owned_output_bytes"])
+            self.assertEqual(digest(old_record), original_record_sha)
+            self.assertFalse(list((second.parent / "caches").iterdir()))
+
+    def test_explicit_continuation_prepares_interrupted_original(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = PreparationFixture(Path(directory))
+            first = fixture.plan()
+            with fake_runtime(fixture.fixture), patch(
+                "diffusionfas.source_preparation.stage_member", side_effect=ValueError("interrupted"),
+            ), self.assertRaisesRegex(ValueError, "interrupted"):
+                run_preparation(first, digest(first))
+            write_json(first.parent / "supervision.json", {"completed": False, "plan_sha256": digest(first)})
+            fixture.output = fixture.root / "continuation"
+            second = fixture.plan(first)
+            with fake_runtime(fixture.fixture), patch(
+                "diffusionfas.source_preparation.stage_member", side_effect=fixture.stage,
+            ) as stage:
+                run_preparation(second, digest(second))
+            self.assertEqual(stage.call_count, 1)
+            report = summarize_preparation(second, {"completed": True})
+            self.assertTrue(report["completed"])
+            self.assertEqual(report["prepared_originals"], 1)
+            self.assertEqual(report["reused_prepared_originals"], 0)
+
+    def test_continuation_retains_tracking_failure_without_retry(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = PreparationFixture(Path(directory))
+            first = fixture.plan()
+            with fake_runtime(fixture.fixture), patch(
+                "diffusionfas.source_preparation.stage_member", side_effect=fixture.stage,
+            ), patch("diffusionfas.preprocessing.prepare_video", side_effect=MediaFailure("missing_track_endpoint")):
+                run_preparation(first, digest(first))
+            write_json(first.parent / "supervision.json", {"completed": True, "plan_sha256": digest(first)})
+            fixture.output = fixture.root / "continuation"
+            second = fixture.plan(first)
+            with fake_runtime(fixture.fixture), patch(
+                "diffusionfas.source_preparation.stage_member",
+            ) as stage:
+                run_preparation(second, digest(second))
+            stage.assert_not_called()
+            report = summarize_preparation(second, {"completed": True})
+            self.assertTrue(report["completed"])
+            self.assertEqual(report["failures_by_reason"], {"missing_track_endpoint": 1})
+
+    def test_changed_predecessor_receipt_fails_before_detector_or_staging(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = PreparationFixture(Path(directory))
+            first = fixture.plan()
+            with fake_runtime(fixture.fixture), patch(
+                "diffusionfas.source_preparation.stage_member", side_effect=fixture.stage,
+            ):
+                run_preparation(first, digest(first))
+            write_json(first.parent / "supervision.json", {"completed": True, "plan_sha256": digest(first)})
+            fixture.output = fixture.root / "continuation"
+            second = fixture.plan(first)
+            with (first.parent / "records/result-000000.json").open("a") as stream:
+                stream.write(" ")
+            with patch("diffusionfas.preprocessing.FasFaceProvider") as provider, patch(
+                "diffusionfas.source_preparation.stage_member",
+            ) as stage, self.assertRaises(ValueError):
+                run_preparation(second, digest(second))
+            provider.assert_not_called()
+            stage.assert_not_called()

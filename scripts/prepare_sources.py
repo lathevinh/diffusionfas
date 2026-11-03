@@ -24,6 +24,7 @@ def main() -> None:
     plan.add_argument("--max-seconds", type=float, required=True)
     plan.add_argument("--max-rss-bytes", type=int, required=True)
     plan.add_argument("--max-output-bytes", type=int, required=True)
+    plan.add_argument("--previous-plan", type=Path)
     run = commands.add_parser("run")
     run.add_argument("--plan", type=Path, required=True)
     run.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
@@ -41,6 +42,7 @@ def main() -> None:
             arguments.metadata, arguments.source_manifest, arguments.config, arguments.fas_root,
             arguments.detector, arguments.private_root, max_seconds=arguments.max_seconds,
             max_rss_bytes=arguments.max_rss_bytes, max_output_bytes=arguments.max_output_bytes,
+            previous_plan=arguments.previous_plan,
         )
         print({"plan_sha256": digest(path), "completed": True}, flush=True)
         return
@@ -67,12 +69,16 @@ def main() -> None:
     if (root / "supervision.json").exists() or (root / "batch.log").exists():
         raise ValueError("batch already attempted; no automatic retry/resume")
     budget = plan["budget"]
+    from diffusionfas.source_preparation import previous_output_root
+
+    previous_root = previous_output_root(plan)
     result = run_bounded(
         [sys.executable, str(Path(__file__).resolve()), "run", "--plan", str(arguments.plan),
          "--worker", "--plan-sha256", plan_sha],
         cwd=ROOT, owned_root=root, log=root / "batch.log",
         max_seconds=budget["max_seconds"], max_rss_bytes=budget["max_rss_bytes"],
         max_disk_bytes=budget["max_output_bytes"],
+        additional_output_roots=(previous_root,) if previous_root is not None else (),
     )
     result["plan_sha256"] = plan_sha
     write_json(root / "supervision.json", result)
