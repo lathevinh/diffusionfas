@@ -11,6 +11,10 @@
     "checkpoint_download": false
   },
   "clip": {"duration": 2.0, "fps": 8, "context_scale": 1.3},
+  "preprocessing": {
+    "decoders": {"MSU-MFSD": "fas_strict_ffmpeg"},
+    "native_replay_helper_sha256": "8018390bfa8004d42cd52eae21dab8633a39838f1efc523647de5cd9d823a888"
+  },
   "model": {
     "variant": "pretrained_temporal",
     "local_bundle": null,

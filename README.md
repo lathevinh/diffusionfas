@@ -7,6 +7,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Aggregate metadata/resource preflight](results/preflight-v2.json).
 - [Checkpoint, GPU và source preprocessing probe](docs/003-bounded-checkpoint-gpu-and-source-probes.md).
 - [Aggregate probe evidence](results/probe-v2.json).
+- [Strict MSU decoder đã wire vào CLI/config](docs/004-strict-msu-decoder-policy.md).
 
 **Đã tải checkpoint private và chạy bounded engineering probes trong env `fas`;
 chưa training trên PAD videos, chưa đánh giá target.** Đã xử lý 12 cửa sổ cố định
@@ -17,8 +18,8 @@ từ 6 source bonafide originals; không dùng OULU. Default scientific config v
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v3.json):
-43 tests passed.
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v4.json):
+55 tests passed, gồm actual pinned FFmpeg helper trên video tổng hợp.
 
 ```bash
 PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
@@ -27,12 +28,17 @@ PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
 PYTHONPATH=src conda run --no-capture-output -n fas python -m diffusionfas --help
 
 conda run --no-capture-output -n fas python scripts/validate.py \
+  --fas-root /path/to/fas \
   --out /path/to/new-validation-receipt.json
 ```
 
 Chỉ bổ sung package còn thiếu `diffusers==0.35.1` với `--no-deps`; các package cũ
 không được nâng cấp. Checkpoint chỉ được tải bằng explicit bounded acquisition
 probe; không có automatic download trong scientific loader.
+
+`--fas-root` trong validator bật native-helper integration test, chỉ dùng video
+tổng hợp. Nếu không cung cấp source root (hoặc `DIFFUSIONFAS_FAS_ROOT`), portable
+suite skip riêng test này; không cần PAD media/checkpoints.
 
 ## Lệnh metadata-only: có thể chạy trước training approval
 
@@ -79,6 +85,18 @@ Các subcommands có `--help`; config hiện tại cố ý không cho chạy ch�
 `prepare` cần checkout `fas` và detector cục bộ có hash được chỉ định; reuse
 preprocessing đã có, không copy detector implementation. `feature-baseline` cần
 checkout DINO/trọng số cục bộ được xác minh. Không tự tải các assets này.
+
+### Decoder policy
+
+[Default config](configs/offline-v1.json) chọn strict FFmpeg cho MSU, OpenCV cho
+các domain còn lại; execution gates vẫn đóng. Với approved source-preparation
+config sau này, `prepare` cần thêm `--source-manifest /path/to/accepted/source_manifest.json`
+khi chọn native decoder. Manifest phải khớp imported provenance; helper code,
+transaction/media receipts, timestamps và full native RGB sequence đều được bind.
+
+Decoder error không fallback sang OpenCV và không đổi accepted hashes. Failed
+originals giữ nguyên trong output manifest, kèm technical failure. Chi tiết
+policy, diagnostics và command example ở [tài liệu 004](docs/004-strict-msu-decoder-policy.md).
 
 ### Các model variants
 
@@ -136,10 +154,9 @@ review quyền dữ liệu/commercial use.
 - Engineering probe chỉ có 6 source originals, không chứng minh tracking success
   toàn dataset hoặc khả năng phân biệt bonafide/spoof.
 - GPU timing chỉ từ tensors tổng hợp; chưa đo end-to-end training.
-- OpenCV default của `prepare` không đổi và đã phát hiện không khớp MSU RGB
-  receipts. Fixed MSU probe dùng explicit accepted-FFmpeg replay qua Python API
-  `prepare_video(native_replay=...)`; phải chốt/wire decoder policy cho full
-  preparation trước scientific run, không bật CLI full preparation như hiện tại.
+- MSU strict FFmpeg đã được wire vào CLI/config, không automatic fallback.
+  Config cũ không có decoder policy giữ legacy OpenCV behavior; không dùng
+  config legacy đó cho MSU full preparation.
 - Source calibration bonafide CASIA/MSU quá ít cho strict 5% finite-sample policy
   đã chọn; không tự nới ngưỡng hoặc đổi split.
 - Exact-member staging và sampled process watchdog đã kiểm tra cho probe nhỏ.

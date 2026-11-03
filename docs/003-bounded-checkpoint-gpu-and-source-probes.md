@@ -1,5 +1,8 @@
 # 003 - Checkpoint, GPU và source preprocessing probes
 
+Snapshot của phase probes. Giới hạn CLI native-decoder bên dưới đã được giải
+quyết ở [phase 004](004-strict-msu-decoder-policy.md); số đo/probe receipts giữ nguyên.
+
 ## 1. Kết luận và ranh giới
 
 **Engineering feasibility đã qua:** checkpoint dùng được, synthetic optimization/
@@ -141,10 +144,9 @@ diffusion model và không tạo PAD scores.
 kiểm tra hash/count; default OpenCV behavior được giữ để tránh âm thầm đổi
 scientific contract. Probe đã sử dụng native hook cho MSU.
 
-**CLI `prepare` chưa wire native hook.** Không bật full-source preparation với
-default này cho MSU. Trước phase scientific cần chốt/wire explicit decoder policy
-và provenance vào CLI/config, giữ all-original failure accounting; không sửa
-accepted hashes, đổi video hoặc đơn giản bỏ những video khó.
+**Ở snapshot 003, CLI `prepare` chưa wire native hook.** Việc này đã được hoàn
+thành trong [004](004-strict-msu-decoder-policy.md), giữ all-original failure
+accounting; không sửa accepted hashes, đổi video hoặc bỏ những video khó.
 
 ## 5. Resource supervision và reproducibility
 

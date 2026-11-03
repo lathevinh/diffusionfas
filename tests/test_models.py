@@ -95,6 +95,7 @@ class ModelTests(unittest.TestCase):
                                    "bundle_manifest_sha256": None, "adapter_channels": 8}})
 
     def test_learned_spatial_adapter_does_not_mix_frames(self) -> None:
+        torch.manual_seed(5)
         base = scratch_model(TINY, temporal=False)
         model = ClipDenoiser(base.backbone, base.scheduler, temporal=True,
                             freeze_backbone=True, adapter_channels=8, temporal_kernel=1).eval()
@@ -103,8 +104,11 @@ class ModelTests(unittest.TestCase):
         clip = torch.randn(1, 3, 3, 16, 16)
         timestep = torch.tensor([2])
         together = model(clip, timestep)
-        apart = torch.cat([model(clip[:, i:i+1], timestep) for i in range(3)], dim=1)
-        self.assertTrue(torch.allclose(together, apart, atol=1e-6))
+        changed = clip.clone()
+        changed[:, -1].add_(10)
+        updated = model(changed, timestep)
+        self.assertTrue(torch.equal(together[:, :-1], updated[:, :-1]))
+        self.assertFalse(torch.equal(together[:, -1], updated[:, -1]))
 
 
 if __name__ == "__main__":

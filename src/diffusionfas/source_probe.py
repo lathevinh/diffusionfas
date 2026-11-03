@@ -188,7 +188,7 @@ def run_source_probe(
         raise ValueError("source archive reader changed since selection")
     if len(plan["originals"]) != 6 or plan["target"] != "OULU-NPU":
         raise ValueError("exact fixed six-source-original probe required")
-    previous, native, native_hash, original_rows = None, None, None, {}
+    previous, native, native_hash = None, None, None
     if previous_probe is not None:
         previous = read_json(previous_probe)
         if previous["plan_sha256"] != digest(plan_path) or source_manifest is None:
@@ -197,15 +197,10 @@ def run_source_probe(
         if len(failures) != 4 or any(a["dataset"] != "MSU-MFSD" or a["failure"] !=
                                   "native_RGB_hash_mismatch_no_decoder_waiver" for a in failures):
             raise ValueError("native follow-up is restricted to the four observed MSU RGB failures")
-        original_rows = {f"{r['dataset']}/{r['video_id']}": r
-                         for r in read_json(source_manifest, MANIFEST_SHA)["rows"]}
-        sys.path.insert(0, str(fas_root / "scripts"))
-        sys.path.insert(0, str(fas_root / "src"))
-        native = importlib.import_module("msu_replay282")
-        native_path = fas_root / "scripts/msu_replay282.py"
-        if Path(native.__file__).resolve() != native_path.resolve():
-            raise ValueError("unbound source native decoder")
-        native_hash = digest(native_path)
+        from .native_replay import FAS_NATIVE_HELPER_SHA256, FasNativeReplay
+
+        native_hash = FAS_NATIVE_HELPER_SHA256
+        native = FasNativeReplay(fas_root, native_hash, source_manifest, MANIFEST_SHA)
     output.mkdir(parents=True)
     temporary = output / "staging"
     temporary.mkdir()
@@ -240,29 +235,10 @@ def run_source_probe(
                     window_started = time.monotonic()
                     replay = None
                     if native is not None:
-                        transaction_path = Path(original_rows[video.key]["record_path"])
-                        transaction = read_json(transaction_path, original_rows[video.key]["record_sha256"])
-                        media_path = transaction_path.parent.parent / "media" / transaction_path.name
-                        receipt = read_json(media_path, item["receipt_sha256"])
-                        if transaction["media_record_sha256"] != item["receipt_sha256"]:
-                            raise ValueError("source replay receipt parent drift")
-                        replays = [0]
-
-                        def replay(path, consume, timeout):
-                            pass_number = replays[0]
-                            replays[0] += 1
-                            try:
-                                native.strict_replay(
-                                    path, receipt, consume,
-                                    output / f"native-{ordinal}-{window_name}-pass-{pass_number}.json",
-                                    timeout=timeout,
-                                )
-                            except TimeoutError as error:
-                                raise MediaFailure("native_ffmpeg_deadline") from error
-                            except ValueError as error:
-                                if str(error) not in {"RGB identity/count mismatch", "extra RGB bytes"} and not str(error).startswith("strict decoder returncode="):
-                                    raise
-                                raise MediaFailure("native_ffmpeg_replay_failure") from error
+                        replay = native.bind(
+                            video, output / f"native-{ordinal}-{window_name}",
+                            expected_receipt_sha256=item["receipt_sha256"],
+                        )
                     try:
                         result = prepare_video(bound, provider, crop_file, max_seconds=min(
                             120, deadline - time.monotonic()), window_start=start, window_duration=2,

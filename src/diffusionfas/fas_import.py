@@ -15,6 +15,27 @@ PARTITIONS_SHA = "2700baf9d757cc8c773247f104cd2a85c4ee9c288e461bb929cdbff9333c29
 SOURCE_REVISION = "707e3ddf6103835c55e937cbbd84081d91f188c7"
 
 
+def read_media_receipt(
+    row: dict[str, Any], oulu_media_root: Path | None = None,
+) -> tuple[dict[str, Any], str]:
+    transaction_path = Path(row["record_path"])
+    transaction = read_json(transaction_path, row["record_sha256"])
+    if transaction["video_id"] != row["video_id"] or transaction["binary_label"] != row["binary_label"]:
+        raise ValueError("transaction original/label mismatch")
+    if row["dataset"] == "OULU-NPU":
+        if oulu_media_root is None:
+            raise ValueError("OULU media receipt root required")
+        receipt_path = oulu_media_root / f"{row['video_id']}.json"
+    else:
+        receipt_path = transaction_path.parent.parent / "media" / transaction_path.name
+    receipt = read_json(receipt_path, transaction["media_record_sha256"])
+    if receipt["media_sha256"] != transaction["media_sha256"]:
+        raise ValueError("media receipt/transaction binding mismatch")
+    if receipt["video_id"] != row["video_id"]:
+        raise ValueError("media receipt identity mismatch")
+    return receipt, transaction["media_record_sha256"]
+
+
 def import_metadata(
     manifest_path: Path, partitions_path: Path, oulu_media_root: Path,
     manifest_sha: str = MANIFEST_SHA, partitions_sha: str = PARTITIONS_SHA,
@@ -51,19 +72,7 @@ def import_metadata(
                 status="historical_pre_detector_failure",
             ))
             continue
-        transaction_path = Path(row["record_path"])
-        transaction = read_json(transaction_path, row["record_sha256"])
-        if transaction["video_id"] != row["video_id"] or transaction["binary_label"] != row["binary_label"]:
-            raise ValueError("transaction original/label mismatch")
-        receipt_path = (
-            oulu_media_root / f"{row['video_id']}.json" if row["dataset"] == "OULU-NPU"
-            else transaction_path.parent.parent / "media" / transaction_path.name
-        )
-        receipt = read_json(receipt_path, transaction["media_record_sha256"])
-        if receipt["media_sha256"] != transaction["media_sha256"]:
-            raise ValueError("media receipt/transaction binding mismatch")
-        if receipt["video_id"] != row["video_id"]:
-            raise ValueError("media receipt identity mismatch")
+        receipt, _ = read_media_receipt(row, oulu_media_root)
         receipt_counts[row["dataset"]] += 1
         frames = receipt.get("frame_index", [])
         status = "eligible_pending_tracking" if receipt["decode_status"] == "decoded" else "historical_decode_failure"

@@ -73,6 +73,7 @@ def run_bind(arguments: argparse.Namespace) -> None:
 
 
 def run_prepare(arguments: argparse.Namespace) -> None:
+    from .native_replay import FasNativeReplay, decoder_policy
     from .preprocessing import FasFaceProvider, MediaFailure, prepare_video
 
     config = read_json(arguments.config)
@@ -96,11 +97,24 @@ def run_prepare(arguments: argparse.Namespace) -> None:
         raise ValueError("explicit preparation wall/output budget required")
     if arguments.cache_root.exists():
         raise ValueError("preparation requires a new cache directory")
-    provider = FasFaceProvider(arguments.fas_root, arguments.preprocessing_sha256,
-                               arguments.detector, arguments.detector_sha256)
     import time
 
     deadline = time.monotonic() + budget["max_seconds"]
+    decoders, helper_sha = decoder_policy(config)
+    native_videos = [v for v in selected if v.status == "eligible_pending_tracking"
+                     and decoders[v.dataset] == "fas_strict_ffmpeg"]
+    replays = {}
+    native_source_sha = None
+    if native_videos:
+        source_manifest = getattr(arguments, "source_manifest", None)
+        native_source_sha = provenance.get("source_manifest_sha256")
+        if source_manifest is None or not native_source_sha or helper_sha is None:
+            raise ValueError("native decoder requires --source-manifest bound by imported provenance")
+        native = FasNativeReplay(arguments.fas_root, helper_sha, source_manifest, native_source_sha)
+        replays = {v.key: native.bind(v, arguments.cache_root / "native-replay" / object_digest(v.key))
+                   for v in native_videos}
+    provider = FasFaceProvider(arguments.fas_root, arguments.preprocessing_sha256,
+                               arguments.detector, arguments.detector_sha256)
     lookup = {v.key: v for v in videos}
     for video in selected:
         remaining = deadline - time.monotonic()
@@ -116,13 +130,18 @@ def run_prepare(arguments: argparse.Namespace) -> None:
         try:
             lookup[video.key] = prepare_video(video, provider, output, fps=config["clip"]["fps"],
                                               max_seconds=min(remaining, 180),
-                                              max_output_bytes=remaining_bytes)
+                                              max_output_bytes=remaining_bytes,
+                                              native_replay=replays.get(video.key))
         except MediaFailure as error:
             lookup[video.key] = replace(video, status=f"preparation_failure:{error}")
+        if sum(p.stat().st_size for p in arguments.cache_root.rglob("*") if p.is_file()) > budget["max_output_bytes"]:
+            raise OSError("preparation output budget exhausted including native diagnostics")
     provenance = {**provenance, "parent_manifest_sha256": digest(arguments.manifest),
                   "preprocessing_sha256": arguments.preprocessing_sha256,
                   "detector_sha256": arguments.detector_sha256,
-                  "clip_config": config["clip"]}
+                  "clip_config": config["clip"],
+                  "decoder_policy": {"decoders": decoders, "native_replay_helper_sha256": helper_sha,
+                                     "source_manifest_sha256": native_source_sha}}
     write_json(arguments.out, manifest_payload([lookup[v.key] for v in videos], provenance))
 
 
@@ -369,6 +388,8 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--preprocessing-sha256", required=True)
     command.add_argument("--detector", type=Path, required=True)
     command.add_argument("--detector-sha256", required=True)
+    command.add_argument("--source-manifest", type=Path,
+                         help="accepted FAS source manifest required by strict native decoder policy")
     command.set_defaults(run=run_prepare)
 
     command = commands.add_parser("train", help="disabled until explicit budget/source-training approval")

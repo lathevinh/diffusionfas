@@ -21,11 +21,14 @@ from diffusionfas.io import digest, write_json
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--fas-root", type=Path, help="enable pinned FAS helper integration on synthetic media only")
     arguments = parser.parse_args()
     if os.environ.get("CONDA_DEFAULT_ENV") != "fas":
         raise ValueError("run validation through conda run -n fas")
     os.environ["HF_HUB_OFFLINE"] = "1"
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
+    if arguments.fas_root is not None:
+        os.environ["DIFFUSIONFAS_FAS_ROOT"] = str(arguments.fas_root.resolve())
     started = time.monotonic()
     for folder in ("src", "tests", "scripts"):
         if not compileall.compile_dir(ROOT / folder, quiet=1):
@@ -43,6 +46,7 @@ def main() -> None:
         "scope": "offline_synthetic_only_not_PAD_performance_or_GPU_throughput",
         "PAD_video_decodes": 0, "PAD_training_runs": 0, "PAD_target_evaluations": 0,
         "pretrained_checkpoint_downloads": 0,
+        "external_native_helper_test_enabled": bool(os.environ.get("DIFFUSIONFAS_FAS_ROOT")),
         "synthetic_video_decode_and_optimizer_steps_executed": True,
         "implementation_sha256": {str(path.relative_to(ROOT)): digest(path) for path in files},
         "config_sha256": digest(ROOT / "configs/offline-v1.json"),
