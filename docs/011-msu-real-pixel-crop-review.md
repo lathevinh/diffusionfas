@@ -85,8 +85,12 @@ exact token path may serve the SHA-bound HTML; no directory listing, arbitrary
 files or external image requests. Forward port 8765 through VS Code and use
 the laptop browser. Token and server state must never enter Git.
 
-**Human review is pending; automatic continuation is disabled.**
-After visual acceptance, a separate bounded frozen-DDPM A/B protocol must use
+**The user subsequently accepted these crops.** The temporary server has been
+stopped and its token state removed. [A separately approved matched frozen
+A/B](012-msu-frozen-crop-ablation.md) has completed; automatic continuation
+remains disabled. The original preview completion receipt retains its historical
+pending state rather than being rewritten.
+A separate bounded frozen-DDPM A/B protocol must use
 the same 22 eligible validation originals, fixed windows, score direction and
 noise draws for both crops. Recompute the legacy baseline on that population;
 do not compare directly with the old differently populated MSU AUROC.

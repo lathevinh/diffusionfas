@@ -15,6 +15,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [CelebA-HQ-style crop và private HTML review trước ablation](docs/009-celebahq-geometry-visual-review.md).
 - [Audit dataset: crop phải nằm hoàn toàn trên pixels thật, không padding](docs/010-real-pixel-crop-dataset-audit.md).
 - [MSU preview không padding: 6 videos, dừng chờ duyệt ảnh](docs/011-msu-real-pixel-crop-review.md).
+- [Frozen DDPM crop A/B trên cùng 22 MSU clips](docs/012-msu-frozen-crop-ablation.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
@@ -189,9 +190,18 @@ riêng, không tự đổi validation window để cứu mẫu. Xem
 **6/6 validation videos, 18/18 frames**, zero padding, không đổi middle window.
 Strict renderer kiểm tra cả square bounds lẫn actual bilinear support trước
 khi sample RGB; historical reflected renderer không được dùng cho policy mới.
-25 targeted crop tests passed. HTML/ảnh giữ private, **đang chờ duyệt bằng mắt**;
-chưa chạy DDPM A/B hoặc train thêm. Xem
+25 targeted crop tests passed ở bước preview. HTML/ảnh giữ private, **đã được
+duyệt bằng mắt**; server preview đã dừng. Xem
 [protocol và aggregate](docs/011-msu-real-pixel-crop-review.md).
+
+Frozen-DDPM A/B được duyệt riêng đã hoàn tất trên cùng 22 validation clips:
+AUROC **0,687500 legacy / 0,697917 real-pixel square**, delta **+0,010417**,
+paired subject-bootstrap 95% CI **[0,000000; +0,083333]**, chỉ 3 subject groups.
+Bonafide residual giảm 14,41% nhưng attack residual cũng giảm 10,70%;
+**chưa chứng minh separation cải thiện chắc chắn**. 33 targeted crop tests
+pass; không train/fit threshold hoặc decode fitting/calibration/target.
+Lỗi preflight list/tuple lượt đầu và explicit approval lượt mới được giữ
+trong [report 012](docs/012-msu-frozen-crop-ablation.md). Không có lượt chạy tiếp.
 
 ```bash
 conda run --no-capture-output -n fas python scripts/crop_preview.py plan \

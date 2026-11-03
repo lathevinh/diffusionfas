@@ -1,0 +1,15 @@
+{
+  "completed": false,
+  "stage": "parent_preflight_before_supervision",
+  "plan_sha256": "da476df646c2bf94b20904a8071f053f61248829016e54f852552eed675d7d68",
+  "exception": "ValueError: ablation must retain every eligible validation original",
+  "cause": "JSON lists compared directly with dataclass tuples in timestamps and frame_hashes",
+  "canonical_population_content_identical": true,
+  "selected_originals": 22,
+  "worker_started": false,
+  "supervisor_started": false,
+  "source_video_decodes": 0,
+  "model_scoring_profiles": 0,
+  "training_runs": 0,
+  "automatic_retry_performed": false
+}

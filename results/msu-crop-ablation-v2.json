@@ -1,0 +1,203 @@
+{
+  "completed": true,
+  "development_subset_not_full_MSU_benchmark": true,
+  "new_attempt_explicitly_approved": true,
+  "plan_sha256": "d27ad239c51dd9078e4f2e819ee35e329796e1ab52ce1161648282a42d87319a",
+  "postflight": {
+    "class_profile_means": {
+      "legacy": {
+        "attack": [
+          0.026370188337750733,
+          0.010321111476514488,
+          0.0032467773417010903
+        ],
+        "bona_fide": [
+          0.02073658909648657,
+          0.00805089824522535,
+          0.002489439987887939
+        ]
+      },
+      "real_pixels": {
+        "attack": [
+          0.023428505228366703,
+          0.009385088720591739,
+          0.0028502176064648665
+        ],
+        "bona_fide": [
+          0.017839303861061733,
+          0.006836463153983156,
+          0.0020943295288210115
+        ]
+      }
+    },
+    "frozen_backbone_matches_prior_pilot": true,
+    "independent_bootstrap_valid_repetitions": 2000,
+    "independent_weighted_pair_bootstrap_intervals": {
+      "legacy": [
+        0.625,
+        0.75
+      ],
+      "real_pixels": [
+        0.625,
+        0.75
+      ],
+      "real_pixels-minus-legacy": [
+        0.0,
+        0.08333333333333337
+      ]
+    },
+    "legacy_prior_diagnostic_profile_max_absolute_difference": 0.0,
+    "minimum_recorded_square_margin_pixels": 9.871509559152116,
+    "prior_frozen_scores_sha256": "890dcdb3dc43df6895e539852e66e3b91facdb3752b5fc1b9a784e6a9fd2bd94",
+    "sklearn_auroc": {
+      "legacy": 0.6875,
+      "real_pixels": 0.6979166666666666
+    },
+    "staged_raw_files_remaining": 0,
+    "verified_middle_native_frames": 352,
+    "verified_originals": 22,
+    "verified_pair_caches": 22,
+    "verified_profiles": 44,
+    "worker_verified_full_native_frames": 6028
+  },
+  "postflight_sha256": "df098169160e0286e8f56839084a196ba10efc367d8188663bad53d7637d35d8",
+  "previous_failed_preflight_plan_sha256": "da476df646c2bf94b20904a8071f053f61248829016e54f852552eed675d7d68",
+  "result": {
+    "authority": {
+      "automatic_retry": false,
+      "calibration_pixels": false,
+      "fitting_pixels": false,
+      "frozen_model_only": true,
+      "higher_score_is_attack": true,
+      "source_validation_MSU_only": true,
+      "target_pixels": false,
+      "threshold_fitting": false,
+      "training": false
+    },
+    "budget": {
+      "max_gpu_bytes": 8589934592,
+      "max_output_bytes": 1073741824,
+      "max_rss_bytes": 8589934592,
+      "max_seconds": 1800
+    },
+    "calibration_pixel_access": 0,
+    "comparison": {
+      "arms": {
+        "legacy": {
+          "all_original_missing_score_bounds": [
+            0.6875,
+            0.6875
+          ],
+          "auroc_usable": 0.6875,
+          "coverage": {
+            "attack": {
+              "originals": 16,
+              "technical_failures": 0,
+              "usable": 16
+            },
+            "bona_fide": {
+              "originals": 6,
+              "technical_failures": 0,
+              "usable": 6
+            }
+          },
+          "score_direction": "higher_is_attack",
+          "unavailable_reason": null
+        },
+        "real_pixels": {
+          "all_original_missing_score_bounds": [
+            0.6979166666666666,
+            0.6979166666666666
+          ],
+          "auroc_usable": 0.6979166666666666,
+          "coverage": {
+            "attack": {
+              "originals": 16,
+              "technical_failures": 0,
+              "usable": 16
+            },
+            "bona_fide": {
+              "originals": 6,
+              "technical_failures": 0,
+              "usable": 6
+            }
+          },
+          "score_direction": "higher_is_attack",
+          "unavailable_reason": null
+        }
+      },
+      "grouping_unit": "declared_subject_group",
+      "paired_subject_bootstrap": {
+        "declared_groups": 3,
+        "intervals": {
+          "legacy": [
+            0.625,
+            0.75
+          ],
+          "real_pixels": [
+            0.625,
+            0.75
+          ],
+          "real_pixels-minus-legacy": [
+            0.0,
+            0.08333333333333337
+          ]
+        },
+        "invalid_usable_one_class": 0,
+        "repetitions": 2000,
+        "scope": "development_diagnostic_conditional_on_fixed_models",
+        "unavailable_reason": null,
+        "valid_repetitions": 2000
+      },
+      "real_pixels_minus_legacy": 0.01041666666666663,
+      "small_group_count_warning": true
+    },
+    "fitting_pixel_access": 0,
+    "frozen_backbone_sha256_before_and_after": "ec734b668531cca8dbcaa9a05117d0544b282950b510887b374227fc9efc82b9",
+    "model_scoring_profiles": 44,
+    "originals": 22,
+    "peak_allocated_bytes": 1884642816,
+    "peak_reserved_bytes": 2640314368,
+    "plan_sha256": "d27ad239c51dd9078e4f2e819ee35e329796e1ab52ce1161648282a42d87319a",
+    "policy": {
+      "bit_exact_celebahq_claimed": false,
+      "border": "forbidden_verified_bilinear_support",
+      "center_eye_mouth_offset": 0.1,
+      "crop_shifting_allowed": false,
+      "crop_shrinking_allowed": false,
+      "enhancement_superresolution_or_beautification": false,
+      "eye_distance_half_side": 2.0,
+      "eye_mouth_distance_half_side": 1.8,
+      "interpolation": "bilinear_1024_then_area_256",
+      "name": "celebahq_real_pixels_v1",
+      "output_resolution": 256,
+      "quad_bounds": "closed_native_pixel_center_rectangle",
+      "reference": "https://github.com/tkarras/progressive_growing_of_gans/blob/master/dataset_tool.py",
+      "render_resolution": 1024
+    },
+    "scope": "MSU_frozen_matched_crop_development_diagnostic",
+    "target_pixel_access": 0,
+    "threshold_fitting_runs": 0,
+    "training_runs": 0
+  },
+  "result_sha256": "90819a2050486ceb8031a52020e80155a63f633affdbb04e149783f50a572f71",
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "d27ad239c51dd9078e4f2e819ee35e329796e1ab52ce1161648282a42d87319a",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": 6491734016,
+    "sampled_owned_peak_disk_bytes": 205659463,
+    "sampled_tree_peak_rss_bytes": 1589710848,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 134.2662332070031
+  },
+  "validation": {
+    "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 conda run --no-capture-output -n fas python -m unittest discover -s tests -p test_crop*.py -q",
+    "errors": 0,
+    "failures": 0,
+    "scope": "targeted_synthetic_crop_suite",
+    "tests_run": 33
+  },
+  "visual_review": "accepted"
+}
