@@ -13,6 +13,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Matched spatial/temporal source-only pilot](docs/007-matched-source-adapter-pilot.md).
 - [Source-validation spoof diagnostic: raw residual chưa tách tốt](docs/008-source-validation-spoof-diagnostic.md).
 - [CelebA-HQ-style crop và private HTML review trước ablation](docs/009-celebahq-geometry-visual-review.md).
+- [Audit dataset: crop phải nằm hoàn toàn trên pixels thật, không padding](docs/010-real-pixel-crop-dataset-audit.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
@@ -44,8 +45,8 @@ Synthetic optimizer steps không phải kết quả FAS.
 
 Mọi lệnh Python chạy bằng **conda env `fas`**. Dependencies được khai báo trong
 [pyproject.toml](pyproject.toml). Không tạo venv khác hoặc nâng cấp môi trường
-đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v13.json):
-97 tests passed, gồm actual CUDA checkpoint-resume và pinned FFmpeg helper trên
+đang phục vụ thí nghiệm khác. [Validation mới nhất](results/validation-v14.json):
+105 tests passed, gồm actual CUDA checkpoint-resume và pinned FFmpeg helper trên
 video tổng hợp.
 
 ```bash
@@ -168,8 +169,20 @@ giữ private. Xem [protocol, lỗi ban đầu và kết quả](docs/008-source-
 legacy crop và CelebA-HQ-style square crop, trên seeded source-validation sample.
 Worker chỉ CPU, không DDPM scoring/training hoặc calibration/target pixels.
 Crop mới là geometry/resampling ablation, không claim bit-exact preprocessing
-của checkpoint hoặc cải thiện PAD. HTML và ảnh giữ ngoài Git; **dừng chờ người
-dùng duyệt bằng mắt**, không tự chạy tiếp. Xem [protocol](docs/009-celebahq-geometry-visual-review.md).
+của checkpoint hoặc cải thiện PAD. HTML và ảnh giữ ngoài Git. **Người dùng đã
+reject việc bù context bằng reflection**; preview này chỉ còn là lịch sử, server
+đã dừng và chưa chạy ablation. Xem [protocol](docs/009-celebahq-geometry-visual-review.md).
+
+### Real-pixel-only crop eligibility
+
+[Metadata auditor](scripts/crop_fit_audit.py) kiểm tra nguyên square geometry
+trên native frame dimensions, không padding/shift/shrink, decode ảnh hoặc chạy
+model. Đã audit 618 caches / 651 source originals: MSU phù hợp nhất nhưng
+không dataset nào đạt 100% toàn bộ denominator. MSU có 18/18 fitting bonafides,
+6/6 validation bonafides và 16/18 validation attacks đạt; một attack không đủ
+context, một attack có decode failure cũ. Việc dùng subset cần chốt protocol
+riêng, không tự đổi validation window để cứu mẫu. Xem
+[coverage và selection-bias caveats](docs/010-real-pixel-crop-dataset-audit.md).
 
 ### Các model variants
 

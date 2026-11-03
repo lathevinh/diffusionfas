@@ -1,0 +1,162 @@
+{
+  "completed": true,
+  "postflight": {
+    "cache_hashes_verified": 618,
+    "cached_frames_assessed": 33324,
+    "independent_prefix_sum_windows_verified": true,
+    "independent_vectorized_square_bounds_verified": true,
+    "input_images_decoded": 0,
+    "original_denominator": 651,
+    "unknown_existing_failures": 33
+  },
+  "result": {
+    "calibration_pixel_access": 0,
+    "criterion": {
+      "alternate_windows_are_diagnostic_only": true,
+      "bounds": "all_four_source_quad_corners_inside_[0,width-1]x[0,height-1]",
+      "crop_shifting_allowed": false,
+      "crop_shrinking_allowed": false,
+      "dataset_or_original_selection_authorized": false,
+      "fitting_primary": "all_existing_8fps_cache_frames_fit",
+      "name": "celebahq_square_real_pixels_only_v1",
+      "padding_allowed": false,
+      "validation_window": "existing_lower_middle_T16"
+    },
+    "dataset_or_original_selection_performed": false,
+    "groups": {
+      "CASIA-FASD:fitting:bona_fide": {
+        "all_T16_windows": 1486,
+        "all_cached_frames_fit": 23,
+        "assessed_caches": 36,
+        "cached_frames": 2026,
+        "fit_frames": 1162,
+        "has_any_valid_T16_window": 23,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 23,
+        "originals": 36,
+        "valid_T16_windows": 817
+      },
+      "CASIA-FASD:validation:attack": {
+        "all_T16_windows": 1660,
+        "all_cached_frames_fit": 18,
+        "assessed_caches": 36,
+        "cached_frames": 2200,
+        "fit_frames": 1159,
+        "has_any_valid_T16_window": 20,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 18,
+        "originals": 36,
+        "valid_T16_windows": 833
+      },
+      "CASIA-FASD:validation:bona_fide": {
+        "all_T16_windows": 526,
+        "all_cached_frames_fit": 7,
+        "assessed_caches": 12,
+        "cached_frames": 706,
+        "fit_frames": 344,
+        "has_any_valid_T16_window": 7,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 7,
+        "originals": 12,
+        "valid_T16_windows": 239
+      },
+      "MSU-MFSD:fitting:bona_fide": {
+        "all_T16_windows": 1644,
+        "all_cached_frames_fit": 18,
+        "assessed_caches": 18,
+        "cached_frames": 1914,
+        "fit_frames": 1914,
+        "has_any_valid_T16_window": 18,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 18,
+        "originals": 18,
+        "valid_T16_windows": 1644
+      },
+      "MSU-MFSD:validation:attack": {
+        "all_T16_windows": 1363,
+        "all_cached_frames_fit": 16,
+        "assessed_caches": 17,
+        "cached_frames": 1618,
+        "fit_frames": 1573,
+        "has_any_valid_T16_window": 17,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 16,
+        "originals": 18,
+        "unassessed_existing_failure": 1,
+        "valid_T16_windows": 1311
+      },
+      "MSU-MFSD:validation:bona_fide": {
+        "all_T16_windows": 538,
+        "all_cached_frames_fit": 6,
+        "assessed_caches": 6,
+        "cached_frames": 628,
+        "fit_frames": 628,
+        "has_any_valid_T16_window": 6,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 6,
+        "originals": 6,
+        "valid_T16_windows": 538
+      },
+      "SiW-Mv2:fitting:bona_fide": {
+        "all_T16_windows": 10808,
+        "all_cached_frames_fit": 200,
+        "assessed_caches": 305,
+        "cached_frames": 15383,
+        "fit_frames": 12100,
+        "has_any_valid_T16_window": 236,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 215,
+        "originals": 314,
+        "unassessed_existing_failure": 9,
+        "valid_T16_windows": 8229
+      },
+      "SiW-Mv2:validation:attack": {
+        "all_T16_windows": 2619,
+        "all_cached_frames_fit": 54,
+        "assessed_caches": 89,
+        "cached_frames": 3954,
+        "fit_frames": 3178,
+        "has_any_valid_T16_window": 70,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 62,
+        "originals": 106,
+        "unassessed_existing_failure": 17,
+        "valid_T16_windows": 1859
+      },
+      "SiW-Mv2:validation:bona_fide": {
+        "all_T16_windows": 3410,
+        "all_cached_frames_fit": 61,
+        "assessed_caches": 99,
+        "cached_frames": 4895,
+        "fit_frames": 3500,
+        "has_any_valid_T16_window": 70,
+        "invalid_landmark_frames": 0,
+        "middle_T16_fit": 66,
+        "originals": 105,
+        "unassessed_existing_failure": 6,
+        "valid_T16_windows": 2396
+      }
+    },
+    "image_arrays_decoded": 0,
+    "model_scoring_runs": 0,
+    "originals": 651,
+    "plan_sha256": "07295e678961390f85e097ebfaff8291ade02e9bd5fe130dafa423e259289c69",
+    "private_results_sha256": "cd9939f65729c7aded36d329ea00179dd8cb275c1e4e448ff8a8e7bc5577ed3a",
+    "scope": "source_metadata_no_padding_coverage",
+    "source_video_decodes": 0,
+    "target_pixel_access": 0,
+    "training_runs": 0,
+    "unknown_geometry_is_not_a_crop_failure": true
+  },
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "07295e678961390f85e097ebfaff8291ade02e9bd5fe130dafa423e259289c69",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": null,
+    "sampled_owned_peak_disk_bytes": 434921,
+    "sampled_tree_peak_rss_bytes": 469716992,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 17.61927996799932
+  }
+}

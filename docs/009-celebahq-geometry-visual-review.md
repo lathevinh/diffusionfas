@@ -1,5 +1,10 @@
 # 009 - CelebA-HQ-style geometry: private visual review before ablation
 
+**Review outcome:** the user rejected manufactured context from reflection.
+This preview policy is historical and must not be used for a new ablation.
+The server is stopped. See the [real-pixel-only dataset audit](010-real-pixel-crop-dataset-audit.md)
+for the replacement eligibility criterion; no model run has followed.
+
 ## Why review preprocessing first
 
 The [source diagnostic](008-source-validation-spoof-diagnostic.md) measured the
@@ -150,6 +155,7 @@ trusted workspace. We did not move private images into Git, change workspace
 trust or bypass that restriction. The user chose to download/open the
 self-contained artifact in an external browser.
 
-**Human review is still pending.** Browser visual approval has not been
-performed by the agent, and model compatibility/performance has not been
-certified. No ablation or further data run is authorized by this receipt.
+The receipt correctly retains the original **human review pending** state.
+Subsequent user review rejected reflection as a way to supply missing context;
+it did not approve an ablation. The agent has not certified model compatibility
+or performance. No ablation or further data run is authorized by this receipt.
