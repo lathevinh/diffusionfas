@@ -4,6 +4,11 @@ Ngày: 2026-11-03.
 
 **Trạng thái: đề xuất để phản biện, chưa triển khai hoặc thực nghiệm.**
 
+Cập nhật sau quyết định triển khai: xem
+[002 - implementation và preflight](002-offline-implementation-and-preflight.md).
+001 được giữ làm proposal lịch sử; 002 mô tả code thực tế, hướng pretrained được
+chọn và các data/calibration blockers, không hàm ý scientific training đã chạy.
+
 Tài liệu này chuyển phương án đã trao đổi thành kế hoạch có thể triển khai.
 Các hyperparameter là lựa chọn nghiên cứu ban đầu, không phải recipe đã chứng
 minh hiệu quả. Việc đưa tài liệu lên repository không cho phép tự động decode
