@@ -1,0 +1,984 @@
+{
+  "PAD_image_decodes": 0,
+  "arms": [
+    "global__erm",
+    "global__group_dro",
+    "anatomical__erm",
+    "anatomical__group_dro",
+    "spatial_control__erm",
+    "spatial_control__group_dro"
+  ],
+  "automatic_retry": false,
+  "budget": {
+    "max_gpu_bytes": 8589934592,
+    "max_output_bytes": 4294967296,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 14400
+  },
+  "dimensions": {
+    "anatomical": 4608,
+    "global": 1536,
+    "spatial_control": 4608
+  },
+  "feature_forwards_planned": 7471,
+  "geometry_failure_counts": {
+    "regional DINO left_eye has no valid patch-center support": 1,
+    "regional DINO mouth ellipse outside historical crop": 2,
+    "regional DINO nose ellipse outside historical crop": 1,
+    "regional DINO right_eye ellipse outside historical crop": 1
+  },
+  "head_settings": {
+    "dro_step_size": 0.1,
+    "epochs": 200,
+    "learning_rate": 0.001,
+    "weight_decay": 0.05
+  },
+  "implementation_bound_file_count": 34,
+  "implementation_commitment_sha256": "6f16a36bb779f5e11843416c9e41249175ee57e4a9b7feb326521e728ce54196",
+  "input_bound_file_count": 14951,
+  "inventory": [
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260923,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260923,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260923,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260923,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260923,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20260923,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20261001,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20261001,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20261001,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20261001,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20261001,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 282,
+        "evaluation": 1800,
+        "fitting": 836,
+        "validation": 276
+      },
+      "seed": 20261001,
+      "target": "OULU-NPU"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260923,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260923,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260923,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260923,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260923,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20260923,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20261001,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20261001,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20261001,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20261001,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20261001,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 864,
+        "evaluation": 354,
+        "fitting": 2491,
+        "validation": 948
+      },
+      "seed": 20261001,
+      "target": "CASIA-FASD"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260923,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260923,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260923,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260923,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260923,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20260923,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20261001,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20261001,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20261001,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20261001,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20261001,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 888,
+        "evaluation": 156,
+        "fitting": 2566,
+        "validation": 973
+      },
+      "seed": 20261001,
+      "target": "MSU-MFSD"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260923,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260923,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260923,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260923,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260923,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20260923,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "global__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20261001,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "global__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20261001,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "anatomical__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20261001,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "anatomical__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20261001,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "spatial_control__erm",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20261001,
+      "target": "SiW-Mv2"
+    },
+    {
+      "arm": "spatial_control__group_dro",
+      "role_usable_counts": {
+        "calibration": 702,
+        "evaluation": 616,
+        "fitting": 2012,
+        "validation": 791
+      },
+      "seed": 20261001,
+      "target": "SiW-Mv2"
+    }
+  ],
+  "minimum_region_patch_counts": {
+    "left_eye": 1,
+    "mouth": 2,
+    "nose": 1,
+    "right_eye": 1
+  },
+  "minimum_successful_class_support": {
+    "calibration_evaluation_per_domain_class": 6,
+    "fit_validation_per_source_class": 6
+  },
+  "new_shared_geometry_failures": 5,
+  "operating_cases_planned": 216,
+  "originals": 7505,
+  "plan_sha256": "8e6d56d90bc2541f6ac3a60f1fb6443d187dc19d3d63b0d43cd485e0b5e53919",
+  "policy": {
+    "accept": "probability_strictly_less_than_threshold_ties_rejected",
+    "bootstrap_repetitions": 2000,
+    "bootstrap_seed": 20261028,
+    "control": "nearest_same_patch_count_to_fixed_quarter_image_anchors_stable_ties",
+    "global": "normalized_CLS_concat_mean_normalized_image_patch_tokens_excluding_registers",
+    "oracle_is_diagnostic_only": true,
+    "paired_contrasts": [
+      [
+        "minus_global_erm",
+        "global__group_dro",
+        "global__erm"
+      ],
+      [
+        "minus_global_erm",
+        "anatomical__erm",
+        "global__erm"
+      ],
+      [
+        "minus_global_erm",
+        "anatomical__group_dro",
+        "global__erm"
+      ],
+      [
+        "minus_global_erm",
+        "spatial_control__erm",
+        "global__erm"
+      ],
+      [
+        "minus_global_erm",
+        "spatial_control__group_dro",
+        "global__erm"
+      ],
+      [
+        "anatomical_minus_spatial_erm",
+        "anatomical__erm",
+        "spatial_control__erm"
+      ],
+      [
+        "anatomical_minus_spatial_dro",
+        "anatomical__group_dro",
+        "spatial_control__group_dro"
+      ],
+      [
+        "dro_minus_erm_anatomical",
+        "anatomical__group_dro",
+        "anatomical__erm"
+      ],
+      [
+        "dro_minus_erm_spatial",
+        "spatial_control__group_dro",
+        "spatial_control__erm"
+      ]
+    ],
+    "patch_rule": "patch_center_inside_full_ellipse_no_clipping_or_empty_fallback",
+    "primary_alpha": "1/20",
+    "primary_candidate": "anatomical__group_dro",
+    "radius_reference": "fixed_MAT_eye_distance_ellipses_not_reconstruction",
+    "reference": "global__erm",
+    "regional": "global_concat_four_region_means_no_feature_standardization",
+    "regions": [
+      "left_eye",
+      "right_eye",
+      "nose",
+      "mouth"
+    ],
+    "sensitivity_alphas": [
+      "1/100",
+      "1/10"
+    ],
+    "target_model_selection": false,
+    "threshold": "minimum_source_safe_attack_order_statistic_successful_calibration_budget",
+    "validation": "source_only_equal_source_equal_class_BCE_earliest_strict_best_no_refit"
+  },
+  "primary_interval_records_planned": 540,
+  "scientific_head_fits": 0,
+  "scope": {
+    "SiW_subject_independence_verified": false,
+    "automatic_retry": false,
+    "calibrator_fits": 72,
+    "contexts": 12,
+    "encoder_fitting": false,
+    "head_fits": 72,
+    "invalid_regions_shared_technical_failure_all_arms_originals_retained": true,
+    "legacy_RGB518_crop_unchanged": true,
+    "new_detectors": 0,
+    "new_download": false,
+    "new_video_decodes": 0,
+    "single_accepted_middle_frame": true,
+    "source_fitting_validation_calibration_pixels": true,
+    "target_test_pixels": true,
+    "untouched_confirmation": false
+  },
+  "seeds": [
+    20260917,
+    20260923,
+    20261001
+  ],
+  "source_revision": "707e3ddf6103835c55e937cbbd84081d91f188c7",
+  "status": "implemented_synthetically_validated_metadata_prepared_not_scientifically_authorized",
+  "target_evaluations": 0,
+  "usable": 7469,
+  "usable_by_domain": {
+    "CASIA-FASD": 594,
+    "MSU-MFSD": 272,
+    "OULU-NPU": 4949,
+    "SiW-Mv2": 1654
+  },
+  "validation": {
+    "CPU_synthetic_DINO_smoke": {
+      "PAD_image_decodes": 0,
+      "completed": true,
+      "device": "cpu",
+      "encoder_trainable_parameters": 0,
+      "exact_replay": true,
+      "feature_shapes": {
+        "anatomical": [
+          1,
+          4608
+        ],
+        "global": [
+          1,
+          1536
+        ],
+        "spatial_control": [
+          1,
+          4608
+        ]
+      },
+      "synthetic_forwards": 2,
+      "training_fits": 0,
+      "wall_seconds": 2.9189507070113905
+    },
+    "Pylance_transport_available": false,
+    "focused_tests_passed": 25,
+    "new_tests": 12
+  }
+}
