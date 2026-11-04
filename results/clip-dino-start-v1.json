@@ -1,0 +1,23 @@
+{
+  "additional_seed_execution_authorized": false,
+  "approval_sha256": "5fb6519106346617ec142f42f23397023c332dc56c1806a2fb6fb56b3186d4f9",
+  "approved_calibrator_fits": 16,
+  "approved_head_fits": 16,
+  "approved_seed_count": 1,
+  "approved_targets": 4,
+  "automatic_retry": false,
+  "completion_or_target_performance_claimed": false,
+  "device_receipt_sha256": "3dfb5346f46be20b595a2edcf0a24157b7951dd6f0d3a7979b6c241a95429cb4",
+  "first_feature_progress": {
+    "encoder_frames": 48,
+    "originals": 1
+  },
+  "first_real_clip_native_replay_and_tracking_verified": true,
+  "implementation_commit": "7a1acd25d66626fafe1c2f5f22d7da74b0d830ac",
+  "observed_at_UTC": "2026-11-04T10:12:32.147278+00:00",
+  "owner_approved_exact_plan": true,
+  "plan_sha256": "7bc62b991dee8f8394dcebed3c44909505a215f80349c9dd7c7c2788f5739238",
+  "started_receipt_sha256": "ced1184352957c4927d8310dcab14814076d6e03e52eb1502bd29bc53515de77",
+  "study": "adapted_dino_short_clip_v1",
+  "verified_supervisor_and_worker_alive": true
+}

@@ -1,8 +1,11 @@
 # Adapted DINO short-clip probe: controlled implementation
 
 Date: 2026-11-04.
-Status: **implemented, tested and sealed; scientific execution requires a new
-exact-plan approval.** No new PAD video has been decoded for this probe.
+Status: **owner approved the exact plan; persistent supervised scientific
+execution started.** The first real native replay, tracked crop and48
+adapted-encoder image forwards were observed. This is not a completed comparison
+or target-performance result. The preparation/zero-start statements below are
+the preserved pre-approval history, not live status.
 
 The owner requested a two-second clip experiment after the
 [negative regional study](018-regional-dino-completed-results.md), and explicitly
@@ -222,3 +225,18 @@ No expansion is executable automatically.
 CLI: `scripts/clip_dino.py --help`. Private plan/approval/attempt/model/score
 records stay outside Git. Only sanitized preparation and completed aggregate
 summaries may be published.
+
+## 7. Exact owner approval and verified scientific start
+
+After publication of implementation commit `7a1acd2`, the owner selected
+`approve_exact_plan` for the final SHA256 and all declared ceilings.
+The [aggregate-safe start receipt](../results/clip-dino-start-v1.json) binds
+that decision and the private immutable start/device receipts.
+
+The supervisor runs persistently, independent of the chat turn. Readiness
+verification observed both recorded processes alive and actual progress:
+one real canonical video replay, one tracked16-frame RGB224 clip, and48 image
+forwards across the three eligible fold-specific encoders. No head-training
+completion, final metric or improvement is claimed from this observation.
+Only the approved one-seed inventory can execute; no additional attempt or
+seed is authorized. Subsequent progress is in the private worker log.
