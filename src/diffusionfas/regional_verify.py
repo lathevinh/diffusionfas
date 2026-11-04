@@ -34,10 +34,16 @@ def reconstruct_scores(features: np.ndarray, model: dict[str, Any]) -> np.ndarra
 
 
 def independent_intervals(predictions: dict[str, np.ndarray], originals: list[dict[str, Any]],
-                          policies: dict[str, Any], services: dict[str, Any]) -> list[dict[str, Any]]:
+                          policies: dict[str, Any], services: dict[str, Any], *,
+                          arms=ARMS, contrasts=CONTRASTS,
+                          repetitions: int = POLICY["bootstrap_repetitions"],
+                          group_map: dict[str, str] | None = None) -> list[dict[str, Any]]:
     from fas.fusion_study import components
     identity = services["fas.source_fitting"].identity
-    mapping = components([{**row, "group_id": row["subject_id"] or row["group_id"]} for row in originals])
+    mapping = (components([{**row, "group_id": row["subject_id"] or row["group_id"]} for row in originals])
+               if group_map is None else group_map)
+    if set(mapping) != {identity(row) for row in originals}:
+        raise ValueError("exact original coverage required in bootstrap grouping")
     groups = sorted(set(mapping.values()))
     lookup = {group: index for index, group in enumerate(groups)}
     original_group = np.asarray([lookup[mapping[identity(row)]] for row in originals])
@@ -47,11 +53,11 @@ def independent_intervals(predictions: dict[str, np.ndarray], originals: list[di
     good_groups = original_group[positions]
     rng = np.random.default_rng(POLICY["bootstrap_seed"])
     draws = np.asarray([rng.multinomial(len(groups), np.full(len(groups), 1/len(groups)))
-                        for _ in range(POLICY["bootstrap_repetitions"])])
+                        for _ in range(repetitions)])
     attack_denominator = draws @ np.bincount(original_group, weights=original_y, minlength=len(groups))
     real_denominator = draws @ np.bincount(original_group, weights=~original_y, minlength=len(groups))
     values = {}
-    for arm in ARMS:
+    for arm in arms:
         scores = predictions[arm]
         if scores.shape != (len(positions),) or not np.isfinite(scores).all():
             raise ValueError("complete finite paired saved scores required")
@@ -72,7 +78,7 @@ def independent_intervals(predictions: dict[str, np.ndarray], originals: list[di
         values[arm, "AUROC_usable"] = np.divide(wins, denominator,
             out=np.full(len(draws), np.nan), where=denominator > 0)
     result = []
-    comparisons: list[tuple[str, str, str | None]] = [("point", arm, None) for arm in ARMS]+list(CONTRASTS)
+    comparisons: list[tuple[str, str, str | None]] = [("point", arm, None) for arm in arms]+list(contrasts)
     for comparison, arm, reference in comparisons:
         for metric in ("FA", "BFA", "AUROC_usable"):
             samples = values[arm, metric]
@@ -81,9 +87,9 @@ def independent_intervals(predictions: dict[str, np.ndarray], originals: list[di
             finite = samples[np.isfinite(samples)]
             result.append({"arm": arm, "metric": metric, "comparison": comparison,
                            "valid_repetitions": len(finite), "declared_groups": len(groups),
-                           "repetitions": POLICY["bootstrap_repetitions"],
+                           "repetitions": repetitions,
                            "percentile95": np.quantile(finite, [.025, .975]).tolist()
-                           if len(finite) >= .95*POLICY["bootstrap_repetitions"] else None})
+                           if len(finite) >= .95*repetitions else None})
     return result
 
 

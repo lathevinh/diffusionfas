@@ -320,24 +320,29 @@ def extract(plan: dict[str, Any], original_rows: list[dict[str, Any]], services:
 
 def paired_intervals(predictions: dict[str, np.ndarray], originals: list[dict[str, Any]],
                      policies: dict[str, Any], services: dict[str, Any],
-                     guard: Callable[[], None]) -> list[dict[str, Any]]:
+                     guard: Callable[[], None], *, arms=ARMS, contrasts=CONTRASTS,
+                     repetitions: int = POLICY["bootstrap_repetitions"],
+                     group_map: dict[str, str] | None = None) -> list[dict[str, Any]]:
     from fas.fusion_study import components
     study = services["study"]
     identity = services["fas.source_fitting"].identity
-    mapping = components([{**row, "group_id": row["subject_id"] or row["group_id"]} for row in originals])
+    mapping = (components([{**row, "group_id": row["subject_id"] or row["group_id"]} for row in originals])
+               if group_map is None else group_map)
+    if set(mapping) != {identity(row) for row in originals}:
+        raise ValueError("exact original coverage required in bootstrap grouping")
     groups = sorted(set(mapping.values()))
     lookup = {group: index for index, group in enumerate(groups)}
     indexes = np.asarray([lookup[mapping[identity(row)]] for row in originals])
     rng = np.random.default_rng(POLICY["bootstrap_seed"])
     metrics = ("FA", "BFA", "AUROC_usable")
-    samples = {(arm, metric): [] for arm in ARMS for metric in metrics}
+    samples = {(arm, metric): [] for arm in arms for metric in metrics}
     differences = {(comparison, left, right, metric): []
-                   for comparison, left, right in CONTRASTS for metric in metrics}
-    for _ in range(POLICY["bootstrap_repetitions"]):
+                   for comparison, left, right in contrasts for metric in metrics}
+    for _ in range(repetitions):
         guard()
         weights = rng.multinomial(len(groups), np.full(len(groups), 1/len(groups)))[indexes]
         current = {arm: study.metrics(predictions[arm], originals, policies[arm]["1/20"]["threshold"], weights)
-                   for arm in ARMS}
+                   for arm in arms}
         for (arm, metric), values in samples.items():
             if current[arm][metric] is not None:
                 values.append(current[arm][metric])
@@ -352,9 +357,9 @@ def paired_intervals(predictions: dict[str, np.ndarray], originals: list[dict[st
     for comparison, arm, metric, values in records:
         result.append({"arm": arm, "metric": metric, "comparison": comparison,
                        "valid_repetitions": len(values), "declared_groups": len(groups),
-                       "repetitions": POLICY["bootstrap_repetitions"],
+                       "repetitions": repetitions,
                        "percentile95": np.quantile(values, [.025, .975]).tolist()
-                       if len(values) >= .95*POLICY["bootstrap_repetitions"] else None})
+                       if len(values) >= .95*repetitions else None})
     return result
 
 

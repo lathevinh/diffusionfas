@@ -22,6 +22,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Audit sẵn sàng công bố: đóng góp, checklist sửa bài và shortlist tạp chí có điều kiện](docs/016-submission-readiness-audit.md).
 - [DINO vùng mặt + GroupDRO: protocol 6 nhánh ablation có đối chứng](docs/017-regional-dino-controlled-ablation.md).
 - [Kết quả 72 heads đã kiểm chứng: anatomical pooling + GroupDRO không cải thiện ổn định](docs/018-regional-dino-completed-results.md).
+- [Probe clip 2 giây trên DINO đã fine-tune: single/mean/temporal/shuffle, giữ source-only và shared failures](docs/019-adapted-dino-short-clip-probe.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD

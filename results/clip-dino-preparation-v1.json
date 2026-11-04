@@ -1,0 +1,372 @@
+{
+  "adapted_checkpoint_sha256": {
+    "CASIA-FASD": "b84dbec2a3fe1a975e2c4f6dfff3a76a72365b7b9d97ae228ad7321d1f60be8f",
+    "MSU-MFSD": "70a09b1ea33b99e50b7956be5f8cc6f77c40faf02aeb83d0609007faec88d200",
+    "OULU-NPU": "5392f3affe1f7bdb7560397a1c43cf7ac258d2f85f58d95ef6114940c35838eb",
+    "SiW-Mv2": "c22fb08928387a2639b559af0b39aea63c28e94488c1a8ece78b463618c72bc5"
+  },
+  "bound_archives": 13,
+  "bound_files": 14964,
+  "budget": {
+    "max_gpu_bytes": 8589934592,
+    "max_output_bytes": 4294967296,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 86400
+  },
+  "conservative_owned_output_estimate_bytes": 1354219520,
+  "inventory": [
+    {
+      "maximum_encoder_frames": 50224,
+      "metadata_eligible": 3139,
+      "originals": 3212,
+      "role_counts": {
+        "calibration": {
+          "metadata_eligible": 268,
+          "originals": 283,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 36,
+            "CASIA-FASD/bona_fide": 12,
+            "MSU-MFSD/attack": 18,
+            "MSU-MFSD/bona_fide": 6,
+            "SiW-Mv2/attack": 96,
+            "SiW-Mv2/bona_fide": 100
+          }
+        },
+        "evaluation": {
+          "metadata_eligible": 1800,
+          "originals": 1800,
+          "usable_by_domain_class": {
+            "OULU-NPU/attack": 1440,
+            "OULU-NPU/bona_fide": 360
+          }
+        },
+        "fitting": {
+          "metadata_eligible": 804,
+          "originals": 846,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 108,
+            "CASIA-FASD/bona_fide": 36,
+            "MSU-MFSD/attack": 51,
+            "MSU-MFSD/bona_fide": 18,
+            "SiW-Mv2/attack": 286,
+            "SiW-Mv2/bona_fide": 305
+          }
+        },
+        "validation": {
+          "metadata_eligible": 267,
+          "originals": 283,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 36,
+            "CASIA-FASD/bona_fide": 12,
+            "MSU-MFSD/attack": 17,
+            "MSU-MFSD/bona_fide": 6,
+            "SiW-Mv2/attack": 97,
+            "SiW-Mv2/bona_fide": 99
+          }
+        }
+      },
+      "target": "OULU-NPU"
+    },
+    {
+      "maximum_encoder_frames": 73600,
+      "metadata_eligible": 4600,
+      "originals": 4682,
+      "role_counts": {
+        "calibration": {
+          "metadata_eligible": 850,
+          "originals": 865,
+          "usable_by_domain_class": {
+            "MSU-MFSD/attack": 18,
+            "MSU-MFSD/bona_fide": 6,
+            "OULU-NPU/attack": 504,
+            "OULU-NPU/bona_fide": 126,
+            "SiW-Mv2/attack": 96,
+            "SiW-Mv2/bona_fide": 100
+          }
+        },
+        "evaluation": {
+          "metadata_eligible": 353,
+          "originals": 360,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 265,
+            "CASIA-FASD/bona_fide": 88
+          }
+        },
+        "fitting": {
+          "metadata_eligible": 2459,
+          "originals": 2502,
+          "usable_by_domain_class": {
+            "MSU-MFSD/attack": 51,
+            "MSU-MFSD/bona_fide": 18,
+            "OULU-NPU/attack": 1440,
+            "OULU-NPU/bona_fide": 359,
+            "SiW-Mv2/attack": 286,
+            "SiW-Mv2/bona_fide": 305
+          }
+        },
+        "validation": {
+          "metadata_eligible": 938,
+          "originals": 955,
+          "usable_by_domain_class": {
+            "MSU-MFSD/attack": 17,
+            "MSU-MFSD/bona_fide": 6,
+            "OULU-NPU/attack": 575,
+            "OULU-NPU/bona_fide": 144,
+            "SiW-Mv2/attack": 97,
+            "SiW-Mv2/bona_fide": 99
+          }
+        }
+      },
+      "target": "CASIA-FASD"
+    },
+    {
+      "maximum_encoder_frames": 72432,
+      "metadata_eligible": 4527,
+      "originals": 4602,
+      "role_counts": {
+        "calibration": {
+          "metadata_eligible": 874,
+          "originals": 889,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 36,
+            "CASIA-FASD/bona_fide": 12,
+            "OULU-NPU/attack": 504,
+            "OULU-NPU/bona_fide": 126,
+            "SiW-Mv2/attack": 96,
+            "SiW-Mv2/bona_fide": 100
+          }
+        },
+        "evaluation": {
+          "metadata_eligible": 156,
+          "originals": 160,
+          "usable_by_domain_class": {
+            "MSU-MFSD/attack": 116,
+            "MSU-MFSD/bona_fide": 40
+          }
+        },
+        "fitting": {
+          "metadata_eligible": 2534,
+          "originals": 2574,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 108,
+            "CASIA-FASD/bona_fide": 36,
+            "OULU-NPU/attack": 1440,
+            "OULU-NPU/bona_fide": 359,
+            "SiW-Mv2/attack": 286,
+            "SiW-Mv2/bona_fide": 305
+          }
+        },
+        "validation": {
+          "metadata_eligible": 963,
+          "originals": 979,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 36,
+            "CASIA-FASD/bona_fide": 12,
+            "OULU-NPU/attack": 575,
+            "OULU-NPU/bona_fide": 144,
+            "SiW-Mv2/attack": 97,
+            "SiW-Mv2/bona_fide": 99
+          }
+        }
+      },
+      "target": "MSU-MFSD"
+    },
+    {
+      "maximum_encoder_frames": 65344,
+      "metadata_eligible": 4084,
+      "originals": 4133,
+      "role_counts": {
+        "calibration": {
+          "metadata_eligible": 702,
+          "originals": 702,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 36,
+            "CASIA-FASD/bona_fide": 12,
+            "MSU-MFSD/attack": 18,
+            "MSU-MFSD/bona_fide": 6,
+            "OULU-NPU/attack": 504,
+            "OULU-NPU/bona_fide": 126
+          }
+        },
+        "evaluation": {
+          "metadata_eligible": 580,
+          "originals": 623,
+          "usable_by_domain_class": {
+            "SiW-Mv2/attack": 327,
+            "SiW-Mv2/bona_fide": 253
+          }
+        },
+        "fitting": {
+          "metadata_eligible": 2012,
+          "originals": 2016,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 108,
+            "CASIA-FASD/bona_fide": 36,
+            "MSU-MFSD/attack": 51,
+            "MSU-MFSD/bona_fide": 18,
+            "OULU-NPU/attack": 1440,
+            "OULU-NPU/bona_fide": 359
+          }
+        },
+        "validation": {
+          "metadata_eligible": 790,
+          "originals": 792,
+          "usable_by_domain_class": {
+            "CASIA-FASD/attack": 36,
+            "CASIA-FASD/bona_fide": 12,
+            "MSU-MFSD/attack": 17,
+            "MSU-MFSD/bona_fide": 6,
+            "OULU-NPU/attack": 575,
+            "OULU-NPU/bona_fide": 144
+          }
+        }
+      },
+      "target": "SiW-Mv2"
+    }
+  ],
+  "maximum_detector_calls": 118016,
+  "maximum_full_native_frames": 1147357,
+  "metadata_eligible": 7376,
+  "metadata_failure_counts": {
+    "frame exceeds half-sampling-period tolerance": 1,
+    "historical_detector": 22,
+    "historical_pre_detector": 9,
+    "insufficient_duration": 97
+  },
+  "new_PAD_head_fits": 0,
+  "new_PAD_model_forwards": 0,
+  "new_PAD_video_decodes": 0,
+  "originals": 7505,
+  "plan_sha256": "7bc62b991dee8f8394dcebed3c44909505a215f80349c9dd7c7c2788f5739238",
+  "policy": {
+    "SiW_subject_independence_verified": false,
+    "automatic_expansion": false,
+    "automatic_retry": false,
+    "bootstrap_repetitions": 2000,
+    "bootstrap_seed": 20261028,
+    "crop": "original_shared_context_crop_then_bicubic_RGB224_tracked_three_point_smoothing",
+    "development_targets_already_seen": true,
+    "duration_seconds": 2,
+    "encoder": "frozen_fold_specific_completed_paper329_reference_normalized_CLS_RGB224",
+    "failures": "all_four_arms_shared_nonacceptance_original_denominators",
+    "fps": 8,
+    "frames": 16,
+    "grouping": "subject_or_group_and_historical_or_any_selected_native_frame_connected_components",
+    "historical_31_failures": "retained_without_recovery",
+    "inference_shuffle": "same_temporal_head_calibrator_and_chronological_source_policy_no_refit",
+    "new_cross_role_or_domain_frame_collision": "hard_stop_before_pixel_access",
+    "order_specific_control": "shuffled",
+    "primary_alpha": "1/20",
+    "primary_candidate": "temporal",
+    "reference": "mean",
+    "selection": "earliest_strict_best_source_equal_domain_equal_class_BCE",
+    "sensitivity_alphas": [
+      "1/100",
+      "1/10"
+    ],
+    "shuffle": "fixed_addressed_nonidentity_permutation_per_target_original_all_roles",
+    "single_slot": 8,
+    "target_model_selection": false,
+    "tracking": "original_interpolate_track_endpoints_required_max_gap2_jump0.5_area_ratio0.5_to2",
+    "window": "native_interval_middle_uniform_bin_centers_nearest_unique_native_frames"
+  },
+  "preparation_wall_seconds": 152.6360326699796,
+  "scientific_execution_authorized": false,
+  "scope": {
+    "calibrator_fits": 16,
+    "conditional_intervals": 132,
+    "encoder_training": false,
+    "head_fits": 16,
+    "new_download": false,
+    "new_environment": false,
+    "operating_cases": 60,
+    "retained_PAD_pixel_caches": false,
+    "seed": 20260917,
+    "source_and_target_video_decode": true,
+    "source_only_head_selection_and_calibration": true,
+    "targets": 4
+  },
+  "settings": {
+    "dtype": "float64",
+    "early_stopping": false,
+    "epochs": 200,
+    "full_batch": true,
+    "hidden": 32,
+    "lr": 0.001,
+    "seed": 20260917,
+    "selection": "earliest_strict_best_source_equal_domain_equal_class_BCE",
+    "training_device": "cpu",
+    "weight_decay": 0.05
+  },
+  "validation": {
+    "cpu_smoke_supervision": {
+      "completed": true,
+      "guard_failure": null,
+      "returncode": 0,
+      "sampled_device_peak_gpu_bytes": null,
+      "sampled_owned_peak_disk_bytes": 2768,
+      "sampled_tree_peak_rss_bytes": 1454895104,
+      "sampling_interval_seconds": 0.2,
+      "wall_seconds": 14.019535300991265
+    },
+    "cpu_synthetic_smoke": {
+      "PAD_fits": 0,
+      "PAD_pixel_decodes": 0,
+      "completed": true,
+      "device": "cpu",
+      "normalization_max_absolute_error": 0.0,
+      "records": [
+        {
+          "checkpoint_sha256": "5392f3affe1f7bdb7560397a1c43cf7ac258d2f85f58d95ef6114940c35838eb",
+          "exact_synthetic_replay": true,
+          "frozen_encoder_state_sha256": "7db83550c875e06db2d266af5a23efc0c5aa57c9900b4119c4a131d006f3660b",
+          "shape": [
+            1,
+            768
+          ],
+          "target": "OULU-NPU",
+          "trainable_encoder_parameters": 0
+        },
+        {
+          "checkpoint_sha256": "b84dbec2a3fe1a975e2c4f6dfff3a76a72365b7b9d97ae228ad7321d1f60be8f",
+          "exact_synthetic_replay": true,
+          "frozen_encoder_state_sha256": "1ee09359aac55c29968dc42d53ffb45bf89971dd7a7d787a9e9770f09c8135ef",
+          "shape": [
+            1,
+            768
+          ],
+          "target": "CASIA-FASD",
+          "trainable_encoder_parameters": 0
+        },
+        {
+          "checkpoint_sha256": "70a09b1ea33b99e50b7956be5f8cc6f77c40faf02aeb83d0609007faec88d200",
+          "exact_synthetic_replay": true,
+          "frozen_encoder_state_sha256": "6a7fd4865b077fc5125ca7aff26a460f0ca62dc2b4dacc4230e58e328a233cff",
+          "shape": [
+            1,
+            768
+          ],
+          "target": "MSU-MFSD",
+          "trainable_encoder_parameters": 0
+        },
+        {
+          "checkpoint_sha256": "c22fb08928387a2639b559af0b39aea63c28e94488c1a8ece78b463618c72bc5",
+          "exact_synthetic_replay": true,
+          "frozen_encoder_state_sha256": "5654362dc7e8611d12eab288f7d7fb4fec529b39e7d110f195d74e831ddb27a2",
+          "shape": [
+            1,
+            768
+          ],
+          "target": "SiW-Mv2",
+          "trainable_encoder_parameters": 0
+        }
+      ],
+      "synthetic_encoder_frames": 8,
+      "wall_seconds": 11.641565666010138
+    },
+    "focused_tests_passed": 53,
+    "pylance_endpoint": "unavailable_transport_initialization_failure",
+    "python_syntax_files": 9,
+    "sealed_inputs_revalidated": true
+  }
+}

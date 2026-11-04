@@ -114,6 +114,17 @@ def stage_member(
                          and video["partition"] == "validation")
     if video["dataset"] not in SOURCES or not (bonafide or diagnostic_attack):
         raise ValueError("staging restricted to predetermined source bonafide or explicitly authorized validation attacks")
+    stage_archive_member(item, fas_root, data_root, output, stack, msu_context, deadline)
+
+
+def stage_archive_member(
+    item: dict[str, Any], fas_root: Path, data_root: Path, output: Path,
+    stack: ExitStack, msu_context: dict[str, Any], deadline: float,
+) -> None:
+    """Copy one receipt-bound member; callers must enforce their operation authority."""
+    video, member = item["video"], item["member"]
+    if video["dataset"] not in SOURCES:
+        raise ValueError("known non-OULU archive dataset required")
     safe_member(member)
     expected_size, expected_sha = item["byte_size"], video["media_sha256"]
     if video["dataset"] == "SiW-Mv2":

@@ -53,6 +53,7 @@ def run_bounded(
     max_seconds: float, max_rss_bytes: int, max_disk_bytes: int,
     additional_output_roots: tuple[Path, ...] = (),
     max_gpu_bytes: int | None = None, gpu_memory_bytes: Callable[[], int] | None = None,
+    rss_root_pid: int | None = None,
 ) -> dict[str, Any]:
     if max_seconds <= 0 or max_rss_bytes <= 0 or max_disk_bytes <= 0:
         raise ValueError("positive probe process caps required")
@@ -60,6 +61,8 @@ def run_bounded(
         max_gpu_bytes is not None and max_gpu_bytes <= 0
     ):
         raise ValueError("GPU cap and explicit memory reader must be supplied together")
+    if rss_root_pid is not None and (type(rss_root_pid) is not int or rss_root_pid < 1):
+        raise ValueError("positive explicit supervised RSS root PID required")
     log.parent.mkdir(parents=True, exist_ok=True)
     if log.exists():
         raise ValueError("new process log required")
@@ -71,7 +74,7 @@ def run_bounded(
                                    stdout=stream, stderr=subprocess.STDOUT, start_new_session=True)
         try:
             while process.poll() is None:
-                peak_rss = max(peak_rss, process_tree_rss(process.pid))
+                peak_rss = max(peak_rss, process_tree_rss(process.pid if rss_root_pid is None else rss_root_pid))
                 peak_disk = max(peak_disk, sum(tree_bytes(p) for p in output_roots))
                 if gpu_memory_bytes is not None:
                     current_gpu = gpu_memory_bytes()
