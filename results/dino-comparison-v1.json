@@ -1,0 +1,736 @@
+{
+  "authority": {
+    "MSU_excluded_from_all_head_fit_validation_calibration": true,
+    "all_three_existing_seeds": true,
+    "automatic_retry": false,
+    "fusion_fitting": false,
+    "legacy_DINO_rectangle_to_square_resize_explicitly_accepted": true,
+    "new_calibration_or_target_pixels": false,
+    "new_download": false,
+    "new_training": false,
+    "source_validation_MSU_22_only": true,
+    "threshold_selection": false
+  },
+  "budget": {
+    "max_gpu_bytes": 8589934592,
+    "max_output_bytes": 1073741824,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 1800
+  },
+  "completed": true,
+  "development_subset_not_independent_test": true,
+  "metadata_support_audit": {
+    "all_source_cubic_footprints_inside_real_bounds": true,
+    "completed": true,
+    "frames_checked": 352,
+    "plan_sha256": "93319fead64a6a3a0c0f9e76df3452e16605d84b81d836689860347e29b831a3",
+    "real_PAD_pixels_read": 0,
+    "synthetic_shape_placeholders_only": true
+  },
+  "models": {
+    "MSU_excluded_from_all_head_fit_validation_calibration": true,
+    "backbone_sha256": {
+      "dino_plain": "0b8b82f85de91b424aded121c7e1dcc2b7bc6d0adeea651bf73a13307fad8c73",
+      "dino_reg": "73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71"
+    },
+    "existing_head_file_sha256_by_seed": {
+      "20260917": "71e994bb46f22945a4287fab1a3cb5bf28e14ce5e4fee583e0c042f9668eaaca",
+      "20260923": "52108aa19fa12b763956885f66a39316d267423a22cd305ad2c0a38b38c92b63",
+      "20261001": "fe3e26287fe477854f9d65e0700022c769d46d251d2027a2b898d702f16bdde7"
+    },
+    "official_DINO_source_revision": "7764ea0f912e53c92e82eb78a2a1631e92725fc8"
+  },
+  "not_matched_crop": true,
+  "plan_sha256": "93319fead64a6a3a0c0f9e76df3452e16605d84b81d836689860347e29b831a3",
+  "policy": {
+    "aspect_ratio_distortion_possible": true,
+    "complementarity": "3x3_attack_bonafide_pair_ordering_with_explicit_ties",
+    "context_scale": 1.3,
+    "crop": "original_shared_context_crop",
+    "cross_seed_model_ensemble": false,
+    "frames": 16,
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "name": "historical_DINO_native518_strict_real_support_v1",
+    "operating_point_rescue_or_FA_claim": false,
+    "padding_allowed": false,
+    "pooling": "normalized_CLS_concat_mean_normalized_patch_excluding_registers",
+    "resize": "original_bicubic_rectangle_to_518_square",
+    "same_crop_as_MAT": false,
+    "seed_selection": false,
+    "source": "native_RGB_not_upscaled_cache",
+    "source_cubic_4x4_footprint_required": true,
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "two_dino": "fixed_50_50_frame_probabilities_then_video_mean",
+    "video_score": "mean_frame_calibrated_attack_probability"
+  },
+  "postflight": {
+    "all_thirty_group_bootstrap_intervals_reproduced": true,
+    "all_three_seed_AUROCs_and_pair_tables_reproduced": true,
+    "completed": true,
+    "crops_verified": 352,
+    "encoder_feature_vectors_verified": 704,
+    "maximum_independent_frame_probability_difference": 1.3877787807814457e-15,
+    "native_RGB_frames_verified": 6028,
+    "native_padding_fraction": 0,
+    "no_staged_raw_files": true,
+    "plan_sha256": "93319fead64a6a3a0c0f9e76df3452e16605d84b81d836689860347e29b831a3",
+    "rectangle_aspect_ratio_min_max": [
+      0.7625570776255708,
+      0.8664495114006515
+    ],
+    "script_sha256": "69d093c3ea02ff122be5a0c7427c7849df9a0d9d380b42dcdd022d43025d7952",
+    "verified": {
+      "20260917": {
+        "AUROC": {
+          "MAT": 0.75,
+          "dino_plain": 0.96875,
+          "dino_reg": 0.9791666666666667,
+          "two_dino": 0.9791666666666667
+        },
+        "all_ten_bootstrap_intervals_reproduced": true,
+        "pair_ordering_counts": [
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            24,
+            0,
+            70
+          ]
+        ]
+      },
+      "20260923": {
+        "AUROC": {
+          "MAT": 0.75,
+          "dino_plain": 0.9895833333333334,
+          "dino_reg": 0.9791666666666667,
+          "two_dino": 0.9895833333333334
+        },
+        "all_ten_bootstrap_intervals_reproduced": true,
+        "pair_ordering_counts": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            24,
+            0,
+            71
+          ]
+        ]
+      },
+      "20261001": {
+        "AUROC": {
+          "MAT": 0.75,
+          "dino_plain": 0.9895833333333334,
+          "dino_reg": 0.9791666666666667,
+          "two_dino": 0.9791666666666667
+        },
+        "all_ten_bootstrap_intervals_reproduced": true,
+        "pair_ordering_counts": [
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            24,
+            0,
+            70
+          ]
+        ]
+      }
+    }
+  },
+  "pre_run_protocol_commit": "4a46292",
+  "result": {
+    "encoder_image_forwards": 704,
+    "equal_seed_descriptive_AUROC": {
+      "dino_plain": 0.982638888888889,
+      "dino_reg": 0.9791666666666666,
+      "two_dino": 0.9826388888888888
+    },
+    "frames": 352,
+    "frozen_states_before_and_after": {
+      "dino_plain": "6ba9dd85ee9ac3caec717ec270ee86bb44f57b3b4787679b64e5e1c549af0906",
+      "dino_reg": "69366bd19cee297e8423d5f0a6b08977330937d9d7def3112807724f761f10dc"
+    },
+    "independent_test_claimed": false,
+    "new_calibration_or_target_pixel_access": 0,
+    "new_download_bytes": 0,
+    "new_fits": 0,
+    "new_threshold_or_fusion_selection": false,
+    "originals": 22,
+    "plan_sha256": "93319fead64a6a3a0c0f9e76df3452e16605d84b81d836689860347e29b831a3",
+    "results": {
+      "20260917": {
+        "complementarity": {
+          "DINO_correct_MAT_wrong": 24,
+          "DINO_wrong_MAT_correct": 2,
+          "attack_bonafide_pairs": 96,
+          "both_correct": 70,
+          "both_wrong": 0,
+          "columns": "MAT",
+          "counts": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              24,
+              0,
+              70
+            ]
+          ],
+          "dependent_pairs_not_independent_trials": true,
+          "not_operating_point_rescue": true,
+          "ordering": [
+            "wrong",
+            "tie",
+            "correct"
+          ],
+          "rows": "DINO"
+        },
+        "paired_subject_bootstrap": {
+          "declared_groups": 3,
+          "intervals": {
+            "MAT": [
+              0.625,
+              0.8333333333333334
+            ],
+            "dino_plain": [
+              0.9523809523809523,
+              1.0
+            ],
+            "dino_plain-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "dino_plain-minus-dino_reg": [
+              -0.04761904761904767,
+              0.0185185185185186
+            ],
+            "dino_reg": [
+              0.9629629629629629,
+              1.0
+            ],
+            "dino_reg-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "two_dino": [
+              0.9761904761904762,
+              1.0
+            ],
+            "two_dino-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "two_dino-minus-dino_plain": [
+              0.0,
+              0.023809523809523836
+            ],
+            "two_dino-minus-dino_reg": [
+              -0.023809523809523836,
+              0.0185185185185186
+            ]
+          },
+          "invalid_usable_one_class": 0,
+          "repetitions": 2000,
+          "scope": "development_diagnostic_conditional_on_fixed_models",
+          "unavailable_reason": null,
+          "valid_repetitions": 2000
+        },
+        "summaries": {
+          "MAT": {
+            "all_original_missing_score_bounds": [
+              0.75,
+              0.75
+            ],
+            "auroc_usable": 0.75,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "dino_plain": {
+            "all_original_missing_score_bounds": [
+              0.96875,
+              0.96875
+            ],
+            "auroc_usable": 0.96875,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "dino_reg": {
+            "all_original_missing_score_bounds": [
+              0.9791666666666666,
+              0.9791666666666666
+            ],
+            "auroc_usable": 0.9791666666666666,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "two_dino": {
+            "all_original_missing_score_bounds": [
+              0.9791666666666666,
+              0.9791666666666666
+            ],
+            "auroc_usable": 0.9791666666666666,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          }
+        }
+      },
+      "20260923": {
+        "complementarity": {
+          "DINO_correct_MAT_wrong": 24,
+          "DINO_wrong_MAT_correct": 1,
+          "attack_bonafide_pairs": 96,
+          "both_correct": 71,
+          "both_wrong": 0,
+          "columns": "MAT",
+          "counts": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              24,
+              0,
+              71
+            ]
+          ],
+          "dependent_pairs_not_independent_trials": true,
+          "not_operating_point_rescue": true,
+          "ordering": [
+            "wrong",
+            "tie",
+            "correct"
+          ],
+          "rows": "DINO"
+        },
+        "paired_subject_bootstrap": {
+          "declared_groups": 3,
+          "intervals": {
+            "MAT": [
+              0.625,
+              0.8333333333333334
+            ],
+            "dino_plain": [
+              0.9761904761904762,
+              1.0
+            ],
+            "dino_plain-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "dino_plain-minus-dino_reg": [
+              -0.023809523809523836,
+              0.03703703703703709
+            ],
+            "dino_reg": [
+              0.9629629629629629,
+              1.0
+            ],
+            "dino_reg-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "two_dino": [
+              0.9761904761904762,
+              1.0
+            ],
+            "two_dino-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "two_dino-minus-dino_plain": [
+              0.0,
+              0.0
+            ],
+            "two_dino-minus-dino_reg": [
+              -0.023809523809523836,
+              0.03703703703703709
+            ]
+          },
+          "invalid_usable_one_class": 0,
+          "repetitions": 2000,
+          "scope": "development_diagnostic_conditional_on_fixed_models",
+          "unavailable_reason": null,
+          "valid_repetitions": 2000
+        },
+        "summaries": {
+          "MAT": {
+            "all_original_missing_score_bounds": [
+              0.75,
+              0.75
+            ],
+            "auroc_usable": 0.75,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "dino_plain": {
+            "all_original_missing_score_bounds": [
+              0.9895833333333334,
+              0.9895833333333334
+            ],
+            "auroc_usable": 0.9895833333333334,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "dino_reg": {
+            "all_original_missing_score_bounds": [
+              0.9791666666666666,
+              0.9791666666666666
+            ],
+            "auroc_usable": 0.9791666666666666,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "two_dino": {
+            "all_original_missing_score_bounds": [
+              0.9895833333333334,
+              0.9895833333333334
+            ],
+            "auroc_usable": 0.9895833333333334,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          }
+        }
+      },
+      "20261001": {
+        "complementarity": {
+          "DINO_correct_MAT_wrong": 24,
+          "DINO_wrong_MAT_correct": 2,
+          "attack_bonafide_pairs": 96,
+          "both_correct": 70,
+          "both_wrong": 0,
+          "columns": "MAT",
+          "counts": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              24,
+              0,
+              70
+            ]
+          ],
+          "dependent_pairs_not_independent_trials": true,
+          "not_operating_point_rescue": true,
+          "ordering": [
+            "wrong",
+            "tie",
+            "correct"
+          ],
+          "rows": "DINO"
+        },
+        "paired_subject_bootstrap": {
+          "declared_groups": 3,
+          "intervals": {
+            "MAT": [
+              0.625,
+              0.8333333333333334
+            ],
+            "dino_plain": [
+              0.9761904761904762,
+              1.0
+            ],
+            "dino_plain-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "dino_plain-minus-dino_reg": [
+              -0.023809523809523836,
+              0.03703703703703709
+            ],
+            "dino_reg": [
+              0.9629629629629629,
+              1.0
+            ],
+            "dino_reg-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "two_dino": [
+              0.9761904761904762,
+              1.0
+            ],
+            "two_dino-minus-MAT": [
+              0.16666666666666663,
+              0.375
+            ],
+            "two_dino-minus-dino_plain": [
+              -0.01851851851851849,
+              0.0
+            ],
+            "two_dino-minus-dino_reg": [
+              -0.023809523809523836,
+              0.0185185185185186
+            ]
+          },
+          "invalid_usable_one_class": 0,
+          "repetitions": 2000,
+          "scope": "development_diagnostic_conditional_on_fixed_models",
+          "unavailable_reason": null,
+          "valid_repetitions": 2000
+        },
+        "summaries": {
+          "MAT": {
+            "all_original_missing_score_bounds": [
+              0.75,
+              0.75
+            ],
+            "auroc_usable": 0.75,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "dino_plain": {
+            "all_original_missing_score_bounds": [
+              0.9895833333333334,
+              0.9895833333333334
+            ],
+            "auroc_usable": 0.9895833333333334,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "dino_reg": {
+            "all_original_missing_score_bounds": [
+              0.9791666666666666,
+              0.9791666666666666
+            ],
+            "auroc_usable": 0.9791666666666666,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          },
+          "two_dino": {
+            "all_original_missing_score_bounds": [
+              0.9791666666666666,
+              0.9791666666666666
+            ],
+            "auroc_usable": 0.9791666666666666,
+            "coverage": {
+              "attack": {
+                "originals": 16,
+                "technical_failures": 0,
+                "usable": 16
+              },
+              "bona_fide": {
+                "originals": 6,
+                "technical_failures": 0,
+                "usable": 6
+              }
+            },
+            "score_direction": "higher_is_attack",
+            "unavailable_reason": null
+          }
+        }
+      }
+    },
+    "synthetic_forwards": 4
+  },
+  "smoke": {
+    "dino_plain": {
+      "atol": 1e-06,
+      "repeat_max_absolute_difference": 0.0,
+      "rtol": 1e-05
+    },
+    "dino_reg": {
+      "atol": 1e-06,
+      "repeat_max_absolute_difference": 0.0,
+      "rtol": 1e-05
+    }
+  },
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "93319fead64a6a3a0c0f9e76df3452e16605d84b81d836689860347e29b831a3",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": 4062183424,
+    "sampled_owned_peak_disk_bytes": 258571522,
+    "sampled_tree_peak_rss_bytes": 1854021632,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 60.99555798000074
+  },
+  "validation": {
+    "environment": "fas",
+    "focused_tests_passed": 48,
+    "packages_installed_or_upgraded": 0
+  }
+}

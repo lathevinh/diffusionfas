@@ -18,6 +18,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Frozen DDPM crop A/B trên cùng 22 MSU clips](docs/012-msu-frozen-crop-ablation.md).
 - [MAT pretrained face inpainting: native-512 preview đã được duyệt](docs/013-mat-native512-inpainting-preview.md).
 - [MAT masked reconstruction: protocol cố định trên 22 MSU validation clips](docs/014-msu-mat-anatomical-diagnostic.md).
+- [Đối chiếu DINO–MAT: cùng 22 clips/T16, giữ crop đúng từng model](docs/015-matched-msu-dino-mat-comparison.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
@@ -244,6 +245,16 @@ subject nên **chưa chứng minh MAT tốt hơn hoặc generalize**. Nose riên
 AUROC 0,2604; giữ nguyên trọng số/dấu, không chọn eye-only theo kết quả.
 Postflight độc lập từ float32 hole predictions, sklearn và weighted pairwise
 bootstrap đã khớp. Không train/fit threshold; đây vẫn là development evidence.
+
+**Đối chiếu DINO đã hoàn tất** trên đúng 22 originals/T16: DINO-Reg mean AUROC
+**0,9792**, plain DINO **0,9826**, fixed two-DINO **0,9826** qua cả ba seed
+head cũ loại MSU khỏi fitting/validation/calibration, so MAT **0,7500**.
+Giữ preprocessing DINO 518 lịch sử (rectangle-to-square, đã được duyệt và
+kiểm tra không padding), không dùng crop MAT thay cho head input cũ.
+MAT sửa thứ tự 1–2 cặp DINO sai mỗi seed, nhưng sai 24 cặp DINO xếp đúng;
+đây là **pair ranking, không phải spoof rescue/FA reduction hay fusion gain**.
+Không chọn seed, train, fit threshold hay fusion; không phải cải thiện
+0,927→0,983 trên cùng test cũ. Xem [protocol, CI, full seed results và caveats](docs/015-matched-msu-dino-mat-comparison.md).
 
 MAT runtime dùng pinned official source ngoài Git và optional dependency
 `timm==1.0.30` đang có sẵn; không import model này từ scientific CLI mặc định.

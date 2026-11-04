@@ -103,4 +103,109 @@ encoder inference; it is not an experiment retry.
 
 ## Results
 
-Pending the approved run and independent postflight.
+**Completed and independently verified, with no technical failures or retry.**
+The protocol was committed as `4a46292` before inference. All22 originals,
+352 native518 crops,704 image/encoder forwards and four synthetic repeat
+forwards completed. Existing MAT/DDPM scores were reused, not rerun or tuned.
+See [aggregate-only evidence](../results/dino-comparison-v1.json).
+
+### Same originals and frame windows
+
+| Existing head seed | DINO-Reg AUROC | Plain DINO AUROC | Fixed two-DINO AUROC |
+|---|---:|---:|---:|
+|20260917|0.9791666667|0.9687500000|0.9791666667|
+|20260923|0.9791666667|0.9895833333|0.9895833333|
+|20261001|0.9791666667|0.9895833333|0.9791666667|
+|**Descriptive equal-seed mean**|**0.9791666667**|**0.9826388889**|**0.9826388889**|
+
+On these same22 originals, MAT remains **0.7500000000** and the earlier
+real-pixel DDPM score **0.6979166667**. The crops are deliberately model-specific,
+not geometrically matched: do not attribute the entire difference to backbone
+architecture or learning objective. DINO has supervised PAD source heads;
+MAT has no PAD fine-tuning.
+
+Each seed's two-DINO subject-bootstrap95% CI is
+**[0.9761904762,1.0]**. Paired two-DINO-minus-MAT differences are respectively
+**+0.2291666667,+0.2395833333,+0.2291666667**, each with conditional interval
+**[+0.1666666667,+0.375]**. All2,000 replicates per seed are valid.
+All30 per-system/paired intervals are published in the aggregate.
+Only **three subject groups** underlie these discrete, conditional intervals:
+there is no pooled mean CI or deployment/generalization guarantee.
+
+Plain DINO and two-DINO have the same descriptive mean here; combining two
+encoders is not proven better on this subset. Do not select a single best seed
+or promote a new single-model policy based on these22 clips alone.
+
+**This is not an improvement from paper324's0.927 to0.983 on the same test.**
+Paper324 uses the official MSU target-test cohort and a representative image.
+This diagnostic uses22 selected source-validation originals and a T16
+probability average. The population, aggregation and coverage constraints
+differ, despite reusing the actual same saved models.
+
+### Does MAT add a different ranking signal?
+
+These are **96 dependent attack/bona-fide pair orderings per seed**, not counts
+of correctly classified videos, spoof rescues or newly safe authentication
+decisions. Both model score directions were fixed before this comparison.
+
+| Seed | Both order correctly | DINO wrong / MAT correct | DINO correct / MAT wrong | Both wrong | Pairs with ties |
+|---|---:|---:|---:|---:|---:|
+|20260917|70|2|24|0|0|
+|20260923|71|1|24|0|0|
+|20261001|70|2|24|0|0|
+
+The complete3x3 wrong/tie/correct matrices are preserved for every seed in the
+aggregate. MAT orders the1--2 DINO-inverted pairs correctly, so it is not
+literally identical information. Conversely, DINO orders all24 MAT-inverted
+pairs correctly. This small, asymmetric complementarity is **not evidence of
+fusion utility**: no inference-time gate can choose the right model using the
+evaluation labels. No MAT threshold, fixed new fusion, oracle fused score,
+learned gate or threshold-dependent false-accept claim was computed.
+
+### Independent verification and resources
+
+- Verified all committed input/evidence hashes after the run, including all
+  six supervised heads/calibrators, both backbone weights and source helpers.
+  Complete MSU exclusion applies to all source fitting roles for all seeds.
+- Verified352 crop hashes and inverse-mapped cubic footprints: **zero native
+  padding**. Historical pre-resize width/height ratios range
+  **0.7625570776--0.8664495114**; distortion disclosure is substantive, not
+  a claim of equivalent square crops.
+- Verified704 finite FP32 feature vectors, exact16x1536 per original/encoder.
+  Independently reconstructed all3x2x352 frame probabilities from saved
+  coefficients and features using scalar compensated summation and a stable
+  sigmoid, not the original inference helper.
+  Maximum probability difference **1.3877787808e-15**.
+- sklearn independently reproduced every AUROC. Independent pair tables
+  reproduced every count, including no ties. A weighted pairwise bootstrap
+  reproduced all **30 intervals**, with original group draws and denominators.
+- Verified all22 strict native-replay receipts against **6,028 full RGB
+  frames**, counts and decoded-sequence hashes, without new native decoding.
+  No substitutions. No staged raw videos remain.
+- Actual GPU synthetic repeated extraction error is **0 for both encoders**.
+  Each backbone state digest matched before/after inference.
+- Worker wall time **60.99555798 seconds**. Watchdog0.2-second samples recorded
+  peak tree RSS1,854,021,632 bytes, **device-wide** GPU4,062,183,424 bytes and
+  owned output258,571,522 bytes. These are sampled, not instantaneous-peak
+  guarantees; all approved guards passed.
+- **48 focused tests passed**. No packages installed/upgraded, fitting,
+  model download, new calibration/target pixels or fusion/threshold selection.
+  The FAS source checkout stays read-only.
+
+## Decision and next gate
+
+On this small matched-video diagnostic, the existing DINO systems clearly
+outrank raw MAT/DDPM reconstruction errors. Prioritize DINO as the strong
+baseline; this result does **not** justify longer MAT training or deploying
+an inpainting detector.
+
+There is a small distinct MAT ranking signal, but no demonstrated operating
+benefit from adding it. A fusion experiment would require an explicitly
+declared source-only fitting/selection protocol and later independent data,
+not weights or gates chosen on these22 clips.
+
+The useful next question is low-false-accept threshold transfer and stability
+on additional subjects/cameras, with no threshold chosen from the held-out
+evaluation labels. The present near-perfect ranking does not resolve
+paper324's operating-policy failures or establish security. No extra
+experiment, threshold fitting or access beyond the approved22 was performed.
