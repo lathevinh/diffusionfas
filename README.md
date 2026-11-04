@@ -20,7 +20,8 @@ Offline-first bonafide-only short-clip PAD research.
 - [MAT masked reconstruction: protocol cố định trên 22 MSU validation clips](docs/014-msu-mat-anatomical-diagnostic.md).
 - [Đối chiếu DINO–MAT: cùng 22 clips/T16, giữ crop đúng từng model](docs/015-matched-msu-dino-mat-comparison.md).
 - [Audit sẵn sàng công bố: đóng góp, checklist sửa bài và shortlist tạp chí có điều kiện](docs/016-submission-readiness-audit.md).
-- [DINO vùng mặt + GroupDRO: 6 ablations đã implement, chạy thật cần duyệt protocol/budget](docs/017-regional-dino-controlled-ablation.md).
+- [DINO vùng mặt + GroupDRO: protocol 6 nhánh ablation có đối chứng](docs/017-regional-dino-controlled-ablation.md).
+- [Kết quả 72 heads đã kiểm chứng: anatomical pooling + GroupDRO không cải thiện ổn định](docs/018-regional-dino-completed-results.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD

@@ -1,8 +1,10 @@
 # Regional DINO: controlled implementation and execution protocol
 
 Date: 2026-11-04.
-Status: implementation validated on synthetic data; real scientific execution
-requires exact-plan owner approval. No improvement result is claimed here.
+Status: owner approved the exact plan; scientific execution and reconstruction
+completed. See [completed results](018-regional-dino-completed-results.md):
+the primary candidate did not improve generalization. The protocol and
+pre-execution validation below are preserved, not a new pending run request.
 
 ## Hypothesis and controls
 
