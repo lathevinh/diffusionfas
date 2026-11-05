@@ -1,0 +1,74 @@
+"""Prepare spatial DINO; deliberately no scientific run or approval command."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/"src"))
+sys.dont_write_bytecode = True
+for name, value in {"PYTHONDONTWRITEBYTECODE": "1", "OPENBLAS_NUM_THREADS": "2",
+                    "OMP_NUM_THREADS": "2", "XFORMERS_DISABLED": "1", "HF_HUB_OFFLINE": "1",
+                    "TRANSFORMERS_OFFLINE": "1", "CUBLAS_WORKSPACE_CONFIG": ":4096:8"}.items():
+    os.environ[name] = value
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest="command", required=True)
+    smoke = commands.add_parser("smoke")
+    smoke.add_argument("--private-root", type=Path, required=True)
+    prepare = commands.add_parser("prepare")
+    prepare.add_argument("--private-root", type=Path, required=True)
+    prepare.add_argument("--probe", type=Path, required=True)
+    worker = commands.add_parser("_smoke")
+    worker.add_argument("--output", type=Path, required=True)
+    replay = commands.add_parser("_replay")
+    replay.add_argument("--checkpoint", type=Path, required=True)
+    replay.add_argument("--checkpoint-sha256", required=True)
+    for command in (smoke, prepare, worker, replay):
+        command.add_argument("--fas-root", type=Path, required=True)
+    args = parser.parse_args()
+    if os.environ.get("CONDA_DEFAULT_ENV") != "fas":
+        raise RuntimeError("use the existing fas conda environment")
+    import torch
+    torch.set_num_threads(2)
+    from diffusionfas.io import digest, read_json, require_private_output, write_json
+    from diffusionfas.spatial_preparation import PROBE_CAPS, prepare, synthetic_probe, synthetic_replay
+    if args.command == "_replay":
+        print(json.dumps(synthetic_replay(args.checkpoint, args.checkpoint_sha256, args.fas_root)))
+    elif args.command == "_smoke":
+        synthetic_probe(args.output, args.fas_root)
+    elif args.command == "prepare":
+        path = prepare(args.fas_root, args.private_root, args.probe)
+        print(json.dumps({"preparation_sha256": digest(path), "scientific_execution_authorized": False}))
+    else:
+        from diffusionfas.adapter_pilot import device_memory_bytes
+        from diffusionfas.supervision import run_bounded
+        require_private_output(args.private_root/"probe.json")
+        if args.private_root.exists():
+            raise FileExistsError("new immutable synthetic probe directory required")
+        if device_memory_bytes() >= PROBE_CAPS["max_gpu_bytes"]:
+            raise MemoryError("shared-device occupancy exceeds synthetic probe budget")
+        args.private_root.mkdir(parents=True)
+        result = run_bounded(
+            [sys.executable, str(Path(__file__).resolve()), "_smoke", "--fas-root", str(args.fas_root),
+             "--output", str(args.private_root/"probe.json")],
+            cwd=ROOT, owned_root=args.private_root, log=args.private_root/"probe.log",
+            max_seconds=PROBE_CAPS["max_seconds"], max_rss_bytes=PROBE_CAPS["max_rss_bytes"],
+            max_disk_bytes=PROBE_CAPS["max_output_bytes"], max_gpu_bytes=PROBE_CAPS["max_gpu_bytes"],
+            gpu_memory_bytes=device_memory_bytes, rss_root_pid=os.getpid())
+        write_json(args.private_root/"supervision.json", result)
+        if not result["completed"]:
+            raise RuntimeError("synthetic probe failed; inspect retained probe.log, no automatic retry")
+        value = read_json(args.private_root/"probe.json")
+        print(json.dumps({"status": value["status"], "supervision": result,
+                          "scientific_execution_authorized": False}))
+
+
+if __name__ == "__main__":
+    main()
