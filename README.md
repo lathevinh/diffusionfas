@@ -24,6 +24,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Kết quả 72 heads đã kiểm chứng: anatomical pooling + GroupDRO không cải thiện ổn định](docs/018-regional-dino-completed-results.md).
 - [Probe clip 2 giây trên DINO đã fine-tune: single/mean/temporal/shuffle, giữ source-only và shared failures](docs/019-adapted-dino-short-clip-probe.md).
 - [Clip probe đã hoàn tất: temporal chưa vượt mean16, chỉ CASIA đạt operating utility](docs/020-adapted-dino-short-clip-results.md).
+- [Audit 5 công trình: protocol/threshold/code-license, novelty và quyết định nghiên cứu tiếp theo](docs/021-benchmark-novelty-and-next-decision.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
