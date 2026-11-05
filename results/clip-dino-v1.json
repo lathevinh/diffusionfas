@@ -1,0 +1,4302 @@
+{
+  "adapted_checkpoint_sha256": {
+    "CASIA-FASD": "b84dbec2a3fe1a975e2c4f6dfff3a76a72365b7b9d97ae228ad7321d1f60be8f",
+    "MSU-MFSD": "70a09b1ea33b99e50b7956be5f8cc6f77c40faf02aeb83d0609007faec88d200",
+    "OULU-NPU": "5392f3affe1f7bdb7560397a1c43cf7ac258d2f85f58d95ef6114940c35838eb",
+    "SiW-Mv2": "c22fb08928387a2639b559af0b39aea63c28e94488c1a8ece78b463618c72bc5"
+  },
+  "budget": {
+    "max_gpu_bytes": 8589934592,
+    "max_output_bytes": 4294967296,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 86400
+  },
+  "canonical_native_frames_verified": 1147357,
+  "cases": [
+    {
+      "alpha": "1/20",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 72,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 72,
+        "oracle_accepted_bona_fide": 299,
+        "oracle_max_BFA": 0.8305555555555556,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9643827160493826,
+        "BFA": 0.9277777777777778,
+        "BF_rejection_usable": 0.07222222222222219,
+        "FA": 0.14027777777777778,
+        "FA_usable": 0.14027777777777778,
+        "FA_within_constraint": false,
+        "accepted_attack": 202.0,
+        "accepted_bona_fide": 334.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 14,
+        "empirically_attainable": true,
+        "oracle_FA": 0.009722222222222222,
+        "oracle_accepted_attack": 14,
+        "oracle_accepted_bona_fide": 223,
+        "oracle_max_BFA": 0.6194444444444445,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9643827160493826,
+        "BFA": 0.8027777777777778,
+        "BF_rejection_usable": 0.1972222222222222,
+        "FA": 0.041666666666666664,
+        "FA_usable": 0.041666666666666664,
+        "FA_within_constraint": false,
+        "accepted_attack": 60.0,
+        "accepted_bona_fide": 289.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 144,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 144,
+        "oracle_accepted_bona_fide": 323,
+        "oracle_max_BFA": 0.8972222222222223,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9643827160493826,
+        "BFA": 0.95,
+        "BF_rejection_usable": 0.050000000000000044,
+        "FA": 0.18611111111111112,
+        "FA_usable": 0.18611111111111112,
+        "FA_within_constraint": false,
+        "accepted_attack": 268.0,
+        "accepted_bona_fide": 342.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 72,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 72,
+        "oracle_accepted_bona_fide": 298,
+        "oracle_max_BFA": 0.8277777777777777,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9654533179012345,
+        "BFA": 0.9388888888888889,
+        "BF_rejection_usable": 0.061111111111111116,
+        "FA": 0.16666666666666666,
+        "FA_usable": 0.16666666666666666,
+        "FA_within_constraint": false,
+        "accepted_attack": 240.0,
+        "accepted_bona_fide": 338.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 14,
+        "empirically_attainable": true,
+        "oracle_FA": 0.009722222222222222,
+        "oracle_accepted_attack": 14,
+        "oracle_accepted_bona_fide": 228,
+        "oracle_max_BFA": 0.6333333333333333,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9654533179012345,
+        "BFA": 0.9138888888888889,
+        "BF_rejection_usable": 0.08611111111111114,
+        "FA": 0.11875,
+        "FA_usable": 0.11875,
+        "FA_within_constraint": false,
+        "accepted_attack": 171.0,
+        "accepted_bona_fide": 329.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 144,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 144,
+        "oracle_accepted_bona_fide": 325,
+        "oracle_max_BFA": 0.9027777777777778,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9654533179012345,
+        "BFA": 0.9555555555555556,
+        "BF_rejection_usable": 0.0444444444444444,
+        "FA": 0.20625,
+        "FA_usable": 0.20625,
+        "FA_within_constraint": false,
+        "accepted_attack": 297.0,
+        "accepted_bona_fide": 344.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 72,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 72,
+        "oracle_accepted_bona_fide": 298,
+        "oracle_max_BFA": 0.8277777777777777,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9657233796296295,
+        "BFA": 0.9416666666666667,
+        "BF_rejection_usable": 0.05833333333333335,
+        "FA": 0.17152777777777778,
+        "FA_usable": 0.17152777777777778,
+        "FA_within_constraint": false,
+        "accepted_attack": 247.0,
+        "accepted_bona_fide": 339.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 14,
+        "empirically_attainable": true,
+        "oracle_FA": 0.009722222222222222,
+        "oracle_accepted_attack": 14,
+        "oracle_accepted_bona_fide": 229,
+        "oracle_max_BFA": 0.6361111111111111,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9657233796296295,
+        "BFA": 0.9194444444444444,
+        "BF_rejection_usable": 0.0805555555555556,
+        "FA": 0.12361111111111112,
+        "FA_usable": 0.12361111111111112,
+        "FA_within_constraint": false,
+        "accepted_attack": 178.0,
+        "accepted_bona_fide": 331.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 144,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 144,
+        "oracle_accepted_bona_fide": 326,
+        "oracle_max_BFA": 0.9055555555555556,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9657233796296295,
+        "BFA": 0.9611111111111111,
+        "BF_rejection_usable": 0.03888888888888886,
+        "FA": 0.2048611111111111,
+        "FA_usable": 0.2048611111111111,
+        "FA_within_constraint": false,
+        "accepted_attack": 295.0,
+        "accepted_bona_fide": 346.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 72,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 72,
+        "oracle_accepted_bona_fide": 299,
+        "oracle_max_BFA": 0.8305555555555556,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9627334104938272,
+        "BFA": 0.9472222222222222,
+        "BF_rejection_usable": 0.05277777777777781,
+        "FA": 0.17777777777777778,
+        "FA_usable": 0.17777777777777778,
+        "FA_within_constraint": false,
+        "accepted_attack": 256.0,
+        "accepted_bona_fide": 341.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 14,
+        "empirically_attainable": true,
+        "oracle_FA": 0.009722222222222222,
+        "oracle_accepted_attack": 14,
+        "oracle_accepted_bona_fide": 185,
+        "oracle_max_BFA": 0.5138888888888888,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9627334104938272,
+        "BFA": 0.9277777777777778,
+        "BF_rejection_usable": 0.07222222222222219,
+        "FA": 0.14791666666666667,
+        "FA_usable": 0.14791666666666667,
+        "FA_within_constraint": false,
+        "accepted_attack": 213.0,
+        "accepted_bona_fide": 334.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 144,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 144,
+        "oracle_accepted_bona_fide": 324,
+        "oracle_max_BFA": 0.9,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9627334104938272,
+        "BFA": 0.95,
+        "BF_rejection_usable": 0.050000000000000044,
+        "FA": 0.19722222222222222,
+        "FA_usable": 0.19722222222222222,
+        "FA_within_constraint": false,
+        "accepted_attack": 284.0,
+        "accepted_bona_fide": 342.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 72,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 72,
+        "oracle_accepted_bona_fide": 297,
+        "oracle_max_BFA": 0.825,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9646643518518517,
+        "BFA": 0.9416666666666667,
+        "BF_rejection_usable": 0.05833333333333335,
+        "FA": 0.17152777777777778,
+        "FA_usable": 0.17152777777777778,
+        "FA_within_constraint": false,
+        "accepted_attack": 247.0,
+        "accepted_bona_fide": 339.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 14,
+        "empirically_attainable": true,
+        "oracle_FA": 0.009722222222222222,
+        "oracle_accepted_attack": 14,
+        "oracle_accepted_bona_fide": 230,
+        "oracle_max_BFA": 0.6388888888888888,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9646643518518517,
+        "BFA": 0.9194444444444444,
+        "BF_rejection_usable": 0.0805555555555556,
+        "FA": 0.12291666666666666,
+        "FA_usable": 0.12291666666666666,
+        "FA_within_constraint": false,
+        "accepted_attack": 177.0,
+        "accepted_bona_fide": 331.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 144,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 144,
+        "oracle_accepted_bona_fide": 326,
+        "oracle_max_BFA": 0.9055555555555556,
+        "original_attack": 1440,
+        "original_bona_fide": 360,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 180,
+        "successful_attack": 1440,
+        "successful_bona_fide": 360,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9646643518518517,
+        "BFA": 0.9583333333333334,
+        "BF_rejection_usable": 0.04166666666666663,
+        "FA": 0.20902777777777778,
+        "FA_usable": 0.20902777777777778,
+        "FA_within_constraint": false,
+        "accepted_attack": 301.0,
+        "accepted_bona_fide": 345.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "usable_attack": 1440.0,
+        "usable_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "OULU-NPU"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 13,
+        "empirically_attainable": true,
+        "oracle_FA": 0.04814814814814815,
+        "oracle_accepted_attack": 13,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9992281303602061,
+        "BFA": 0.9111111111111111,
+        "BF_rejection_usable": 0.06818181818181823,
+        "FA": 0.003703703703703704,
+        "FA_usable": 0.0037735849056603774,
+        "FA_within_constraint": true,
+        "accepted_attack": 1.0,
+        "accepted_bona_fide": 82.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 2,
+        "empirically_attainable": true,
+        "oracle_FA": 0.007407407407407408,
+        "oracle_accepted_attack": 2,
+        "oracle_accepted_bona_fide": 86,
+        "oracle_max_BFA": 0.9555555555555556,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9992281303602061,
+        "BFA": 0.7888888888888889,
+        "BF_rejection_usable": 0.19318181818181823,
+        "FA": 0.0,
+        "FA_usable": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 71.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 27,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 27,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9992281303602061,
+        "BFA": 0.9777777777777777,
+        "BF_rejection_usable": 0.0,
+        "FA": 0.037037037037037035,
+        "FA_usable": 0.03773584905660377,
+        "FA_within_constraint": true,
+        "accepted_attack": 10.0,
+        "accepted_bona_fide": 88.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 13,
+        "empirically_attainable": true,
+        "oracle_FA": 0.04814814814814815,
+        "oracle_accepted_attack": 13,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9993567753001716,
+        "BFA": 0.9666666666666667,
+        "BF_rejection_usable": 0.011363636363636354,
+        "FA": 0.018518518518518517,
+        "FA_usable": 0.018867924528301886,
+        "FA_within_constraint": true,
+        "accepted_attack": 5.0,
+        "accepted_bona_fide": 87.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 2,
+        "empirically_attainable": true,
+        "oracle_FA": 0.007407407407407408,
+        "oracle_accepted_attack": 2,
+        "oracle_accepted_bona_fide": 86,
+        "oracle_max_BFA": 0.9555555555555556,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9993567753001716,
+        "BFA": 0.9,
+        "BF_rejection_usable": 0.07954545454545459,
+        "FA": 0.0,
+        "FA_usable": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 81.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 27,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 27,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9993567753001716,
+        "BFA": 0.9777777777777777,
+        "BF_rejection_usable": 0.0,
+        "FA": 0.03333333333333333,
+        "FA_usable": 0.033962264150943396,
+        "FA_within_constraint": true,
+        "accepted_attack": 9.0,
+        "accepted_bona_fide": 88.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 13,
+        "empirically_attainable": true,
+        "oracle_FA": 0.04814814814814815,
+        "oracle_accepted_attack": 13,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9994425385934822,
+        "BFA": 0.9555555555555556,
+        "BF_rejection_usable": 0.022727272727272707,
+        "FA": 0.011111111111111112,
+        "FA_usable": 0.011320754716981131,
+        "FA_within_constraint": true,
+        "accepted_attack": 3.0,
+        "accepted_bona_fide": 86.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 2,
+        "empirically_attainable": true,
+        "oracle_FA": 0.007407407407407408,
+        "oracle_accepted_attack": 2,
+        "oracle_accepted_bona_fide": 86,
+        "oracle_max_BFA": 0.9555555555555556,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9994425385934822,
+        "BFA": 0.8888888888888888,
+        "BF_rejection_usable": 0.09090909090909094,
+        "FA": 0.0,
+        "FA_usable": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 80.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 27,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 27,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9994425385934822,
+        "BFA": 0.9777777777777777,
+        "BF_rejection_usable": 0.0,
+        "FA": 0.04814814814814815,
+        "FA_usable": 0.04905660377358491,
+        "FA_within_constraint": true,
+        "accepted_attack": 13.0,
+        "accepted_bona_fide": 88.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 13,
+        "empirically_attainable": true,
+        "oracle_FA": 0.04814814814814815,
+        "oracle_accepted_attack": 13,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9995283018867926,
+        "BFA": 0.9555555555555556,
+        "BF_rejection_usable": 0.022727272727272707,
+        "FA": 0.018518518518518517,
+        "FA_usable": 0.018867924528301886,
+        "FA_within_constraint": true,
+        "accepted_attack": 5.0,
+        "accepted_bona_fide": 86.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 2,
+        "empirically_attainable": true,
+        "oracle_FA": 0.007407407407407408,
+        "oracle_accepted_attack": 2,
+        "oracle_accepted_bona_fide": 86,
+        "oracle_max_BFA": 0.9555555555555556,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9995283018867926,
+        "BFA": 0.9111111111111111,
+        "BF_rejection_usable": 0.06818181818181823,
+        "FA": 0.0,
+        "FA_usable": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 82.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 27,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 27,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9995283018867926,
+        "BFA": 0.9777777777777777,
+        "BF_rejection_usable": 0.0,
+        "FA": 0.044444444444444446,
+        "FA_usable": 0.045283018867924525,
+        "FA_within_constraint": true,
+        "accepted_attack": 12.0,
+        "accepted_bona_fide": 88.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 13,
+        "empirically_attainable": true,
+        "oracle_FA": 0.04814814814814815,
+        "oracle_accepted_attack": 13,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.999571183533448,
+        "BFA": 0.9555555555555556,
+        "BF_rejection_usable": 0.022727272727272707,
+        "FA": 0.014814814814814815,
+        "FA_usable": 0.01509433962264151,
+        "FA_within_constraint": true,
+        "accepted_attack": 4.0,
+        "accepted_bona_fide": 86.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 2,
+        "empirically_attainable": true,
+        "oracle_FA": 0.007407407407407408,
+        "oracle_accepted_attack": 2,
+        "oracle_accepted_bona_fide": 86,
+        "oracle_max_BFA": 0.9555555555555556,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.999571183533448,
+        "BFA": 0.8888888888888888,
+        "BF_rejection_usable": 0.09090909090909094,
+        "FA": 0.0,
+        "FA_usable": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 80.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 27,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 27,
+        "oracle_accepted_bona_fide": 88,
+        "oracle_max_BFA": 0.9777777777777777,
+        "original_attack": 270,
+        "original_bona_fide": 90,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 45,
+        "successful_attack": 265,
+        "successful_bona_fide": 88,
+        "technical_failure_BFA_ceiling": 0.9777777777777777,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.999571183533448,
+        "BFA": 0.9777777777777777,
+        "BF_rejection_usable": 0.0,
+        "FA": 0.044444444444444446,
+        "FA_usable": 0.045283018867924525,
+        "FA_within_constraint": true,
+        "accepted_attack": 12.0,
+        "accepted_bona_fide": 88.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "usable_attack": 265.0,
+        "usable_bona_fide": 88.0,
+        "utility_feasible": true
+      },
+      "seed": 20260917,
+      "target": "CASIA-FASD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 6,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 6,
+        "oracle_accepted_bona_fide": 34,
+        "oracle_max_BFA": 0.85,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9663793103448277,
+        "BFA": 0.95,
+        "BF_rejection_usable": 0.050000000000000044,
+        "FA": 0.125,
+        "FA_usable": 0.12931034482758622,
+        "FA_within_constraint": false,
+        "accepted_attack": 15.0,
+        "accepted_bona_fide": 38.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 1,
+        "empirically_attainable": false,
+        "oracle_FA": 0.008333333333333333,
+        "oracle_accepted_attack": 1,
+        "oracle_accepted_bona_fide": 16,
+        "oracle_max_BFA": 0.4,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9663793103448277,
+        "BFA": 0.825,
+        "BF_rejection_usable": 0.17500000000000004,
+        "FA": 0.03333333333333333,
+        "FA_usable": 0.034482758620689655,
+        "FA_within_constraint": false,
+        "accepted_attack": 4.0,
+        "accepted_bona_fide": 33.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 12,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 12,
+        "oracle_accepted_bona_fide": 36,
+        "oracle_max_BFA": 0.9,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9663793103448277,
+        "BFA": 0.975,
+        "BF_rejection_usable": 0.025000000000000022,
+        "FA": 0.225,
+        "FA_usable": 0.23275862068965517,
+        "FA_within_constraint": false,
+        "accepted_attack": 27.0,
+        "accepted_bona_fide": 39.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 6,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 6,
+        "oracle_accepted_bona_fide": 33,
+        "oracle_max_BFA": 0.825,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9693965517241381,
+        "BFA": 0.925,
+        "BF_rejection_usable": 0.07499999999999996,
+        "FA": 0.15833333333333333,
+        "FA_usable": 0.16379310344827586,
+        "FA_within_constraint": false,
+        "accepted_attack": 19.0,
+        "accepted_bona_fide": 37.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 1,
+        "empirically_attainable": true,
+        "oracle_FA": 0.008333333333333333,
+        "oracle_accepted_attack": 1,
+        "oracle_accepted_bona_fide": 31,
+        "oracle_max_BFA": 0.775,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9693965517241381,
+        "BFA": 0.825,
+        "BF_rejection_usable": 0.17500000000000004,
+        "FA": 0.058333333333333334,
+        "FA_usable": 0.0603448275862069,
+        "FA_within_constraint": false,
+        "accepted_attack": 7.0,
+        "accepted_bona_fide": 33.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 12,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 12,
+        "oracle_accepted_bona_fide": 35,
+        "oracle_max_BFA": 0.875,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9693965517241381,
+        "BFA": 0.975,
+        "BF_rejection_usable": 0.025000000000000022,
+        "FA": 0.23333333333333334,
+        "FA_usable": 0.2413793103448276,
+        "FA_within_constraint": false,
+        "accepted_attack": 28.0,
+        "accepted_bona_fide": 39.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 6,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 6,
+        "oracle_accepted_bona_fide": 33,
+        "oracle_max_BFA": 0.825,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.966594827586207,
+        "BFA": 0.925,
+        "BF_rejection_usable": 0.07499999999999996,
+        "FA": 0.16666666666666666,
+        "FA_usable": 0.1724137931034483,
+        "FA_within_constraint": false,
+        "accepted_attack": 20.0,
+        "accepted_bona_fide": 37.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 1,
+        "empirically_attainable": true,
+        "oracle_FA": 0.008333333333333333,
+        "oracle_accepted_attack": 1,
+        "oracle_accepted_bona_fide": 30,
+        "oracle_max_BFA": 0.75,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.966594827586207,
+        "BFA": 0.8,
+        "BF_rejection_usable": 0.19999999999999996,
+        "FA": 0.041666666666666664,
+        "FA_usable": 0.04310344827586207,
+        "FA_within_constraint": false,
+        "accepted_attack": 5.0,
+        "accepted_bona_fide": 32.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 12,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 12,
+        "oracle_accepted_bona_fide": 36,
+        "oracle_max_BFA": 0.9,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.966594827586207,
+        "BFA": 0.975,
+        "BF_rejection_usable": 0.025000000000000022,
+        "FA": 0.225,
+        "FA_usable": 0.23275862068965517,
+        "FA_within_constraint": false,
+        "accepted_attack": 27.0,
+        "accepted_bona_fide": 39.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 6,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 6,
+        "oracle_accepted_bona_fide": 32,
+        "oracle_max_BFA": 0.8,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9655172413793104,
+        "BFA": 0.95,
+        "BF_rejection_usable": 0.050000000000000044,
+        "FA": 0.18333333333333332,
+        "FA_usable": 0.1896551724137931,
+        "FA_within_constraint": false,
+        "accepted_attack": 22.0,
+        "accepted_bona_fide": 38.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 1,
+        "empirically_attainable": true,
+        "oracle_FA": 0.008333333333333333,
+        "oracle_accepted_attack": 1,
+        "oracle_accepted_bona_fide": 29,
+        "oracle_max_BFA": 0.725,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9655172413793104,
+        "BFA": 0.825,
+        "BF_rejection_usable": 0.17500000000000004,
+        "FA": 0.075,
+        "FA_usable": 0.07758620689655173,
+        "FA_within_constraint": false,
+        "accepted_attack": 9.0,
+        "accepted_bona_fide": 33.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 12,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 12,
+        "oracle_accepted_bona_fide": 36,
+        "oracle_max_BFA": 0.9,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9655172413793104,
+        "BFA": 0.975,
+        "BF_rejection_usable": 0.025000000000000022,
+        "FA": 0.225,
+        "FA_usable": 0.23275862068965517,
+        "FA_within_constraint": false,
+        "accepted_attack": 27.0,
+        "accepted_bona_fide": 39.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 6,
+        "empirically_attainable": true,
+        "oracle_FA": 0.05,
+        "oracle_accepted_attack": 6,
+        "oracle_accepted_bona_fide": 33,
+        "oracle_max_BFA": 0.825,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9655172413793105,
+        "BFA": 0.925,
+        "BF_rejection_usable": 0.07499999999999996,
+        "FA": 0.175,
+        "FA_usable": 0.1810344827586207,
+        "FA_within_constraint": false,
+        "accepted_attack": 21.0,
+        "accepted_bona_fide": 37.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 1,
+        "empirically_attainable": true,
+        "oracle_FA": 0.008333333333333333,
+        "oracle_accepted_attack": 1,
+        "oracle_accepted_bona_fide": 29,
+        "oracle_max_BFA": 0.725,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9655172413793105,
+        "BFA": 0.825,
+        "BF_rejection_usable": 0.17500000000000004,
+        "FA": 0.05,
+        "FA_usable": 0.05172413793103448,
+        "FA_within_constraint": false,
+        "accepted_attack": 6.0,
+        "accepted_bona_fide": 33.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 12,
+        "empirically_attainable": true,
+        "oracle_FA": 0.1,
+        "oracle_accepted_attack": 12,
+        "oracle_accepted_bona_fide": 36,
+        "oracle_max_BFA": 0.9,
+        "original_attack": 120,
+        "original_bona_fide": 40,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 20,
+        "successful_attack": 116,
+        "successful_bona_fide": 40,
+        "technical_failure_BFA_ceiling": 1.0,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.9655172413793105,
+        "BFA": 0.975,
+        "BF_rejection_usable": 0.025000000000000022,
+        "FA": 0.21666666666666667,
+        "FA_usable": 0.22413793103448276,
+        "FA_within_constraint": false,
+        "accepted_attack": 26.0,
+        "accepted_bona_fide": 39.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "usable_attack": 116.0,
+        "usable_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "MSU-MFSD"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 18,
+        "empirically_attainable": false,
+        "oracle_FA": 0.049723756906077346,
+        "oracle_accepted_attack": 18,
+        "oracle_accepted_bona_fide": 127,
+        "oracle_max_BFA": 0.48659003831417624,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8640145415507734,
+        "BFA": 0.9386973180076629,
+        "BF_rejection_usable": 0.031620553359683834,
+        "FA": 0.574585635359116,
+        "FA_usable": 0.6419753086419753,
+        "FA_within_constraint": false,
+        "accepted_attack": 208.0,
+        "accepted_bona_fide": 245.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 3,
+        "empirically_attainable": false,
+        "oracle_FA": 0.008287292817679558,
+        "oracle_accepted_attack": 3,
+        "oracle_accepted_bona_fide": 43,
+        "oracle_max_BFA": 0.16475095785440613,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8640145415507734,
+        "BFA": 0.9386973180076629,
+        "BF_rejection_usable": 0.031620553359683834,
+        "FA": 0.56353591160221,
+        "FA_usable": 0.6296296296296297,
+        "FA_within_constraint": false,
+        "accepted_attack": 204.0,
+        "accepted_bona_fide": 245.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "single",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 36,
+        "empirically_attainable": true,
+        "oracle_FA": 0.09944751381215469,
+        "oracle_accepted_attack": 36,
+        "oracle_accepted_bona_fide": 154,
+        "oracle_max_BFA": 0.5900383141762452,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8640145415507734,
+        "BFA": 0.9655172413793104,
+        "BF_rejection_usable": 0.0039525691699604515,
+        "FA": 0.7458563535911602,
+        "FA_usable": 0.8333333333333334,
+        "FA_within_constraint": false,
+        "accepted_attack": 270.0,
+        "accepted_bona_fide": 252.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 18,
+        "empirically_attainable": false,
+        "oracle_FA": 0.049723756906077346,
+        "oracle_accepted_attack": 18,
+        "oracle_accepted_bona_fide": 130,
+        "oracle_max_BFA": 0.49808429118773945,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8712609183623676,
+        "BFA": 0.9501915708812261,
+        "BF_rejection_usable": 0.01976284584980237,
+        "FA": 0.6629834254143646,
+        "FA_usable": 0.7407407407407407,
+        "FA_within_constraint": false,
+        "accepted_attack": 240.0,
+        "accepted_bona_fide": 248.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 3,
+        "empirically_attainable": false,
+        "oracle_FA": 0.008287292817679558,
+        "oracle_accepted_attack": 3,
+        "oracle_accepted_bona_fide": 32,
+        "oracle_max_BFA": 0.12260536398467432,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8712609183623676,
+        "BFA": 0.9501915708812261,
+        "BF_rejection_usable": 0.01976284584980237,
+        "FA": 0.5828729281767956,
+        "FA_usable": 0.6512345679012346,
+        "FA_within_constraint": false,
+        "accepted_attack": 211.0,
+        "accepted_bona_fide": 248.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "mean",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 36,
+        "empirically_attainable": true,
+        "oracle_FA": 0.09944751381215469,
+        "oracle_accepted_attack": 36,
+        "oracle_accepted_bona_fide": 174,
+        "oracle_max_BFA": 0.6666666666666666,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8712609183623676,
+        "BFA": 0.9655172413793104,
+        "BF_rejection_usable": 0.0039525691699604515,
+        "FA": 0.7734806629834254,
+        "FA_usable": 0.8641975308641975,
+        "FA_within_constraint": false,
+        "accepted_attack": 280.0,
+        "accepted_bona_fide": 252.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 18,
+        "empirically_attainable": false,
+        "oracle_FA": 0.049723756906077346,
+        "oracle_accepted_attack": 18,
+        "oracle_accepted_bona_fide": 120,
+        "oracle_max_BFA": 0.45977011494252873,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8718830820280096,
+        "BFA": 0.9501915708812261,
+        "BF_rejection_usable": 0.01976284584980237,
+        "FA": 0.6160220994475138,
+        "FA_usable": 0.6882716049382716,
+        "FA_within_constraint": false,
+        "accepted_attack": 223.0,
+        "accepted_bona_fide": 248.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 3,
+        "empirically_attainable": false,
+        "oracle_FA": 0.008287292817679558,
+        "oracle_accepted_attack": 3,
+        "oracle_accepted_bona_fide": 42,
+        "oracle_max_BFA": 0.16091954022988506,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8718830820280096,
+        "BFA": 0.946360153256705,
+        "BF_rejection_usable": 0.02371541501976282,
+        "FA": 0.5828729281767956,
+        "FA_usable": 0.6512345679012346,
+        "FA_within_constraint": false,
+        "accepted_attack": 211.0,
+        "accepted_bona_fide": 247.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 36,
+        "empirically_attainable": true,
+        "oracle_FA": 0.09944751381215469,
+        "oracle_accepted_attack": 36,
+        "oracle_accepted_bona_fide": 159,
+        "oracle_max_BFA": 0.6091954022988506,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8718830820280096,
+        "BFA": 0.9655172413793104,
+        "BF_rejection_usable": 0.0039525691699604515,
+        "FA": 0.7734806629834254,
+        "FA_usable": 0.8641975308641975,
+        "FA_within_constraint": false,
+        "accepted_attack": 280.0,
+        "accepted_bona_fide": 252.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 18,
+        "empirically_attainable": false,
+        "oracle_FA": 0.049723756906077346,
+        "oracle_accepted_attack": 18,
+        "oracle_accepted_bona_fide": 115,
+        "oracle_max_BFA": 0.44061302681992337,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8792270531400964,
+        "BFA": 0.9501915708812261,
+        "BF_rejection_usable": 0.01976284584980237,
+        "FA": 0.6104972375690608,
+        "FA_usable": 0.6820987654320988,
+        "FA_within_constraint": false,
+        "accepted_attack": 221.0,
+        "accepted_bona_fide": 248.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 3,
+        "empirically_attainable": false,
+        "oracle_FA": 0.008287292817679558,
+        "oracle_accepted_attack": 3,
+        "oracle_accepted_bona_fide": 54,
+        "oracle_max_BFA": 0.20689655172413793,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8792270531400964,
+        "BFA": 0.9501915708812261,
+        "BF_rejection_usable": 0.01976284584980237,
+        "FA": 0.5994475138121547,
+        "FA_usable": 0.6697530864197531,
+        "FA_within_constraint": false,
+        "accepted_attack": 217.0,
+        "accepted_bona_fide": 248.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "oracle": {
+        "attack_error_budget": 36,
+        "empirically_attainable": true,
+        "oracle_FA": 0.09944751381215469,
+        "oracle_accepted_attack": 36,
+        "oracle_accepted_bona_fide": 176,
+        "oracle_max_BFA": 0.6743295019157088,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8792270531400964,
+        "BFA": 0.9655172413793104,
+        "BF_rejection_usable": 0.0039525691699604515,
+        "FA": 0.7679558011049724,
+        "FA_usable": 0.8580246913580247,
+        "FA_within_constraint": false,
+        "accepted_attack": 278.0,
+        "accepted_bona_fide": 252.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/20",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 18,
+        "empirically_attainable": true,
+        "oracle_FA": 0.049723756906077346,
+        "oracle_accepted_attack": 18,
+        "oracle_accepted_bona_fide": 134,
+        "oracle_max_BFA": 0.5134099616858238,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8821548821548821,
+        "BFA": 0.9501915708812261,
+        "BF_rejection_usable": 0.01976284584980237,
+        "FA": 0.6215469613259669,
+        "FA_usable": 0.6944444444444444,
+        "FA_within_constraint": false,
+        "accepted_attack": 225.0,
+        "accepted_bona_fide": 248.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/100",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 3,
+        "empirically_attainable": false,
+        "oracle_FA": 0.008287292817679558,
+        "oracle_accepted_attack": 3,
+        "oracle_accepted_bona_fide": 41,
+        "oracle_max_BFA": 0.15708812260536398,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "low_FA_score_separation_insufficient",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8821548821548821,
+        "BFA": 0.946360153256705,
+        "BF_rejection_usable": 0.02371541501976282,
+        "FA": 0.585635359116022,
+        "FA_usable": 0.654320987654321,
+        "FA_within_constraint": false,
+        "accepted_attack": 212.0,
+        "accepted_bona_fide": 247.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    },
+    {
+      "alpha": "1/10",
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "oracle": {
+        "attack_error_budget": 36,
+        "empirically_attainable": true,
+        "oracle_FA": 0.09944751381215469,
+        "oracle_accepted_attack": 36,
+        "oracle_accepted_bona_fide": 177,
+        "oracle_max_BFA": 0.6781609195402298,
+        "original_attack": 362,
+        "original_bona_fide": 261,
+        "reason": "attainable_on_this_sample",
+        "required_bona_fide_acceptances": 131,
+        "successful_attack": 324,
+        "successful_bona_fide": 253,
+        "technical_failure_BFA_ceiling": 0.9693486590038314,
+        "uses_evaluation_labels": true
+      },
+      "policy": {
+        "AUROC_usable": 0.8821548821548821,
+        "BFA": 0.9655172413793104,
+        "BF_rejection_usable": 0.0039525691699604515,
+        "FA": 0.7707182320441989,
+        "FA_usable": 0.8611111111111112,
+        "FA_within_constraint": false,
+        "accepted_attack": 279.0,
+        "accepted_bona_fide": 252.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "usable_attack": 324.0,
+        "usable_bona_fide": 253.0,
+        "utility_feasible": false
+      },
+      "seed": 20260917,
+      "target": "SiW-Mv2"
+    }
+  ],
+  "completed": true,
+  "conditional_intervals": [
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.10972222222222222,
+        0.17222222222222222
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.9,
+        0.9527777777777777
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9557170621141975,
+        0.9718423032407406
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.13401041666666666,
+        0.20208333333333334
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.9166666666666666,
+        0.9583333333333334
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9570016396604938,
+        0.9725626929012345
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.1388888888888889,
+        0.20625
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.925,
+        0.9583333333333334
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9594337866512346,
+        0.9716735146604939
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.1451388888888889,
+        0.2111284722222221
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.9305555555555556,
+        0.9638888888888889
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9567010513117284,
+        0.9686498842592591
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.13958333333333334,
+        0.20416666666666666
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.925,
+        0.9583333333333334
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9579202353395062,
+        0.971163483796296
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.013888888888888895,
+        0.03819444444444445
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.005625000000000084,
+        0.033333333333333326
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0008532503858023899,
+        0.0028144290123457453
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.002777777777777768,
+        0.012499999999999983
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.01388888888888884,
+        0.016666666666666607
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0018037712191359024,
+        0.0034531732253087213
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.0034722222222222376,
+        0.019461805555555475
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.008333333333333415,
+        0.022222222222222254
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.005177469135802424,
+        0.00103862847222224
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.012499999999999983,
+        -0.000694444444444442
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.01388888888888884,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.001604841820987729,
+        0.004122395833333083
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.021527777777777785,
+        0.040972222222222215
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.030555555555555558
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.001591628086419794,
+        0.005241415895061809
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.003489583333333347,
+        0.004166666666666652
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.002147183641975331,
+        -4.798418209869669e-05
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.011111111111111112
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.8444444444444444,
+        0.9777777777777777
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9980835543766577,
+        0.9999999999999998
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.003703703703703704,
+        0.03333333333333333
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.9111111111111111,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9981874447391689,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.02962962962962963
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.9,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9984286090245392,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.003703703703703704,
+        0.037037037037037035
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.9,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9986120749479529,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.03333333333333333
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.9,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9986560874908452,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.03333333333333333
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.011111111111111072,
+        0.11111111111111116
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0010366060951286422,
+        0.001299684093137607
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        -0.025925925925925925,
+        0.01111111111111111
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        -0.033333333333333326,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0004699253139363979,
+        0.0007637410517943199
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        -0.014814814814814815,
+        0.014814814814814815
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        -0.033333333333333326,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.00038016389287831576,
+        0.0008878489947690966
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        -0.018518518518518517,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.00035238227866065395,
+        1.1102230246251565e-16
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.022222222222222223
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.10000000000000009
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0006049083995851607,
+        0.001144903829475629
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.011111111111111112
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -1.1102230246251565e-16,
+        0.00040885178710077497
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.058333333333333334,
+        0.2
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.875,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9427074353448276,
+        0.988580537856072
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.08333333333333333,
+        0.23333333333333334
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.85,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9491452991452992,
+        0.9883507277081799
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.09166666666666666,
+        0.24166666666666667
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.85,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9463921936114734,
+        0.9868664691765412
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.09166666666666666,
+        0.275
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.875,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.945295868347339,
+        0.9865052756977535
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.09166666666666666,
+        0.25833333333333336
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.85,
+        1.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.9464270451770452,
+        0.985659992372235
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.07499999999999998
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.07500000000000007,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.007609919702310802,
+        0.011956521739130425
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.04166666666666666,
+        0.04999999999999999
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.008479979561501132,
+        0.002542372881355839
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.06666666666666668
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.07500000000000007
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.008852677558429996,
+        0.001906779661017044
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.05833333333333335,
+        0.016666666666666663
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.07500000000000007,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.003448275862068975,
+        0.005389102323838187
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.08333333333333334
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.07500000000000007,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.012608695652173822,
+        0.012502626050420218
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.024999999999999994,
+        0.04999999999999999
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.005387931034482765,
+        0.005043085030622393
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        0.5229064567507964,
+        0.625
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.9073269282571608,
+        0.9651162790697675
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "single",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.8336158716501343,
+        0.8933545962277497
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        0.6168375893388922,
+        0.7119752882536632
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.9218691697761194,
+        0.9737852171725642
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.8416289019133074,
+        0.8988537636444786
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        0.5654592454316091,
+        0.6666666666666666
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.9218691697761194,
+        0.9737852171725642
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.8429165718406373,
+        0.8995984181007791
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        0.5611636203363269,
+        0.6611295761078997
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.9218691697761194,
+        0.9737852171725642
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.8513058567333027,
+        0.9049594649227594
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        0.5725932267884323,
+        0.6721774563820019
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.9218691697761194,
+        0.9737852171725642
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "point",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.854584660150928,
+        0.9091873211242303
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        0.05915492957746482,
+        0.11966394187102633
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.025552141477028657
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "mean",
+      "comparison": "mean_minus_single",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.000850769569411544,
+        0.015800832961177708
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        -0.07205051232788989,
+        -0.024453216803760246
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_mean",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.012031745410420772,
+        0.013495615464578501
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        -0.07713518299881937,
+        -0.029891304347826053
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "shuffled",
+      "comparison": "shuffled_minus_mean",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0036909260376222774,
+        0.019818007341512976
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        -0.011268401368663947,
+        0.022535211267605604
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_shuffled",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.021752691810145074,
+        0.007172821976005769
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        0.01621295558292872,
+        0.06779661016949146
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.025552141477028657
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal",
+      "comparison": "temporal_minus_single",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.007514030959261736,
+        0.022814899547171273
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 622,
+      "metric": "FA",
+      "percentile95": [
+        -0.01657573345984906,
+        0.028490213010938376
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 622,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    },
+    {
+      "arm": "temporal_inference_shuffle",
+      "comparison": "inference_shuffle_minus_temporal",
+      "declared_groups": 622,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0031076673227383917,
+        0.023357710100657715
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000
+    }
+  ],
+  "failure_counts": {
+    "ambiguous_track_jump": 4,
+    "ambiguous_track_scale": 1,
+    "frame exceeds half-sampling-period tolerance": 1,
+    "historical_detector": 22,
+    "historical_pre_detector": 9,
+    "insufficient_duration": 97,
+    "missing_track_endpoint": 3,
+    "track_gap_exceeds_limit": 1
+  },
+  "limitation": "development_pilot_one_seed_no_untouched_confirmation_no_Q3_or_novelty_claim",
+  "plan_sha256": "7bc62b991dee8f8394dcebed3c44909505a215f80349c9dd7c7c2788f5739238",
+  "policy": {
+    "SiW_subject_independence_verified": false,
+    "automatic_expansion": false,
+    "automatic_retry": false,
+    "bootstrap_repetitions": 2000,
+    "bootstrap_seed": 20261028,
+    "crop": "original_shared_context_crop_then_bicubic_RGB224_tracked_three_point_smoothing",
+    "development_targets_already_seen": true,
+    "duration_seconds": 2,
+    "encoder": "frozen_fold_specific_completed_paper329_reference_normalized_CLS_RGB224",
+    "failures": "all_four_arms_shared_nonacceptance_original_denominators",
+    "fps": 8,
+    "frames": 16,
+    "grouping": "subject_or_group_and_historical_or_any_selected_native_frame_connected_components",
+    "historical_31_failures": "retained_without_recovery",
+    "inference_shuffle": "same_temporal_head_calibrator_and_chronological_source_policy_no_refit",
+    "new_cross_role_or_domain_frame_collision": "hard_stop_before_pixel_access",
+    "order_specific_control": "shuffled",
+    "primary_alpha": "1/20",
+    "primary_candidate": "temporal",
+    "reference": "mean",
+    "selection": "earliest_strict_best_source_equal_domain_equal_class_BCE",
+    "sensitivity_alphas": [
+      "1/100",
+      "1/10"
+    ],
+    "shuffle": "fixed_addressed_nonidentity_permutation_per_target_original_all_roles",
+    "single_slot": 8,
+    "target_model_selection": false,
+    "tracking": "original_interpolate_track_endpoints_required_max_gap2_jump0.5_area_ratio0.5_to2",
+    "window": "native_interval_middle_uniform_bin_centers_nearest_unique_native_frames"
+  },
+  "primary_equal_target_summaries": [
+    {
+      "FA_safe_targets": 1,
+      "arm": "single",
+      "diagnostic_only": false,
+      "equal_target_macro": {
+        "AUROC_usable": 0.9485011745762975,
+        "BFA": 0.9318965517241379,
+        "FA": 0.21089177921014937
+      },
+      "joint_utility_targets": 1
+    },
+    {
+      "FA_safe_targets": 1,
+      "arm": "mean",
+      "diagnostic_only": false,
+      "equal_target_macro": {
+        "AUROC_usable": 0.9513668908219779,
+        "BFA": 0.9451867816091954,
+        "FA": 0.25162548598322076
+      },
+      "joint_utility_targets": 1
+    },
+    {
+      "FA_safe_targets": 1,
+      "arm": "temporal",
+      "diagnostic_only": false,
+      "equal_target_macro": {
+        "AUROC_usable": 0.950910956959332,
+        "BFA": 0.943103448275862,
+        "FA": 0.24133191375076735
+      },
+      "joint_utility_targets": 1
+    },
+    {
+      "FA_safe_targets": 1,
+      "arm": "shuffled",
+      "diagnostic_only": false,
+      "equal_target_macro": {
+        "AUROC_usable": 0.9517515017250067,
+        "BFA": 0.950742337164751,
+        "FA": 0.24753171679967262
+      },
+      "joint_utility_targets": 1
+    },
+    {
+      "FA_safe_targets": 1,
+      "arm": "temporal_inference_shuffle",
+      "diagnostic_only": true,
+      "equal_target_macro": {
+        "AUROC_usable": 0.952976914729873,
+        "BFA": 0.943103448275862,
+        "FA": 0.24572238847963987
+      },
+      "joint_utility_targets": 1
+    }
+  ],
+  "production_encoder_frames": 261264,
+  "resources": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "7bc62b991dee8f8394dcebed3c44909505a215f80349c9dd7c7c2788f5739238",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": 4924112896,
+    "sampled_owned_peak_disk_bytes": 1037341170,
+    "sampled_tree_peak_rss_bytes": 7229448192,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 38191.804212416
+  },
+  "retained_originals": 7505,
+  "scope": {
+    "calibrator_fits": 16,
+    "conditional_intervals": 132,
+    "encoder_training": false,
+    "head_fits": 16,
+    "new_download": false,
+    "new_environment": false,
+    "operating_cases": 60,
+    "retained_PAD_pixel_caches": false,
+    "seed": 20260917,
+    "source_and_target_video_decode": true,
+    "source_only_head_selection_and_calibration": true,
+    "targets": 4
+  },
+  "seed_count": 1,
+  "settings": {
+    "dtype": "float64",
+    "early_stopping": false,
+    "epochs": 200,
+    "full_batch": true,
+    "hidden": 32,
+    "lr": 0.001,
+    "seed": 20260917,
+    "selection": "earliest_strict_best_source_equal_domain_equal_class_BCE",
+    "training_device": "cpu",
+    "weight_decay": 0.05
+  },
+  "usable_clip_originals": 7367,
+  "verification": {
+    "completed": true,
+    "conditional_intervals": 132,
+    "limitation": "separate_CPU_saved_feature_reconstruction_not_training_or_encoder_replication",
+    "maximum_probability_absolute_error": 0.0,
+    "new_PAD_pixel_decodes": 0,
+    "new_fits": 0,
+    "operating_cases": 60,
+    "plan_sha256": "7bc62b991dee8f8394dcebed3c44909505a215f80349c9dd7c7c2788f5739238",
+    "result_sha256": "df80f286d8721ba88614364334a897ca292970ed0f90ea7a78851191a8e963a3",
+    "tolerance": 1e-10
+  }
+}

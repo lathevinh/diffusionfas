@@ -1,11 +1,10 @@
 # Adapted DINO short-clip probe: controlled implementation
 
 Date: 2026-11-04.
-Status: **owner approved the exact plan; persistent supervised scientific
-execution started.** The first real native replay, tracked crop and48
-adapted-encoder image forwards were observed. This is not a completed comparison
-or target-performance result. The preparation/zero-start statements below are
-the preserved pre-approval history, not live status.
+Status: **completed and separately reconstructed.** See the
+[completed results](020-adapted-dino-short-clip-results.md): the temporal head
+did not establish an improvement over averaging. Preparation and start statements
+below preserve the approval history, not live status. No automatic expansion.
 
 The owner requested a two-second clip experiment after the
 [negative regional study](018-regional-dino-completed-results.md), and explicitly
