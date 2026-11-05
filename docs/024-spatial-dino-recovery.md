@@ -1,7 +1,10 @@
 # Spatial DINO: GPU-guard failure and explicit recovery preparation
 
 Date: 2026-11-05.
-Status: recovery preparation only; **no recovery approval or scientific launch**.
+Status: **the owner approved and launched the sealed recovery, but its GPU
+guard terminated it during pre-fit input checks, before any scientific fit
+or checkpoint import.** Preparation statements below describe the historical
+pre-approval stage. See [attempt evidence](../results/spatial-dino-recovery-attempt-v1.json).
 
 ## 1. What failed, and what is not established
 
@@ -155,3 +158,31 @@ Metadata preparation receipt SHA:
 The plan binds15,009 files. All six real inherited checkpoints passed the
 CPU checks above; GPU source-validation and final reconstruction remain
 pending a new exact owner approval.
+
+## 6. Exact approval and unsuccessful recovery launch
+
+The owner selected `approve_exact_recovery_plan` for the SHA above.
+Approval receipt SHA:
+`b50489a8afcb1636c6c428a3546c1ad0144246bb6f7beae6a0715ca35d8c3f4c`.
+The detached supervised command was started, but did not pass readiness.
+
+After100.7069s of supervision the total-device GPU guard terminated the
+worker at15,358,492,672 bytes (14,647MiB), above14GiB (14,336MiB).
+The log was empty; there were zero new training starts, inherited-fit
+receipts or calibration starts. The code writes progress/start markers
+before entering any model fit/import; this termination occurred during
+the preceding bound-input checks. Batch32 was not exercised in this attempt.
+It is not a recorded CUDA OOM.
+
+Afterwards supervisor530742 and worker530750 were both absent. A device
+snapshot still showed14,917MiB used, only1,129MiB free. That post-termination
+occupancy is outside the terminated recovery, although it does not identify
+the responsible process or reconstruct the failure-instant allocation.
+The GPU was shared and its occupancy changed: the pre-approval snapshot
+had shown5,528MiB used. No other process was stopped.
+
+All six original completed checkpoints remain intact. Neither attempt is
+successful, and no new training or statistical result is claimed.
+Do not silently retry or raise the cap again. A future separately approved
+attempt needs adequate GPU headroom rather than another blind launch under
+the same occupied-device conditions.

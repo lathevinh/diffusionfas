@@ -1,0 +1,45 @@
+{
+  "study": "spatial_dino_recovery_v1",
+  "date": "2026-11-05",
+  "status": "owner_approved_attempt_terminated_before_scientific_work",
+  "plan_sha256": "41e5162ff9b44cc60de20509806291b228d4890751a3f96025d6599a6e9626db",
+  "owner_decision": "approve_exact_recovery_plan",
+  "approval_sha256": "b50489a8afcb1636c6c428a3546c1ad0144246bb6f7beae6a0715ca35d8c3f4c",
+  "supervision_sha256": "13ffb39909126f60f947256bac6669908c0d61bea18acc999779b4b20560eda2",
+  "completed": false,
+  "scientific_success_claimed": false,
+  "supervision": {
+    "guard_failure": "conservative_device_gpu_memory_cap",
+    "returncode": -15,
+    "wall_seconds": 100.70686248899437,
+    "sampled_device_peak_gpu_bytes": 15358492672,
+    "max_gpu_bytes": 15032385536,
+    "sampled_tree_peak_rss_bytes": 1865441280,
+    "sampled_owned_peak_disk_bytes": 6833458,
+    "sampling_interval_seconds": 0.2
+  },
+  "verified_after_termination": {
+    "supervisor_pid": 530742,
+    "worker_pid": 530750,
+    "supervisor_alive": false,
+    "worker_alive": false,
+    "batch_log_bytes": 0,
+    "new_backbone_training_starts": 0,
+    "imported_completed_fit_receipts": 0,
+    "new_calibrator_starts": 0,
+    "scientific_checkpoint_replays": 0,
+    "post_termination_device_used_MiB": 14917,
+    "device_total_MiB": 16376,
+    "device_free_MiB": 1129
+  },
+  "interpretation": {
+    "terminated_during_pre_fit_input_verification": true,
+    "batch_size_not_exercised_in_this_attempt": true,
+    "no_recorded_CUDA_out_of_memory_exception": true,
+    "post_termination_high_device_occupancy_is_outside_terminated_recovery": true,
+    "specific_other_process_identity_or_failure_instant_attribution": "not_established",
+    "original_six_completed_checkpoints_preserved": true,
+    "automatic_retry_or_resource_cap_increase": false
+  },
+  "next_constraint": "Do not repeat an attempt under the same occupied-device conditions. A new execution plan/authority and adequate GPU headroom are required; do not terminate other processes."
+}
