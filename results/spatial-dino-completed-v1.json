@@ -1,0 +1,52 @@
+{
+  "study": "spatial_dino_recovery_v1",
+  "status": "completed_independently_reconstructed_negative_anatomical_result",
+  "plan_sha256": "41e5162ff9b44cc60de20509806291b228d4890751a3f96025d6599a6e9626db",
+  "approval_sha256": "9009237e449edb7c827cf6712ce524090ef4ea70b2225fe337a6c7e0a94c27b0",
+  "aggregate_sha256": "221f1c8a451d7293bd17d48897c2afd7a3576e8c7de65d2fb961928b7290dac3",
+  "result_sha256": "ba18be1b07c87684658723ee72ebe3f14fc3bc8b19cfa7ff424d6488b9c27f98",
+  "verification_sha256": "3e6adb55ecfe75b1a556b3d8947d1996b7050f455a8c83b2eff6f33693fc7f9a",
+  "supervision_sha256": "ac05262aebe4a20c436c95d2793bcb11d8a602826e40d854a481361649a74454",
+  "completed": true,
+  "reused_backbone_fits": 6,
+  "new_backbone_fits": 14,
+  "new_source_calibrator_fits": 20,
+  "independent_checkpoint_replays": 20,
+  "verification_new_fits": 0,
+  "operating_cases": 60,
+  "conditional_intervals": 132,
+  "maximum_probability_absolute_error": 0.0,
+  "source_validation_recomputed": true,
+  "primary_alpha": "1/20",
+  "equal_target_primary_macro_percent": [
+    {"arm": "reference", "AUROC_usable": 94.3353, "FA": 18.6431, "BFA": 85.5268, "FA_safe_targets": 1, "joint_utility_targets": 1},
+    {"arm": "uniform", "AUROC_usable": 93.4967, "FA": 25.9944, "BFA": 80.4071, "FA_safe_targets": 1, "joint_utility_targets": 0},
+    {"arm": "content", "AUROC_usable": 95.0090, "FA": 22.0731, "BFA": 86.4224, "FA_safe_targets": 1, "joint_utility_targets": 1},
+    {"arm": "anatomical", "AUROC_usable": 93.8635, "FA": 24.9967, "BFA": 90.3113, "FA_safe_targets": 1, "joint_utility_targets": 1},
+    {"arm": "permuted", "AUROC_usable": 95.1190, "FA": 21.0483, "BFA": 89.8851, "FA_safe_targets": 1, "joint_utility_targets": 1}
+  ],
+  "supervision": {
+    "returncode": 0,
+    "guard_failure": null,
+    "wall_seconds": 22608.516743514017,
+    "sampled_device_peak_gpu_bytes": 12880707584,
+    "sampled_tree_peak_rss_bytes": 6246338560,
+    "sampled_owned_peak_disk_bytes": 7147590075
+  },
+  "interpretation": {
+    "primary_anatomical_improvement_supported": false,
+    "higher_anatomical_BFA_is_not_equal_security_improvement": true,
+    "CASIA_only_target_with_FA_at_most_five_percent_for_each_arm": true,
+    "uniform_CASIA_BFA_below_fifty_percent": true,
+    "new_method_or_SOTA_claim": false,
+    "extra_seeds_or_posthoc_tuning_authorized": false
+  },
+  "limitations": [
+    "One training seed; bootstrap intervals are conditional, not training-seed uncertainty.",
+    "Four targets are development-exposed; unknown SiW participant dependence.",
+    "SiW-Mv2 replaces Replay-Attack, so this is not standard MCIO.",
+    "All arms reuse historical RGB224 crops with possible aspect-ratio distortion.",
+    "Neural replay shares model implementation; statistical reconstruction is independent.",
+    "These metrics are not ISO/IEC 30107-3 or iBeta certification evidence."
+  ]
+}

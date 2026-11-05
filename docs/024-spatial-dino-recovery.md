@@ -1,10 +1,11 @@
 # Spatial DINO: GPU-guard failure and explicit recovery preparation
 
 Date: 2026-11-05.
-Status: **following the failed first recovery, the owner explicitly approved
-a fresh recovery attempt after GPU headroom returned; v2 is running and
-passed real inherited-checkpoint replay/calibration readiness.** See the
-[v2 start receipt](../results/spatial-dino-recovery-start-v2.json).
+Status: **recovery v2 completed and passed all20 independent checkpoint
+replays and full statistical reconstruction. The anatomical hypothesis
+was not supported.** See [completed results](025-spatial-dino-completed-results.md).
+The [v2 start receipt](../results/spatial-dino-recovery-start-v2.json)
+preserves its launch snapshot.
 Preparation and failed-v1 statements below preserve their historical context.
 
 ## 1. What failed, and what is not established
