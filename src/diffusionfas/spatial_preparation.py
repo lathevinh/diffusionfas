@@ -27,7 +27,7 @@ from .spatial_dino import (
 GIB = 1024**3
 PROBE_CAPS = {"max_seconds": 600, "max_rss_bytes": 8*GIB,
               "max_gpu_bytes": 12*GIB, "max_output_bytes": 2*GIB}
-PROPOSED_LIMITS = {"max_seconds": 72*3600, "max_rss_bytes": 8*GIB,
+PROPOSED_LIMITS = {"max_seconds": 120*3600, "max_rss_bytes": 8*GIB,
                    "max_gpu_bytes": 12*GIB, "max_output_bytes": 16*GIB}
 POLICY = {
     "source_training_domains": 3, "held_out_targets": 4, "seed": SEED,

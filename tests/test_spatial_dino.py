@@ -285,6 +285,8 @@ class SpatialTests(unittest.TestCase):
         self.assertEqual(POLICY["scientific_fits_proposed"], 20)
         self.assertFalse(POLICY["automatic_expansion"])
         self.assertEqual(result["proposed_wall_cap_seconds"], PROPOSED_LIMITS["max_seconds"])
+        self.assertEqual(PROPOSED_LIMITS, {"max_seconds": 432000, "max_rss_bytes": 8*1024**3,
+                                        "max_gpu_bytes": 12*1024**3, "max_output_bytes": 16*1024**3})
         probe["scientific_training_starts"] = 1
         with self.assertRaises(ValueError):
             estimate_budget(inventory, probe)

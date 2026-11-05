@@ -157,10 +157,12 @@ ready-to-approve scientific execution plan.
 
 ## 5. Budget and go/stop
 
-Proposed future ceiling, not authorized:72h shared wall,8GiB process-tree
-RSS,12GiB conservative total-device GPU use,16GiB owned outputs; no retry or
-seed expansion. Use maximum200-epoch inventories, not historical selected
-epochs, for cost estimation.
+Current future ceiling:120h shared wall,8GiB process-tree RSS,12GiB
+conservative total-device GPU use,16GiB owned outputs; no retry or seed
+expansion. The owner authorized raising the budget on2026-11-05; this
+authorizes the increased planning ceiling, not scientific execution under an
+unfinished/unsealed controller. Use maximum200-epoch inventories, not
+historical selected epochs, for cost estimation.
 
 The preparation estimate multiplies each arm's slowest measured synthetic
 step by its full optimizer-step inventory, includes full source validation
@@ -177,7 +179,7 @@ cross-target regressions. Use the proposed operational gates in the
 uncertainty and then repeat seeds; a one-seed pilot does not establish
 robustness or paper novelty. A visual attention map is not causal evidence.
 
-## 6. Completed engineering evidence
+## 6. Historical v1 engineering evidence (72h ceiling)
 
 The [aggregate receipt](../results/spatial-dino-preparation-v1.json) records:
 
@@ -212,8 +214,40 @@ is used to pretend that the conservative planning gate passed.
 Private preparation SHA256:
 `61c8c126c15b3a2130318141b0c86a1ee68eaa118997ff6ce044bc97ec100ae0`.
 
-**Stop here:** do not launch20 real fits, silently shorten200 epochs, raise
-the ceiling or create owner approval. Before a scientific run, explicitly
-resolve the budget and finish/seal its approval-gated execution,
-reconstruction and analysis controller. Model/sampler/training preparation
-is implemented; scientific execution readiness is not claimed.
+The72h budget block above belongs to the immutable v1 evidence. The owner
+subsequently authorized an increased budget, implemented as a bounded120h
+ceiling with the same memory/storage caps and unchanged scientific recipe.
+Refreshed code-bound preparation is recorded separately rather than editing
+the historical receipt.
+
+**Scientific execution still stops here:** do not launch20 real fits, shorten
+200 epochs or create exact-plan owner approval. Finish/seal the approval-gated
+execution, reconstruction and analysis controller before starting.
+Model/sampler/training preparation is implemented; scientific execution
+readiness is not claimed.
+
+## 7. Owner-authorized budget revision:120h
+
+The owner instructed "Cu nang ngan sach thoai mai" on2026-11-05.
+The [v2 budget receipt](../results/spatial-dino-preparation-v2.json) records
+the bounded increase from72h to **120h (five days)**. RAM8GiB, conservative
+total-device GPU12GiB, output16GiB, twenty fits, one seed, all five arms and
+the scientific recipe remain unchanged. This is not unlimited authority.
+
+Sixteen focused tests passed, including an exact432,000-second ceiling check
+and unchanged memory/storage caps. A fresh code-bound synthetic probe passed
+all five independent-process replays with no scientific starts. Supervised
+wall39.403s, sampled process-tree peak3.919GiB and device peak9.632GiB.
+Fresh metadata/hashing68.083s binds the same14,975 files and population.
+
+The refreshed planning estimate is **76.604h**, below120h; the budget planning
+gate now passes. Timing differences from v1 are synthetic measurement
+variation, not a model improvement or changed recipe. This is still not a
+guaranteed upper runtime bound.
+
+New private preparation SHA256:
+`1d7bb54c360ae771a7b2e3ca8e2ce3954d7b799541ac012cd1a667be04dfda84`.
+
+The remaining prerequisite is the sealed scientific execution/reconstruction/
+analysis controller and its exact-plan approval. No real training was started
+by the budget increase.
