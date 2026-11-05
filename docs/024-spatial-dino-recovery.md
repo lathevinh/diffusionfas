@@ -1,10 +1,11 @@
 # Spatial DINO: GPU-guard failure and explicit recovery preparation
 
 Date: 2026-11-05.
-Status: **the owner approved and launched the sealed recovery, but its GPU
-guard terminated it during pre-fit input checks, before any scientific fit
-or checkpoint import.** Preparation statements below describe the historical
-pre-approval stage. See [attempt evidence](../results/spatial-dino-recovery-attempt-v1.json).
+Status: **following the failed first recovery, the owner explicitly approved
+a fresh recovery attempt after GPU headroom returned; v2 is running and
+passed real inherited-checkpoint replay/calibration readiness.** See the
+[v2 start receipt](../results/spatial-dino-recovery-start-v2.json).
+Preparation and failed-v1 statements below preserve their historical context.
 
 ## 1. What failed, and what is not established
 
@@ -186,3 +187,22 @@ successful, and no new training or statistical result is claimed.
 Do not silently retry or raise the cap again. A future separately approved
 attempt needs adequate GPU headroom rather than another blind launch under
 the same occupied-device conditions.
+
+## 7. Renewed owner approval and verified v2 launch
+
+After the GPU watcher observed at least12GiB free for three minutes, the
+owner explicitly instructed `ok chạy đi`. A fresh immutable recovery-v2 root
+was sealed and approved; both failed roots remain unchanged. Identical
+plan content retains SHA
+`41e5162ff9b44cc60de20509806291b228d4890751a3f96025d6599a6e9626db`;
+the new approval SHA is
+`9009237e449edb7c827cf6712ce524090ef4ea70b2225fe337a6c7e0a94c27b0`.
+No model code, recipe, reuse inventory or resource cap was changed.
+
+The pre-seal device snapshot showed13,730MiB free. After persistent launch,
+supervisor535532 and worker535560 were verified alive with the correct
+parent relation. The worker completed real OULU-NPU/reference inherited
+checkpoint loading, source-validation replay and new source calibration,
+logging `SPATIAL_REUSE_COMPLETE OULU-NPU reference 44`. This is a readiness
+snapshot, not a final result. All20 final checkpoint replays and complete
+60-case/132-interval reconstruction remain required.
