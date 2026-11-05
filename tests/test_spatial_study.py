@@ -264,6 +264,50 @@ class SpatialStudyTests(unittest.TestCase):
             summary = completed_summary(root, sha, verified, {"completed": True})
             self.assertEqual(len(summary["macro"]), 15)
             self.assertEqual(summary["scope"]["backbone_fits"], 20)
+            from diffusionfas.spatial_recovery import contract
+            budget, scope, policy = contract()
+            reused = []
+            for target, arm in [("a", arm) for arm in ARMS]+[("b", "reference")]:
+                folder = root/"models"/f"{target}-{arm}"
+                reused.append({"target": target, "arm": arm, "checkpoint": str(folder/"model.pth"),
+                    "checkpoint_sha256": digest(folder/"model.pth"), "trace": str(folder/"batches.jsonl"),
+                    "trace_sha256": digest(folder/"batches.jsonl")})
+            recovery_root = root/"recovery"
+            recovery_path = recovery_root/"plan.json"
+            recovery_plan = {**plan, "recovery": {"reused": reused},
+                             "budget": budget, "execution_scope": scope, "execution_policy": policy}
+            write_json(recovery_path, recovery_plan)
+            recovery_sha = digest(recovery_path)
+            recovery_approval = {**approval, "budget": budget}
+            recovery_approval_path = recovery_root/"approval.json"
+            write_json(recovery_approval_path, recovery_approval)
+            write_json(recovery_root/"attempt.json",
+                       {"supervisor_pid": os.getppid(), "plan_sha256": recovery_sha})
+
+            def reconstruct_recovery(*args, **kwargs):
+                self.assertIn("_verify", args[0])
+                write_json(recovery_root/"verification.json",
+                           verify_results(recovery_plan, recovery_root, recovery_sha, lambda: None))
+                return SimpleNamespace(returncode=0)
+
+            from diffusionfas.spatial_study import fit as original_fit
+            with patch("diffusionfas.spatial_study.require_approval",
+                       return_value=(recovery_plan, recovery_approval)), patch(
+                "diffusionfas.spatial_study.subprocess.run", side_effect=reconstruct_recovery
+            ), patch("diffusionfas.spatial_study.fit", wraps=original_fit) as new_fits:
+                worker(recovery_path, recovery_sha, recovery_approval_path)
+                self.assertEqual(new_fits.call_count, 14)
+            recovery_verified = read_json(recovery_root/"verification.json")
+            self.assertEqual(recovery_verified["checkpoint_replays"], 20)
+            self.assertEqual(recovery_verified["execution_new_backbone_fits"], 14)
+            self.assertEqual(recovery_verified["execution_reused_backbone_fits"], 6)
+            self.assertEqual(recovery_verified["execution_new_calibrator_fits"], 20)
+            self.assertEqual(len(list((recovery_root/"models").glob("*/started.json"))), 14)
+            self.assertEqual(len(list((recovery_root/"models").glob("*/reused.json"))), 6)
+            extra = recovery_root/"models"/"a-reference"/"started.json"
+            write_json(extra, {"target": "a", "arm": "reference", "seed": SEED, "plan_sha256": recovery_sha})
+            with self.assertRaisesRegex(ValueError, "exact twenty"):
+                verify_results(recovery_plan, recovery_root, recovery_sha, lambda: None)
             result = read_json(root/"result.json")
             result["cases"][0]["policy"]["accepted_attack"] += 1
             # Put the corrupted first case in the first fold so reconstruction

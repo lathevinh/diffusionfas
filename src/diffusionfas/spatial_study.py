@@ -144,8 +144,14 @@ def seal(preparation_path: Path, preparation_sha: str, fas_root: Path, output: P
 def checked_plan(path: Path, sha: str) -> dict[str, Any]:
     require_private_output(path)
     plan = read_json(path, sha)
-    if (plan["study"] != "spatial_dino_execution_v1" or plan["execution_scope"] != SCOPE
-            or plan["execution_policy"] != EXECUTION_POLICY or plan["budget"] != BUDGET
+    budget, scope, policy = BUDGET, SCOPE, EXECUTION_POLICY
+    expected_study = "spatial_dino_execution_v1"
+    if "recovery" in plan:
+        from .spatial_recovery import contract
+        budget, scope, policy = contract()
+        expected_study = "spatial_dino_recovery_v1"
+    if (plan["study"] != expected_study or plan["execution_scope"] != scope
+            or plan["execution_policy"] != policy or plan["budget"] != budget
             or plan["settings"] != SETTINGS or plan["policy"] != POLICY
             or plan["code_sha256"] != code_pins(REPOSITORY) or plan["runtime"] != execution_runtime()
             or plan["scientific_execution_authorized"] is not False
@@ -156,6 +162,10 @@ def checked_plan(path: Path, sha: str) -> dict[str, Any]:
 
 
 def verify_inputs(plan: dict[str, Any], guard: Callable) -> None:
+    if "recovery" in plan:
+        from .spatial_recovery import verify_recovery_inputs
+        verify_recovery_inputs(plan, guard)
+        return
     source_state(Path(plan["fas_root"]))
     preparation = read_json(Path(plan["preparation_path"]), plan["preparation_sha256"])
     for field in ("settings", "policy", "entries", "contexts", "inventory", "counts", "code_sha256"):
@@ -196,16 +206,21 @@ def verify_inputs(plan: dict[str, Any], guard: Callable) -> None:
 def clock(approval: dict[str, Any]) -> None:
     now = time.monotonic()
     if (approval["boot_id"] != Path("/proc/sys/kernel/random/boot_id").read_text().strip()
-            or not 0 <= now-approval["approved_monotonic"] < BUDGET["max_seconds"]):
+            or not 0 <= now-approval["approved_monotonic"] < approval.get("budget", BUDGET)["max_seconds"]):
         raise TimeoutError("original nonresettable spatial approval clock required")
 
 
 def require_approval(path: Path, sha: str, approval_path: Path) -> tuple[dict, dict]:
     plan = checked_plan(path, sha)
     approval = read_json(approval_path)
-    if (approval["answer"] != ANSWER or approval["plan_sha256"] != sha
-            or approval["budget"] != BUDGET or approval["scope"] != SCOPE
-            or approval["execution_policy"] != EXECUTION_POLICY):
+    answer = ANSWER
+    if "recovery" in plan:
+        from .spatial_recovery import ANSWER as recovery_answer
+        answer = recovery_answer
+    if (approval["answer"] != answer or approval["plan_sha256"] != sha
+            or approval["budget"] != plan.get("budget", BUDGET)
+            or approval["scope"] != plan.get("execution_scope", SCOPE)
+            or approval["execution_policy"] != plan.get("execution_policy", EXECUTION_POLICY)):
         raise PermissionError("exact spatial plan owner approval required")
     clock(approval)
     return plan, approval
@@ -213,7 +228,11 @@ def require_approval(path: Path, sha: str, approval_path: Path) -> tuple[dict, d
 
 def approve(path: Path, sha: str, answer: str) -> Path:
     plan = checked_plan(path, sha)
-    if answer != ANSWER or any((path.parent/name).exists() for name in
+    expected_answer = ANSWER
+    if "recovery" in plan:
+        from .spatial_recovery import ANSWER as recovery_answer
+        expected_answer = recovery_answer
+    if answer != expected_answer or any((path.parent/name).exists() for name in
                               ("approval.json", "attempt.json", "started.json", "batch.log")):
         raise PermissionError("explicit exact-plan answer and unapproved/unattempted plan required")
     begun = time.monotonic()
@@ -224,8 +243,9 @@ def approve(path: Path, sha: str, answer: str) -> Path:
 
     verify_inputs(plan, guard)
     output = path.parent/"approval.json"
-    write_json(output, {"answer": answer, "plan_sha256": sha, "budget": BUDGET, "scope": SCOPE,
-                        "execution_policy": EXECUTION_POLICY, "approved_monotonic": begun,
+    write_json(output, {"answer": answer, "plan_sha256": sha, "budget": plan.get("budget", BUDGET),
+                        "scope": plan.get("execution_scope", SCOPE),
+                        "execution_policy": plan.get("execution_policy", EXECUTION_POLICY), "approved_monotonic": begun,
                         "boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip()})
     return output
 
@@ -304,18 +324,19 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
     if attempt["supervisor_pid"] != os.getppid() or attempt["plan_sha256"] != sha:
         raise PermissionError("spatial worker requires original recorded supervisor")
     supervisor = os.getppid()
+    budget = plan.get("budget", BUDGET)
     write_json(root/"started.json", {"worker_pid": os.getpid(), "plan_sha256": sha,
                                     "approval_sha256": digest(approval_path)})
 
     def guard() -> None:
         clock(approval)
-        if time.monotonic() >= approval["approved_monotonic"]+BUDGET["max_seconds"]-60:
+        if time.monotonic() >= approval["approved_monotonic"]+budget["max_seconds"]-60:
             raise TimeoutError("spatial computation reached shared closure reserve")
         if os.getppid() != supervisor:
             raise RuntimeError("spatial worker lost supervisor")
 
     verify_inputs(plan, guard)
-    torch.cuda.set_per_process_memory_fraction(BUDGET["max_gpu_bytes"]/
+    torch.cuda.set_per_process_memory_fraction(budget["max_gpu_bytes"]/
                                                torch.cuda.get_device_properties(0).total_memory)
     services, raw_rows, _ = inputs(Path(plan["fas_root"]))
     indexed = population(plan, raw_rows, services)
@@ -333,8 +354,13 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
         for arm in ARMS:
             guard()
             folder = root/"models"/f"{target}-{arm}"
-            write_json(folder/"started.json", {"target": target, "arm": arm, "seed": SEED, "plan_sha256": sha})
-            print("SPATIAL_TRAIN_START", target, arm, flush=True)
+            from .spatial_recovery import materialize, reuse_entry
+            inherited = reuse_entry(plan, target, arm)
+            if inherited is None:
+                write_json(folder/"started.json", {"target": target, "arm": arm, "seed": SEED, "plan_sha256": sha})
+                print("SPATIAL_TRAIN_START", target, arm, flush=True)
+            else:
+                print("SPATIAL_REUSE_START", target, arm, flush=True)
             source.model.configure(SEED)
             model = SpatialReference(source.model.Reference(), arm).to(DEVICE)
             reference_sha = tensor_digest(model.reference.state_dict())
@@ -347,14 +373,24 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
                     raise ValueError("all local arms require identical initial fusion tensors")
                 initial_fusion = fusion_sha
             trace = folder/"batches.jsonl"
-            state = fit(model, pools["fitting"], pools["validation"], load_rgb, load_prior,
-                        source, SEED, DEVICE, guard, trace)
+            if inherited is None:
+                state = fit(model, pools["fitting"], pools["validation"], load_rgb, load_prior,
+                            source, SEED, DEVICE, guard, trace)
+            else:
+                state = materialize(inherited, folder, sha, len(pools["fitting"]), guard)
+                model.load_state_dict(state["state_dict"], strict=True)
             validate_state(state, len(pools["fitting"]), arm)
             checkpoint = folder/"model.pth"
-            with checkpoint.open("xb") as stream:
-                torch.save(state, stream)
+            if inherited is None:
+                with checkpoint.open("xb") as stream:
+                    torch.save(state, stream)
             raw = {role: predict(model, pools[role], load_rgb, load_prior, source, DEVICE, guard)
                    for role in ("validation", "calibration", "evaluation")}
+            if inherited is not None:
+                from .clip_verify import require_close
+                from .spatial_dino import validation_loss
+                require_close(validation_loss(raw["validation"], pools["validation"]), state["validation_loss"],
+                              "inherited checkpoint fails selected source-validation replay")
             write_json(folder/"calibrator-started.json", {"plan_sha256": sha})
             calibrator = fitting.fit_calibrator(raw["calibration"],
                 np.asarray([row["binary_label"] == "attack" for row in pools["calibration"]], dtype=int),
@@ -372,7 +408,8 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
                 "probabilities": {role: values.tolist() for role, values in probabilities.items()}}
             traces.append(trace)
             step_counts.append(state["optimizer_steps"])
-            print("SPATIAL_TRAIN_COMPLETE", target, arm, state["selected_epoch"], flush=True)
+            print("SPATIAL_REUSE_COMPLETE" if inherited is not None else "SPATIAL_TRAIN_COMPLETE",
+                  target, arm, state["selected_epoch"], flush=True)
             del model, state, raw
             gc.collect()
             torch.cuda.empty_cache()
@@ -397,12 +434,13 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
     print("SPATIAL_VERIFICATION_START", flush=True)
     subprocess.run([sys.executable, str(REPOSITORY/"scripts/spatial_dino.py"), "_verify",
         "--plan", str(path), "--plan-sha256", sha, "--approval", str(approval_path)],
-        check=True, timeout=max(.01, approval["approved_monotonic"]+BUDGET["max_seconds"]-time.monotonic()))
+        check=True, timeout=max(.01, approval["approved_monotonic"]+budget["max_seconds"]-time.monotonic()))
 
 
 def preparation_summary(plan: dict[str, Any], sha: str) -> dict[str, Any]:
-    return {"plan_sha256": sha, "scope": SCOPE, "execution_policy": EXECUTION_POLICY,
-            "budget": BUDGET, "settings": SETTINGS, "counts": plan["counts"],
+    return {"plan_sha256": sha, "scope": plan.get("execution_scope", SCOPE),
+            "execution_policy": plan.get("execution_policy", EXECUTION_POLICY),
+            "budget": plan.get("budget", BUDGET), "settings": SETTINGS, "counts": plan["counts"],
             "inventory": plan["inventory"], "bound_file_count": len(plan["files"]),
             "budget_estimate": plan["budget_estimate"], "scientific_execution_authorized": False,
             "execution_runner_sealed": True, "PAD_crop_decodes": 0, "scientific_training_starts": 0}
@@ -412,11 +450,12 @@ def supervise(path: Path, sha: str, approval_path: Path) -> dict[str, Any]:
     from .adapter_pilot import device_memory_bytes
     plan, approval = require_approval(path, sha, approval_path)
     root = path.parent
+    budget = plan.get("budget", BUDGET)
     if any((root/name).exists() for name in ("attempt.json", "started.json", "batch.log", "supervision.json")):
         raise FileExistsError("one spatial attempt only; no retry/resume/clock reset")
-    if device_memory_bytes() >= BUDGET["max_gpu_bytes"]:
+    if device_memory_bytes() >= budget["max_gpu_bytes"]:
         raise MemoryError("shared device already exceeds the conservative GPU budget")
-    remaining = approval["approved_monotonic"]+BUDGET["max_seconds"]-30-time.monotonic()
+    remaining = approval["approved_monotonic"]+budget["max_seconds"]-30-time.monotonic()
     if remaining <= 0:
         raise TimeoutError("spatial approval has no supervised closure reserve remaining")
     write_json(root/"attempt.json", {"plan_sha256": sha, "supervisor_pid": os.getpid(),
@@ -426,8 +465,8 @@ def supervise(path: Path, sha: str, approval_path: Path) -> dict[str, Any]:
          "--plan-sha256", sha, "--approval", str(approval_path)], cwd=REPOSITORY,
         owned_root=root, log=root/"batch.log",
         max_seconds=remaining,
-        max_rss_bytes=BUDGET["max_rss_bytes"], max_disk_bytes=BUDGET["max_output_bytes"],
-        max_gpu_bytes=BUDGET["max_gpu_bytes"], gpu_memory_bytes=device_memory_bytes, rss_root_pid=os.getpid())
+        max_rss_bytes=budget["max_rss_bytes"], max_disk_bytes=budget["max_output_bytes"],
+        max_gpu_bytes=budget["max_gpu_bytes"], gpu_memory_bytes=device_memory_bytes, rss_root_pid=os.getpid())
     write_json(root/"supervision.json", {"plan_sha256": sha, **result})
     if not result["completed"]:
         write_json(root/"terminal.json", {"completed": False, "plan_sha256": sha,
@@ -439,9 +478,14 @@ def supervise(path: Path, sha: str, approval_path: Path) -> dict[str, Any]:
         raise ValueError("separate complete spatial checkpoint reconstruction required")
     clock(approval)
     summary = completed_summary(root, sha, verification, result)
+    summary["scope"] = plan.get("execution_scope", SCOPE)
+    if "recovery" in plan:
+        summary["recovery"] = {"origin_plan_sha256": plan["recovery"]["origin_plan_sha256"],
+                               "origin_failed_wall_seconds": plan["recovery"]["origin_failed_wall_seconds"],
+                               "reused_backbone_fits": 6, "new_backbone_fits": 14, "new_calibrator_fits": 20}
     write_json(root/"aggregate.json", summary)
     clock(approval)
-    if tree_bytes(root)+8192 > BUDGET["max_output_bytes"]:
+    if tree_bytes(root)+8192 > budget["max_output_bytes"]:
         raise MemoryError("spatial closure exceeds owned output budget")
     write_json(root/"completion.json", {"completed": True, "plan_sha256": sha,
         "aggregate_sha256": digest(root/"aggregate.json"), "verification_sha256": digest(root/"verification.json"),

@@ -1,8 +1,9 @@
 # Spatial DINO: bounded scientific execution and separate reconstruction
 
 Date: 2026-11-05.
-Status: **owner approved the exact sealed plan; supervised scientific execution
-has started, not completed.** See the [start receipt](../results/spatial-dino-start-v1.json).
+Status: **the approved attempt stopped at its total-device GPU guard; scientific
+execution did not complete.** See [failure and recovery preparation](024-spatial-dino-recovery.md)
+and the historical [start receipt](../results/spatial-dino-start-v1.json).
 Preparation and no-start statements below preserve their pre-approval history.
 
 This wires the [five-arm specification](022-spatial-dino-preparation.md).
@@ -185,8 +186,24 @@ supervisor441567 and worker441575 were alive, and the OULU-NPU reference fit
 had written its first real completed optimizer step (epoch1, zero-based
 step0). This is training progress, not merely an attempted process launch.
 
-The shared120h clock is active, with no reset between phases. No successful
+At launch the shared120h clock became active, with no reset between phases. No successful
 completion, target result, novel-method benefit or seed expansion is claimed.
 The private run root retains `batch.log` and per-fit `batches.jsonl`;
 on completion it must contain the separate verifier and aggregate/terminal
 receipts before any success report.
+
+## 8. GPU-guard termination
+
+The attempt terminated after6217.954s with
+`conservative_device_gpu_memory_cap`: sampled total-device use was
+13,139,705,856 bytes against12GiB. This is a supervisory termination,
+not a recorded CUDA out-of-memory exception. The original terminal remains
+`completed: false`; no independent final reconstruction or successful
+scientific aggregate exists.
+
+All five OULU-NPU fits and CASIA-FASD/reference completed training.
+CASIA-FASD/uniform was interrupted after its epoch28 log entry and has no
+saved completed checkpoint. The remaining targets were not started.
+The [explicit recovery preparation](024-spatial-dino-recovery.md) retains
+this failed evidence and requires a separate exact-plan approval. It does
+not reset, resume or relabel the failed attempt.

@@ -37,6 +37,9 @@ def main() -> None:
     seal.add_argument("--preparation-sha256", required=True)
     seal.add_argument("--fas-root", type=Path, required=True)
     seal.add_argument("--private-root", type=Path, required=True)
+    recovery = commands.add_parser("recover-seal")
+    recovery.add_argument("--origin-plan", type=Path, required=True)
+    recovery.add_argument("--private-root", type=Path, required=True)
     for name in ("check", "approve", "run", "_worker", "_verify"):
         command = commands.add_parser(name)
         command.add_argument("--plan", type=Path, required=True)
@@ -54,7 +57,11 @@ def main() -> None:
     cv2.setNumThreads(2)
     from diffusionfas.io import digest, read_json, require_private_output, write_json
     from diffusionfas.spatial_preparation import PROBE_CAPS, prepare, synthetic_probe, synthetic_replay
-    if args.command in ("seal", "check", "approve", "run", "_worker", "_verify"):
+    if args.command == "recover-seal":
+        from diffusionfas.spatial_recovery import seal as seal_recovery
+        path = seal_recovery(args.origin_plan, args.private_root)
+        print(json.dumps({"recovery_plan_sha256": digest(path), "scientific_execution_authorized": False}))
+    elif args.command in ("seal", "check", "approve", "run", "_worker", "_verify"):
         from diffusionfas.spatial_study import (
             approve, checked_plan, seal, supervise, verify_inputs, worker,
         )

@@ -51,6 +51,7 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
             or len(intervals) != len(result["conditional_intervals"])):
         raise ValueError("exact132 unique spatial interval records required")
     maximum_error, replays, expected_starts, expected_calibrators = 0., 0, set(), set()
+    expected_reused = set()
     initial_reference, initial_fusion = None, None
     for context in plan["contexts"]:
         guard()
@@ -66,17 +67,28 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
         for arm in ARMS:
             guard()
             folder = root/"models"/f"{target}-{arm}"
-            expected_starts.add(folder/"started.json")
             expected_calibrators.add(folder/"calibrator-started.json")
-            start = read_json(folder/"started.json")
-            if start != {"target": target, "arm": arm, "seed": SEED, "plan_sha256": sha}:
-                raise ValueError("exact training-start receipt required")
+            from .spatial_recovery import reuse_entry, reuse_receipt
+            inherited = reuse_entry(plan, target, arm)
+            if inherited is None:
+                expected_starts.add(folder/"started.json")
+                start = read_json(folder/"started.json")
+                if start != {"target": target, "arm": arm, "seed": SEED, "plan_sha256": sha}:
+                    raise ValueError("exact training-start receipt required")
+            else:
+                expected_reused.add(folder/"reused.json")
+                if read_json(folder/"reused.json") != reuse_receipt(inherited, sha):
+                    raise ValueError("exact inherited checkpoint receipt required")
             if read_json(folder/"calibrator-started.json") != {"plan_sha256": sha}:
                 raise ValueError("exact calibrator-start receipt required")
             record = saved["models"][arm]
             checkpoint, trace = folder/"model.pth", folder/"batches.jsonl"
             if digest(checkpoint) != record["checkpoint_sha256"] or digest(trace) != record["trace_sha256"]:
                 raise ValueError("saved spatial checkpoint/trace bytes changed")
+            if inherited is not None and (
+                digest(checkpoint) != inherited["checkpoint_sha256"] or digest(trace) != inherited["trace_sha256"]
+            ):
+                raise ValueError("reused checkpoint/trace no longer matches approved origin")
             state = torch.load(checkpoint, map_location="cpu", weights_only=True)
             validate_state(state, len(pools["fitting"]), arm)
             if (state["trace_sha256"] != digest(trace) or state["selected_epoch"] != record["selected_epoch"]
@@ -161,17 +173,23 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
                 require_close(record["percentile95"], stored["percentile95"], "independent spatial bootstrap differs")
         guard()
     if (set((root/"models").glob("*/started.json")) != expected_starts
-            or set((root/"models").glob("*/calibrator-started.json")) != expected_calibrators or replays != 20):
+            or set((root/"models").glob("*/reused.json")) != expected_reused
+            or set((root/"models").glob("*/calibrator-started.json")) != expected_calibrators or replays != 20
+            or len(expected_starts) != plan.get("execution_scope", SCOPE).get("new_backbone_fits", 20)
+            or len(expected_reused) != plan.get("execution_scope", SCOPE).get("reused_backbone_fits", 0)):
         raise ValueError("exact twenty training/calibrator starts and checkpoint replays required")
     return {"completed": True, "plan_sha256": sha, "result_sha256": digest(root/"result.json"),
             "checkpoint_replays": replays, "operating_cases": len(cases), "conditional_intervals": len(intervals),
             "maximum_probability_absolute_error": maximum_error, "tolerance": 1e-10,
-            "new_fits": 0, "source_validation_recomputed": True, "PAD_crop_replay_required": True}
+            "new_fits": 0, "source_validation_recomputed": True, "PAD_crop_replay_required": True,
+            "execution_new_backbone_fits": len(expected_starts), "execution_reused_backbone_fits": len(expected_reused),
+            "execution_new_calibrator_fits": len(expected_calibrators)}
 
 
 def verify_completed(path: Path, sha: str, approval_path: Path) -> None:
     plan, approval = require_approval(path, sha, approval_path)
     root = path.parent
+    budget = plan.get("budget", BUDGET)
     start = read_json(root/"started.json")
     if (start["worker_pid"] != os.getppid() or start["plan_sha256"] != sha
             or start["approval_sha256"] != digest(approval_path)):
@@ -181,13 +199,13 @@ def verify_completed(path: Path, sha: str, approval_path: Path) -> None:
 
     def guard() -> None:
         clock(approval)
-        if time.monotonic() >= approval["approved_monotonic"]+BUDGET["max_seconds"]-60:
+        if time.monotonic() >= approval["approved_monotonic"]+budget["max_seconds"]-60:
             raise TimeoutError("spatial verification reached shared closure reserve")
         if os.getppid() != parent:
             raise RuntimeError("spatial verifier lost worker parent")
 
     verify_inputs(plan, guard)
-    torch.cuda.set_per_process_memory_fraction(BUDGET["max_gpu_bytes"]/
+    torch.cuda.set_per_process_memory_fraction(budget["max_gpu_bytes"]/
                                                torch.cuda.get_device_properties(0).total_memory)
     result = verify_results(plan, root, sha, guard)
     guard()
