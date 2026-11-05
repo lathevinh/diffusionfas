@@ -26,6 +26,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Clip probe đã hoàn tất: temporal chưa vượt mean16, chỉ CASIA đạt operating utility](docs/020-adapted-dino-short-clip-results.md).
 - [Audit 5 công trình: protocol/threshold/code-license, novelty và quyết định nghiên cứu tiếp theo](docs/021-benchmark-novelty-and-next-decision.md).
 - [Chuẩn bị DINO fine-tune với soft anatomical patch weights: 5 arms, synthetic parity và ngân sách](docs/022-spatial-dino-preparation.md).
+- [Controller spatial DINO: 20 fine-tunes, exact approval, giám sát 120 giờ và kiểm chứng checkpoint riêng](docs/023-spatial-dino-execution-controller.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD

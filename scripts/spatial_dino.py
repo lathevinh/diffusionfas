@@ -1,4 +1,4 @@
-"""Prepare spatial DINO; deliberately no scientific run or approval command."""
+"""Prepare, seal and supervise one exactly approved spatial DINO study."""
 
 from __future__ import annotations
 
@@ -32,14 +32,57 @@ def main() -> None:
     replay.add_argument("--checkpoint-sha256", required=True)
     for command in (smoke, prepare, worker, replay):
         command.add_argument("--fas-root", type=Path, required=True)
+    seal = commands.add_parser("seal")
+    seal.add_argument("--preparation", type=Path, required=True)
+    seal.add_argument("--preparation-sha256", required=True)
+    seal.add_argument("--fas-root", type=Path, required=True)
+    seal.add_argument("--private-root", type=Path, required=True)
+    for name in ("check", "approve", "run", "_worker", "_verify"):
+        command = commands.add_parser(name)
+        command.add_argument("--plan", type=Path, required=True)
+        command.add_argument("--plan-sha256", required=True)
+        if name == "approve":
+            command.add_argument("--answer", required=True)
+        if name in ("run", "_worker", "_verify"):
+            command.add_argument("--approval", type=Path, required=True)
     args = parser.parse_args()
     if os.environ.get("CONDA_DEFAULT_ENV") != "fas":
         raise RuntimeError("use the existing fas conda environment")
     import torch
+    import cv2
     torch.set_num_threads(2)
+    cv2.setNumThreads(2)
     from diffusionfas.io import digest, read_json, require_private_output, write_json
     from diffusionfas.spatial_preparation import PROBE_CAPS, prepare, synthetic_probe, synthetic_replay
-    if args.command == "_replay":
+    if args.command in ("seal", "check", "approve", "run", "_worker", "_verify"):
+        from diffusionfas.spatial_study import (
+            approve, checked_plan, seal, supervise, verify_inputs, worker,
+        )
+        if args.command == "seal":
+            path = seal(args.preparation, args.preparation_sha256, args.fas_root, args.private_root)
+            print(json.dumps({"execution_plan_sha256": digest(path), "scientific_execution_authorized": False}))
+        elif args.command == "check":
+            import time
+            begun = time.monotonic()
+
+            def guard() -> None:
+                if time.monotonic()-begun > 1800:
+                    raise TimeoutError("spatial metadata check ceiling")
+
+            verify_inputs(checked_plan(args.plan, args.plan_sha256), guard)
+            print(json.dumps({"sealed_inputs_verified": True, "PAD_crop_decodes": 0}))
+        elif args.command == "approve":
+            path = approve(args.plan, args.plan_sha256, args.answer)
+            print(json.dumps({"approval_sha256": digest(path)}))
+        elif args.command == "_worker":
+            worker(args.plan, args.plan_sha256, args.approval)
+        elif args.command == "_verify":
+            from diffusionfas.spatial_verify import verify_completed
+            verify_completed(args.plan, args.plan_sha256, args.approval)
+        else:
+            summary = supervise(args.plan, args.plan_sha256, args.approval)
+            print(json.dumps({"completed": summary["completed"], "plan_sha256": args.plan_sha256}))
+    elif args.command == "_replay":
         print(json.dumps(synthetic_replay(args.checkpoint, args.checkpoint_sha256, args.fas_root)))
     elif args.command == "_smoke":
         synthetic_probe(args.output, args.fas_root)

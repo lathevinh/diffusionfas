@@ -43,14 +43,14 @@ POLICY = {
     "development_targets_already_seen": True, "SiW_subject_independence_verified": False,
     "new_download": False, "new_environment": False, "new_decoder_or_detector": False,
     "automatic_retry": False, "automatic_expansion": False,
-    "current_authority": "metadata_and_synthetic_only_no_scientific_execution_command",
+    "current_authority": "metadata_and_synthetic_only_no_scientific_execution_authority",
 }
 
 
 def code_pins(root: Path) -> dict[str, str]:
     return {str(path.relative_to(root)): digest(path)
             for path in [*sorted((root/"src").rglob("*.py")), *sorted((root/"scripts").glob("*.py")),
-                         root/"tests/test_spatial_dino.py"]}
+                         *sorted((root/"tests").glob("test_spatial*.py"))]}
 
 
 def fixture() -> tuple[list[dict[str, Any]], np.ndarray, np.ndarray]:
@@ -319,7 +319,8 @@ def prepare(fas_root: Path, output: Path, probe_path: Path) -> Path:
                               "maximum_optimizer_steps": ((counts["fitting"]+31)//32)*SETTINGS["epochs"]})
     estimate = estimate_budget(inventory, probe)
     plan = {"study": "spatial_dino_preparation_v1", "scientific_execution_authorized": False,
-            "executable_scientific_runner_available": False, "policy": POLICY, "settings": SETTINGS,
+            "executable_scientific_runner_available": True, "execution_runner_sealed": False,
+            "policy": POLICY, "settings": SETTINGS,
             "code_sha256": code_pins(repository), "files": files, "entries": entries,
             "contexts": contexts, "inventory": inventory, "proposed_limits": PROPOSED_LIMITS,
             "budget_estimate": estimate, "new_shared_geometry_failures": dict(failures),

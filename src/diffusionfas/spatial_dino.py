@@ -312,6 +312,27 @@ def validation_loss(logits: np.ndarray, rows: list[dict[str, Any]]) -> float:
     return float(np.mean(terms))
 
 
+def validate_state(state: dict[str, Any], fitting_count: int, arm: str) -> None:
+    history = state["history"]
+    values = [item["validation"] for item in history]
+    if (state["arm"] != arm or state["seed"] != SEED
+            or state["settings_sha256"] != object_digest(SETTINGS)
+            or not history or len(history) > SETTINGS["epochs"] or not np.isfinite(values).all()
+            or [item["epoch"] for item in history] != list(range(1, len(history)+1))
+            or state["optimizer_steps"] != len(history)*((fitting_count+31)//32)
+            or state["selected_epoch"] != int(np.argmin(values))+1
+            or state["validation_loss"] != min(values)):
+        raise ValueError("spatial checkpoint history/recipe/selection/step inventory mismatch")
+    best, stale = float("inf"), 0
+    for i, value in enumerate(values):
+        stale = 0 if value < best else stale+1
+        best = min(best, value)
+        if stale >= SETTINGS["patience"] and i != len(values)-1:
+            raise ValueError("spatial training continued beyond patience")
+    if len(history) < SETTINGS["epochs"] and stale != SETTINGS["patience"]:
+        raise ValueError("shortened spatial recipe is not successful early stopping")
+
+
 def fit(
     model: SpatialReference, fitting: list[dict[str, Any]], validation: list[dict[str, Any]],
     load_rgb: Callable, load_prior: Callable, source: SourceModules, seed: int, device: str,

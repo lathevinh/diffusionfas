@@ -291,12 +291,12 @@ class SpatialTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             estimate_budget(inventory, probe)
 
-    def test_cli_has_no_scientific_execution_or_approval_command(self):
+    def test_cli_cannot_execute_or_approve_without_explicit_plan_arguments(self):
         script = Path(__file__).resolve().parents[1]/"scripts/spatial_dino.py"
         for command in ("run", "approve"):
             result = subprocess.run([sys.executable, str(script), command], capture_output=True, text=True)
             self.assertEqual(result.returncode, 2)
-            self.assertIn("invalid choice", result.stderr)
+            self.assertIn("required", result.stderr)
 
 
 if __name__ == "__main__":

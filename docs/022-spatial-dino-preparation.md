@@ -1,8 +1,9 @@
 # Fine-tuned DINO with soft anatomical patch weights
 
 Date: 2026-11-05.
-Status: implementation and synthetic/metadata preparation completed;
-**scientific execution blocked, not a PAD result or execution approval**.
+Status: implementation and synthetic/metadata preparation completed.
+The [execution controller](023-spatial-dino-execution-controller.md) now wires
+the next stage; **no PAD result or exact execution approval is implied**.
 
 ## 1. Hypothesis and five arms
 
@@ -148,12 +149,12 @@ pretrained weights, source assets, partitions and synthetic evidence.
 Individual records/paths/landmarks remain private; the public receipt is
 aggregate only.
 
-**There is intentionally no `run` or `approve` command in this preparation.**
-Generic fit/predict helpers are implemented and tested, but a full scientific
-execution controller, exact owner approval, nonresettable clocks,
-independent scientific reconstruction and paired statistical analysis must
-be wired and sealed before starting the20 real fits. This is not yet a
-ready-to-approve scientific execution plan.
+**The v1/v2 preparation intentionally had no `run` or `approve` command.**
+Generic fit/predict helpers were tested before scientific execution was
+implemented. The subsequent [controller](023-spatial-dino-execution-controller.md)
+adds those commands with exact owner approval, nonresettable clocks,
+separate reconstruction and paired analysis. The old preparation receipts
+are historical evidence, not execution authority.
 
 ## 5. Budget and go/stop
 
@@ -248,6 +249,7 @@ guaranteed upper runtime bound.
 New private preparation SHA256:
 `1d7bb54c360ae771a7b2e3ca8e2ce3954d7b799541ac012cd1a667be04dfda84`.
 
-The remaining prerequisite is the sealed scientific execution/reconstruction/
-analysis controller and its exact-plan approval. No real training was started
-by the budget increase.
+At v2, the remaining prerequisite was a sealed scientific execution/
+reconstruction/analysis controller and exact-plan approval. The subsequent
+[controller](023-spatial-dino-execution-controller.md) addresses that stage.
+No real training was started by the budget increase.
