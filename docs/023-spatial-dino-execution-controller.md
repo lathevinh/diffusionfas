@@ -1,8 +1,9 @@
 # Spatial DINO: bounded scientific execution and separate reconstruction
 
 Date: 2026-11-05.
-Status: controller implemented and synthetic regression passed;
-**no scientific start without exact sealed-plan owner approval**.
+Status: **owner approved the exact sealed plan; supervised scientific execution
+has started, not completed.** See the [start receipt](../results/spatial-dino-start-v1.json).
+Preparation and no-start statements below preserve their pre-approval history.
 
 This wires the [five-arm specification](022-spatial-dino-preparation.md).
 The120h budget increase is not treated as an exact scientific execution
@@ -171,3 +172,21 @@ attempt marker at sealing.
 Both approval and actual launch remain separate explicit steps. The
 five-arm/20-fit scope above, including the verifier's PAD crop replay, must
 be shown with this exact SHA before starting.
+
+## 7. Exact owner approval and verified start
+
+The owner selected `approve_exact_plan` for execution SHA
+`866233a31917bae7d73e943a533a72916edb15383ad13bd1af675259fc2c896f`.
+Approval receipt SHA:
+`9dc6c802efcb98fb9313fe4fd8c70d0978d53a08d7ed495e282a4ff58eea201b`.
+
+The persistent supervised run was launched and independently checked:
+supervisor441567 and worker441575 were alive, and the OULU-NPU reference fit
+had written its first real completed optimizer step (epoch1, zero-based
+step0). This is training progress, not merely an attempted process launch.
+
+The shared120h clock is active, with no reset between phases. No successful
+completion, target result, novel-method benefit or seed expansion is claimed.
+The private run root retains `batch.log` and per-fit `batches.jsonl`;
+on completion it must contain the separate verifier and aggregate/terminal
+receipts before any success report.

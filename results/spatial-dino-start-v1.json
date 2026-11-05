@@ -1,0 +1,41 @@
+{
+  "study": "spatial_dino_execution_v1",
+  "status": "approved_started_not_completed",
+  "date": "2026-11-05",
+  "execution_plan_sha256": "866233a31917bae7d73e943a533a72916edb15383ad13bd1af675259fc2c896f",
+  "owner_decision": "approve_exact_plan",
+  "approval_sha256": "9dc6c802efcb98fb9313fe4fd8c70d0978d53a08d7ed495e282a4ff58eea201b",
+  "scientific_execution_authorized": true,
+  "supervised_detached_run": true,
+  "supervisor_pid_at_observation": 441567,
+  "worker_pid_at_observation": 441575,
+  "both_processes_alive_at_observation": true,
+  "first_training_context": {
+    "target": "OULU-NPU",
+    "arm": "reference",
+    "observed_completed_optimizer_step": {
+      "epoch": 1,
+      "zero_based_step": 0
+    }
+  },
+  "planned_inventory": {
+    "targets": 4,
+    "seed": 20260917,
+    "backbone_fits": 20,
+    "source_calibrator_fits": 20,
+    "independent_checkpoint_replays": 20
+  },
+  "shared_limits": {
+    "max_seconds": 432000,
+    "max_tree_rss_bytes": 8589934592,
+    "max_total_device_gpu_bytes": 12884901888,
+    "max_owned_output_bytes": 17179869184
+  },
+  "new_download": false,
+  "new_native_video_decode": false,
+  "automatic_retry": false,
+  "automatic_expansion": false,
+  "completion_claimed": false,
+  "scientific_improvement_claimed": false,
+  "limitation": "Startup liveness and a real completed training step are verified; final results and separate checkpoint reconstruction are pending."
+}
