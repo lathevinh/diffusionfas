@@ -177,6 +177,13 @@ separation, not fitting target thresholds to claim generalization.
 - Do not add calibration, temporal modeling, new masks or extra seeds to
   this completed seal. Any follow-up requires a new bounded protocol/approval.
 
+The completed [CPU saved-score attack diagnosis](030-siw-saved-score-attack-diagnosis.md)
+now finds that94.262-100% of SiW false accepts at the declared5% source policy
+come from makeup/mask/partial, absent under the usable source-family mapping.
+Print/replay exclusions are also much higher, so both denominators and the
+full target must remain visible. This motivates coverage/unseen-family protocol
+work rather than another blind crop/anatomical or tail-loss grid.
+
 Targets were already development-exposed, SiW participant independence
 remains unresolved and the protocol substitutes SiW-Mv2 for Replay-Attack;
 it is not standard MCIO. One seed and conditional intervals do not establish

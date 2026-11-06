@@ -33,6 +33,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Full-cohort paired crop cache verified: 6,231 real-pixel pairs, unchanged roles and 24-fit A/B inventory](docs/027-spatial-dino-full-cohort-crops.md).
 - [Paired crop controller and approved launch: 24 fits, dual denominator replay, bounded GPU probe and sealed plan](docs/028-spatial-dino-paired-crop-controller.md).
 - [Completed24-fit crop A/B: square improves CLS reference AUROC, but not content/anatomical consistently](docs/029-spatial-dino-paired-crop-results.md).
+- [CPU SiW attack diagnosis: absent makeup/mask/partial families dominate false accepts; no subject-disjointness claim](docs/030-siw-saved-score-attack-diagnosis.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
