@@ -1,0 +1,89 @@
+{
+  "study": "spatial_crop_controller_preparation_v1",
+  "completed": true,
+  "owner_decision": "approve_synthetic_probe_and_metadata_seal_only",
+  "private_plan_sha256": "2df70a86325cf2f06baf20709773d42177d39708721981d4c218d0e08ce2fe86",
+  "private_preparation_sha256": "b82353431baa0fa08e467b8d785fd48abb11c1d54518ca1af52a5634186ca71e",
+  "private_probe_sha256": "52850fced8c9fa983d78e5ad7f48d1b7589ba44753f71064e7479cef6e191d6e",
+  "private_probe_supervision_sha256": "47f1e2514d22200a545b17ae0b10d9e2b6a23f9b378f82d928606efaed4bac9a",
+  "private_check_sha256": "e885a3986e381856d66881d7af836658cfa246517e42acd6e3dc02f4c6f862c9",
+  "code_pins_sha256": "e8fcb8ce2d46f13269b6287e7f5aac1d7a9abf7cecd9a7622c71e7a785920e24",
+  "execution_scope": {
+    "targets": 4, "seed": 20260917, "backbone_fits": 24, "new_backbone_fits": 24,
+    "calibrator_fits": 24, "reused_backbone_fits": 0,
+    "systems": [
+      "legacy_reference", "legacy_content", "legacy_anatomical",
+      "square_reference", "square_content", "square_anatomical"
+    ],
+    "views": ["original", "common"],
+    "operating_cases": 144, "conditional_intervals": 360,
+    "automatic_retry": false, "automatic_expansion": false,
+    "new_native_video_decode": false, "new_detector": false,
+    "new_download": false, "new_environment": false,
+    "generic_pretrained_initialization_only": true
+  },
+  "proposed_execution_budget": {
+    "max_seconds": 432000, "max_rss_bytes": 8589934592,
+    "max_gpu_bytes": 15032385536, "max_output_bytes": 17179869184
+  },
+  "cohort": {
+    "originals": 7505, "common_usable": 6231, "shared_failures": 1274,
+    "source_roles_changed": false, "original_denominators_preserved": true,
+    "conditional_view_refits_calibrator": false,
+    "explicit_crop_landmark_loader_required": true,
+    "checkpoint_target_crop_mask_role_binding_required": true,
+    "crop_pair_RNG_labels_transforms_PDA_checked": true,
+    "cross_crop_RGB_and_prior_equality_required": false
+  },
+  "engineering_probe": {
+    "scope": "synthetic_five_arm_engine_superset_not_PAD",
+    "completed": true, "synthetic_optimizer_steps": 15,
+    "same_process_exact_replays": 5, "separate_process_exact_replays": 5,
+    "PAD_image_decodes": 0, "retained_synthetic_checkpoints": 0,
+    "max_seconds": 600, "max_rss_bytes": 8589934592,
+    "max_total_device_gpu_bytes": 15032385536, "max_output_bytes": 2147483648,
+    "per_process_cuda_allocator_limit_bytes": 12884901888,
+    "wall_seconds": 41.32226667396026,
+    "sampled_device_peak_gpu_bytes": 9453961216,
+    "sampled_tree_peak_rss_bytes": 4282355712,
+    "sampled_owned_peak_disk_bytes": 346516572,
+    "guard_failure": null
+  },
+  "budget_estimate": {
+    "maximum_optimizer_steps": 248400,
+    "raw_max_epoch_synthetic_training_seconds": 81717.58283476811,
+    "raw_max_epoch_synthetic_validation_seconds": 7325.769356568344,
+    "planning_seconds_with_3x_factor_plus_6h_reserve": 288730.05657400936,
+    "estimated_checkpoint_bytes": 8315497352,
+    "fits_within_proposed_wall_estimate": true,
+    "crop_IO_measured": false,
+    "is_guaranteed_upper_bound": false
+  },
+  "validation": {
+    "focused_tests_passed": 86,
+    "focused_test_wall_seconds": 39.241,
+    "synthetic_tiny_model_fits_in_new_integration_test": 24,
+    "synthetic_checkpoint_reconstructions_in_new_integration_test": 24,
+    "synthetic_operating_cases_checked": 144,
+    "synthetic_interval_records_checked": 360,
+    "synthetic_macro_records_checked": 36,
+    "new_integration_test_intercepts_subprocess_launch": true,
+    "old20_fit_and6_inherited14_new_recovery_regressions_passed": true,
+    "changed_Python_files_AST_parsed": 6,
+    "editor_typecheck_claimed": false,
+    "all_bound_files_rechecked": 27488,
+    "exact_plan_code_runtime_and_input_check_completed": true
+  },
+  "execution_runner_sealed": true,
+  "scientific_execution_authorized": false,
+  "execution_approval_created": false,
+  "execution_attempt_created": false,
+  "actual_PAD_backbone_fits": 0,
+  "actual_PAD_calibrator_fits": 0,
+  "actual_PAD_checkpoint_replays": 0,
+  "new_native_video_decodes": 0,
+  "source_FAS_modified": false,
+  "private_data_published": false,
+  "accuracy_improvement_claimed": false,
+  "ISO_or_iBeta_pass_claimed": false
+}

@@ -135,6 +135,12 @@ or GPU measurement.
 
 Still required before fitting:
 
+Follow-up: the controller, augmentation/PDA tests, synthetic GPU probe and
+exact execution seal have now completed; see
+[the paired-crop controller readiness report](028-spatial-dino-paired-crop-controller.md).
+The plan remains unapproved and unattempted. This does not change the
+preparation-only authority or any preceding scientific results.
+
 - Implement the two-crop controller and loaders with explicit crop-specific
   landmark/prior inputs; do not silently reuse the historical geometry setting.
 - Preserve the source recipe, RGB/label augmentation and prior transport

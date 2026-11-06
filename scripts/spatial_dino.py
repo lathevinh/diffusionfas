@@ -22,6 +22,8 @@ def main() -> None:
     commands = parser.add_subparsers(dest="command", required=True)
     smoke = commands.add_parser("smoke")
     smoke.add_argument("--private-root", type=Path, required=True)
+    crop_smoke = commands.add_parser("crop-smoke")
+    crop_smoke.add_argument("--private-root", type=Path, required=True)
     prepare = commands.add_parser("prepare")
     prepare.add_argument("--private-root", type=Path, required=True)
     prepare.add_argument("--probe", type=Path, required=True)
@@ -30,7 +32,7 @@ def main() -> None:
     replay = commands.add_parser("_replay")
     replay.add_argument("--checkpoint", type=Path, required=True)
     replay.add_argument("--checkpoint-sha256", required=True)
-    for command in (smoke, prepare, worker, replay):
+    for command in (smoke, crop_smoke, prepare, worker, replay):
         command.add_argument("--fas-root", type=Path, required=True)
     seal = commands.add_parser("seal")
     seal.add_argument("--preparation", type=Path, required=True)
@@ -40,6 +42,11 @@ def main() -> None:
     recovery = commands.add_parser("recover-seal")
     recovery.add_argument("--origin-plan", type=Path, required=True)
     recovery.add_argument("--private-root", type=Path, required=True)
+    crop_seal = commands.add_parser("crop-seal")
+    crop_seal.add_argument("--preparation", type=Path, required=True)
+    crop_seal.add_argument("--verification", type=Path, required=True)
+    crop_seal.add_argument("--probe", type=Path, required=True)
+    crop_seal.add_argument("--private-root", type=Path, required=True)
     for name in ("check", "approve", "run", "_worker", "_verify"):
         command = commands.add_parser(name)
         command.add_argument("--plan", type=Path, required=True)
@@ -57,7 +64,11 @@ def main() -> None:
     cv2.setNumThreads(2)
     from diffusionfas.io import digest, read_json, require_private_output, write_json
     from diffusionfas.spatial_preparation import PROBE_CAPS, prepare, synthetic_probe, synthetic_replay
-    if args.command == "recover-seal":
+    if args.command == "crop-seal":
+        from diffusionfas.spatial_crop_study import seal as seal_crops
+        path = seal_crops(args.preparation, args.verification, args.probe, args.private_root)
+        print(json.dumps({"crop_plan_sha256": digest(path), "scientific_execution_authorized": False}))
+    elif args.command == "recover-seal":
         from diffusionfas.spatial_recovery import seal as seal_recovery
         path = seal_recovery(args.origin_plan, args.private_root)
         print(json.dumps({"recovery_plan_sha256": digest(path), "scientific_execution_authorized": False}))
@@ -99,20 +110,25 @@ def main() -> None:
     else:
         from diffusionfas.adapter_pilot import device_memory_bytes
         from diffusionfas.supervision import run_bounded
+        caps = PROBE_CAPS
+        if args.command == "crop-smoke":
+            from diffusionfas.spatial_crop_study import BUDGET as crop_budget
+            caps = {**PROBE_CAPS, "max_gpu_bytes": crop_budget["max_gpu_bytes"]}
         require_private_output(args.private_root/"probe.json")
         if args.private_root.exists():
             raise FileExistsError("new immutable synthetic probe directory required")
-        if device_memory_bytes() >= PROBE_CAPS["max_gpu_bytes"]:
+        if device_memory_bytes() >= caps["max_gpu_bytes"]:
             raise MemoryError("shared-device occupancy exceeds synthetic probe budget")
         args.private_root.mkdir(parents=True)
         result = run_bounded(
             [sys.executable, str(Path(__file__).resolve()), "_smoke", "--fas-root", str(args.fas_root),
              "--output", str(args.private_root/"probe.json")],
             cwd=ROOT, owned_root=args.private_root, log=args.private_root/"probe.log",
-            max_seconds=PROBE_CAPS["max_seconds"], max_rss_bytes=PROBE_CAPS["max_rss_bytes"],
-            max_disk_bytes=PROBE_CAPS["max_output_bytes"], max_gpu_bytes=PROBE_CAPS["max_gpu_bytes"],
+            max_seconds=caps["max_seconds"], max_rss_bytes=caps["max_rss_bytes"],
+            max_disk_bytes=caps["max_output_bytes"], max_gpu_bytes=caps["max_gpu_bytes"],
             gpu_memory_bytes=device_memory_bytes, rss_root_pid=os.getpid())
-        write_json(args.private_root/"supervision.json", result)
+        write_json(args.private_root/"supervision.json",
+                   {**result, **({"caps": caps} if args.command == "crop-smoke" else {})})
         if not result["completed"]:
             raise RuntimeError("synthetic probe failed; inspect retained probe.log, no automatic retry")
         value = read_json(args.private_root/"probe.json")

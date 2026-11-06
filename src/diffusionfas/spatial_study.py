@@ -60,6 +60,49 @@ REPOSITORY = Path(__file__).resolve().parents[2]
 DEVICE = "cuda"
 
 
+def systems(plan: dict) -> tuple[str, ...]:
+    if "crop_study" in plan:
+        from .spatial_crop_study import SYSTEMS
+        return SYSTEMS
+    return ARMS
+
+
+def model_arm(plan: dict, system: str) -> str:
+    if "crop_study" in plan:
+        from .spatial_crop_study import split_system
+        return split_system(system)[1]
+    return system
+
+
+def input_binding(plan: dict, target: str, system: str) -> dict:
+    if "crop_study" in plan:
+        from .spatial_crop_study import input_binding as crop_binding
+        return {"input_binding": crop_binding(plan, target, system)}
+    return {}
+
+
+def analysis_views(plan: dict, originals: list[dict], groups: dict) -> list[tuple[str | None, list, dict]]:
+    if "crop_study" in plan:
+        from .spatial_crop_study import views
+        return views(originals, groups)
+    return [(None, originals, groups)]
+
+
+def contrasts(plan: dict) -> tuple:
+    if "crop_study" in plan:
+        from .spatial_crop_study import CONTRASTS as crop_contrasts
+        return crop_contrasts
+    return CONTRASTS
+
+
+def paired_traces(plan: dict, paths: list[Path], steps: list[int], guard: Callable) -> None:
+    if "crop_study" in plan:
+        from .spatial_crop_study import verify_traces
+        verify_traces(paths, steps, guard)
+    else:
+        verify_paired_traces(paths, steps, guard)
+
+
 def execution_runtime() -> dict[str, Any]:
     if not torch.cuda.is_available():
         raise RuntimeError("approved spatial execution requires the measured CUDA device")
@@ -69,6 +112,9 @@ def execution_runtime() -> dict[str, Any]:
 
 
 def population(plan: dict[str, Any], raw: list[dict[str, Any]], services: dict[str, Any]) -> dict[str, dict]:
+    if "crop_study" in plan:
+        from .spatial_crop_study import population as crop_population
+        return crop_population(plan, raw, services)
     from .regional_study import transaction_for
     entries = {item["key"]: item for item in plan["entries"]}
     identity = services["fas.source_fitting"].identity
@@ -146,13 +192,23 @@ def checked_plan(path: Path, sha: str) -> dict[str, Any]:
     plan = read_json(path, sha)
     budget, scope, policy = BUDGET, SCOPE, EXECUTION_POLICY
     expected_study = "spatial_dino_execution_v1"
+    settings, preparation_policy = SETTINGS, POLICY
+    if "crop_study" in plan:
+        from .spatial_crop_study import BUDGET as crop_budget, SCOPE as crop_scope
+        from .spatial_crop_study import EXECUTION_POLICY as crop_policy, SETTINGS as crop_settings
+        from .spatial_crop_study import POLICY as crop_preparation_policy
+        if "recovery" in plan:
+            raise PermissionError("paired-crop study cannot inherit historical full-source fits")
+        budget, scope, policy = crop_budget, crop_scope, crop_policy
+        settings, preparation_policy = crop_settings, crop_preparation_policy
+        expected_study = "spatial_crop_execution_v1"
     if "recovery" in plan:
         from .spatial_recovery import contract
         budget, scope, policy = contract()
         expected_study = "spatial_dino_recovery_v1"
     if (plan["study"] != expected_study or plan["execution_scope"] != scope
             or plan["execution_policy"] != policy or plan["budget"] != budget
-            or plan["settings"] != SETTINGS or plan["policy"] != POLICY
+            or plan["settings"] != settings or plan["policy"] != preparation_policy
             or plan["code_sha256"] != code_pins(REPOSITORY) or plan["runtime"] != execution_runtime()
             or plan["scientific_execution_authorized"] is not False
             or plan["executable_scientific_runner_available"] is not True
@@ -162,6 +218,10 @@ def checked_plan(path: Path, sha: str) -> dict[str, Any]:
 
 
 def verify_inputs(plan: dict[str, Any], guard: Callable) -> None:
+    if "crop_study" in plan:
+        from .spatial_crop_study import verify_inputs as crop_inputs
+        crop_inputs(plan, guard)
+        return
     if "recovery" in plan:
         from .spatial_recovery import verify_recovery_inputs
         verify_recovery_inputs(plan, guard)
@@ -214,6 +274,9 @@ def require_approval(path: Path, sha: str, approval_path: Path) -> tuple[dict, d
     plan = checked_plan(path, sha)
     approval = read_json(approval_path)
     answer = ANSWER
+    if "crop_study" in plan:
+        from .spatial_crop_study import ANSWER as crop_answer
+        answer = crop_answer
     if "recovery" in plan:
         from .spatial_recovery import ANSWER as recovery_answer
         answer = recovery_answer
@@ -229,6 +292,9 @@ def require_approval(path: Path, sha: str, approval_path: Path) -> tuple[dict, d
 def approve(path: Path, sha: str, answer: str) -> Path:
     plan = checked_plan(path, sha)
     expected_answer = ANSWER
+    if "crop_study" in plan:
+        from .spatial_crop_study import ANSWER as crop_answer
+        expected_answer = crop_answer
     if "recovery" in plan:
         from .spatial_recovery import ANSWER as recovery_answer
         expected_answer = recovery_answer
@@ -250,7 +316,12 @@ def approve(path: Path, sha: str, answer: str) -> Path:
     return output
 
 
-def loaders(plan: dict[str, Any], guard: Callable) -> tuple[Callable, Callable]:
+def loaders(plan: dict[str, Any], guard: Callable, *, system: str | None = None) -> tuple[Callable, Callable]:
+    if "crop_study" in plan:
+        from .spatial_crop_study import loaders as crop_loaders
+        if system is None:
+            raise ValueError("paired-crop loader requires explicit system; no legacy default")
+        return crop_loaders(plan, guard, system)
     entries = {entry["key"]: entry for entry in plan["entries"]}
 
     def rgb(row: dict[str, Any]) -> np.ndarray:
@@ -279,10 +350,11 @@ def loaders(plan: dict[str, Any], guard: Callable) -> tuple[Callable, Callable]:
 
 
 def analyze(target: str, predictions: dict, policies: dict, originals: list[dict],
-            services: dict, guard: Callable, groups: dict) -> tuple[list, list]:
+            services: dict, guard: Callable, groups: dict, *, plan: dict | None = None) -> tuple[list, list]:
+    selected_plan = {} if plan is None else plan
     study = services["study"]
     cases = []
-    for arm in ARMS:
+    for arm in systems(selected_plan):
         positions, labels = study.score_inputs(predictions[arm], originals)
         for alpha in study.ALPHAS:
             point = study.metrics(predictions[arm], originals, policies[arm][str(alpha)]["threshold"])
@@ -294,11 +366,13 @@ def analyze(target: str, predictions: dict, policies: dict, originals: list[dict
             cases.append({"target": target, "seed": SEED, "arm": arm, "alpha": str(alpha),
                           "policy": point, "oracle": oracle})
     intervals = paired_intervals(predictions, originals, policies, services, guard,
-        arms=ARMS, contrasts=CONTRASTS, repetitions=EXECUTION_POLICY["bootstrap_repetitions"], group_map=groups)
+        arms=systems(selected_plan), contrasts=contrasts(selected_plan),
+        repetitions=selected_plan.get("execution_policy", EXECUTION_POLICY)["bootstrap_repetitions"], group_map=groups)
     return cases, [{"target": target, "seed": SEED, **record} for record in intervals]
 
 
-def verify_paired_traces(paths: list[Path], steps: list[int], guard: Callable) -> None:
+def verify_paired_traces(paths: list[Path], steps: list[int], guard: Callable, *,
+                         omit: tuple[str, ...] = ()) -> None:
     from contextlib import ExitStack
     from itertools import zip_longest
     counts = [0]*len(paths)
@@ -310,7 +384,8 @@ def verify_paired_traces(paths: list[Path], steps: list[int], guard: Callable) -
             for i, line in enumerate(lines):
                 if line is not None:
                     counts[i] += 1
-                    records.append(json.loads(line))
+                    record = json.loads(line)
+                    records.append({key: value for key, value in record.items() if key not in omit})
             if any(record != records[0] for record in records[1:]):
                 raise ValueError("five-arm addressed batch/geometry pairing mismatch")
     if counts != steps:
@@ -340,7 +415,7 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
                                                torch.cuda.get_device_properties(0).total_memory)
     services, raw_rows, _ = inputs(Path(plan["fas_root"]))
     indexed = population(plan, raw_rows, services)
-    load_rgb, load_prior = loaders(plan, guard)
+    load_rgb, load_prior = (None, None) if "crop_study" in plan else loaders(plan, guard)
     source = source_modules(Path(plan["fas_root"]))
     fitting, study = services["fas.source_fitting"], services["study"]
     cases, intervals, artifacts = [], [], {}
@@ -351,8 +426,14 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
                         if indexed[key]["detector_status"] == "success"] for role in ROLES}
         keys = {role: [fitting.identity(row) for row in pool] for role, pool in pools.items()}
         predictions, policies, models, step_counts, traces = {}, {}, {}, [], []
-        for arm in ARMS:
+        for arm in systems(plan):
             guard()
+            actual_arm = model_arm(plan, arm)
+            binding = input_binding(plan, target, arm)
+            if "crop_study" in plan:
+                load_rgb, load_prior = loaders(plan, guard, system=arm)
+            if load_rgb is None or load_prior is None:
+                raise RuntimeError("explicit spatial training loaders required")
             folder = root/"models"/f"{target}-{arm}"
             from .spatial_recovery import materialize, reuse_entry
             inherited = reuse_entry(plan, target, arm)
@@ -362,7 +443,7 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
             else:
                 print("SPATIAL_REUSE_START", target, arm, flush=True)
             source.model.configure(SEED)
-            model = SpatialReference(source.model.Reference(), arm).to(DEVICE)
+            model = SpatialReference(source.model.Reference(), actual_arm).to(DEVICE)
             reference_sha = tensor_digest(model.reference.state_dict())
             fusion_sha = None if model.fusion is None else tensor_digest(model.fusion.state_dict())
             if initial_reference is not None and initial_reference != reference_sha:
@@ -375,11 +456,11 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
             trace = folder/"batches.jsonl"
             if inherited is None:
                 state = fit(model, pools["fitting"], pools["validation"], load_rgb, load_prior,
-                            source, SEED, DEVICE, guard, trace)
+                            source, SEED, DEVICE, guard, trace, **binding)
             else:
                 state = materialize(inherited, folder, sha, len(pools["fitting"]), guard)
                 model.load_state_dict(state["state_dict"], strict=True)
-            validate_state(state, len(pools["fitting"]), arm)
+            validate_state(state, len(pools["fitting"]), actual_arm, **binding)
             checkpoint = folder/"model.pth"
             if inherited is None:
                 with checkpoint.open("xb") as stream:
@@ -413,17 +494,22 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
             del model, state, raw
             gc.collect()
             torch.cuda.empty_cache()
-        verify_paired_traces(traces, step_counts, guard)
+        paired_traces(plan, traces, step_counts, guard)
         record = {"target": target, "keys": keys, "models": models, "policies": policies,
                   "prediction": {arm: values.tolist() for arm, values in predictions.items()}}
         write_json(root/f"context-{target}.json", record)
         artifacts[target] = digest(root/f"context-{target}.json")
         originals = [indexed[key] for key in context["evaluation"]]
-        points, uncertainty = analyze(target, predictions, policies, originals, services, guard,
-                                     {key: plan["groups"][key] for key in context["evaluation"]})
-        cases.extend(points)
-        intervals.extend(uncertainty)
-    if len(cases) != SCOPE["operating_cases"] or len(intervals) != SCOPE["conditional_intervals"]:
+        groups = {key: plan["groups"][key] for key in context["evaluation"]}
+        for view, rows, grouping in analysis_views(plan, originals, groups):
+            points, uncertainty = analyze(target, predictions, policies, rows, services, guard, grouping, plan=plan)
+            if view is not None:
+                points = [{**point, "view": view} for point in points]
+                uncertainty = [{**record, "view": view} for record in uncertainty]
+            cases.extend(points)
+            intervals.extend(uncertainty)
+    scope = plan.get("execution_scope", SCOPE)
+    if len(cases) != scope["operating_cases"] or len(intervals) != scope["conditional_intervals"]:
         raise ValueError("complete five-arm/four-target output required")
     write_json(root/"result.json", {"plan_sha256": sha, "artifacts": artifacts, "cases": cases,
                                     "conditional_intervals": intervals})
@@ -440,7 +526,7 @@ def worker(path: Path, sha: str, approval_path: Path) -> None:
 def preparation_summary(plan: dict[str, Any], sha: str) -> dict[str, Any]:
     return {"plan_sha256": sha, "scope": plan.get("execution_scope", SCOPE),
             "execution_policy": plan.get("execution_policy", EXECUTION_POLICY),
-            "budget": plan.get("budget", BUDGET), "settings": SETTINGS, "counts": plan["counts"],
+            "budget": plan.get("budget", BUDGET), "settings": plan.get("settings", SETTINGS), "counts": plan["counts"],
             "inventory": plan["inventory"], "bound_file_count": len(plan["files"]),
             "budget_estimate": plan["budget_estimate"], "scientific_execution_authorized": False,
             "execution_runner_sealed": True, "PAD_crop_decodes": 0, "scientific_training_starts": 0}
@@ -477,7 +563,7 @@ def supervise(path: Path, sha: str, approval_path: Path) -> dict[str, Any]:
             or verification["result_sha256"] != digest(root/"result.json")):
         raise ValueError("separate complete spatial checkpoint reconstruction required")
     clock(approval)
-    summary = completed_summary(root, sha, verification, result)
+    summary = completed_summary(root, sha, verification, result, plan=plan)
     summary["scope"] = plan.get("execution_scope", SCOPE)
     if "recovery" in plan:
         summary["recovery"] = {"origin_plan_sha256": plan["recovery"]["origin_plan_sha256"],
@@ -495,26 +581,33 @@ def supervise(path: Path, sha: str, approval_path: Path) -> dict[str, Any]:
     return summary
 
 
-def completed_summary(root: Path, sha: str, verification: dict, supervision: dict) -> dict:
+def completed_summary(root: Path, sha: str, verification: dict, supervision: dict, *, plan: dict | None = None) -> dict:
+    selected_plan = {} if plan is None else plan
+    scope = selected_plan.get("execution_scope", SCOPE)
     result = read_json(root/"result.json")
     if result["plan_sha256"] != sha or verification["completed"] is not True or not supervision["completed"]:
         raise ValueError("successful fully bound spatial result required")
-    if (verification["checkpoint_replays"] != 20 or verification["new_fits"] != 0
-            or len(result["cases"]) != SCOPE["operating_cases"]
-            or len(result["conditional_intervals"]) != SCOPE["conditional_intervals"]):
+    if (verification["checkpoint_replays"] != scope["backbone_fits"] or verification["new_fits"] != 0
+            or len(result["cases"]) != scope["operating_cases"]
+            or len(result["conditional_intervals"]) != scope["conditional_intervals"]):
         raise ValueError("complete spatial reconstruction and output inventories required")
     macro = []
-    for arm in ARMS:
+    for arm in systems(selected_plan):
         for alpha in ("1/20", "1/100", "1/10"):
-            selected = [case["policy"] for case in result["cases"] if case["arm"] == arm and case["alpha"] == alpha]
-            if len(selected) != 4:
-                raise ValueError("all targets required in spatial summary")
-            macro.append({"arm": arm, "alpha": alpha, "equal_target_macro": {
-                metric: float(np.mean([point[metric] for point in selected]))
-                for metric in ("FA", "BFA", "AUROC_usable")},
-                "FA_safe_targets": sum(point["FA_within_constraint"] for point in selected),
-                "joint_utility_targets": sum(point["utility_feasible"] for point in selected)})
+            for view in scope.get("views", [None]):
+                selected = [case["policy"] for case in result["cases"]
+                            if case["arm"] == arm and case["alpha"] == alpha and case.get("view") == view]
+                if len(selected) != 4:
+                    raise ValueError("all targets required in each spatial summary view")
+                record = {"arm": arm, "alpha": alpha, "equal_target_macro": {
+                    metric: float(np.mean([point[metric] for point in selected]))
+                    for metric in ("FA", "BFA", "AUROC_usable")},
+                    "FA_safe_targets": sum(point["FA_within_constraint"] for point in selected),
+                    "joint_utility_targets": sum(point["utility_feasible"] for point in selected)}
+                if view is not None:
+                    record["view"] = view
+                macro.append(record)
     return {"completed": True, "plan_sha256": sha, "cases": result["cases"],
             "conditional_intervals": result["conditional_intervals"], "macro": macro,
-            "verification": verification, "supervision": supervision, "scope": SCOPE,
+            "verification": verification, "supervision": supervision, "scope": scope,
             "development_targets_already_seen": True, "SiW_subject_independence_verified": False}

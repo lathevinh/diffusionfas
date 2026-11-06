@@ -312,7 +312,10 @@ def validation_loss(logits: np.ndarray, rows: list[dict[str, Any]]) -> float:
     return float(np.mean(terms))
 
 
-def validate_state(state: dict[str, Any], fitting_count: int, arm: str) -> None:
+def validate_state(state: dict[str, Any], fitting_count: int, arm: str, *,
+                   input_binding: dict[str, Any] | None = None) -> None:
+    if input_binding is not None and state.get("input_binding") != input_binding:
+        raise ValueError("spatial checkpoint crop/target/cohort/role input binding mismatch")
     history = state["history"]
     values = [item["validation"] for item in history]
     if (state["arm"] != arm or state["seed"] != SEED
@@ -336,7 +339,7 @@ def validate_state(state: dict[str, Any], fitting_count: int, arm: str) -> None:
 def fit(
     model: SpatialReference, fitting: list[dict[str, Any]], validation: list[dict[str, Any]],
     load_rgb: Callable, load_prior: Callable, source: SourceModules, seed: int, device: str,
-    guard: Callable, trace_path: Path,
+    guard: Callable, trace_path: Path, *, input_binding: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     optimizer = optimizer_for(model)
     augmenter = source.augmentation.FASAug()
@@ -384,7 +387,10 @@ def fit(
     model.load_state_dict(best, strict=True)
     del optimizer
     gc.collect()
-    return {"state_dict": best, "history": history, "selected_epoch": selected,
+    result = {"state_dict": best, "history": history, "selected_epoch": selected,
             "validation_loss": best_loss, "optimizer_steps": len(history)*steps,
             "arm": model.arm, "seed": seed, "settings_sha256": object_digest(SETTINGS),
             "trace_sha256": hashlib.sha256(trace_path.read_bytes()).hexdigest()}
+    if input_binding is not None:
+        result["input_binding"] = input_binding
+    return result

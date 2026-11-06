@@ -24,6 +24,7 @@ from .spatial_dino import (
 from .spatial_study import (
     BUDGET, CONTRASTS, EXECUTION_POLICY, ROLES, SCOPE, clock, loaders, population,
     require_approval, verify_inputs, verify_paired_traces,
+    analysis_views, contrasts, input_binding, model_arm, paired_traces, systems,
 )
 
 DEVICE = "cuda"
@@ -33,21 +34,27 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
     services, raw_rows, _ = inputs(Path(plan["fas_root"]))
     indexed = population(plan, raw_rows, services)
     source = source_modules(Path(plan["fas_root"]))
-    load_rgb, load_prior = loaders(plan, guard)
+    load_rgb, load_prior = (None, None) if "crop_study" in plan else loaders(plan, guard)
     result = read_json(root/"result.json")
     if result["plan_sha256"] != sha:
         raise ValueError("spatial result/plan binding mismatch")
-    case_keys = {(c["target"], SEED, arm, str(alpha)) for c in plan["contexts"]
-                 for arm in ARMS for alpha in services["study"].ALPHAS}
-    cases = {(c["target"], c["seed"], c["arm"], c["alpha"]): c for c in result["cases"]}
-    if len(cases) != SCOPE["operating_cases"] or set(cases) != case_keys or len(cases) != len(result["cases"]):
+    scope = plan.get("execution_scope", SCOPE)
+    views = scope.get("views", [None])
+    case_keys = {(c["target"], SEED, arm, str(alpha)) + (() if view is None else (view,))
+                 for c in plan["contexts"] for arm in systems(plan)
+                 for alpha in services["study"].ALPHAS for view in views}
+    cases = {(c["target"], c["seed"], c["arm"], c["alpha"]) +
+             (() if "view" not in c else (c["view"],)): c for c in result["cases"]}
+    if len(cases) != scope["operating_cases"] or set(cases) != case_keys or len(cases) != len(result["cases"]):
         raise ValueError("exact sixty unique spatial operating cases required")
-    interval_keys = {(c["target"], SEED, comparison, arm, metric) for c in plan["contexts"]
-        for comparison, arm, _ in ([("point", arm, None) for arm in ARMS]+list(CONTRASTS))
-        for metric in ("FA", "BFA", "AUROC_usable")}
-    intervals = {(c["target"], c["seed"], c["comparison"], c["arm"], c["metric"]): c
+    interval_keys = {(c["target"], SEED, comparison, arm, metric) + (() if view is None else (view,))
+        for c in plan["contexts"]
+        for comparison, arm, _ in ([("point", arm, None) for arm in systems(plan)]+list(contrasts(plan)))
+        for metric in ("FA", "BFA", "AUROC_usable") for view in views}
+    intervals = {(c["target"], c["seed"], c["comparison"], c["arm"], c["metric"]) +
+                 (() if "view" not in c else (c["view"],)): c
                  for c in result["conditional_intervals"]}
-    if (len(intervals) != SCOPE["conditional_intervals"] or set(intervals) != interval_keys
+    if (len(intervals) != scope["conditional_intervals"] or set(intervals) != interval_keys
             or len(intervals) != len(result["conditional_intervals"])):
         raise ValueError("exact132 unique spatial interval records required")
     maximum_error, replays, expected_starts, expected_calibrators = 0., 0, set(), set()
@@ -61,11 +68,17 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
                  for role in ROLES}
         keys = {role: [services["fas.source_fitting"].identity(row) for row in pool]
                 for role, pool in pools.items()}
-        if saved["keys"] != keys or saved["target"] != target or set(saved["models"]) != set(ARMS):
+        if saved["keys"] != keys or saved["target"] != target or set(saved["models"]) != set(systems(plan)):
             raise ValueError("exact spatial role/key/model joins required")
         probabilities, step_counts, traces = {}, [], []
-        for arm in ARMS:
+        for arm in systems(plan):
             guard()
+            actual_arm = model_arm(plan, arm)
+            binding = input_binding(plan, target, arm)
+            if "crop_study" in plan:
+                load_rgb, load_prior = loaders(plan, guard, system=arm)
+            if load_rgb is None or load_prior is None:
+                raise RuntimeError("explicit spatial replay loaders required")
             folder = root/"models"/f"{target}-{arm}"
             expected_calibrators.add(folder/"calibrator-started.json")
             from .spatial_recovery import reuse_entry, reuse_receipt
@@ -90,12 +103,12 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
             ):
                 raise ValueError("reused checkpoint/trace no longer matches approved origin")
             state = torch.load(checkpoint, map_location="cpu", weights_only=True)
-            validate_state(state, len(pools["fitting"]), arm)
+            validate_state(state, len(pools["fitting"]), actual_arm, **binding)
             if (state["trace_sha256"] != digest(trace) or state["selected_epoch"] != record["selected_epoch"]
                     or state["optimizer_steps"] != record["optimizer_steps"]):
                 raise ValueError("spatial saved-state/operating inventory mismatch")
             source.model.configure(SEED)
-            model = SpatialReference(source.model.Reference(), arm).to(DEVICE)
+            model = SpatialReference(source.model.Reference(), actual_arm).to(DEVICE)
             reference_sha = tensor_digest(model.reference.state_dict())
             fusion_sha = None if model.fusion is None else tensor_digest(model.fusion.state_dict())
             if (reference_sha != record["initial_reference_sha256"]
@@ -141,15 +154,17 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
                 if not np.array_equal(rebuilt["evaluation"] < replay_threshold,
                                       probabilities[arm] < threshold):
                     raise ValueError("numerical replay changed a strict spatial operating decision")
-                case = cases[target, SEED, arm, str(alpha)]
-                point = independent_points(probabilities[arm], originals, threshold, alpha)
-                for name, value in point.items():
-                    require_close(case["policy"][name], value, f"independent spatial metric differs: {name}")
-                services["oracle316"].curve_check(case["oracle"], probabilities[arm], labels)
-                expected_oracle = services["oracle316"].oracle(probabilities[arm], labels,
-                    point["original_attack"], point["original_bona_fide"], alpha=alpha)
-                if case["oracle"] != expected_oracle:
-                    raise ValueError("spatial oracle diagnostic metadata differs")
+                groups = {key: plan["groups"][key] for key in context["evaluation"]}
+                for view, rows, _ in analysis_views(plan, originals, groups):
+                    case = cases[(target, SEED, arm, str(alpha)) + (() if view is None else (view,))]
+                    point = independent_points(probabilities[arm], rows, threshold, alpha)
+                    for name, value in point.items():
+                        require_close(case["policy"][name], value, f"independent spatial metric differs: {name}")
+                    services["oracle316"].curve_check(case["oracle"], probabilities[arm], labels)
+                    expected_oracle = services["oracle316"].oracle(probabilities[arm], labels,
+                        point["original_attack"], point["original_bona_fide"], alpha=alpha)
+                    if case["oracle"] != expected_oracle:
+                        raise ValueError("spatial oracle diagnostic metadata differs")
             step_counts.append(state["optimizer_steps"])
             traces.append(trace)
             replays += 1
@@ -157,26 +172,30 @@ def verify_results(plan: dict[str, Any], root: Path, sha: str, guard: Callable) 
             gc.collect()
             torch.cuda.empty_cache()
             print("SPATIAL_CHECKPOINT_VERIFIED", target, arm, replays, flush=True)
-        verify_paired_traces(traces, step_counts, guard)
+        paired_traces(plan, traces, step_counts, guard)
         originals = [indexed[key] for key in context["evaluation"]]
-        rebuilt = independent_intervals(probabilities, originals, saved["policies"], services,
-            arms=ARMS, contrasts=CONTRASTS, repetitions=EXECUTION_POLICY["bootstrap_repetitions"],
-            group_map={key: plan["groups"][key] for key in context["evaluation"]})
-        for record in rebuilt:
-            stored = intervals[target, SEED, record["comparison"], record["arm"], record["metric"]]
-            for field in ("valid_repetitions", "repetitions", "declared_groups"):
-                if record[field] != stored[field]:
-                    raise ValueError("independent spatial interval support differs")
-            if (record["percentile95"] is None) != (stored["percentile95"] is None):
-                raise ValueError("independent spatial interval validity differs")
-            if record["percentile95"] is not None:
-                require_close(record["percentile95"], stored["percentile95"], "independent spatial bootstrap differs")
+        groups = {key: plan["groups"][key] for key in context["evaluation"]}
+        for view, rows, grouping in analysis_views(plan, originals, groups):
+            rebuilt = independent_intervals(probabilities, rows, saved["policies"], services,
+                arms=systems(plan), contrasts=contrasts(plan),
+                repetitions=plan.get("execution_policy", EXECUTION_POLICY)["bootstrap_repetitions"], group_map=grouping)
+            for record in rebuilt:
+                key = (target, SEED, record["comparison"], record["arm"], record["metric"])
+                stored = intervals[key + (() if view is None else (view,))]
+                for field in ("valid_repetitions", "repetitions", "declared_groups"):
+                    if record[field] != stored[field]:
+                        raise ValueError("independent spatial interval support differs")
+                if (record["percentile95"] is None) != (stored["percentile95"] is None):
+                    raise ValueError("independent spatial interval validity differs")
+                if record["percentile95"] is not None:
+                    require_close(record["percentile95"], stored["percentile95"], "independent spatial bootstrap differs")
         guard()
     if (set((root/"models").glob("*/started.json")) != expected_starts
             or set((root/"models").glob("*/reused.json")) != expected_reused
-            or set((root/"models").glob("*/calibrator-started.json")) != expected_calibrators or replays != 20
-            or len(expected_starts) != plan.get("execution_scope", SCOPE).get("new_backbone_fits", 20)
-            or len(expected_reused) != plan.get("execution_scope", SCOPE).get("reused_backbone_fits", 0)):
+            or set((root/"models").glob("*/calibrator-started.json")) != expected_calibrators
+            or replays != scope["backbone_fits"]
+            or len(expected_starts) != scope.get("new_backbone_fits", scope["backbone_fits"])
+            or len(expected_reused) != scope.get("reused_backbone_fits", 0)):
         raise ValueError("exact twenty training/calibrator starts and checkpoint replays required")
     return {"completed": True, "plan_sha256": sha, "result_sha256": digest(root/"result.json"),
             "checkpoint_replays": replays, "operating_cases": len(cases), "conditional_intervals": len(intervals),
