@@ -31,7 +31,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Completed spatial DINO study: independently verified results do not support the anatomical prior](docs/025-spatial-dino-completed-results.md).
 - [Low-FA oracle diagnosis and real-pixel square crop preparation, with a private sixteen-frame preview](docs/026-spatial-dino-lowfa-and-crop-next-step.md).
 - [Full-cohort paired crop cache verified: 6,231 real-pixel pairs, unchanged roles and 24-fit A/B inventory](docs/027-spatial-dino-full-cohort-crops.md).
-- [Paired crop controller ready: 24 fits, dual denominator replay, bounded GPU probe and sealed unapproved plan](docs/028-spatial-dino-paired-crop-controller.md).
+- [Paired crop controller and approved launch: 24 fits, dual denominator replay, bounded GPU probe and sealed plan](docs/028-spatial-dino-paired-crop-controller.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD

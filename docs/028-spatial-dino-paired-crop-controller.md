@@ -1,4 +1,4 @@
-# Paired crop controller: sealed and verified, no PAD training started
+# Paired crop controller: verified preparation and approved launch
 
 The owner continued implementation and explicitly selected
 `approve_synthetic_probe_and_metadata_seal_only`. This authorized a
@@ -8,7 +8,8 @@ then a30-minute metadata seal/check, **not scientific fitting or calibration**.
 The controller,86 focused tests, actual generic-DINO synthetic GPU probe,
 full input verification and execution seal completed. The sealed plan SHA is
 `2df70a86325cf2f06baf20709773d42177d39708721981d4c218d0e08ce2fe86`.
-No approval, attempt, worker-start or training log exists for this plan.
+At readiness publication no approval, attempt, worker-start or training log
+existed for this plan. The subsequent exact approval and launch are in section6.
 The source FAS repository is unchanged; private crop/subject records remain
 outside Git. [The aggregate receipt](../results/spatial-crop-controller-preparation-v1.json)
 contains sanitized hashes, scope and measurements.
@@ -165,9 +166,42 @@ this sealed crop study. Approval requires the exact plan SHA and
 answer or general "continue" instruction cannot approve it. The original
 nonresettable boot-bound approval clock covers input checks through closure.
 
-**Scientific training remains unapproved and unattempted.** The earlier
+**At the end of the engineering stage, training was unapproved and unattempted.** The earlier
 negative anatomical result, weak SiW low-FA separation, development-exposed
 target data, one seed, nonstandard SiW-Mv2 protocol and unresolved SiW
 participant dependence remain. No accuracy improvement, novelty, SOTA,
 ISO/iBeta pass, learned attention-map interpretation or publication readiness
 is established by these engineering tests.
+
+## 6. Exact owner-approved scientific launch
+
+The owner then explicitly selected
+`approve_exact_spatial_crop_24_fits_120h_no_retry` for the unchanged plan SHA
+above and the120h/8GiB RSS/14GiB total-device GPU/16GiB output caps.
+The approval CLI reverified every sealed input before writing the boot-bound
+nonresettable clock receipt. Approval SHA:
+`1f8bad65981d96d395aa311e77b50174d1ac14d0d99a28c4584e55bcda07f7dd`.
+
+The supervised run was launched persistently, with no retry/resume or
+automatic expansion. Live supervisor851314 and worker851324 were verified
+against their immutable attempt/start receipts and the actual worker parent.
+The first32-example optimizer batch and a completed source-validation epoch
+were observed, not merely a process or empty log.
+
+The first active fit is **OULU-NPU held out / `legacy_reference`**: its source
+data are CASIA-FASD+MSU-MFSD+SiW-Mv2 on the fixed common cohort. It is the
+matched legacy baseline; the square fits follow the three legacy arms in this
+fold. No historical adapted checkpoint is being reused.
+
+At the launch-verification snapshot the model had completed epoch9, source
+validation BCE0.06957946409703047. A nearby instantaneous resource snapshot
+showed total-device GPU9,310,306,304 bytes, whole-tree RSS3,685,576,704 bytes
+and new output24,014,581 bytes, below caps. These are instantaneous observations,
+not completed-run peaks or target metrics.
+
+[The sanitized launch receipt](../results/spatial-crop-start-v1.json)
+binds plan/approval/attempt/start hashes and marks the scientific study
+**started, not completed**. The private run's `batch.log` is the live training
+log. No completion/terminal success,24-fit reconstruction or scientific
+improvement is claimed at launch; final receipts require the full existing
+verification and closure path.

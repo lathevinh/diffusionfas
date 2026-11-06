@@ -1,0 +1,43 @@
+{
+  "study": "spatial_crop_scientific_start_v1",
+  "exact_owner_answer": "approve_exact_spatial_crop_24_fits_120h_no_retry",
+  "plan_sha256": "2df70a86325cf2f06baf20709773d42177d39708721981d4c218d0e08ce2fe86",
+  "approval_sha256": "1f8bad65981d96d395aa311e77b50174d1ac14d0d99a28c4584e55bcda07f7dd",
+  "attempt_sha256": "bfacfc3df6295ebf763e28b6bad1211c92097aff6034c1faf76a077e6cc20edf",
+  "started_sha256": "ff726430797fae50c7c4fe9d49fa10fbfd45a5c17cdb53bffac2f8ecacc04c32",
+  "execution_scope": {
+    "new_backbone_fits": 24, "new_source_calibrator_fits": 24, "checkpoint_replays": 24,
+    "held_out_targets": 4, "seed": 20260917, "operating_cases": 144,
+    "conditional_intervals": 360, "views": ["original", "common"],
+    "historical_adapted_checkpoint_reuse": false,
+    "new_native_video_decode": false, "new_detector": false,
+    "automatic_retry": false, "automatic_resume": false, "automatic_expansion": false
+  },
+  "approved_budget": {
+    "max_seconds": 432000, "max_rss_bytes": 8589934592,
+    "max_gpu_bytes": 15032385536, "max_output_bytes": 17179869184
+  },
+  "launch": {
+    "persistent_supervised_process": true,
+    "supervisor_pid": 851314, "worker_pid": 851324,
+    "actual_worker_parent_join_verified": true,
+    "first_completed_optimizer_batch_observed": true,
+    "first_completed_epoch_observed": true,
+    "first_fit": {"held_out_target": "OULU-NPU", "crop": "legacy", "arm": "reference"},
+    "first_fit_source_datasets": ["CASIA-FASD", "MSU-MFSD", "SiW-Mv2"],
+    "latest_completed_epoch_at_launch_check": 9,
+    "latest_source_validation_BCE_at_launch_check": 0.06957946409703047,
+    "live_log_relative_to_private_run": "batch.log"
+  },
+  "instantaneous_launch_resources_not_peaks": {
+    "device_GPU_memory_bytes": 9310306304,
+    "tree_RSS_bytes": 3685576704,
+    "new_output_bytes": 24014581
+  },
+  "scientific_started": true,
+  "scientific_completed": false,
+  "full_checkpoint_reconstruction_completed": false,
+  "target_metrics_claimed": false,
+  "source_FAS_modified": false,
+  "private_data_published": false
+}
