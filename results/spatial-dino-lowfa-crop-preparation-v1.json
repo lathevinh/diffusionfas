@@ -1,0 +1,103 @@
+{
+  "status": "completed_saved_score_diagnosis_and_private_crop_preview_no_new_training",
+  "origin_plan_sha256": "41e5162ff9b44cc60de20509806291b228d4890751a3f96025d6599a6e9626db",
+  "origin_result_sha256": "ba18be1b07c87684658723ee72ebe3f14fc3bc8b19cfa7ff424d6488b9c27f98",
+  "origin_aggregate_sha256": "221f1c8a451d7293bd17d48897c2afd7a3576e8c7de65d2fb961928b7290dac3",
+  "diagnosis_summary_sha256": "179678da8d9ccab937ad431e93cd4071eae6255e8e42d0d7113f08085d1425bc",
+  "preview_summary_sha256": "a1f8cc20a22d217dd4e9baf7d967969c31d1288850db90e9bf8d6d0744a60bfb",
+  "private_preview_HTML_sha256": "c88dc5a86aa19d5043df8a3c36a459add2127919689487d62b09da58968da3e8",
+  "diagnostic_cases": 40,
+  "alphas": ["1/100", "1/20"],
+  "reference_oracle_max_BFA_percent": [
+    {"target": "OULU-NPU", "at_FA1": 52.222, "at_FA5": 76.111},
+    {"target": "CASIA-FASD", "at_FA1": 93.333, "at_FA5": 98.889},
+    {"target": "MSU-MFSD", "at_FA1": 42.500, "at_FA5": 75.000},
+    {"target": "SiW-Mv2", "at_FA1": 26.437, "at_FA5": 45.211}
+  ],
+  "oracle_max_BFA_at_FA5_percent": [
+    {"target": "OULU-NPU", "reference": 76.111, "content": 84.722, "anatomical": 80.556},
+    {"target": "CASIA-FASD", "reference": 98.889, "content": 98.889, "anatomical": 98.889},
+    {"target": "MSU-MFSD", "reference": 75.000, "content": 82.500, "anatomical": 70.000},
+    {"target": "SiW-Mv2", "reference": 45.211, "content": 47.893, "anatomical": 46.743}
+  ],
+  "oracle_uses_target_labels": true,
+  "oracle_is_deployable": false,
+  "BFA50_case_counts": {
+    "current_policy_meets_this_empirical_goal": 7,
+    "empirical_separation_available_policy_transfer_insufficient": 17,
+    "low_FA_separation_insufficient": 16
+  },
+  "crop_metadata": {
+    "originals": 7505,
+    "current_usable": 7472,
+    "candidate_selection": "owner_selected_expanded_legacy_square_for_preview_only",
+    "crop_shifting_shrinking_or_padding": false,
+    "minimum_conservative_source_margin_pixels": 2.0,
+    "new_crop_matrix_aspect_preserving": true,
+    "dataset_and_class_coverage": [
+      {"dataset": "OULU-NPU", "label": "attack", "originals": 3960, "current_usable": 3960, "expanded_strict_pair": 3377, "celebahq_strict_pair": 2624},
+      {"dataset": "OULU-NPU", "label": "bona_fide", "originals": 990, "current_usable": 989, "expanded_strict_pair": 909, "celebahq_strict_pair": 807},
+      {"dataset": "CASIA-FASD", "label": "attack", "originals": 450, "current_usable": 445, "expanded_strict_pair": 268, "celebahq_strict_pair": 255},
+      {"dataset": "CASIA-FASD", "label": "bona_fide", "originals": 150, "current_usable": 149, "expanded_strict_pair": 99, "celebahq_strict_pair": 97},
+      {"dataset": "MSU-MFSD", "label": "attack", "originals": 210, "current_usable": 202, "expanded_strict_pair": 188, "celebahq_strict_pair": 165},
+      {"dataset": "MSU-MFSD", "label": "bona_fide", "originals": 70, "current_usable": 70, "expanded_strict_pair": 69, "celebahq_strict_pair": 65},
+      {"dataset": "SiW-Mv2", "label": "attack", "originals": 890, "current_usable": 881, "expanded_strict_pair": 697, "celebahq_strict_pair": 627},
+      {"dataset": "SiW-Mv2", "label": "bona_fide", "originals": 785, "current_usable": 776, "expanded_strict_pair": 624, "celebahq_strict_pair": 564}
+    ],
+    "expanded_target_cohort": [
+      {"target": "OULU-NPU", "attack_eligible": 1234, "original_attack": 1440, "bona_fide_eligible": 332, "original_bona_fide": 360},
+      {"target": "CASIA-FASD", "attack_eligible": 160, "original_attack": 270, "bona_fide_eligible": 60, "original_bona_fide": 90},
+      {"target": "MSU-MFSD", "attack_eligible": 108, "original_attack": 120, "bona_fide_eligible": 39, "original_bona_fide": 40},
+      {"target": "SiW-Mv2", "attack_eligible": 287, "original_attack": 362, "bona_fide_eligible": 214, "original_bona_fide": 261}
+    ],
+    "full_cohort_training_plan_sealed": false,
+    "future_matched_fits_proposed_not_authorized": 24,
+    "future_maximum_optimizer_steps_metadata_estimate": 248400,
+    "current_backbone_checkpoint_reuse_for_changed_source_cohort_valid": false
+  },
+  "preview": {
+    "frames": 16,
+    "embedded_PNGs": 48,
+    "selection_seed": 20261106,
+    "selection_uses_scores": false,
+    "legacy_exact_pixel_matches": 16,
+    "conservative_bicubic_footprint_pairs_verified": 16,
+    "padding_fraction": 0.0,
+    "native_video_decodes": 0,
+    "new_detectors": 0,
+    "GPU_inference": 0,
+    "training": 0,
+    "calibration": 0,
+    "landmark_overlay_not_attention_map": true,
+    "human_review_required": true
+  },
+  "resources": {
+    "diagnosis_supervised_seconds": 43.05748050898546,
+    "diagnosis_peak_tree_rss_bytes": 1558679552,
+    "diagnosis_owned_output_bytes": 26404587,
+    "preview_supervised_seconds": 24.03587076999247,
+    "preview_peak_tree_rss_bytes": 1526673408,
+    "preview_owned_output_bytes": 8146522
+  },
+  "validation": {
+    "focused_tests_passed": 48,
+    "test_seconds": 2.222,
+    "oracle_cases_independently_bruteforce_checked": 40,
+    "crop_candidate_geometries_independently_checked": 7472,
+    "embedded_PNGs_independently_decoded": 48,
+    "Python_AST_files_parsed": 6,
+    "first_diagnosis_roundoff_failure_preserved": true,
+    "first_preview_mask_roundoff_failure_preserved": true,
+    "no_dependency_install": true
+  },
+  "limitations": [
+    "Oracle results use target labels and are not a proposed deployable threshold.",
+    "Target-conditioned development diagnosis does not establish untouched generalization.",
+    "Expanded square changes context and resampling geometry, not only aspect ratio.",
+    "Metadata coverage is conservative; only the sixteen preview frames passed actual PNG and render-footprint checks.",
+    "No full-cohort new crop cache, training, held-out-domain calibration or patch-weight maps have been executed.",
+    "Orange landmark dots in the preview are not learned attention.",
+    "Historical decoder, camera, subject and SiW dependency limitations remain.",
+    "No ISO/iBeta pass claim or anatomical-performance improvement is made."
+  ]
+}

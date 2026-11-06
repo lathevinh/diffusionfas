@@ -29,6 +29,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Controller spatial DINO: 20 fine-tunes, exact approval, giám sát 120 giờ và kiểm chứng checkpoint riêng](docs/023-spatial-dino-execution-controller.md).
 - [Spatial DINO GPU-guard failure and recovery preparation: six inherited fits, fourteen new fits, unchanged batch32](docs/024-spatial-dino-recovery.md).
 - [Completed spatial DINO study: independently verified results do not support the anatomical prior](docs/025-spatial-dino-completed-results.md).
+- [Low-FA oracle diagnosis and real-pixel square crop preparation, with a private sixteen-frame preview](docs/026-spatial-dino-lowfa-and-crop-next-step.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD
