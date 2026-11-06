@@ -23,6 +23,10 @@ SEED = 20261106
 CANDIDATE = "expanded_legacy_square"
 
 
+class CropSupportError(ValueError):
+    """Explicit shared ineligibility, not corruption or a replacement crop."""
+
+
 def preview_keys(plan: dict, records: list[dict]) -> list[str]:
     indexed = {r["key"]: r for r in records}
     if len(indexed) != len(records):
@@ -54,7 +58,7 @@ def require_bicubic_support(matrix: np.ndarray, bounds: tuple[int, int, int, int
     minimum = source.min(axis=0)-2-1/32
     maximum = source.max(axis=0)+2+1/32
     if np.any(minimum < 0) or np.any(maximum > [width-1, height-1]):
-        raise ValueError("bicubic interpolation footprint outside real source pixels")
+        raise CropSupportError("bicubic interpolation footprint outside real source pixels")
 
 
 def render_pair(rgb: np.ndarray, transaction: dict) -> tuple[np.ndarray, np.ndarray, dict]:
@@ -95,6 +99,36 @@ def png(image: np.ndarray) -> str:
     return base64.b64encode(encoded.tobytes()).decode("ascii")
 
 
+def load_crop_pair(row: dict, transaction: dict) -> tuple[np.ndarray, np.ndarray, dict, dict]:
+    asset = transaction["selected_RGB_asset"]
+    anchor = Path(row["record_path"]).parent.parent.resolve()
+    relative = Path(asset["path"])
+    raw = anchor/relative
+    if relative.is_absolute() or not raw.resolve().is_relative_to(anchor):
+        raise ValueError("native PNG asset escaped original transaction root")
+    frame = transaction["selected_frame"]
+    if digest(raw) != asset["sha256"]:
+        raise ValueError("native selected PNG commitment differs")
+    if "RGB_sha256" in asset and asset["RGB_sha256"] != frame["rgb_sha256"]:
+        raise ValueError("optional native RGB commitment differs from canonical selected frame")
+    if "shape" in asset and asset["shape"] != [frame["height"], frame["width"], 3]:
+        raise ValueError("optional native shape differs from canonical selected frame")
+    with Image.open(raw) as image:
+        if image.mode != "RGB":
+            raise ValueError("native selected PNG must already be RGB")
+        rgb = np.asarray(image)
+    old, new, geometry = render_pair(rgb, transaction)
+    crop = row["crops"]["224"]
+    if digest(Path(crop["path"])) != crop["sha256"]:
+        raise ValueError("historical RGB224 PNG binding changed")
+    with Image.open(crop["path"]) as image:
+        if image.mode != "RGB" or not np.array_equal(np.asarray(image), old):
+            raise ValueError("regenerated legacy crop differs from pinned historical pixels")
+    bindings = {str(raw): asset["sha256"], crop["path"]: crop["sha256"],
+                row["record_path"]: row["record_sha256"]}
+    return rgb, new, geometry, bindings
+
+
 def run(completed_root: Path, diagnosis_root: Path, output: Path) -> dict:
     require_private_output(output/"review.html")
     if output.exists():
@@ -118,31 +152,10 @@ def run(completed_root: Path, diagnosis_root: Path, output: Path) -> dict:
         guard()
         row = indexed[key]
         transaction = transaction_for(row)
-        asset = transaction["selected_RGB_asset"]
-        anchor = Path(row["record_path"]).parent.parent.resolve()
-        relative = Path(asset["path"])
-        raw = anchor/relative
-        if relative.is_absolute() or not raw.resolve().is_relative_to(anchor):
-            raise ValueError("native PNG asset escaped original transaction root")
-        if (digest(raw) != asset["sha256"]
-                or asset["RGB_sha256"] != transaction["selected_frame"]["rgb_sha256"]
-                or asset["shape"] != [transaction["selected_frame"]["height"],
-                                      transaction["selected_frame"]["width"], 3]):
-            raise ValueError("native selected PNG commitment differs")
-        with Image.open(raw) as image:
-            if image.mode != "RGB":
-                raise ValueError("native selected PNG must already be RGB")
-            rgb = np.asarray(image)
-        old, new, geometry = render_pair(rgb, transaction)
-        crop = row["crops"]["224"]
-        if digest(Path(crop["path"])) != crop["sha256"]:
-            raise ValueError("historical RGB224 PNG binding changed")
-        with Image.open(crop["path"]) as image:
-            if image.mode != "RGB" or not np.array_equal(np.asarray(image), old):
-                raise ValueError("regenerated legacy crop differs from pinned historical pixels")
-        for path, sha in ((raw, asset["sha256"]), (Path(crop["path"]), crop["sha256"]),
-                          (Path(row["record_path"]), row["record_sha256"])):
-            bindings[str(path)] = sha
+        rgb, new, geometry, pair_bindings = load_crop_pair(row, transaction)
+        bindings.update(pair_bindings)
+        with Image.open(row["crops"]["224"]["path"]) as image:
+            old = np.asarray(image)
         candidate = geometry["candidates"][CANDIDATE]
         preview = rgb.copy()
         quad = np.rint(candidate["source_quad"]).astype(np.int32)

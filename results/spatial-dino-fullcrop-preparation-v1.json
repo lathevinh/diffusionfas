@@ -1,0 +1,114 @@
+{
+  "study": "spatial_dino_fullcrop_preparation_v1",
+  "completed": true,
+  "owner_decision": "approve_full_cohort_cpu_preparation",
+  "scope": "existing_native_PNG_only_paired_RGB224_crop_cache_and_common_cohort_inventory",
+  "origin_plan_sha256": "41e5162ff9b44cc60de20509806291b228d4890751a3f96025d6599a6e9626db",
+  "crop": "expanded_legacy_square",
+  "same_center_and_rotation": true,
+  "no_padding_shifting_shrinking_or_replacement": true,
+  "pure_stretch_only_intervention": false,
+  "budget": {
+    "max_seconds": 3600,
+    "max_rss_bytes": 4294967296,
+    "max_output_bytes": 4294967296
+  },
+  "private_receipt_sha256": {
+    "preparation": "b82353431baa0fa08e467b8d785fd48abb11c1d54518ca1af52a5634186ca71e",
+    "summary": "66d4521f9166cde694b675eb9105d24febcd0e988921e44daa8435c67254e6e8",
+    "supervision": "8de647933c8b373638511627dfd83b8b577d77334cb24c9a5e34f02f3696a4c3",
+    "verification": "f67bd0a45d553cbce668c111294a1f84d467c1b90f722ee0033fdddc589ba024",
+    "common_eligibility": "23552c7e8bf95c33822ea766976a9053cab2d884d39b8651ab6a50ac406494f3",
+    "code_pins": "023e163d295fdc40831875ddd533f38bfa24fef9f75dcf1be9409e0b9c2c2dde"
+  },
+  "originals": 7505,
+  "common_usable": 6231,
+  "shared_failures": 1274,
+  "exclusions": {
+    "historical_failure": 31,
+    "shared_geometry_failure": 2,
+    "metadata_square_or_legacy_real_pixel_support_ineligible": 1241,
+    "additional_quantization_margin_failures": 0
+  },
+  "pixel_checks": {
+    "native_PNG_payload_canonical_RGB_and_shape": 6231,
+    "exact_regenerated_legacy_matches": 6231,
+    "square_PNG_roundtrips": 6231,
+    "crop_specific_priors": 12462,
+    "actual_source_support_pairs": 6231,
+    "all_bound_file_hashes_independently_verified": 27483,
+    "all_square_RGB_pixel_hashes_independently_verified": 6231,
+    "square_render_matrices_and_source_footprints_independently_verified": 6231
+  },
+  "all_role_coverage": [
+    {"dataset": "OULU-NPU", "attack": [3377, 3960], "bona_fide": [909, 990]},
+    {"dataset": "CASIA-FASD", "attack": [268, 450], "bona_fide": [99, 150]},
+    {"dataset": "MSU-MFSD", "attack": [188, 210], "bona_fide": [69, 70]},
+    {"dataset": "SiW-Mv2", "attack": [697, 890], "bona_fide": [624, 785]}
+  ],
+  "target_coverage": [
+    {
+      "target": "OULU-NPU", "fitting": 653, "validation": 215, "calibration": 209,
+      "common_target": 1566, "original_target": 1800,
+      "attack": [1234, 1440], "bona_fide": [332, 360], "shared_failures": 234
+    },
+    {
+      "target": "CASIA-FASD", "fitting": 2107, "validation": 805, "calibration": 738,
+      "common_target": 220, "original_target": 360,
+      "attack": [160, 270], "bona_fide": [60, 90], "shared_failures": 140
+    },
+    {
+      "target": "MSU-MFSD", "fitting": 2133, "validation": 810, "calibration": 744,
+      "common_target": 147, "original_target": 160,
+      "attack": [108, 120], "bona_fide": [39, 40], "shared_failures": 13
+    },
+    {
+      "target": "SiW-Mv2", "fitting": 1695, "validation": 669, "calibration": 613,
+      "common_target": 501, "original_target": 623,
+      "attack": [287, 362], "bona_fide": [214, 261], "shared_failures": 122
+    }
+  ],
+  "unchanged_role_assignments": true,
+  "source_group_subject_isolation_and_domain_class_strata_checked": true,
+  "SiW_participant_independence_verified": false,
+  "original_denominators_preserved": true,
+  "future_metric_views": ["conditional_common_cohort", "original_denominator_system"],
+  "future_factorial": {
+    "targets": 4, "crops": ["legacy", "square"],
+    "arms": ["reference", "content", "anatomical"],
+    "new_backbone_fits": 24, "new_source_calibrators": 24,
+    "seed": 20260917, "historical_full_source_checkpoint_reuse": false,
+    "maximum_optimizer_steps": 248400,
+    "wall_or_GPU_budget_measured": false,
+    "executable_training_runner_sealed": false,
+    "scientific_execution_authorized": false
+  },
+  "resources": {
+    "preparation_wall_seconds": 861.8752654679702,
+    "sampled_tree_peak_rss_bytes": 1585299456,
+    "sampled_owned_peak_disk_bytes": 534463639,
+    "square_PNG_payload_bytes": 510993491,
+    "guard_failure": null,
+    "independent_verification_wall_seconds": 103.06824917299673,
+    "independent_verifier_sampled_rss_bytes": 815042560
+  },
+  "tests": {"focused_passed": 53, "changed_Python_files_AST_parsed": 4, "editor_typecheck_claimed": false},
+  "first_attempt": {
+    "completed": false,
+    "failure": "optional_native_asset_RGB_metadata_assumed_required",
+    "partial_square_PNGs_preserved": 163,
+    "wall_seconds": 46.31405826797709,
+    "supervision_sha256": "137b2fcc0bcbe0053acd65b6fee34f7d7dd7f9e84a04f342d8de473979152f31",
+    "original_root_and_log_preserved": true
+  },
+  "actual_model_fits": 0,
+  "actual_calibration_fits": 0,
+  "new_native_video_decodes": 0,
+  "GPU_inference": 0,
+  "learned_attention_maps_computed": false,
+  "dependency_installations": 0,
+  "source_FAS_modified": false,
+  "private_data_published": false,
+  "anatomical_improvement_claimed": false,
+  "ISO_or_iBeta_pass_claimed": false
+}

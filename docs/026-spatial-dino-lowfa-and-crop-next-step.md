@@ -135,6 +135,12 @@ wall-time/GPU budget or an executable sealed training plan.
 
 Required preparation after visual acceptance:
 
+The full-cohort PNG cache, common mask, crop-specific priors and role audit
+have now completed under a separate bounded CPU approval; see
+[the verified full-cohort preparation](027-spatial-dino-full-cohort-crops.md).
+This closes the pixel/cohort preparation items below, not the new training
+controller, augmentation/PDA integration, GPU resource probe or execution approval.
+
 - Verify real saved PNG bytes/shape and actual interpolation support for
   **all** candidate role images, not just the16 preview frames.
 - Freeze a common eligibility mask and retain original failure/exclusion
