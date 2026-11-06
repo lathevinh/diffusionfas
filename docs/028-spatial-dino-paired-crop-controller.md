@@ -205,3 +205,18 @@ binds plan/approval/attempt/start hashes and marks the scientific study
 log. No completion/terminal success,24-fit reconstruction or scientific
 improvement is claimed at launch; final receipts require the full existing
 verification and closure path.
+
+## 7. Completed and verified follow-up
+
+The approved run subsequently completed with24 fresh fits,24 source
+calibrators,24 separate-process checkpoint replays,144 operating cases
+and360 interval records. Replay probability error was0.0; no resource
+guard failed. The launch observations in section6 remain historical
+snapshots, not final results.
+
+See [the completed paired-crop results](029-spatial-dino-paired-crop-results.md)
+and [sanitized completed receipt](../results/spatial-crop-completed-v1.json).
+Square preprocessing improved the CLS reference's macro AUROC, but did
+not improve content/anatomical pooling consistently or establish robust
+source-threshold transfer. Completion does not authorize another fit,
+calibration redesign, attention-map inference or extra seeds.

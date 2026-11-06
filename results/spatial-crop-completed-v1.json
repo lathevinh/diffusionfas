@@ -1,0 +1,2471 @@
+{
+  "ISO_or_iBeta_pass_claimed": false,
+  "SiW_subject_independence_verified": false,
+  "budget": {
+    "max_gpu_bytes": 15032385536,
+    "max_output_bytes": 17179869184,
+    "max_rss_bytes": 8589934592,
+    "max_seconds": 432000
+  },
+  "cohort": {
+    "originals": 7505,
+    "shared_failures": 1274,
+    "usable": 6231
+  },
+  "completed": true,
+  "conditional_group_bootstrap_not_seed_variance": true,
+  "crop_intervention_changes_context_and_resampling": true,
+  "development_targets_already_seen": true,
+  "full_interval_validity": {
+    "2000": 360
+  },
+  "macro": [
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "legacy_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9237787824782313,
+        "BFA": 0.7125239463601533,
+        "FA": 0.2425663750767342
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "legacy_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9237787824782313,
+        "BFA": 0.8209701494691924,
+        "FA": 0.2954090066099395
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "legacy_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9237787824782313,
+        "BFA": 0.4950670498084291,
+        "FA": 0.15884649324739103
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "legacy_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9237787824782313,
+        "BFA": 0.5605802433313412,
+        "FA": 0.19729259257167703
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "legacy_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9237787824782313,
+        "BFA": 0.7769396551724139,
+        "FA": 0.2930219843462247
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "legacy_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9237787824782313,
+        "BFA": 0.9061417849687752,
+        "FA": 0.354116312493294
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "legacy_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9509791260889717,
+        "BFA": 0.7713840996168582,
+        "FA": 0.20174858041743401
+      },
+      "joint_utility_targets": 1,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "legacy_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9509791260889717,
+        "BFA": 0.9054698665257724,
+        "FA": 0.24880096412293906
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "legacy_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9509791260889717,
+        "BFA": 0.5950670498084292,
+        "FA": 0.1321334023941068
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "legacy_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9509791260889717,
+        "BFA": 0.6998758874462624,
+        "FA": 0.16572899666250657
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "legacy_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9509791260889717,
+        "BFA": 0.8109674329501917,
+        "FA": 0.25848488336402703
+      },
+      "joint_utility_targets": 1,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "legacy_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9509791260889717,
+        "BFA": 0.9580494154908636,
+        "FA": 0.312920324011066
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "legacy_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9468723784562676,
+        "BFA": 0.7515086206896553,
+        "FA": 0.2069415669122161
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "legacy_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9468723784562676,
+        "BFA": 0.8786414890330553,
+        "FA": 0.25523789288020227
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/100",
+      "arm": "legacy_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9468723784562676,
+        "BFA": 0.6091235632183908,
+        "FA": 0.15500786525475752
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/100",
+      "arm": "legacy_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9468723784562676,
+        "BFA": 0.696492945181156,
+        "FA": 0.19290647216883527
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "legacy_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9468723784562676,
+        "BFA": 0.8070641762452107,
+        "FA": 0.262624693063229
+      },
+      "joint_utility_targets": 1,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "legacy_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9468723784562676,
+        "BFA": 0.9451305220883535,
+        "FA": 0.3191379402120794
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/20",
+      "arm": "square_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9497448717544114,
+        "BFA": 0.6824952107279694,
+        "FA": 0.23639023173726215
+      },
+      "joint_utility_targets": 1,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/20",
+      "arm": "square_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9497448717544114,
+        "BFA": 0.7912360080148055,
+        "FA": 0.29140858191980856
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "square_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9497448717544114,
+        "BFA": 0.5019396551724138,
+        "FA": 0.18812634284837326
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "square_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9497448717544114,
+        "BFA": 0.5736116644868475,
+        "FA": 0.23543658480113397
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/10",
+      "arm": "square_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9497448717544114,
+        "BFA": 0.7484674329501917,
+        "FA": 0.26520583947206877
+      },
+      "joint_utility_targets": 1,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "square_reference",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9497448717544114,
+        "BFA": 0.8721172251912034,
+        "FA": 0.32405302780742556
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "square_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9323247644216454,
+        "BFA": 0.6660919540229886,
+        "FA": 0.202277087170043
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "square_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9323247644216454,
+        "BFA": 0.7624536607970342,
+        "FA": 0.24940363246535915
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "square_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9323247644216454,
+        "BFA": 0.5834530651340997,
+        "FA": 0.17120069828115408
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "square_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9323247644216454,
+        "BFA": 0.6742045103490887,
+        "FA": 0.21418618243834672
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "square_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9323247644216454,
+        "BFA": 0.7244252873563217,
+        "FA": 0.2543604205033763
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "square_content",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9323247644216454,
+        "BFA": 0.8357854494902688,
+        "FA": 0.30913485882948666
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "square_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9428067965853563,
+        "BFA": 0.6897749042145593,
+        "FA": 0.21587246777163904
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/20",
+      "arm": "square_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9428067965853563,
+        "BFA": 0.7886947141549663,
+        "FA": 0.2645886053577677
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "square_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9428067965853563,
+        "BFA": 0.5342193486590038,
+        "FA": 0.1681294122160835
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 2,
+      "alpha": "1/100",
+      "arm": "square_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9428067965853563,
+        "BFA": 0.6116133116217566,
+        "FA": 0.20968960181613855
+      },
+      "joint_utility_targets": 0,
+      "view": "common"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "square_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9428067965853563,
+        "BFA": 0.7467193486590038,
+        "FA": 0.24729607888275015
+      },
+      "joint_utility_targets": 0,
+      "view": "original"
+    },
+    {
+      "FA_safe_targets": 1,
+      "alpha": "1/10",
+      "arm": "square_anatomical",
+      "equal_target_macro": {
+        "AUROC_usable": 0.9428067965853563,
+        "BFA": 0.8616750972257109,
+        "FA": 0.30021124177051756
+      },
+      "joint_utility_targets": 1,
+      "view": "common"
+    }
+  ],
+  "models": [
+    {
+      "completed_training_epochs": 39,
+      "optimizer_steps": 819,
+      "selected_epoch": 19,
+      "system": "legacy_anatomical",
+      "target": "OULU-NPU"
+    },
+    {
+      "completed_training_epochs": 43,
+      "optimizer_steps": 903,
+      "selected_epoch": 23,
+      "system": "legacy_content",
+      "target": "OULU-NPU"
+    },
+    {
+      "completed_training_epochs": 53,
+      "optimizer_steps": 1113,
+      "selected_epoch": 33,
+      "system": "legacy_reference",
+      "target": "OULU-NPU"
+    },
+    {
+      "completed_training_epochs": 27,
+      "optimizer_steps": 567,
+      "selected_epoch": 7,
+      "system": "square_anatomical",
+      "target": "OULU-NPU"
+    },
+    {
+      "completed_training_epochs": 32,
+      "optimizer_steps": 672,
+      "selected_epoch": 12,
+      "system": "square_content",
+      "target": "OULU-NPU"
+    },
+    {
+      "completed_training_epochs": 63,
+      "optimizer_steps": 1323,
+      "selected_epoch": 43,
+      "system": "square_reference",
+      "target": "OULU-NPU"
+    },
+    {
+      "completed_training_epochs": 31,
+      "optimizer_steps": 2046,
+      "selected_epoch": 11,
+      "system": "legacy_anatomical",
+      "target": "CASIA-FASD"
+    },
+    {
+      "completed_training_epochs": 30,
+      "optimizer_steps": 1980,
+      "selected_epoch": 10,
+      "system": "legacy_content",
+      "target": "CASIA-FASD"
+    },
+    {
+      "completed_training_epochs": 54,
+      "optimizer_steps": 3564,
+      "selected_epoch": 34,
+      "system": "legacy_reference",
+      "target": "CASIA-FASD"
+    },
+    {
+      "completed_training_epochs": 56,
+      "optimizer_steps": 3696,
+      "selected_epoch": 36,
+      "system": "square_anatomical",
+      "target": "CASIA-FASD"
+    },
+    {
+      "completed_training_epochs": 58,
+      "optimizer_steps": 3828,
+      "selected_epoch": 38,
+      "system": "square_content",
+      "target": "CASIA-FASD"
+    },
+    {
+      "completed_training_epochs": 41,
+      "optimizer_steps": 2706,
+      "selected_epoch": 21,
+      "system": "square_reference",
+      "target": "CASIA-FASD"
+    },
+    {
+      "completed_training_epochs": 32,
+      "optimizer_steps": 2144,
+      "selected_epoch": 12,
+      "system": "legacy_anatomical",
+      "target": "MSU-MFSD"
+    },
+    {
+      "completed_training_epochs": 65,
+      "optimizer_steps": 4355,
+      "selected_epoch": 45,
+      "system": "legacy_content",
+      "target": "MSU-MFSD"
+    },
+    {
+      "completed_training_epochs": 65,
+      "optimizer_steps": 4355,
+      "selected_epoch": 45,
+      "system": "legacy_reference",
+      "target": "MSU-MFSD"
+    },
+    {
+      "completed_training_epochs": 41,
+      "optimizer_steps": 2747,
+      "selected_epoch": 21,
+      "system": "square_anatomical",
+      "target": "MSU-MFSD"
+    },
+    {
+      "completed_training_epochs": 32,
+      "optimizer_steps": 2144,
+      "selected_epoch": 12,
+      "system": "square_content",
+      "target": "MSU-MFSD"
+    },
+    {
+      "completed_training_epochs": 38,
+      "optimizer_steps": 2546,
+      "selected_epoch": 18,
+      "system": "square_reference",
+      "target": "MSU-MFSD"
+    },
+    {
+      "completed_training_epochs": 32,
+      "optimizer_steps": 1696,
+      "selected_epoch": 12,
+      "system": "legacy_anatomical",
+      "target": "SiW-Mv2"
+    },
+    {
+      "completed_training_epochs": 34,
+      "optimizer_steps": 1802,
+      "selected_epoch": 14,
+      "system": "legacy_content",
+      "target": "SiW-Mv2"
+    },
+    {
+      "completed_training_epochs": 33,
+      "optimizer_steps": 1749,
+      "selected_epoch": 13,
+      "system": "legacy_reference",
+      "target": "SiW-Mv2"
+    },
+    {
+      "completed_training_epochs": 34,
+      "optimizer_steps": 1802,
+      "selected_epoch": 14,
+      "system": "square_anatomical",
+      "target": "SiW-Mv2"
+    },
+    {
+      "completed_training_epochs": 33,
+      "optimizer_steps": 1749,
+      "selected_epoch": 13,
+      "system": "square_content",
+      "target": "SiW-Mv2"
+    },
+    {
+      "completed_training_epochs": 74,
+      "optimizer_steps": 3922,
+      "selected_epoch": 54,
+      "system": "square_reference",
+      "target": "SiW-Mv2"
+    }
+  ],
+  "new_training_authorized_by_completion": false,
+  "one_training_seed": true,
+  "primary_alpha": "1/20",
+  "primary_operating_points": [
+    {
+      "metrics": {
+        "AUROC_usable": 0.9257849876003202,
+        "BFA": 0.8694444444444445,
+        "FA": 0.23472222222222222,
+        "FA_within_constraint": false,
+        "accepted_attack": 338.0,
+        "accepted_bona_fide": 313.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.5444444444444444,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9721739470035735,
+        "BFA": 0.8722222222222222,
+        "FA": 0.1076388888888889,
+        "FA_within_constraint": false,
+        "accepted_attack": 155.0,
+        "accepted_bona_fide": 314.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.8083333333333333,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9635429888109976,
+        "BFA": 0.8694444444444445,
+        "FA": 0.12569444444444444,
+        "FA_within_constraint": false,
+        "accepted_attack": 181.0,
+        "accepted_bona_fide": 313.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.7416666666666667,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9734847005526155,
+        "BFA": 0.9166666666666666,
+        "FA": 0.2465277777777778,
+        "FA_within_constraint": false,
+        "accepted_attack": 355.0,
+        "accepted_bona_fide": 330.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.7916666666666666,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9708387846361132,
+        "BFA": 0.8972222222222223,
+        "FA": 0.12361111111111112,
+        "FA_within_constraint": false,
+        "accepted_attack": 178.0,
+        "accepted_bona_fide": 323.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.7666666666666667,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9709217746187342,
+        "BFA": 0.9138888888888889,
+        "FA": 0.23333333333333334,
+        "FA_within_constraint": false,
+        "accepted_attack": 336.0,
+        "accepted_bona_fide": 329.0,
+        "original_attack": 1440.0,
+        "original_bona_fide": 360.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.7694444444444445,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9257849876003202,
+        "BFA": 0.9427710843373494,
+        "FA": 0.2739059967585089,
+        "FA_within_constraint": false,
+        "accepted_attack": 338.0,
+        "accepted_bona_fide": 313.0,
+        "original_attack": 1234.0,
+        "original_bona_fide": 332.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.5481927710843374,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9721739470035735,
+        "BFA": 0.9457831325301205,
+        "FA": 0.12560777957860617,
+        "FA_within_constraint": false,
+        "accepted_attack": 155.0,
+        "accepted_bona_fide": 314.0,
+        "original_attack": 1234.0,
+        "original_bona_fide": 332.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.8524096385542169,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9635429888109976,
+        "BFA": 0.9427710843373494,
+        "FA": 0.146677471636953,
+        "FA_within_constraint": false,
+        "accepted_attack": 181.0,
+        "accepted_bona_fide": 313.0,
+        "original_attack": 1234.0,
+        "original_bona_fide": 332.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.7650602409638554,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9734847005526155,
+        "BFA": 0.9939759036144579,
+        "FA": 0.28768233387358183,
+        "FA_within_constraint": false,
+        "accepted_attack": 355.0,
+        "accepted_bona_fide": 330.0,
+        "original_attack": 1234.0,
+        "original_bona_fide": 332.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.8373493975903614,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9708387846361132,
+        "BFA": 0.9728915662650602,
+        "FA": 0.14424635332252836,
+        "FA_within_constraint": false,
+        "accepted_attack": 178.0,
+        "accepted_bona_fide": 323.0,
+        "original_attack": 1234.0,
+        "original_bona_fide": 332.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.8162650602409639,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9709217746187342,
+        "BFA": 0.9909638554216867,
+        "FA": 0.27228525121555913,
+        "FA_within_constraint": false,
+        "accepted_attack": 336.0,
+        "accepted_bona_fide": 329.0,
+        "original_attack": 1234.0,
+        "original_bona_fide": 332.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "OULU-NPU",
+      "target_label_oracle_max_BFA": 0.8012048192771084,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9986458333333335,
+        "BFA": 0.32222222222222224,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 29.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.6666666666666666,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 1.0,
+        "BFA": 0.5222222222222223,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 47.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "utility_feasible": true
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.6666666666666666,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 1.0,
+        "BFA": 0.4666666666666667,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 42.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.6666666666666666,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.995625,
+        "BFA": 0.32222222222222224,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 29.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.6555555555555556,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9909375000000002,
+        "BFA": 0.2222222222222222,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 20.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.6666666666666666,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9996875000000001,
+        "BFA": 0.24444444444444444,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 22.0,
+        "original_attack": 270.0,
+        "original_bona_fide": 90.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.6666666666666666,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9986458333333335,
+        "BFA": 0.48333333333333334,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 29.0,
+        "original_attack": 160.0,
+        "original_bona_fide": 60.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 1.0,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 1.0,
+        "BFA": 0.7833333333333333,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 47.0,
+        "original_attack": 160.0,
+        "original_bona_fide": 60.0,
+        "utility_feasible": true
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 1.0,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 1.0,
+        "BFA": 0.7,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 42.0,
+        "original_attack": 160.0,
+        "original_bona_fide": 60.0,
+        "utility_feasible": true
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 1.0,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.995625,
+        "BFA": 0.48333333333333334,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 29.0,
+        "original_attack": 160.0,
+        "original_bona_fide": 60.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.9666666666666667,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9909375000000002,
+        "BFA": 0.3333333333333333,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 20.0,
+        "original_attack": 160.0,
+        "original_bona_fide": 60.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 0.95,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9996875000000001,
+        "BFA": 0.36666666666666664,
+        "FA": 0.0,
+        "FA_within_constraint": true,
+        "accepted_attack": 0.0,
+        "accepted_bona_fide": 22.0,
+        "original_attack": 160.0,
+        "original_bona_fide": 60.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "CASIA-FASD",
+      "target_label_oracle_max_BFA": 1.0,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9444444444444444,
+        "BFA": 0.85,
+        "FA": 0.13333333333333333,
+        "FA_within_constraint": false,
+        "accepted_attack": 16.0,
+        "accepted_bona_fide": 34.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.775,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9693732193732193,
+        "BFA": 0.875,
+        "FA": 0.08333333333333333,
+        "FA_within_constraint": false,
+        "accepted_attack": 10.0,
+        "accepted_bona_fide": 35.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.85,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9669990503323836,
+        "BFA": 0.85,
+        "FA": 0.075,
+        "FA_within_constraint": false,
+        "accepted_attack": 9.0,
+        "accepted_bona_fide": 34.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.825,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9605887939221273,
+        "BFA": 0.675,
+        "FA": 0.025,
+        "FA_within_constraint": true,
+        "accepted_attack": 3.0,
+        "accepted_bona_fide": 27.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "utility_feasible": true
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.7,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9337606837606837,
+        "BFA": 0.725,
+        "FA": 0.075,
+        "FA_within_constraint": false,
+        "accepted_attack": 9.0,
+        "accepted_bona_fide": 29.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.675,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9617758784425451,
+        "BFA": 0.8,
+        "FA": 0.058333333333333334,
+        "FA_within_constraint": false,
+        "accepted_attack": 7.0,
+        "accepted_bona_fide": 32.0,
+        "original_attack": 120.0,
+        "original_bona_fide": 40.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.775,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9444444444444444,
+        "BFA": 0.8717948717948718,
+        "FA": 0.14814814814814814,
+        "FA_within_constraint": false,
+        "accepted_attack": 16.0,
+        "accepted_bona_fide": 34.0,
+        "original_attack": 108.0,
+        "original_bona_fide": 39.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.7435897435897436,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9693732193732193,
+        "BFA": 0.8974358974358975,
+        "FA": 0.09259259259259259,
+        "FA_within_constraint": false,
+        "accepted_attack": 10.0,
+        "accepted_bona_fide": 35.0,
+        "original_attack": 108.0,
+        "original_bona_fide": 39.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.8461538461538461,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9669990503323836,
+        "BFA": 0.8717948717948718,
+        "FA": 0.08333333333333333,
+        "FA_within_constraint": false,
+        "accepted_attack": 9.0,
+        "accepted_bona_fide": 34.0,
+        "original_attack": 108.0,
+        "original_bona_fide": 39.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.8461538461538461,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9605887939221273,
+        "BFA": 0.6923076923076923,
+        "FA": 0.027777777777777776,
+        "FA_within_constraint": true,
+        "accepted_attack": 3.0,
+        "accepted_bona_fide": 27.0,
+        "original_attack": 108.0,
+        "original_bona_fide": 39.0,
+        "utility_feasible": true
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.717948717948718,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9337606837606837,
+        "BFA": 0.7435897435897436,
+        "FA": 0.08333333333333333,
+        "FA_within_constraint": false,
+        "accepted_attack": 9.0,
+        "accepted_bona_fide": 29.0,
+        "original_attack": 108.0,
+        "original_bona_fide": 39.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.6666666666666666,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.9617758784425451,
+        "BFA": 0.8205128205128205,
+        "FA": 0.06481481481481481,
+        "FA_within_constraint": false,
+        "accepted_attack": 7.0,
+        "accepted_bona_fide": 32.0,
+        "original_attack": 108.0,
+        "original_bona_fide": 39.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "MSU-MFSD",
+      "target_label_oracle_max_BFA": 0.7948717948717948,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8262398645348269,
+        "BFA": 0.8084291187739464,
+        "FA": 0.6022099447513812,
+        "FA_within_constraint": false,
+        "accepted_attack": 218.0,
+        "accepted_bona_fide": 211.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.32567049808429116,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.862369337979094,
+        "BFA": 0.8160919540229885,
+        "FA": 0.6160220994475138,
+        "FA_within_constraint": false,
+        "accepted_attack": 223.0,
+        "accepted_bona_fide": 213.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.4061302681992337,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8569474746816892,
+        "BFA": 0.8199233716475096,
+        "FA": 0.6270718232044199,
+        "FA_within_constraint": false,
+        "accepted_attack": 227.0,
+        "accepted_bona_fide": 214.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.40229885057471265,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8692809925429028,
+        "BFA": 0.8160919540229885,
+        "FA": 0.6740331491712708,
+        "FA_within_constraint": false,
+        "accepted_attack": 244.0,
+        "accepted_bona_fide": 213.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.3486590038314176,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8337620892897847,
+        "BFA": 0.8199233716475096,
+        "FA": 0.6104972375690608,
+        "FA_within_constraint": false,
+        "accepted_attack": 221.0,
+        "accepted_bona_fide": 214.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.31800766283524906,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8388420332801458,
+        "BFA": 0.8007662835249042,
+        "FA": 0.5718232044198895,
+        "FA_within_constraint": false,
+        "accepted_attack": 207.0,
+        "accepted_bona_fide": 209.0,
+        "original_attack": 362.0,
+        "original_bona_fide": 261.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.3486590038314176,
+      "view": "original"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8262398645348269,
+        "BFA": 0.985981308411215,
+        "FA": 0.759581881533101,
+        "FA_within_constraint": false,
+        "accepted_attack": 218.0,
+        "accepted_bona_fide": 211.0,
+        "original_attack": 287.0,
+        "original_bona_fide": 214.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_reference",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.37383177570093457,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.862369337979094,
+        "BFA": 0.9953271028037384,
+        "FA": 0.7770034843205574,
+        "FA_within_constraint": false,
+        "accepted_attack": 223.0,
+        "accepted_bona_fide": 213.0,
+        "original_attack": 287.0,
+        "original_bona_fide": 214.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_content",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.43457943925233644,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8569474746816892,
+        "BFA": 1.0,
+        "FA": 0.7909407665505227,
+        "FA_within_constraint": false,
+        "accepted_attack": 227.0,
+        "accepted_bona_fide": 214.0,
+        "original_attack": 287.0,
+        "original_bona_fide": 214.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "legacy_anatomical",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.46261682242990654,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8692809925429028,
+        "BFA": 0.9953271028037384,
+        "FA": 0.8501742160278746,
+        "FA_within_constraint": false,
+        "accepted_attack": 244.0,
+        "accepted_bona_fide": 213.0,
+        "original_attack": 287.0,
+        "original_bona_fide": 214.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_reference",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.40186915887850466,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8337620892897847,
+        "BFA": 1.0,
+        "FA": 0.7700348432055749,
+        "FA_within_constraint": false,
+        "accepted_attack": 221.0,
+        "accepted_bona_fide": 214.0,
+        "original_attack": 287.0,
+        "original_bona_fide": 214.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_content",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.3644859813084112,
+      "view": "common"
+    },
+    {
+      "metrics": {
+        "AUROC_usable": 0.8388420332801458,
+        "BFA": 0.9766355140186916,
+        "FA": 0.7212543554006968,
+        "FA_within_constraint": false,
+        "accepted_attack": 207.0,
+        "accepted_bona_fide": 209.0,
+        "original_attack": 287.0,
+        "original_bona_fide": 214.0,
+        "utility_feasible": false
+      },
+      "oracle_not_deployable": true,
+      "system": "square_anatomical",
+      "target": "SiW-Mv2",
+      "target_label_oracle_max_BFA": 0.3317757009345794,
+      "view": "common"
+    }
+  ],
+  "private_images_identifiers_and_individual_scores_published": false,
+  "receipt_sha256": {
+    "aggregate.json": "29dc1397e62570633cb487c4ee24f0f4da2e4278aaf34f61202ee5e6956377f9",
+    "approval.json": "1f8bad65981d96d395aa311e77b50174d1ac14d0d99a28c4584e55bcda07f7dd",
+    "completion.json": "610b3e5e46c8145426b2b0006eefc21cee24a27489e7f1a5c70d7c8e80d1055f",
+    "plan.json": "2df70a86325cf2f06baf20709773d42177d39708721981d4c218d0e08ce2fe86",
+    "result.json": "ce4c5457be8ca8b6d76c3fe1afdcc967302ea3546133a62526f623165365cbac",
+    "supervision.json": "c12d3683f09edcfcb9fbfd72b11a80ba100d0effb805910765c05a756d315fee",
+    "terminal.json": "f7a08d5d25e49ff2edebbd07c01a71d62eb08109d279bc43e2a5f071b873c804",
+    "verification.json": "40281ad14b8f34e921c211b74f706d2d7e6cfdc5cbe0a1be786fbcc1ccb2eaa1"
+  },
+  "scope": {
+    "PAD_crop_decode": true,
+    "automatic_expansion": false,
+    "automatic_retry": false,
+    "backbone_fits": 24,
+    "calibrator_fits": 24,
+    "conditional_intervals": 360,
+    "generic_pretrained_initialization_only": true,
+    "new_backbone_fits": 24,
+    "new_detector": false,
+    "new_download": false,
+    "new_environment": false,
+    "new_native_video_decode": false,
+    "operating_cases": 144,
+    "reused_backbone_fits": 0,
+    "seed": 20260917,
+    "systems": [
+      "legacy_reference",
+      "legacy_content",
+      "legacy_anatomical",
+      "square_reference",
+      "square_content",
+      "square_anatomical"
+    ],
+    "targets": 4,
+    "views": [
+      "original",
+      "common"
+    ]
+  },
+  "selected_original_view_paired_intervals": [
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.011805555555555555,
+        0.046527777777777765
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.025000000000000022,
+        0.016666666666666607
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.016581792357627113,
+        3.462249220591659e-05
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.0798611111111111,
+        0.14166666666666666
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.036111111111111205
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.006957206568581934,
+        0.0071620830337583395
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.01597222222222225,
+        0.03819444444444445
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.022222222222222254,
+        0.07229166666666637
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.03727069448229654,
+        0.05699995197638198
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.006944444444444434,
+        0.038888888888888876
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0027777777777778763,
+        0.047222222222222165
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.007287848157949528,
+        0.006607144179665
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        0.07569444444444445,
+        0.1409722222222222
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.019444444444444375,
+        0.0722222222222223
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.00035085584324371917,
+        0.014605033903181516
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "OULU-NPU",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        -0.1111111111111111,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -2.220446049250313e-16,
+        2.220446049250313e-16
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        -0.06666666666666665,
+        0.11111111111111113
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.002666225165563066,
+        0.018250287981155085
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        -0.06666666666666671,
+        0.06666666666666671
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.00929604564755824,
+        0.001626016260162566
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        -0.37777777777777777,
+        -0.2222222222222222
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.019110531054314813,
+        -0.0026662251655630628
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 30,
+      "metric": "FA",
+      "percentile95": [
+        0.0,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 30,
+      "metric": "BFA",
+      "percentile95": [
+        -0.3222222222222222,
+        -0.1333333333333333
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 30,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.0012738853503182518,
+        2.220446049250313e-16
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "CASIA-FASD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.03333333333333334,
+        0.016666666666666677
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.10000000000000009,
+        0.050000000000000044
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.017499999999999964,
+        0.010844222975767101
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.05833333333333333,
+        0.024999999999999994
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.15000000000000002
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.009742879333750882,
+        0.04805017568175475
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.15,
+        -0.06666666666666667
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.275,
+        -0.07499999999999996
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.004673262266355083,
+        0.04475660262068026
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.05833333333333334,
+        0.04166666666666667
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.25,
+        -0.050000000000000044
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.05653606731731746,
+        -0.01620346941070616
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 20,
+      "metric": "FA",
+      "percentile95": [
+        -0.06666666666666665,
+        0.03333333333333334
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 20,
+      "metric": "BFA",
+      "percentile95": [
+        -0.125,
+        0.0
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 20,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.022173885774594237,
+        0.014439730681640053
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "MSU-MFSD",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 623,
+      "metric": "FA",
+      "percentile95": [
+        -0.0028171003421659847,
+        0.027175764127473048
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 623,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.01234824035653915
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "legacy_anatomical",
+      "comparison": "legacy_anatomical_minus_content",
+      "declared_groups": 623,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.02040261311582851,
+        0.010076428484246825
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 623,
+      "metric": "FA",
+      "percentile95": [
+        -0.06128133704735372,
+        -0.01666666666666672
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 623,
+      "metric": "BFA",
+      "percentile95": [
+        -0.036903785704523656,
+        -0.0038910505836575737
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_anatomical_minus_content",
+      "declared_groups": 623,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.011173868901623191,
+        0.02226988874073945
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 623,
+      "metric": "FA",
+      "percentile95": [
+        0.045454545454545525,
+        0.09946868394449039
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 623,
+      "metric": "BFA",
+      "percentile95": [
+        -0.007462686567164092,
+        0.023348583414396794
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_reference",
+      "comparison": "square_minus_legacy_reference",
+      "declared_groups": 623,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        0.015916555124085914,
+        0.0717487734664933
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 623,
+      "metric": "FA",
+      "percentile95": [
+        -0.02754820936639124,
+        0.016441761901157974
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 623,
+      "metric": "BFA",
+      "percentile95": [
+        0.0,
+        0.01234824035653915
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_content",
+      "comparison": "square_minus_legacy_content",
+      "declared_groups": 623,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.05058679283177055,
+        -0.0075535623799520045
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 623,
+      "metric": "FA",
+      "percentile95": [
+        -0.08056323000898477,
+        -0.03314917127071826
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 623,
+      "metric": "BFA",
+      "percentile95": [
+        -0.036903785704523656,
+        -0.0038910505836575737
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    },
+    {
+      "arm": "square_anatomical",
+      "comparison": "square_minus_legacy_anatomical",
+      "declared_groups": 623,
+      "metric": "AUROC_usable",
+      "percentile95": [
+        -0.036220209997523775,
+        -0.0007536808000479826
+      ],
+      "repetitions": 2000,
+      "seed": 20260917,
+      "target": "SiW-Mv2",
+      "valid_repetitions": 2000,
+      "view": "original"
+    }
+  ],
+  "stable_anatomical_advantage_claimed": false,
+  "stable_square_improvement_across_arms_claimed": false,
+  "standard_MCIO_protocol": false,
+  "study": "spatial_crop_completed_v1",
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "plan_sha256": "2df70a86325cf2f06baf20709773d42177d39708721981d4c218d0e08ce2fe86",
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": 10078912512,
+    "sampled_owned_peak_disk_bytes": 8542305514,
+    "sampled_tree_peak_rss_bytes": 6355369984,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 24395.89769202401
+  },
+  "total_actual_optimizer_steps": 54228,
+  "total_completed_fit_epochs": 1040,
+  "verification": {
+    "PAD_crop_replay_required": true,
+    "checkpoint_replays": 24,
+    "completed": true,
+    "conditional_intervals": 360,
+    "execution_new_backbone_fits": 24,
+    "execution_new_calibrator_fits": 24,
+    "execution_reused_backbone_fits": 0,
+    "maximum_probability_absolute_error": 0.0,
+    "new_fits": 0,
+    "operating_cases": 144,
+    "plan_sha256": "2df70a86325cf2f06baf20709773d42177d39708721981d4c218d0e08ce2fe86",
+    "result_sha256": "ce4c5457be8ca8b6d76c3fe1afdcc967302ea3546133a62526f623165365cbac",
+    "source_validation_recomputed": true,
+    "tolerance": 1e-10
+  }
+}
