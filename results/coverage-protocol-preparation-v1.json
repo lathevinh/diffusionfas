@@ -1,0 +1,1938 @@
+{
+  "ISO_or_iBeta_pass_claimed": false,
+  "architecture_objective_augmentation_recipe_changes_proposed": false,
+  "budget": {
+    "max_output_bytes": 67108864,
+    "max_rss_bytes": 2147483648,
+    "max_seconds": 1800
+  },
+  "candidates": [
+    {
+      "all_target_originals_retained": true,
+      "baseline_fitting_attack_eligible": 212,
+      "blockers": [
+        "SiW_subject_identity_unverified",
+        "single_domain_sampler_not_implemented_pinned_sampler_requires_three_sources",
+        "equal_cardinality_component_preserving_replacement_manifest_not_sealed",
+        "fixed_paired_optimizer_step_schedule_and_training_budget_not_sealed",
+        "engineering_probe_checkpoint_replay_and_new_owner_training_approval_required",
+        "development_exposed_target_not_unbiased_final_test"
+      ],
+      "collateral_removed_originals": 0,
+      "estimand": "within_SiW_family_coverage_development_diagnostic",
+      "execution_ready": false,
+      "heldout_family": "makeup",
+      "heldout_fitting_attack_eligible": 36,
+      "inventory_sha256": "b9eabc1c96329a59085e82292e8d18f3cfe039351c625a84da955a5a03ceb355",
+      "maximum_possible_replacements_before_component_matching": 36,
+      "role_support": {
+        "calibration": {
+          "components": 193,
+          "excluded": 50,
+          "known_subjects": 0,
+          "originals": 193,
+          "unknown_subject_originals": 193,
+          "unknown_subject_usable": 143,
+          "usable": 143,
+          "usable_components": 143,
+          "usable_known_subjects": 0
+        },
+        "evaluation": {
+          "components": 623,
+          "excluded": 122,
+          "known_subjects": 0,
+          "originals": 623,
+          "unknown_subject_originals": 623,
+          "unknown_subject_usable": 501,
+          "usable": 501,
+          "usable_components": 501,
+          "usable_known_subjects": 0
+        },
+        "fitting": {
+          "components": 581,
+          "excluded": 117,
+          "known_subjects": 0,
+          "originals": 582,
+          "unknown_subject_originals": 582,
+          "unknown_subject_usable": 465,
+          "usable": 465,
+          "usable_components": 465,
+          "usable_known_subjects": 0
+        },
+        "validation": {
+          "components": 198,
+          "excluded": 45,
+          "known_subjects": 0,
+          "originals": 198,
+          "unknown_subject_originals": 198,
+          "unknown_subject_usable": 153,
+          "usable": 153,
+          "usable_components": 153,
+          "usable_known_subjects": 0
+        }
+      },
+      "selection_and_calibration_heldout_family_absent": true,
+      "subject_disjoint_claim_permitted": false,
+      "target5pct_integer_FA_budget": 2,
+      "target_heldout_attack": {
+        "components": 56,
+        "excluded": 14,
+        "known_subjects": 0,
+        "originals": 56,
+        "unknown_subject_originals": 56,
+        "unknown_subject_usable": 42,
+        "usable": 42,
+        "usable_components": 42,
+        "usable_known_subjects": 0
+      },
+      "training_authorized": false,
+      "unknown_taxonomy_excluded_non_evaluation": 0,
+      "unseen_domain_claim_permitted": false,
+      "usable_class_support": {
+        "calibration": {
+          "attack": 65,
+          "bona_fide": 78
+        },
+        "evaluation": {
+          "attack": 287,
+          "bona_fide": 214
+        },
+        "fitting": {
+          "attack": 212,
+          "bona_fide": 253
+        },
+        "validation": {
+          "attack": 74,
+          "bona_fide": 79
+        }
+      }
+    },
+    {
+      "all_target_originals_retained": true,
+      "baseline_fitting_attack_eligible": 188,
+      "blockers": [
+        "SiW_subject_identity_unverified",
+        "single_domain_sampler_not_implemented_pinned_sampler_requires_three_sources",
+        "equal_cardinality_component_preserving_replacement_manifest_not_sealed",
+        "fixed_paired_optimizer_step_schedule_and_training_budget_not_sealed",
+        "engineering_probe_checkpoint_replay_and_new_owner_training_approval_required",
+        "development_exposed_target_not_unbiased_final_test"
+      ],
+      "collateral_removed_originals": 0,
+      "estimand": "within_SiW_family_coverage_development_diagnostic",
+      "execution_ready": false,
+      "heldout_family": "mask",
+      "heldout_fitting_attack_eligible": 60,
+      "inventory_sha256": "72659d48566a6901c48fb181dfdd13058deb607ccee95b3b6abf8c8ac034eb98",
+      "maximum_possible_replacements_before_component_matching": 60,
+      "role_support": {
+        "calibration": {
+          "components": 190,
+          "excluded": 50,
+          "known_subjects": 0,
+          "originals": 190,
+          "unknown_subject_originals": 190,
+          "unknown_subject_usable": 140,
+          "usable": 140,
+          "usable_components": 140,
+          "usable_known_subjects": 0
+        },
+        "evaluation": {
+          "components": 623,
+          "excluded": 122,
+          "known_subjects": 0,
+          "originals": 623,
+          "unknown_subject_originals": 623,
+          "unknown_subject_usable": 501,
+          "usable": 501,
+          "usable_components": 501,
+          "usable_known_subjects": 0
+        },
+        "fitting": {
+          "components": 555,
+          "excluded": 115,
+          "known_subjects": 0,
+          "originals": 556,
+          "unknown_subject_originals": 556,
+          "unknown_subject_usable": 441,
+          "usable": 441,
+          "usable_components": 441,
+          "usable_known_subjects": 0
+        },
+        "validation": {
+          "components": 184,
+          "excluded": 38,
+          "known_subjects": 0,
+          "originals": 184,
+          "unknown_subject_originals": 184,
+          "unknown_subject_usable": 146,
+          "usable": 146,
+          "usable_components": 146,
+          "usable_known_subjects": 0
+        }
+      },
+      "selection_and_calibration_heldout_family_absent": true,
+      "subject_disjoint_claim_permitted": false,
+      "target5pct_integer_FA_budget": 4,
+      "target_heldout_attack": {
+        "components": 83,
+        "excluded": 14,
+        "known_subjects": 0,
+        "originals": 83,
+        "unknown_subject_originals": 83,
+        "unknown_subject_usable": 69,
+        "usable": 69,
+        "usable_components": 69,
+        "usable_known_subjects": 0
+      },
+      "training_authorized": false,
+      "unknown_taxonomy_excluded_non_evaluation": 0,
+      "unseen_domain_claim_permitted": false,
+      "usable_class_support": {
+        "calibration": {
+          "attack": 62,
+          "bona_fide": 78
+        },
+        "evaluation": {
+          "attack": 287,
+          "bona_fide": 214
+        },
+        "fitting": {
+          "attack": 188,
+          "bona_fide": 253
+        },
+        "validation": {
+          "attack": 67,
+          "bona_fide": 79
+        }
+      }
+    },
+    {
+      "all_target_originals_retained": true,
+      "baseline_fitting_attack_eligible": 145,
+      "blockers": [
+        "SiW_subject_identity_unverified",
+        "single_domain_sampler_not_implemented_pinned_sampler_requires_three_sources",
+        "equal_cardinality_component_preserving_replacement_manifest_not_sealed",
+        "fixed_paired_optimizer_step_schedule_and_training_budget_not_sealed",
+        "engineering_probe_checkpoint_replay_and_new_owner_training_approval_required",
+        "development_exposed_target_not_unbiased_final_test"
+      ],
+      "collateral_removed_originals": 0,
+      "estimand": "within_SiW_family_coverage_development_diagnostic",
+      "execution_ready": false,
+      "heldout_family": "partial",
+      "heldout_fitting_attack_eligible": 103,
+      "inventory_sha256": "75939eb348f03e0d40fb909e4f7d0326352205039ccc1e00d10cf3035c7ba799",
+      "maximum_possible_replacements_before_component_matching": 103,
+      "role_support": {
+        "calibration": {
+          "components": 170,
+          "excluded": 52,
+          "known_subjects": 0,
+          "originals": 170,
+          "unknown_subject_originals": 170,
+          "unknown_subject_usable": 118,
+          "usable": 118,
+          "usable_components": 118,
+          "usable_known_subjects": 0
+        },
+        "evaluation": {
+          "components": 623,
+          "excluded": 122,
+          "known_subjects": 0,
+          "originals": 623,
+          "unknown_subject_originals": 623,
+          "unknown_subject_usable": 501,
+          "usable": 501,
+          "usable_components": 501,
+          "usable_known_subjects": 0
+        },
+        "fitting": {
+          "components": 517,
+          "excluded": 120,
+          "known_subjects": 0,
+          "originals": 518,
+          "unknown_subject_originals": 518,
+          "unknown_subject_usable": 398,
+          "usable": 398,
+          "usable_components": 398,
+          "usable_known_subjects": 0
+        },
+        "validation": {
+          "components": 170,
+          "excluded": 45,
+          "known_subjects": 0,
+          "originals": 170,
+          "unknown_subject_originals": 170,
+          "unknown_subject_usable": 125,
+          "usable": 125,
+          "usable_components": 125,
+          "usable_known_subjects": 0
+        }
+      },
+      "selection_and_calibration_heldout_family_absent": true,
+      "subject_disjoint_claim_permitted": false,
+      "target5pct_integer_FA_budget": 6,
+      "target_heldout_attack": {
+        "components": 128,
+        "excluded": 6,
+        "known_subjects": 0,
+        "originals": 128,
+        "unknown_subject_originals": 128,
+        "unknown_subject_usable": 122,
+        "usable": 122,
+        "usable_components": 122,
+        "usable_known_subjects": 0
+      },
+      "training_authorized": false,
+      "unknown_taxonomy_excluded_non_evaluation": 0,
+      "unseen_domain_claim_permitted": false,
+      "usable_class_support": {
+        "calibration": {
+          "attack": 40,
+          "bona_fide": 78
+        },
+        "evaluation": {
+          "attack": 287,
+          "bona_fide": 214
+        },
+        "fitting": {
+          "attack": 145,
+          "bona_fide": 253
+        },
+        "validation": {
+          "attack": 46,
+          "bona_fide": 79
+        }
+      }
+    },
+    {
+      "all_target_originals_retained": true,
+      "baseline_fitting_attack_eligible": 217,
+      "blockers": [
+        "SiW_subject_identity_unverified",
+        "single_domain_sampler_not_implemented_pinned_sampler_requires_three_sources",
+        "equal_cardinality_component_preserving_replacement_manifest_not_sealed",
+        "fixed_paired_optimizer_step_schedule_and_training_budget_not_sealed",
+        "engineering_probe_checkpoint_replay_and_new_owner_training_approval_required",
+        "development_exposed_target_not_unbiased_final_test"
+      ],
+      "collateral_removed_originals": 0,
+      "estimand": "within_SiW_family_coverage_development_diagnostic",
+      "execution_ready": false,
+      "heldout_family": "print",
+      "heldout_fitting_attack_eligible": 31,
+      "inventory_sha256": "de76377f488b000311075a2cde5194af679b38080d95f7e41351660e1cc5ebcf",
+      "maximum_possible_replacements_before_component_matching": 31,
+      "role_support": {
+        "calibration": {
+          "components": 195,
+          "excluded": 48,
+          "known_subjects": 0,
+          "originals": 195,
+          "unknown_subject_originals": 195,
+          "unknown_subject_usable": 147,
+          "usable": 147,
+          "usable_components": 147,
+          "usable_known_subjects": 0
+        },
+        "evaluation": {
+          "components": 623,
+          "excluded": 122,
+          "known_subjects": 0,
+          "originals": 623,
+          "unknown_subject_originals": 623,
+          "unknown_subject_usable": 501,
+          "usable": 501,
+          "usable_components": 501,
+          "usable_known_subjects": 0
+        },
+        "fitting": {
+          "components": 581,
+          "excluded": 112,
+          "known_subjects": 0,
+          "originals": 582,
+          "unknown_subject_originals": 582,
+          "unknown_subject_usable": 470,
+          "usable": 470,
+          "usable_components": 470,
+          "usable_known_subjects": 0
+        },
+        "validation": {
+          "components": 196,
+          "excluded": 43,
+          "known_subjects": 0,
+          "originals": 196,
+          "unknown_subject_originals": 196,
+          "unknown_subject_usable": 153,
+          "usable": 153,
+          "usable_components": 153,
+          "usable_known_subjects": 0
+        }
+      },
+      "selection_and_calibration_heldout_family_absent": true,
+      "subject_disjoint_claim_permitted": false,
+      "target5pct_integer_FA_budget": 2,
+      "target_heldout_attack": {
+        "components": 56,
+        "excluded": 26,
+        "known_subjects": 0,
+        "originals": 56,
+        "unknown_subject_originals": 56,
+        "unknown_subject_usable": 30,
+        "usable": 30,
+        "usable_components": 30,
+        "usable_known_subjects": 0
+      },
+      "training_authorized": false,
+      "unknown_taxonomy_excluded_non_evaluation": 0,
+      "unseen_domain_claim_permitted": false,
+      "usable_class_support": {
+        "calibration": {
+          "attack": 69,
+          "bona_fide": 78
+        },
+        "evaluation": {
+          "attack": 287,
+          "bona_fide": 214
+        },
+        "fitting": {
+          "attack": 217,
+          "bona_fide": 253
+        },
+        "validation": {
+          "attack": 74,
+          "bona_fide": 79
+        }
+      }
+    },
+    {
+      "all_target_originals_retained": true,
+      "baseline_fitting_attack_eligible": 230,
+      "blockers": [
+        "SiW_subject_identity_unverified",
+        "single_domain_sampler_not_implemented_pinned_sampler_requires_three_sources",
+        "equal_cardinality_component_preserving_replacement_manifest_not_sealed",
+        "fixed_paired_optimizer_step_schedule_and_training_budget_not_sealed",
+        "engineering_probe_checkpoint_replay_and_new_owner_training_approval_required",
+        "development_exposed_target_not_unbiased_final_test"
+      ],
+      "collateral_removed_originals": 0,
+      "estimand": "within_SiW_family_coverage_development_diagnostic",
+      "execution_ready": false,
+      "heldout_family": "replay",
+      "heldout_fitting_attack_eligible": 18,
+      "inventory_sha256": "f1cacf4d64a42a11cd156085a3ee6d967ae1c57ccd61dac39a472b9e6bc22094",
+      "maximum_possible_replacements_before_component_matching": 18,
+      "role_support": {
+        "calibration": {
+          "components": 201,
+          "excluded": 51,
+          "known_subjects": 0,
+          "originals": 201,
+          "unknown_subject_originals": 201,
+          "unknown_subject_usable": 150,
+          "usable": 150,
+          "usable_components": 150,
+          "usable_known_subjects": 0
+        },
+        "evaluation": {
+          "components": 623,
+          "excluded": 122,
+          "known_subjects": 0,
+          "originals": 623,
+          "unknown_subject_originals": 623,
+          "unknown_subject_usable": 501,
+          "usable": 501,
+          "usable_components": 501,
+          "usable_known_subjects": 0
+        },
+        "fitting": {
+          "components": 596,
+          "excluded": 113,
+          "known_subjects": 0,
+          "originals": 596,
+          "unknown_subject_originals": 596,
+          "unknown_subject_usable": 483,
+          "usable": 483,
+          "usable_components": 483,
+          "usable_known_subjects": 0
+        },
+        "validation": {
+          "components": 201,
+          "excluded": 43,
+          "known_subjects": 0,
+          "originals": 201,
+          "unknown_subject_originals": 201,
+          "unknown_subject_usable": 158,
+          "usable": 158,
+          "usable_components": 158,
+          "usable_known_subjects": 0
+        }
+      },
+      "selection_and_calibration_heldout_family_absent": true,
+      "subject_disjoint_claim_permitted": false,
+      "target5pct_integer_FA_budget": 1,
+      "target_heldout_attack": {
+        "components": 39,
+        "excluded": 15,
+        "known_subjects": 0,
+        "originals": 39,
+        "unknown_subject_originals": 39,
+        "unknown_subject_usable": 24,
+        "usable": 24,
+        "usable_components": 24,
+        "usable_known_subjects": 0
+      },
+      "training_authorized": false,
+      "unknown_taxonomy_excluded_non_evaluation": 0,
+      "unseen_domain_claim_permitted": false,
+      "usable_class_support": {
+        "calibration": {
+          "attack": 72,
+          "bona_fide": 78
+        },
+        "evaluation": {
+          "attack": 287,
+          "bona_fide": 214
+        },
+        "fitting": {
+          "attack": 230,
+          "bona_fide": 253
+        },
+        "validation": {
+          "attack": 79,
+          "bona_fide": 79
+        }
+      }
+    }
+  ],
+  "completed": true,
+  "diagnostic_code_sha256": {
+    "scripts/coverage_protocol.py": "4351337102f798643861b751a520d20a20687fe98085a6ad84d131328f9ae120",
+    "src/diffusionfas/coverage_protocol.py": "6ae0f30e694f81ebabd1d32f37a8dbb2fa46ebc1ea933a44e240e2ca1d84c100"
+  },
+  "domain_feasibility": [
+    {
+      "families": [
+        {
+          "components": 30,
+          "coverage": "source_family_covered",
+          "excluded": 79,
+          "family": "print",
+          "known_subjects": 30,
+          "originals": 180,
+          "unknown_subject_originals": 0,
+          "unknown_subject_usable": 0,
+          "usable": 101,
+          "usable_components": 30,
+          "usable_fitting_sources": [
+            "MSU-MFSD",
+            "OULU-NPU",
+            "SiW-Mv2"
+          ],
+          "usable_known_subjects": 30
+        },
+        {
+          "components": 30,
+          "coverage": "source_family_covered",
+          "excluded": 31,
+          "family": "replay",
+          "known_subjects": 30,
+          "originals": 90,
+          "unknown_subject_originals": 0,
+          "unknown_subject_usable": 0,
+          "usable": 59,
+          "usable_components": 30,
+          "usable_fitting_sources": [
+            "MSU-MFSD",
+            "OULU-NPU",
+            "SiW-Mv2"
+          ],
+          "usable_known_subjects": 30
+        }
+      ],
+      "target": "CASIA-FASD",
+      "unknown_fitting_attack_taxonomy": 0,
+      "usable_fitting_families": [
+        "makeup",
+        "mask",
+        "partial",
+        "print",
+        "replay"
+      ]
+    },
+    {
+      "families": [
+        {
+          "components": 20,
+          "coverage": "source_family_covered",
+          "excluded": 4,
+          "family": "print",
+          "known_subjects": 20,
+          "originals": 40,
+          "unknown_subject_originals": 0,
+          "unknown_subject_usable": 0,
+          "usable": 36,
+          "usable_components": 20,
+          "usable_fitting_sources": [
+            "CASIA-FASD",
+            "OULU-NPU",
+            "SiW-Mv2"
+          ],
+          "usable_known_subjects": 20
+        },
+        {
+          "components": 20,
+          "coverage": "source_family_covered",
+          "excluded": 8,
+          "family": "replay",
+          "known_subjects": 20,
+          "originals": 80,
+          "unknown_subject_originals": 0,
+          "unknown_subject_usable": 0,
+          "usable": 72,
+          "usable_components": 20,
+          "usable_fitting_sources": [
+            "CASIA-FASD",
+            "OULU-NPU",
+            "SiW-Mv2"
+          ],
+          "usable_known_subjects": 20
+        }
+      ],
+      "target": "MSU-MFSD",
+      "unknown_fitting_attack_taxonomy": 0,
+      "usable_fitting_families": [
+        "makeup",
+        "mask",
+        "partial",
+        "print",
+        "replay"
+      ]
+    },
+    {
+      "families": [
+        {
+          "components": 20,
+          "coverage": "source_family_covered",
+          "excluded": 100,
+          "family": "print",
+          "known_subjects": 20,
+          "originals": 720,
+          "unknown_subject_originals": 0,
+          "unknown_subject_usable": 0,
+          "usable": 620,
+          "usable_components": 20,
+          "usable_fitting_sources": [
+            "CASIA-FASD",
+            "MSU-MFSD",
+            "SiW-Mv2"
+          ],
+          "usable_known_subjects": 20
+        },
+        {
+          "components": 20,
+          "coverage": "source_family_covered",
+          "excluded": 106,
+          "family": "replay",
+          "known_subjects": 20,
+          "originals": 720,
+          "unknown_subject_originals": 0,
+          "unknown_subject_usable": 0,
+          "usable": 614,
+          "usable_components": 20,
+          "usable_fitting_sources": [
+            "CASIA-FASD",
+            "MSU-MFSD",
+            "SiW-Mv2"
+          ],
+          "usable_known_subjects": 20
+        }
+      ],
+      "target": "OULU-NPU",
+      "unknown_fitting_attack_taxonomy": 0,
+      "usable_fitting_families": [
+        "makeup",
+        "mask",
+        "partial",
+        "print",
+        "replay"
+      ]
+    },
+    {
+      "families": [
+        {
+          "components": 56,
+          "coverage": "source_family_unseen",
+          "excluded": 14,
+          "family": "makeup",
+          "known_subjects": 0,
+          "originals": 56,
+          "unknown_subject_originals": 56,
+          "unknown_subject_usable": 42,
+          "usable": 42,
+          "usable_components": 42,
+          "usable_fitting_sources": [],
+          "usable_known_subjects": 0
+        },
+        {
+          "components": 83,
+          "coverage": "source_family_unseen",
+          "excluded": 14,
+          "family": "mask",
+          "known_subjects": 0,
+          "originals": 83,
+          "unknown_subject_originals": 83,
+          "unknown_subject_usable": 69,
+          "usable": 69,
+          "usable_components": 69,
+          "usable_fitting_sources": [],
+          "usable_known_subjects": 0
+        },
+        {
+          "components": 128,
+          "coverage": "source_family_unseen",
+          "excluded": 6,
+          "family": "partial",
+          "known_subjects": 0,
+          "originals": 128,
+          "unknown_subject_originals": 128,
+          "unknown_subject_usable": 122,
+          "usable": 122,
+          "usable_components": 122,
+          "usable_fitting_sources": [],
+          "usable_known_subjects": 0
+        },
+        {
+          "components": 56,
+          "coverage": "source_family_covered",
+          "excluded": 26,
+          "family": "print",
+          "known_subjects": 0,
+          "originals": 56,
+          "unknown_subject_originals": 56,
+          "unknown_subject_usable": 30,
+          "usable": 30,
+          "usable_components": 30,
+          "usable_fitting_sources": [
+            "CASIA-FASD",
+            "MSU-MFSD",
+            "OULU-NPU"
+          ],
+          "usable_known_subjects": 0
+        },
+        {
+          "components": 39,
+          "coverage": "source_family_covered",
+          "excluded": 15,
+          "family": "replay",
+          "known_subjects": 0,
+          "originals": 39,
+          "unknown_subject_originals": 39,
+          "unknown_subject_usable": 24,
+          "usable": 24,
+          "usable_components": 24,
+          "usable_fitting_sources": [
+            "CASIA-FASD",
+            "MSU-MFSD",
+            "OULU-NPU"
+          ],
+          "usable_known_subjects": 0
+        }
+      ],
+      "target": "SiW-Mv2",
+      "unknown_fitting_attack_taxonomy": 0,
+      "usable_fitting_families": [
+        "print",
+        "replay"
+      ]
+    }
+  ],
+  "equal_bona_fide_validation_calibration_and_evaluation_pools_required": true,
+  "equal_number_of_fitting_attack_originals_required_before_execution": true,
+  "equal_paired_optimizer_steps_and_initialization_required": true,
+  "excluded": 1274,
+  "five_candidates_are_not_ten_authorized_fits": true,
+  "historical_role_assignment_changed": false,
+  "image_video_decodes": 0,
+  "independence_audit_inherited_not_repeated": [
+    {
+      "cross_role_shared_identifier_counts": {
+        "full_media": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "group": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "selected_RGB": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "subject": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "video": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        }
+      },
+      "dataset": "CASIA-FASD",
+      "full_media_hash_unchecked_originals": 6,
+      "known_identifier_isolation_passed": true,
+      "missing_selected_RGB_hash_originals": 0,
+      "not_a_near_duplicate_or_cross_dataset_identity_audit": true,
+      "role_originals": {
+        "calibration": 48,
+        "evaluation": 360,
+        "fitting": 144,
+        "validation": 48
+      },
+      "subject_isolation_checkable": true,
+      "unknown_subject_originals": 0
+    },
+    {
+      "cross_role_shared_identifier_counts": {
+        "full_media": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "group": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "selected_RGB": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "subject": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "video": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        }
+      },
+      "dataset": "MSU-MFSD",
+      "full_media_hash_unchecked_originals": 8,
+      "known_identifier_isolation_passed": true,
+      "missing_selected_RGB_hash_originals": 8,
+      "not_a_near_duplicate_or_cross_dataset_identity_audit": true,
+      "role_originals": {
+        "calibration": 24,
+        "evaluation": 160,
+        "fitting": 72,
+        "validation": 24
+      },
+      "subject_isolation_checkable": true,
+      "unknown_subject_originals": 0
+    },
+    {
+      "cross_role_shared_identifier_counts": {
+        "full_media": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "group": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "selected_RGB": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "subject": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "video": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        }
+      },
+      "dataset": "OULU-NPU",
+      "full_media_hash_unchecked_originals": 1,
+      "known_identifier_isolation_passed": true,
+      "missing_selected_RGB_hash_originals": 1,
+      "not_a_near_duplicate_or_cross_dataset_identity_audit": true,
+      "role_originals": {
+        "calibration": 630,
+        "evaluation": 1800,
+        "fitting": 1800,
+        "validation": 720
+      },
+      "subject_isolation_checkable": true,
+      "unknown_subject_originals": 0
+    },
+    {
+      "cross_role_shared_identifier_counts": {
+        "full_media": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "group": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "selected_RGB": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "subject": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        },
+        "video": {
+          "calibration:evaluation": 0,
+          "fitting:calibration": 0,
+          "fitting:evaluation": 0,
+          "fitting:validation": 0,
+          "validation:calibration": 0,
+          "validation:evaluation": 0
+        }
+      },
+      "dataset": "SiW-Mv2",
+      "full_media_hash_unchecked_originals": 16,
+      "known_identifier_isolation_passed": true,
+      "missing_selected_RGB_hash_originals": 0,
+      "not_a_near_duplicate_or_cross_dataset_identity_audit": true,
+      "role_originals": {
+        "calibration": 211,
+        "evaluation": 623,
+        "fitting": 630,
+        "validation": 211
+      },
+      "subject_isolation_checkable": false,
+      "unknown_subject_originals": 1675
+    }
+  ],
+  "independent_verification_sha256": "53cf2cfc8e90c9ed3a9911eadcc6328f4e5056eaaf0b63becbf983fec5889943",
+  "inventories_sha256": "10fc2972e7b88a98d5d961dd8ff04bbbfe1aa146e1634c28147271fd2e709c08",
+  "matrix": [
+    {
+      "components": 4,
+      "dataset": "CASIA-FASD",
+      "excluded": 10,
+      "family": "print",
+      "known_subjects": 4,
+      "label": "attack",
+      "originals": 24,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 14,
+      "usable_components": 4,
+      "usable_known_subjects": 4
+    },
+    {
+      "components": 4,
+      "dataset": "CASIA-FASD",
+      "excluded": 4,
+      "family": "replay",
+      "known_subjects": 4,
+      "label": "attack",
+      "originals": 12,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 8,
+      "usable_components": 4,
+      "usable_known_subjects": 4
+    },
+    {
+      "components": 4,
+      "dataset": "CASIA-FASD",
+      "excluded": 4,
+      "family": "not_applicable",
+      "known_subjects": 4,
+      "label": "bona_fide",
+      "originals": 12,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 8,
+      "usable_components": 4,
+      "usable_known_subjects": 4
+    },
+    {
+      "components": 30,
+      "dataset": "CASIA-FASD",
+      "excluded": 79,
+      "family": "print",
+      "known_subjects": 30,
+      "label": "attack",
+      "originals": 180,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 101,
+      "usable_components": 30,
+      "usable_known_subjects": 30
+    },
+    {
+      "components": 30,
+      "dataset": "CASIA-FASD",
+      "excluded": 31,
+      "family": "replay",
+      "known_subjects": 30,
+      "label": "attack",
+      "originals": 90,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 59,
+      "usable_components": 30,
+      "usable_known_subjects": 30
+    },
+    {
+      "components": 30,
+      "dataset": "CASIA-FASD",
+      "excluded": 30,
+      "family": "not_applicable",
+      "known_subjects": 30,
+      "label": "bona_fide",
+      "originals": 90,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 60,
+      "usable_components": 30,
+      "usable_known_subjects": 30
+    },
+    {
+      "components": 12,
+      "dataset": "CASIA-FASD",
+      "excluded": 30,
+      "family": "print",
+      "known_subjects": 12,
+      "label": "attack",
+      "originals": 72,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 42,
+      "usable_components": 12,
+      "usable_known_subjects": 12
+    },
+    {
+      "components": 12,
+      "dataset": "CASIA-FASD",
+      "excluded": 12,
+      "family": "replay",
+      "known_subjects": 12,
+      "label": "attack",
+      "originals": 36,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 24,
+      "usable_components": 12,
+      "usable_known_subjects": 12
+    },
+    {
+      "components": 12,
+      "dataset": "CASIA-FASD",
+      "excluded": 13,
+      "family": "not_applicable",
+      "known_subjects": 12,
+      "label": "bona_fide",
+      "originals": 36,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 23,
+      "usable_components": 12,
+      "usable_known_subjects": 12
+    },
+    {
+      "components": 4,
+      "dataset": "CASIA-FASD",
+      "excluded": 12,
+      "family": "print",
+      "known_subjects": 4,
+      "label": "attack",
+      "originals": 24,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 12,
+      "usable_components": 4,
+      "usable_known_subjects": 4
+    },
+    {
+      "components": 4,
+      "dataset": "CASIA-FASD",
+      "excluded": 4,
+      "family": "replay",
+      "known_subjects": 4,
+      "label": "attack",
+      "originals": 12,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 8,
+      "usable_components": 4,
+      "usable_known_subjects": 4
+    },
+    {
+      "components": 4,
+      "dataset": "CASIA-FASD",
+      "excluded": 4,
+      "family": "not_applicable",
+      "known_subjects": 4,
+      "label": "bona_fide",
+      "originals": 12,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 8,
+      "usable_components": 4,
+      "usable_known_subjects": 4
+    },
+    {
+      "components": 3,
+      "dataset": "MSU-MFSD",
+      "excluded": 0,
+      "family": "print",
+      "known_subjects": 3,
+      "label": "attack",
+      "originals": 6,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 6,
+      "usable_components": 3,
+      "usable_known_subjects": 3
+    },
+    {
+      "components": 3,
+      "dataset": "MSU-MFSD",
+      "excluded": 0,
+      "family": "replay",
+      "known_subjects": 3,
+      "label": "attack",
+      "originals": 12,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 12,
+      "usable_components": 3,
+      "usable_known_subjects": 3
+    },
+    {
+      "components": 3,
+      "dataset": "MSU-MFSD",
+      "excluded": 0,
+      "family": "not_applicable",
+      "known_subjects": 3,
+      "label": "bona_fide",
+      "originals": 6,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 6,
+      "usable_components": 3,
+      "usable_known_subjects": 3
+    },
+    {
+      "components": 20,
+      "dataset": "MSU-MFSD",
+      "excluded": 4,
+      "family": "print",
+      "known_subjects": 20,
+      "label": "attack",
+      "originals": 40,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 36,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 20,
+      "dataset": "MSU-MFSD",
+      "excluded": 8,
+      "family": "replay",
+      "known_subjects": 20,
+      "label": "attack",
+      "originals": 80,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 72,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 20,
+      "dataset": "MSU-MFSD",
+      "excluded": 1,
+      "family": "not_applicable",
+      "known_subjects": 20,
+      "label": "bona_fide",
+      "originals": 40,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 39,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 9,
+      "dataset": "MSU-MFSD",
+      "excluded": 2,
+      "family": "print",
+      "known_subjects": 9,
+      "label": "attack",
+      "originals": 18,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 16,
+      "usable_components": 8,
+      "usable_known_subjects": 8
+    },
+    {
+      "components": 9,
+      "dataset": "MSU-MFSD",
+      "excluded": 7,
+      "family": "replay",
+      "known_subjects": 9,
+      "label": "attack",
+      "originals": 36,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 29,
+      "usable_components": 9,
+      "usable_known_subjects": 9
+    },
+    {
+      "components": 9,
+      "dataset": "MSU-MFSD",
+      "excluded": 0,
+      "family": "not_applicable",
+      "known_subjects": 9,
+      "label": "bona_fide",
+      "originals": 18,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 18,
+      "usable_components": 9,
+      "usable_known_subjects": 9
+    },
+    {
+      "components": 3,
+      "dataset": "MSU-MFSD",
+      "excluded": 0,
+      "family": "print",
+      "known_subjects": 3,
+      "label": "attack",
+      "originals": 6,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 6,
+      "usable_components": 3,
+      "usable_known_subjects": 3
+    },
+    {
+      "components": 3,
+      "dataset": "MSU-MFSD",
+      "excluded": 1,
+      "family": "replay",
+      "known_subjects": 3,
+      "label": "attack",
+      "originals": 12,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 11,
+      "usable_components": 3,
+      "usable_known_subjects": 3
+    },
+    {
+      "components": 3,
+      "dataset": "MSU-MFSD",
+      "excluded": 0,
+      "family": "not_applicable",
+      "known_subjects": 3,
+      "label": "bona_fide",
+      "originals": 6,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 6,
+      "usable_components": 3,
+      "usable_known_subjects": 3
+    },
+    {
+      "components": 7,
+      "dataset": "OULU-NPU",
+      "excluded": 26,
+      "family": "print",
+      "known_subjects": 7,
+      "label": "attack",
+      "originals": 252,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 226,
+      "usable_components": 7,
+      "usable_known_subjects": 7
+    },
+    {
+      "components": 7,
+      "dataset": "OULU-NPU",
+      "excluded": 35,
+      "family": "replay",
+      "known_subjects": 7,
+      "label": "attack",
+      "originals": 252,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 217,
+      "usable_components": 7,
+      "usable_known_subjects": 7
+    },
+    {
+      "components": 7,
+      "dataset": "OULU-NPU",
+      "excluded": 10,
+      "family": "not_applicable",
+      "known_subjects": 7,
+      "label": "bona_fide",
+      "originals": 126,
+      "role": "calibration",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 116,
+      "usable_components": 7,
+      "usable_known_subjects": 7
+    },
+    {
+      "components": 20,
+      "dataset": "OULU-NPU",
+      "excluded": 100,
+      "family": "print",
+      "known_subjects": 20,
+      "label": "attack",
+      "originals": 720,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 620,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 20,
+      "dataset": "OULU-NPU",
+      "excluded": 106,
+      "family": "replay",
+      "known_subjects": 20,
+      "label": "attack",
+      "originals": 720,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 614,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 20,
+      "dataset": "OULU-NPU",
+      "excluded": 28,
+      "family": "not_applicable",
+      "known_subjects": 20,
+      "label": "bona_fide",
+      "originals": 360,
+      "role": "evaluation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 332,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 20,
+      "dataset": "OULU-NPU",
+      "excluded": 95,
+      "family": "print",
+      "known_subjects": 20,
+      "label": "attack",
+      "originals": 720,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 625,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 20,
+      "dataset": "OULU-NPU",
+      "excluded": 129,
+      "family": "replay",
+      "known_subjects": 20,
+      "label": "attack",
+      "originals": 720,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 591,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 20,
+      "dataset": "OULU-NPU",
+      "excluded": 33,
+      "family": "not_applicable",
+      "known_subjects": 20,
+      "label": "bona_fide",
+      "originals": 360,
+      "role": "fitting",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 327,
+      "usable_components": 20,
+      "usable_known_subjects": 20
+    },
+    {
+      "components": 8,
+      "dataset": "OULU-NPU",
+      "excluded": 56,
+      "family": "print",
+      "known_subjects": 8,
+      "label": "attack",
+      "originals": 288,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 232,
+      "usable_components": 8,
+      "usable_known_subjects": 8
+    },
+    {
+      "components": 8,
+      "dataset": "OULU-NPU",
+      "excluded": 36,
+      "family": "replay",
+      "known_subjects": 8,
+      "label": "attack",
+      "originals": 288,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 252,
+      "usable_components": 8,
+      "usable_known_subjects": 8
+    },
+    {
+      "components": 8,
+      "dataset": "OULU-NPU",
+      "excluded": 10,
+      "family": "not_applicable",
+      "known_subjects": 8,
+      "label": "bona_fide",
+      "originals": 144,
+      "role": "validation",
+      "unknown_subject_originals": 0,
+      "unknown_subject_usable": 0,
+      "usable": 134,
+      "usable_components": 8,
+      "usable_known_subjects": 8
+    },
+    {
+      "components": 18,
+      "dataset": "SiW-Mv2",
+      "excluded": 6,
+      "family": "makeup",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 18,
+      "role": "calibration",
+      "unknown_subject_originals": 18,
+      "unknown_subject_usable": 12,
+      "usable": 12,
+      "usable_components": 12,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 21,
+      "dataset": "SiW-Mv2",
+      "excluded": 6,
+      "family": "mask",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 21,
+      "role": "calibration",
+      "unknown_subject_originals": 21,
+      "unknown_subject_usable": 15,
+      "usable": 15,
+      "usable_components": 15,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 41,
+      "dataset": "SiW-Mv2",
+      "excluded": 4,
+      "family": "partial",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 41,
+      "role": "calibration",
+      "unknown_subject_originals": 41,
+      "unknown_subject_usable": 37,
+      "usable": 37,
+      "usable_components": 37,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 16,
+      "dataset": "SiW-Mv2",
+      "excluded": 8,
+      "family": "print",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 16,
+      "role": "calibration",
+      "unknown_subject_originals": 16,
+      "unknown_subject_usable": 8,
+      "usable": 8,
+      "usable_components": 8,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 10,
+      "dataset": "SiW-Mv2",
+      "excluded": 5,
+      "family": "replay",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 10,
+      "role": "calibration",
+      "unknown_subject_originals": 10,
+      "unknown_subject_usable": 5,
+      "usable": 5,
+      "usable_components": 5,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 105,
+      "dataset": "SiW-Mv2",
+      "excluded": 27,
+      "family": "not_applicable",
+      "known_subjects": 0,
+      "label": "bona_fide",
+      "originals": 105,
+      "role": "calibration",
+      "unknown_subject_originals": 105,
+      "unknown_subject_usable": 78,
+      "usable": 78,
+      "usable_components": 78,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 56,
+      "dataset": "SiW-Mv2",
+      "excluded": 14,
+      "family": "makeup",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 56,
+      "role": "evaluation",
+      "unknown_subject_originals": 56,
+      "unknown_subject_usable": 42,
+      "usable": 42,
+      "usable_components": 42,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 83,
+      "dataset": "SiW-Mv2",
+      "excluded": 14,
+      "family": "mask",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 83,
+      "role": "evaluation",
+      "unknown_subject_originals": 83,
+      "unknown_subject_usable": 69,
+      "usable": 69,
+      "usable_components": 69,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 128,
+      "dataset": "SiW-Mv2",
+      "excluded": 6,
+      "family": "partial",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 128,
+      "role": "evaluation",
+      "unknown_subject_originals": 128,
+      "unknown_subject_usable": 122,
+      "usable": 122,
+      "usable_components": 122,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 56,
+      "dataset": "SiW-Mv2",
+      "excluded": 26,
+      "family": "print",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 56,
+      "role": "evaluation",
+      "unknown_subject_originals": 56,
+      "unknown_subject_usable": 30,
+      "usable": 30,
+      "usable_components": 30,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 39,
+      "dataset": "SiW-Mv2",
+      "excluded": 15,
+      "family": "replay",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 39,
+      "role": "evaluation",
+      "unknown_subject_originals": 39,
+      "unknown_subject_usable": 24,
+      "usable": 24,
+      "usable_components": 24,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 261,
+      "dataset": "SiW-Mv2",
+      "excluded": 47,
+      "family": "not_applicable",
+      "known_subjects": 0,
+      "label": "bona_fide",
+      "originals": 261,
+      "role": "evaluation",
+      "unknown_subject_originals": 261,
+      "unknown_subject_usable": 214,
+      "usable": 214,
+      "usable_components": 214,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 48,
+      "dataset": "SiW-Mv2",
+      "excluded": 12,
+      "family": "makeup",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 48,
+      "role": "fitting",
+      "unknown_subject_originals": 48,
+      "unknown_subject_usable": 36,
+      "usable": 36,
+      "usable_components": 36,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 74,
+      "dataset": "SiW-Mv2",
+      "excluded": 14,
+      "family": "mask",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 74,
+      "role": "fitting",
+      "unknown_subject_originals": 74,
+      "unknown_subject_usable": 60,
+      "usable": 60,
+      "usable_components": 60,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 112,
+      "dataset": "SiW-Mv2",
+      "excluded": 9,
+      "family": "partial",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 112,
+      "role": "fitting",
+      "unknown_subject_originals": 112,
+      "unknown_subject_usable": 103,
+      "usable": 103,
+      "usable_components": 103,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 48,
+      "dataset": "SiW-Mv2",
+      "excluded": 17,
+      "family": "print",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 48,
+      "role": "fitting",
+      "unknown_subject_originals": 48,
+      "unknown_subject_usable": 31,
+      "usable": 31,
+      "usable_components": 31,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 33,
+      "dataset": "SiW-Mv2",
+      "excluded": 16,
+      "family": "replay",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 34,
+      "role": "fitting",
+      "unknown_subject_originals": 34,
+      "unknown_subject_usable": 18,
+      "usable": 18,
+      "usable_components": 18,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 314,
+      "dataset": "SiW-Mv2",
+      "excluded": 61,
+      "family": "not_applicable",
+      "known_subjects": 0,
+      "label": "bona_fide",
+      "originals": 314,
+      "role": "fitting",
+      "unknown_subject_originals": 314,
+      "unknown_subject_usable": 253,
+      "usable": 253,
+      "usable_components": 253,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 13,
+      "dataset": "SiW-Mv2",
+      "excluded": 2,
+      "family": "makeup",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 13,
+      "role": "validation",
+      "unknown_subject_originals": 13,
+      "unknown_subject_usable": 11,
+      "usable": 11,
+      "usable_components": 11,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 27,
+      "dataset": "SiW-Mv2",
+      "excluded": 9,
+      "family": "mask",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 27,
+      "role": "validation",
+      "unknown_subject_originals": 27,
+      "unknown_subject_usable": 18,
+      "usable": 18,
+      "usable_components": 18,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 41,
+      "dataset": "SiW-Mv2",
+      "excluded": 2,
+      "family": "partial",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 41,
+      "role": "validation",
+      "unknown_subject_originals": 41,
+      "unknown_subject_usable": 39,
+      "usable": 39,
+      "usable_components": 39,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 15,
+      "dataset": "SiW-Mv2",
+      "excluded": 4,
+      "family": "print",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 15,
+      "role": "validation",
+      "unknown_subject_originals": 15,
+      "unknown_subject_usable": 11,
+      "usable": 11,
+      "usable_components": 11,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 10,
+      "dataset": "SiW-Mv2",
+      "excluded": 4,
+      "family": "replay",
+      "known_subjects": 0,
+      "label": "attack",
+      "originals": 10,
+      "role": "validation",
+      "unknown_subject_originals": 10,
+      "unknown_subject_usable": 6,
+      "usable": 6,
+      "usable_components": 6,
+      "usable_known_subjects": 0
+    },
+    {
+      "components": 105,
+      "dataset": "SiW-Mv2",
+      "excluded": 26,
+      "family": "not_applicable",
+      "known_subjects": 0,
+      "label": "bona_fide",
+      "originals": 105,
+      "role": "validation",
+      "unknown_subject_originals": 105,
+      "unknown_subject_usable": 79,
+      "usable": 79,
+      "usable_components": 79,
+      "usable_known_subjects": 0
+    }
+  ],
+  "new_calibrator_fits": 0,
+  "new_fits": 0,
+  "new_inference": 0,
+  "new_model_loads": 0,
+  "new_scores_or_predictions_read": 0,
+  "origin": {
+    "completed_plan_sha256": "2df70a86325cf2f06baf20709773d42177d39708721981d4c218d0e08ce2fe86",
+    "diagnosis_independent_verification_sha256": "b92b7c11f3c6f929ba29ba8d82e8d667e0ca9e268fd2802b5a5e861e024fa25c",
+    "diagnosis_joins_sha256": "f266cc9577b3b656671c48718d055d5483a01aa85cd9f6d560edad8104342292",
+    "diagnosis_publication_sha256": "247394031225b50e80929386bd4521dd551b112121dd787f2b6b7e5ee178f3e3",
+    "diagnosis_summary_sha256": "f83666462483ddade6e4e0e969b5083cc05f69439f32d390096cb0b27f6faeb7"
+  },
+  "originals": 7505,
+  "private_identifiers_or_scores_published": false,
+  "proposed_crop": "legacy",
+  "proposed_system": "legacy_content",
+  "records_sha256": "c13dab8c79fc89230cb4ad8515d4eb84a8f3d9b6ef5a153eb0d23135ea8c93c0",
+  "scope": "metadata_only_non_executable_protocol_preparation",
+  "supervision": {
+    "completed": true,
+    "guard_failure": null,
+    "returncode": 0,
+    "sampled_device_peak_gpu_bytes": null,
+    "sampled_owned_peak_disk_bytes": 2738328,
+    "sampled_tree_peak_rss_bytes": 841105408,
+    "sampling_interval_seconds": 0.2,
+    "wall_seconds": 3.004909079056233
+  },
+  "training_authorized": false,
+  "usable": 6231,
+  "verification": {
+    "completed": true,
+    "domain_folds_recounted": 4,
+    "family_candidates_and_inventory_hashes_checked": 5,
+    "full_target_common_each_candidate": 501,
+    "full_target_originals_each_candidate": 623,
+    "independent_component_count": 1814,
+    "matrix_cells_recounted": 60,
+    "records_reconstructed": 7505,
+    "self_peak_RSS_bytes": 132489216,
+    "summary_sha256": "46ae7a1b15eacd62947386a0cfcef52964d504bb89f98dc1489ae49c34d56e1f",
+    "supervision_sha256": "d18f151abae95b6091faa36ab65dd2a532c39402c7f3a10afa43e195d0dd1928",
+    "wall_seconds": 0.23421572905499488
+  }
+}

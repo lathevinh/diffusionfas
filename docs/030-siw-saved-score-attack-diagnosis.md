@@ -222,6 +222,12 @@ subject metadata. Exact hash isolation alone cannot establish those properties.
 There is no new GPU authorization, model-selection claim, causal explanation,
 ISO30107-3/iBeta pass claim, or unbiased final-test result here.
 
+The subsequent [coverage/protocol preparation](031-attack-coverage-and-heldout-family-preparation.md)
+has now verified a60-cell metadata matrix and prepared five non-executable
+within-SiW family candidate inventories. Training remains blocked on the
+identity/estimand decision, matched replacement manifest, sampler adaptation
+and a fresh bounded approval.
+
 For a separately approved metadata-only rerun, use a fresh private root:
 
 ```bash
