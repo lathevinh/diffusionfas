@@ -35,6 +35,7 @@ Offline-first bonafide-only short-clip PAD research.
 - [Completed24-fit crop A/B: square improves CLS reference AUROC, but not content/anatomical consistently](docs/029-spatial-dino-paired-crop-results.md).
 - [CPU SiW attack diagnosis: absent makeup/mask/partial families dominate false accepts; no subject-disjointness claim](docs/030-siw-saved-score-attack-diagnosis.md).
 - [Coverage matrix and five non-executable held-out-family inventories: matched-comparison design and identity/sampler gates](docs/031-attack-coverage-and-heldout-family-preparation.md).
+- [Official SiW identity review: provider subject language, unresolved participant mapping and scope decision](docs/032-siw-authoritative-identity-gate.md).
 
 **Đã hoàn tất source preparation và matched source-only adapter pilot trong env
 `fas`, cùng source-validation development diagnostic; chưa có unbiased PAD

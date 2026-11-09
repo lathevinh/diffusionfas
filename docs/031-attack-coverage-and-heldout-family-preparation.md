@@ -199,6 +199,13 @@ bounded within-SiW video/group-level coverage diagnostic is technically
 preparable, but its weaker scientific claim must be accepted explicitly.
 Do not claim another crop/anatomical/tail-loss grid fixes the identified gap.
 
+The subsequent [official identity/protocol review](032-siw-authoritative-identity-gate.md)
+did not recover a video-to-participant map in the reviewed public sources.
+The provider describes subjects, but that is not an independently reconstructed
+identity join. Our five-family candidates are also not official14-type
+Protocol II. The identity-first versus limited-development scope decision
+remains explicit; no GPU work is authorized.
+
 For an independently approved metadata-only rerun, use a fresh private root:
 
 ```bash
